@@ -552,13 +552,13 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#introduction">Introduction</a></li>
+<li><a href="#composite-views">Composite Dive Event Visualizations</a></li>
+<li><a href="#annotation-types">Annotation Categories</a></li>
 <li><a href="#depth-distribution">Dive Depth Distribution</a></li>
 <li><a href="#cluster-analysis">Cluster Analysis of Dive Cycles</a></li>
 <li><a href="#duration-depth">Relationship Between Dive Duration and Depth</a></li>
 <li><a href="#temporal-distribution">Temporal Distribution of Dive Phases</a></li>
 <li><a href="#movement-intensity">Movement Intensity Across Dive Phases</a></li>
-<li><a href="#composite-views">Composite Dive Event Visualizations</a></li>
-<li><a href="#annotation-types">Annotation Categories</a></li>
 <li><a href="#conclusions">Conclusions and Future ML-Driven Research</a></li>
 </ul>
 </div>
@@ -580,107 +580,6 @@
     </ul>
 </div>
 </section>
-<section class="plot-section" id="depth-distribution">
-<div class="section-header">
-    <h2>Dive Depth Distribution: The Foundation of Diving Behavior</h2>
-    <div class="toggle-icon">›</div>
-</div>
-<div class="section-content">
-    <p>Understanding the distribution of dive depths provides critical insight into habitat use and potential foraging zones. The histogram below shows the frequency distribution of dive depths recorded by the tag.</p>
-    <div class="plot-container">
-        <img src="plots/Analytics/dive_depth_distribution.png" alt="Distribution of dive depths" loading="lazy">
-        <p class="caption">Figure 1: Distribution of dive depths showing distinct patterns at different depth ranges. Three key zones are identified: surface (0-5m), shallow (5-15m), and deep (&gt;15m) dives.</p>
-    </div>
-    <p>The depth distribution reveals several interesting patterns:</p>
-    <ul>
-    <li>Surface periods (0-5m) represent time when the animal is breathing and recovering between dives</li>
-    <li>Shallow dives (5-15m) may represent exploratory behavior or transitions between surface and deep dives</li>
-    <li>Deep dives (&gt;15m) likely represent focused foraging efforts, where the animal targets specific prey layers</li>
-    </ul>
-    <p>The multimodal distribution suggests different functional categories of dives, each potentially serving a different purpose. The thresholds at 5m and 15m (indicated by red dashed lines) represent biologically meaningful transitions between these diving states.</p>
-</div>
-</section>
-<section class="plot-section" id="cluster-analysis">
-<div class="section-header">
-    <h2>Cluster Analysis of Dive Cycles: Identifying Behavioral Patterns</h2>
-    <div class="toggle-icon">›</div>
-</div>
-<div class="section-content">
-    <p>To identify natural groupings in diving behavior without imposing arbitrary thresholds, a cluster analysis was performed based on depth and time parameters. This unsupervised machine learning approach helps reveal inherent patterns in diving behavior.</p>
-    <div class="plot-container">
-        <img src="plots/Analytics/cluster_analysis_dive_cycles.png" alt="Cluster analysis of dive cycles" loading="lazy">
-        <p class="caption">Figure 2: K-means cluster analysis identifying three distinct dive behavior clusters. Colors represent different clusters identified by the algorithm.</p>
-    </div>
-    <p>The cluster analysis reveals three distinct behavioral states:</p>
-    <ul>
-    <li><strong>Cluster 1:</strong> Deep dives - characterized by longer durations and greater depths, likely representing dedicated foraging events</li>
-    <li><strong>Cluster 2:</strong> Intermediate dives - moderate depths and durations, possibly representing exploratory or transitional behavior</li>
-    <li><strong>Cluster 3:</strong> Surface periods - minimal depth, representing breathing and recovery periods between dives</li>
-    </ul>
-    <p>The emergence of these clusters supports the hypothesis that diving behavior is not continuous but can be categorized into discrete functional states. This clustering approach provides an objective method for classifying diving behavior without relying solely on predefined depth thresholds.</p>
-</div>
-</section>
-<section class="plot-section" id="duration-depth">
-<div class="section-header">
-    <h2>Relationship Between Dive Duration and Depth</h2>
-    <div class="toggle-icon">›</div>
-</div>
-<div class="section-content">
-    <p>The relationship between how long an animal dives and how deep it goes can reveal physiological constraints and behavioral strategies. This relationship helps understand the trade-offs these animals make when diving.</p>
-    <div class="plot-container">
-        <img src="plots/Analytics/dive_duration_vs_depth.png" alt="Relationship between dive duration and depth" loading="lazy">
-        <p class="caption">Figure 3: Relationship between dive duration and depth, color-coded by dive phase. The trend line indicates the general relationship between these variables.</p>
-    </div>
-    <p>This visualization reveals several key insights:</p>
-    <ul>
-    <li>A positive correlation between dive duration and depth - deeper dives generally take longer</li>
-    <li>Different dive phases (colors) occupy different regions of the depth-duration space</li>
-    <li>Significant variability around the trend line suggests that factors beyond depth influence dive duration</li>
-    </ul>
-    <p>This relationship aligns with diving theory: deeper dives require more travel time and may offer access to different prey resources, justifying the longer duration. However, physiological constraints like oxygen storage capacity limit how long animals can remain at depth.</p>
-</div>
-</section>
-<section class="plot-section" id="temporal-distribution">
-<div class="section-header">
-    <h2>Temporal Distribution of Dive Phases</h2>
-    <div class="toggle-icon">›</div>
-</div>
-<div class="section-content">
-    <p>Understanding how diving behavior changes over time can reveal activity patterns, responses to environmental conditions, and behavioral sequences. The plot below shows how different dive phases are distributed over time.</p>
-    <div class="plot-container">
-        <img src="plots/Analytics/temporal_distribution.png" alt="Temporal distribution of dive phases" loading="lazy">
-        <p class="caption">Figure 4: Temporal sequence of dive phases throughout the recording period. This visualization reveals how the animal transitions between different behavioral states over time.</p>
-    </div>
-    <p>The temporal distribution reveals several patterns:</p>
-    <ul>
-    <li>Cyclic patterns of deep dives followed by recovery at the surface</li>
-    <li>Periods of concentrated deep diving activity that may indicate foraging bouts</li>
-    <li>Transitions between phases that suggest a structured diving strategy rather than random behavior</li>
-    </ul>
-    <p>By examining these temporal patterns, it's possible to identify behavioral sequences that might be linked to specific ecological functions like foraging, traveling, or resting. The regularity of certain sequences suggests deliberate behavioral strategies rather than opportunistic responses.</p>
-</div>
-</section>
-<section class="plot-section" id="movement-intensity">
-<div class="section-header">
-    <h2>Movement Intensity Across Dive Phases: Understanding Energy Expenditure</h2>
-    <div class="toggle-icon">›</div>
-</div>
-<div class="section-content">
-    <p>Movement intensity, measured by the normalized jerk (rate of change of acceleration), provides a proxy for energy expenditure and activity level during different dive phases. This metric helps identify active foraging or prey capture events.</p>
-    <div class="plot-container">
-        <img src="plots/Analytics/movement_intensity.png" alt="Movement intensity across dive phases" loading="lazy">
-        <p class="caption">Figure 5: Movement intensity (normalized jerk) across different dive phases and depths. Higher values indicate more intense movement that may be associated with foraging or prey capture attempts.</p>
-    </div>
-    <p>This faceted plot reveals distinct movement patterns across dive phases:</p>
-    <ul>
-    <li><strong>Deep Phase:</strong> Shows bursts of high-intensity movement at specific depths, likely indicating foraging events</li>
-    <li><strong>Shallow Phase:</strong> Generally less intense movement, possibly representing exploratory behavior</li>
-    <li><strong>Surface Phase:</strong> Relatively low movement intensity, consistent with recovery behavior</li>
-    <li><strong>Surfacing:</strong> Brief increases in movement associated with the act of surfacing and breathing</li>
-    </ul>
-    <p>The relationship between depth and movement intensity within each phase provides evidence for depth-specific foraging strategies and helps identify the depths where prey resources might be concentrated.</p>
-</div>
-</section>
 <section class="plot-section" id="composite-views">
 <div class="section-header">
     <h2>Composite Dive Event Visualizations: Detailed Behavioral Analysis</h2>
@@ -690,7 +589,7 @@
     <p>For a more detailed understanding of specific diving events, composite dashboards were created that integrate multiple data streams. These visualizations provide comprehensive views of individual dive events.</p>
     <div class="plot-container">
         <img src="plots/feedingExploratoryDives6/E34_composite_dashboard.png" alt="Composite dashboard for dive event E34" loading="lazy">
-        <p class="caption">Figure 6: Composite dashboard showing multiple parameters for a single dive event. From top to bottom: pitch/roll/heading, movement intensity, depth/temperature profile, and context within the broader dive sequence.</p>
+        <p class="caption">Figure 1: Composite dashboard showing multiple parameters for a single dive event. From top to bottom: pitch/roll/heading, movement intensity, depth/temperature profile, and context within the broader dive sequence.</p>
     </div>
     <p>These comprehensive visualizations allow examination of:</p>
     <ul>
@@ -824,6 +723,106 @@
 
         <p>These diverse feeding strategies highlight the behavioral complexity of marine mammals and demonstrate why sophisticated classification techniques are needed. By correctly identifying these distinct behavioral modes, it becomes possible to better understand how environmental factors influence foraging success and ultimately support conservation efforts.</p>
     </div>
+</section>
+<section class="plot-section" id="depth-distribution">
+<div class="section-header">
+    <h2>Dive Depth Distribution: The Foundation of Diving Behavior</h2>
+    <div class="toggle-icon">›</div>
+</div>
+<div class="section-content">
+    <p>Understanding the distribution of dive depths provides critical insight into habitat use and potential foraging zones. The histogram below shows the frequency distribution of dive depths recorded by the tag.</p>
+    <div class="plot-container">
+        <img src="plots/Analytics/dive_depth_distribution.png" alt="Distribution of dive depths" loading="lazy">
+        <p class="caption">Figure 2: Distribution of dive depths showing distinct patterns at different depth ranges. Three key zones are identified: surface (0-5m), shallow (5-15m), and deep (&gt;15m) dives.</p>
+    </div>
+    <p>The depth distribution reveals several interesting patterns:</p>
+    <ul>
+    <li>Surface periods (0-5m) represent time when the animal is breathing and recovering between dives</li>
+    <li>Shallow dives (5-15m) may represent exploratory behavior or transitions between surface and deep dives</li>
+    <li>Deep dives (&gt;15m) likely represent focused foraging efforts, where the animal targets specific prey layers</li>
+    </ul>
+    <p>The multimodal distribution suggests different functional categories of dives, each potentially serving a different purpose. The thresholds at 5m and 15m (indicated by red dashed lines) represent biologically meaningful transitions between these diving states.</p>
+</div>
+</section>
+<section class="plot-section" id="cluster-analysis">
+<div class="section-header">
+    <h2>Cluster Analysis of Dive Cycles: Identifying Behavioral Patterns</h2>
+    <div class="toggle-icon">›</div>
+</div>
+<div class="section-content">
+    <p>To identify natural groupings in diving behavior without imposing arbitrary thresholds, a cluster analysis was performed based on depth and time parameters. This unsupervised machine learning approach helps reveal inherent patterns in diving behavior.</p>
+    <div class="plot-container">
+        <img src="plots/Analytics/cluster_analysis_dive_cycles.png" alt="Cluster analysis of dive cycles" loading="lazy">
+        <p class="caption">Figure 3: K-means cluster analysis identifying three distinct dive behavior clusters. Colors represent different clusters identified by the algorithm.</p>
+    </div>
+    <p>The cluster analysis reveals three distinct behavioral states:</p>
+    <ul>
+    <li><strong>Cluster 1:</strong> Deep dives - characterized by longer durations and greater depths, likely representing dedicated foraging events</li>
+    <li><strong>Cluster 2:</strong> Intermediate dives - moderate depths and durations, possibly representing exploratory or transitional behavior</li>
+    <li><strong>Cluster 3:</strong> Surface periods - minimal depth, representing breathing and recovery periods between dives</li>
+    </ul>
+    <p>The emergence of these clusters supports the hypothesis that diving behavior is not continuous but can be categorized into discrete functional states. This clustering approach provides an objective method for classifying diving behavior without relying solely on predefined depth thresholds.</p>
+</div>
+</section>
+<section class="plot-section" id="duration-depth">
+<div class="section-header">
+    <h2>Relationship Between Dive Duration and Depth</h2>
+    <div class="toggle-icon">›</div>
+</div>
+<div class="section-content">
+    <p>The relationship between how long an animal dives and how deep it goes can reveal physiological constraints and behavioral strategies. This relationship helps understand the trade-offs these animals make when diving.</p>
+    <div class="plot-container">
+        <img src="plots/Analytics/dive_duration_vs_depth.png" alt="Relationship between dive duration and depth" loading="lazy">
+        <p class="caption">Figure 4: Relationship between dive duration and depth, color-coded by dive phase. The trend line indicates the general relationship between these variables.</p>
+    </div>
+    <p>This visualization reveals several key insights:</p>
+    <ul>
+    <li>A positive correlation between dive duration and depth - deeper dives generally take longer</li>
+    <li>Different dive phases (colors) occupy different regions of the depth-duration space</li>
+    <li>Significant variability around the trend line suggests that factors beyond depth influence dive duration</li>
+    </ul>
+    <p>This relationship aligns with diving theory: deeper dives require more travel time and may offer access to different prey resources, justifying the longer duration. However, physiological constraints like oxygen storage capacity limit how long animals can remain at depth.</p>
+</div>
+</section>
+<section class="plot-section" id="temporal-distribution">
+<div class="section-header">
+    <h2>Temporal Distribution of Dive Phases</h2>
+    <div class="toggle-icon">›</div>
+</div>
+<div class="section-content">
+    <p>Understanding how diving behavior changes over time can reveal activity patterns, responses to environmental conditions, and behavioral sequences. The plot below shows how different dive phases are distributed over time.</p>
+    <div class="plot-container">
+        <img src="plots/Analytics/temporal_distribution.png" alt="Temporal distribution of dive phases" loading="lazy">
+        <p class="caption">Figure 5: Temporal sequence of dive phases throughout the recording period. This visualization reveals how the animal transitions between different behavioral states over time.</p>
+    </div>
+    <p>The temporal distribution reveals several patterns:</p>
+    <ul>
+    <li>Cyclic patterns of deep dives followed by recovery at the surface</li>
+    <li>Periods of concentrated deep diving activity that may indicate foraging bouts</li>
+    <li>Transitions between phases that suggest a structured diving strategy rather than random behavior</li>
+    </ul>
+    <p>By examining these temporal patterns, it's possible to identify behavioral sequences that might be linked to specific ecological functions like foraging, traveling, or resting. The regularity of certain sequences suggests deliberate behavioral strategies rather than opportunistic responses.</p>
+</div>
+</section>
+<section class="plot-section" id="movement-intensity">
+<div class="section-header">
+    <h2>Movement Intensity Across Dive Phases: Understanding Energy Expenditure</h2>
+    <div class="toggle-icon">›</div>
+</div>
+<div class="section-content">
+    <p>Movement intensity, measured by the normalized jerk (rate of change of acceleration), provides a proxy for energy expenditure and activity level during different dive phases. This metric helps identify active foraging or prey capture events.</p>
+    <div class="plot-container">
+        <img src="plots/Analytics/movement_intensity.png" alt="Movement intensity across dive phases" loading="lazy">
+        <p class="caption">Figure 6: Movement intensity (normalized jerk) across different dive phases and depths. Higher values indicate more intense movement that may be associated with foraging or prey capture attempts.</p>
+    </div>
+    <p>This faceted plot reveals distinct movement patterns across dive phases:</p>
+    <ul>
+    <li><strong>Deep Phase:</strong> Shows bursts of high-intensity movement at specific depths, likely indicating foraging events</li>
+    <li><strong>Shallow Phase:</strong> Generally less intense movement, possibly representing exploratory behavior</li>
+    <li><strong>Surface Phase:</strong> Relatively low movement intensity, consistent with recovery behavior</li>
+    <li><strong>Surfacing:</strong> Brief increases in movement associated with the act of surfacing and breathing</li>
+    </ul>
+    <p>The relationship between depth and movement intensity within each phase provides evidence for depth-specific foraging strategies and helps identify the depths where prey resources might be concentrated.</p>
 </div>
 </section>
 <section class="plot-section" id="conclusions">
