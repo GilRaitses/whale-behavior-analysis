@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Whale Dive Behavior Analysis</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(to bottom, #e0f7ff 0%, #87ceeb 100%, #1e5799 100%);
+            background-attachment: fixed;
+        }
+        header {
+            background-color: #0a5d7e;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        h1, h2, h3 {
+            color: #0a5d7e;
+        }
+        .plot-section {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .plot-container {
+            margin: 20px 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh; /* Container takes up to 90% of viewport height */
+        }
+        .plot-container img {
+            max-width: 100%;
+            max-height: 75vh; /* Reduced from 85vh to leave room for navigation */
+            width: auto;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            object-fit: contain;
+        }
+        .caption {
+            font-style: italic;
+            margin-top: 10px;
+            color: #555;
+        }
+        .nav-section {
+            background-color: rgba(225, 240, 250, 0.8);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .nav-section ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+        }
+        .nav-section li {
+            margin-bottom: 10px;
+        }
+        .nav-section a {
+            color: #0a5d7e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .nav-section a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+            background-color: #0a5d7e;
+            border-radius: 5px;
+            font-size: 0.9em;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* Collapsible section styles */
+        .section-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+        .section-header:hover {
+            background-color: rgba(10, 93, 126, 0.1);
+            border-radius: 5px;
+            padding-left: 10px;
+            transition: all 0.3s ease;
+        }
+        .section-header h2 {
+            margin: 0;
+        }
+        .section-content {
+            display: none;
+            padding-top: 10px;
+        }
+        .section-content.show {
+            display: block;
+        }
+        .toggle-icon {
+            font-size: 1.5em;
+            color: #0a5d7e;
+            transition: transform 0.3s ease;
+        }
+        .toggle-icon.rotated {
+            transform: rotate(90deg);
+        }
+        
+        /* Mobile-friendly adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            header {
+                padding: 15px;
+            }
+            .plot-section {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .nav-section ul {
+                flex-direction: column;
+            }
+        }
+        
+        /* Add these styles to your existing CSS */
+        .behavior-navigation {
+            margin-top: 10px;
+            padding: 8px;
+            background-color: rgba(10, 93, 126, 0.1);
+            border-radius: 5px;
+            text-align: center;
+            /* Ensure this is visible within the plot container */
+            flex-shrink: 0; /* Prevent navigation from shrinking */
+        }
+        
+        .behavior-navigation a {
+            color: #0a5d7e;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0 10px;
+        }
+        
+        .behavior-navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .nav-prev, .nav-next {
+            color: #666;
+        }
+        
+        /* Disable non-functional navigation elements */
+        span.nav-prev, span.nav-next {
+            color: #ccc;
+        }
+        
+        /* Lightbox styles for zoomable images */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+        
+        .lightbox:target {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            margin: 0 auto;
+        }
+        
+        .lightbox-caption {
+            color: white;
+            margin-top: 15px;
+            max-width: 80%;
+            font-size: 1em;
+        }
+        
+        .close-lightbox {
+            color: white;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2em;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .zoom-hint {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.8em;
+            color: #0a5d7e;
+            font-style: italic;
+        }
+        
+        /* Make regular images have a pointer cursor to indicate they're clickable */
+        .plot-container img {
+            cursor: zoom-in;
+        }
+    </style>
+</head>
+<body>
+<header>
+<h1>Marine Mammal Diving Behavior: Exploring Whale Dive Patterns</h1>
+<p>A data-driven exploration of diving behavior patterns in tagged marine mammals</p>
+</header>
+<div class="nav-section">
+<h2>Contents</h2>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#depth-distribution">Dive Depth Distribution</a></li>
+<li><a href="#cluster-analysis">Cluster Analysis of Dive Cycles</a></li>
+<li><a href="#duration-depth">Relationship Between Dive Duration and Depth</a></li>
+<li><a href="#temporal-distribution">Temporal Distribution of Dive Phases</a></li>
+<li><a href="#movement-intensity">Movement Intensity Across Dive Phases</a></li>
+<li><a href="#composite-views">Composite Dive Event Visualizations</a></li>
+<li><a href="#annotation-types">Annotation Categories</a></li>
+<li><a href="#conclusions">Conclusions and Future ML-Driven Research</a></li>
+</ul>
+</div>
+<section class="plot-section" id="introduction">
+<div class="section-header">
+    <h2>Introduction: ClassifyingMarine Mammal Diving Behavior</h2>
+    <div class="toggle-icon">›</div>
+</div>
+<div class="section-content">
+    <p>Marine mammals such as whales and dolphins have evolved remarkable diving capabilities that allow them to explore the ocean depths in search of food, mates, and shelter. Understanding these diving behaviors is crucial for marine conservation efforts and provides insights into how these animals have adapted to their environment.</p>
+    <p>This analysis examines high-resolution bio-logging data collected from tagged marine mammals, specifically focusing on dive profiles, movement patterns, and behavioral states during dives. By analyzing the depth, duration, and movement intensity of dives, the research aims to identify different behavioral states and potentially infer foraging and other important activities.</p>
+    <p><strong>Data Source:</strong> The data was collected using animal-borne tags attached to marine mammals. These tags record depth, acceleration, temperature, and other parameters at high sampling rates (typically 5-10 Hz), providing detailed information about the animals' movements and environmental conditions they experience.</p>
+    <p>The quest is to answer the following questions:</p>
+    <ul>
+    <li>What are the typical diving patterns exhibited by these animals?</li>
+    <li>Can distinct phases within diving cycles be identified?</li>
+    <li>How does movement intensity vary across different dive phases and depths?</li>
+    <li>Are there relationships between dive duration and depth that might indicate different behavioral states?</li>
+    </ul>
+</div>
+</section>
+<section class="plot-section" id="depth-distribution">
+<h2>Dive Depth Distribution: The Foundation of Diving Behavior</h2>
+<p>Understanding the distribution of dive depths provides critical insight into habitat use and potential foraging zones. The histogram below shows the frequency distribution of dive depths recorded by the tag.</p>
+<div class="plot-container">
+<img src="plots/Analytics/dive_depth_distribution.png" alt="Distribution of dive depths" loading="lazy">
+<p class="caption">Figure 1: Distribution of dive depths showing distinct patterns at different depth ranges. Three key zones are identified: surface (0-5m), shallow (5-15m), and deep (&gt;15m) dives.</p>
+</div>
+<p>The depth distribution reveals several interesting patterns:</p>
+<ul>
+<li>Surface periods (0-5m) represent time when the animal is breathing and recovering between dives</li>
+<li>Shallow dives (5-15m) may represent exploratory behavior or transitions between surface and deep dives</li>
+<li>Deep dives (&gt;15m) likely represent focused foraging efforts, where the animal targets specific prey layers</li>
+</ul>
+<p>The multimodal distribution suggests different functional categories of dives, each potentially serving a different purpose. The thresholds at 5m and 15m (indicated by red dashed lines) represent biologically meaningful transitions between these diving states.</p>
+</section>
+<section class="plot-section" id="cluster-analysis">
+<h2>Cluster Analysis of Dive Cycles: Identifying Behavioral Patterns</h2>
+<p>To identify natural groupings in diving behavior without imposing arbitrary thresholds, a cluster analysis was performed based on depth and time parameters. This unsupervised machine learning approach helps reveal inherent patterns in diving behavior.</p>
+<div class="plot-container">
+<img src="plots/Analytics/cluster_analysis_dive_cycles.png" alt="Cluster analysis of dive cycles" loading="lazy">
+<p class="caption">Figure 2: K-means cluster analysis identifying three distinct dive behavior clusters. Colors represent different clusters identified by the algorithm.</p>
+</div>
+<p>The cluster analysis reveals three distinct behavioral states:</p>
+<ul>
+<li><strong>Cluster 1:</strong> Deep dives - characterized by longer durations and greater depths, likely representing dedicated foraging events</li>
+<li><strong>Cluster 2:</strong> Intermediate dives - moderate depths and durations, possibly representing exploratory or transitional behavior</li>
+<li><strong>Cluster 3:</strong> Surface periods - minimal depth, representing breathing and recovery periods between dives</li>
+</ul>
+<p>The emergence of these clusters supports the hypothesis that diving behavior is not continuous but can be categorized into discrete functional states. This clustering approach provides an objective method for classifying diving behavior without relying solely on predefined depth thresholds.</p>
+</section>
+<section class="plot-section" id="duration-depth">
+<h2>Relationship Between Dive Duration and Depth</h2>
+<p>The relationship between how long an animal dives and how deep it goes can reveal physiological constraints and behavioral strategies. This relationship helps understand the trade-offs these animals make when diving.</p>
+<div class="plot-container">
+<img src="plots/Analytics/dive_duration_vs_depth.png" alt="Relationship between dive duration and depth" loading="lazy">
+<p class="caption">Figure 3: Relationship between dive duration and depth, color-coded by dive phase. The trend line indicates the general relationship between these variables.</p>
+</div>
+<p>This visualization reveals several key insights:</p>
+<ul>
+<li>A positive correlation between dive duration and depth - deeper dives generally take longer</li>
+<li>Different dive phases (colors) occupy different regions of the depth-duration space</li>
+<li>Significant variability around the trend line suggests that factors beyond depth influence dive duration</li>
+</ul>
+<p>This relationship aligns with diving theory: deeper dives require more travel time and may offer access to different prey resources, justifying the longer duration. However, physiological constraints like oxygen storage capacity limit how long animals can remain at depth.</p>
+</section>
+<section class="plot-section" id="temporal-distribution">
+<h2>Temporal Distribution of Dive Phases</h2>
+<p>Understanding how diving behavior changes over time can reveal activity patterns, responses to environmental conditions, and behavioral sequences. The plot below shows how different dive phases are distributed over time.</p>
+<div class="plot-container">
+<img src="plots/Analytics/temporal_distribution.png" alt="Temporal distribution of dive phases" loading="lazy">
+<p class="caption">Figure 4: Temporal sequence of dive phases throughout the recording period. This visualization reveals how the animal transitions between different behavioral states over time.</p>
+</div>
+<p>The temporal distribution reveals several patterns:</p>
+<ul>
+<li>Cyclic patterns of deep dives followed by recovery at the surface</li>
+<li>Periods of concentrated deep diving activity that may indicate foraging bouts</li>
+<li>Transitions between phases that suggest a structured diving strategy rather than random behavior</li>
+</ul>
+<p>By examining these temporal patterns, it's possible to identify behavioral sequences that might be linked to specific ecological functions like foraging, traveling, or resting. The regularity of certain sequences suggests deliberate behavioral strategies rather than opportunistic responses.</p>
+</section>
+<section class="plot-section" id="movement-intensity">
+<h2>Movement Intensity Across Dive Phases: Understanding Energy Expenditure</h2>
+<p>Movement intensity, measured by the normalized jerk (rate of change of acceleration), provides a proxy for energy expenditure and activity level during different dive phases. This metric helps identify active foraging or prey capture events.</p>
+<div class="plot-container">
+<img src="plots/Analytics/movement_intensity.png" alt="Movement intensity across dive phases" loading="lazy">
+<p class="caption">Figure 5: Movement intensity (normalized jerk) across different dive phases and depths. Higher values indicate more intense movement that may be associated with foraging or prey capture attempts.</p>
+</div>
+<p>This faceted plot reveals distinct movement patterns across dive phases:</p>
+<ul>
+<li><strong>Deep Phase:</strong> Shows bursts of high-intensity movement at specific depths, likely indicating foraging events</li>
+<li><strong>Shallow Phase:</strong> Generally less intense movement, possibly representing exploratory behavior</li>
+<li><strong>Surface Phase:</strong> Relatively low movement intensity, consistent with recovery behavior</li>
+<li><strong>Surfacing:</strong> Brief increases in movement associated with the act of surfacing and breathing</li>
+</ul>
+<p>The relationship between depth and movement intensity within each phase provides evidence for depth-specific foraging strategies and helps identify the depths where prey resources might be concentrated.</p>
+</section>
+<section class="plot-section" id="composite-views">
+<h2>Composite Dive Event Visualizations: Detailed Behavioral Analysis</h2>
+<p>For a more detailed understanding of specific diving events, composite dashboards were created that integrate multiple data streams. These visualizations provide comprehensive views of individual dive events.</p>
+<div class="plot-container">
+<img src="plots/feedingExploratoryDives6/E34_composite_dashboard.png" alt="Composite dashboard for dive event E34" loading="lazy">
+<p class="caption">Figure 6: Composite dashboard showing multiple parameters for a single dive event. From top to bottom: pitch/roll/heading, movement intensity, depth/temperature profile, and context within the broader dive sequence.</p>
+</div>
+<p>These comprehensive visualizations allow examination of:</p>
+<ul>
+<li>Body orientation (pitch, roll, heading) that indicates specific movements and maneuvers</li>
+<li>Peaks in movement intensity that may represent prey capture attempts</li>
+<li>Relationships between depth, temperature, and behavioral parameters</li>
+<li>How specific events fit within the broader context of dive sequences</li>
+</ul>
+<p>By integrating these multiple data streams, a more complete picture can be built of what the animal is doing throughout different phases of a dive, revealing complex behavioral sequences that wouldn't be apparent from depth data alone.</p>
+</section>
+<section class="plot-section" id="annotation-types">
+<h2>Annotation Categories: Diverse Feeding Behaviors</h2>
+<p>This analysis has identified several distinct feeding behaviors, each with unique movement patterns and dive characteristics. Here examples from each annotation category are showcased to demonstrate the diversity of feeding strategies.</p>
+
+<!-- Behavior Categories Navigation -->
+<div class="nav-section" id="behavior-categories">
+    <h3>Feeding Behavior Categories</h3>
+    <ul>
+        <li><a href="#exploratory-dives">Exploratory Dives</a></li>
+        <li><a href="#feeding-loops">Feeding Loops</a></li>
+        <li><a href="#kick-feeding">Kick Feeding</a></li>
+        <li><a href="#noodle-feeding">Noodle Feeding</a></li>
+        <li><a href="#side-rolls">Side Rolls</a></li>
+        <li><a href="#side-rolls-and-loop">Side Rolls and Loop</a></li>
+        <li><a href="#vertical-loop">Vertical Loop</a></li>
+        <li><a href="#traveling">Traveling</a></li>
+    </ul>
+</div>
+
+<!-- Exploratory Dives -->
+<div class="plot-container" id="exploratory-dives">
+    <h3>Exploratory Dives</h3>
+    <p>Characterized by gradual descent patterns with periodic changes in direction, likely representing search behavior for prey patches.</p>
+    
+    <!-- Link the image to its lightbox -->
+    <a href="#lightbox-exploratory">
+        <img src="plots/feedingExploratoryDives6/E34_composite_dashboard.png" alt="Composite dashboard for exploratory dive E34" loading="lazy">
+        <span class="zoom-hint">(Click to enlarge)</span>
+    </a>
+    
+    <p class="caption">Example of an Exploratory Dive pattern showing search behavior with moderate movement intensity.</p>
+    <div class="behavior-navigation">
+        <p><a href="#behavior-categories">↑ Back to Categories</a> | <span class="nav-prev">Previous</span> | <a href="#feeding-loops" class="nav-next">Next: Feeding Loops</a></p>
+    </div>
+    
+    <!-- Lightbox div for this image -->
+    <div id="lightbox-exploratory" class="lightbox">
+        <a href="#exploratory-dives" class="close-lightbox">&times;</a>
+        <img src="plots/feedingExploratoryDives6/E34_composite_dashboard.png" alt="Composite dashboard for exploratory dive E34">
+        <p class="lightbox-caption">Example of an Exploratory Dive pattern showing search behavior with moderate movement intensity.</p>
+    </div>
+</div>
+
+<!-- Feeding Loops -->
+<div class="plot-container" id="feeding-loops">
+    <h3>Feeding Loops</h3>
+    <p>Circular movement patterns typically observed during active feeding, where the animal loops back through prey aggregations.</p>
+    
+    <!-- Link the image to its lightbox -->
+    <a href="#lightbox-feeding-loops">
+        <img src="plots/feedingFeedingLoop/E13_composite_dashboard.png" alt="Composite dashboard for feeding loop E13" loading="lazy">
+        <span class="zoom-hint">(Click to enlarge)</span>
+    </a>
+    
+    <p class="caption">Example of a Feeding Loop pattern showing repeated circular movements through a prey patch.</p>
+    <div class="behavior-navigation">
+        <p><a href="#behavior-categories">↑ Back to Categories</a> | <a href="#exploratory-dives" class="nav-prev">Previous: Exploratory Dives</a> | <a href="#kick-feeding" class="nav-next">Next: Kick Feeding</a></p>
+    </div>
+    
+    <!-- Lightbox div for this image -->
+    <div id="lightbox-feeding-loops" class="lightbox">
+        <a href="#feeding-loops" class="close-lightbox">&times;</a>
+        <img src="plots/feedingFeedingLoop/E13_composite_dashboard.png" alt="Composite dashboard for feeding loop E13">
+        <p class="lightbox-caption">Example of a Feeding Loop pattern showing repeated circular movements through a prey patch.</p>
+    </div>
+</div>
+
+<!-- Kick Feeding -->
+<div class="plot-container" id="kick-feeding">
+    <h3>Kick Feeding</h3>
+    <p>Distinctive behavior where the animal uses its tail to stun or corral prey before lunging to capture it.</p>
+    
+    <!-- Link the image to its lightbox -->
+    <a href="#lightbox-kick-feeding">
+        <img src="plots/feedingKickFeeding/E16_composite_dashboard.png" alt="Composite dashboard for kick feeding E16" loading="lazy">
+        <span class="zoom-hint">(Click to enlarge)</span>
+    </a>
+    
+    <p class="caption">Example of Kick Feeding showing intense movement spikes associated with tail movements.</p>
+    <div class="behavior-navigation">
+        <p><a href="#behavior-categories">↑ Back to Categories</a> | <a href="#feeding-loops" class="nav-prev">Previous: Feeding Loops</a> | <a href="#noodle-feeding" class="nav-next">Next: Noodle Feeding</a></p>
+    </div>
+    
+    <!-- Lightbox div for this image -->
+    <div id="lightbox-kick-feeding" class="lightbox">
+        <a href="#kick-feeding" class="close-lightbox">&times;</a>
+        <img src="plots/feedingKickFeeding/E16_composite_dashboard.png" alt="Composite dashboard for kick feeding E16">
+        <p class="lightbox-caption">Example of Kick Feeding showing intense movement spikes associated with tail movements.</p>
+    </div>
+</div>
+
+<!-- Noodle Feeding -->
+<div class="plot-container" id="noodle-feeding">
+    <h3>Noodle Feeding</h3>
+    <p>Characterized by sinuous, snake-like movements through the water column, potentially used to track prey in complex environments.</p>
+    
+    <!-- Link the image to its lightbox -->
+    <a href="#lightbox-noodle-feeding">
+        <img src="plots/feedingNoodleFeeding/E20_composite_dashboard.png" alt="Composite dashboard for noodle feeding E20" loading="lazy">
+        <span class="zoom-hint">(Click to enlarge)</span>
+    </a>
+    
+    <p class="caption">Example of Noodle Feeding showing distinctive sinuous movement patterns.</p>
+    <div class="behavior-navigation">
+        <p><a href="#behavior-categories">↑ Back to Categories</a> | <a href="#kick-feeding" class="nav-prev">Previous: Kick Feeding</a> | <a href="#side-rolls" class="nav-next">Next: Side Rolls</a></p>
+    </div>
+    
+    <!-- Lightbox div for this image -->
+    <div id="lightbox-noodle-feeding" class="lightbox">
+        <a href="#noodle-feeding" class="close-lightbox">&times;</a>
+        <img src="plots/feedingNoodleFeeding/E20_composite_dashboard.png" alt="Composite dashboard for noodle feeding E20">
+        <p class="lightbox-caption">Example of Noodle Feeding showing distinctive sinuous movement patterns.</p>
+    </div>
+</div>
+
+<!-- Side Rolls -->
+<div class="plot-container" id="side-rolls">
+    <h3>Side Rolls</h3>
+    <p>Rolling behavior where the animal rotates along its longitudinal axis, often associated with prey capture or manipulation.</p>
+    
+    <!-- Link the image to its lightbox -->
+    <a href="#lightbox-side-rolls">
+        <img src="plots/feedingSideRolls5/E7_composite_dashboard.png" alt="Composite dashboard for side rolls E7" loading="lazy">
+        <span class="zoom-hint">(Click to enlarge)</span>
+    </a>
+    
+    <p class="caption">Example of Side Roll behavior showing distinct rotational movements along the body axis.</p>
+    <div class="behavior-navigation">
+        <p><a href="#behavior-categories">↑ Back to Categories</a> | <a href="#noodle-feeding" class="nav-prev">Previous: Noodle Feeding</a> | <a href="#side-rolls-and-loop" class="nav-next">Next: Side Rolls and Loop</a></p>
+    </div>
+    
+    <!-- Lightbox div for this image -->
+    <div id="lightbox-side-rolls" class="lightbox">
+        <a href="#side-rolls" class="close-lightbox">&times;</a>
+        <img src="plots/feedingSideRolls5/E7_composite_dashboard.png" alt="Composite dashboard for side rolls E7">
+        <p class="lightbox-caption">Example of Side Roll behavior showing distinct rotational movements along the body axis.</p>
+    </div>
+</div>
+
+<!-- Side Rolls and Loop -->
+<div class="plot-container" id="side-rolls-and-loop">
+    <h3>Side Rolls and Loop</h3>
+    <p>Combined behavior where side rolling is integrated with looping movements, potentially representing a complex feeding strategy.</p>
+    
+    <!-- Link the image to its lightbox -->
+    <a href="#lightbox-side-rolls-and-loop">
+        <img src="plots/feedingSideRollsAndLoop/E11_composite_dashboard.png" alt="Composite dashboard for side rolls and loop E11" loading="lazy">
+        <span class="zoom-hint">(Click to enlarge)</span>
+    </a>
+    
+    <p class="caption">Example of combined Side Roll and Loop behavior showing integration of multiple feeding techniques.</p>
+    <div class="behavior-navigation">
+        <p><a href="#behavior-categories">↑ Back to Categories</a> | <a href="#side-rolls" class="nav-prev">Previous: Side Rolls</a> | <a href="#vertical-loop" class="nav-next">Next: Vertical Loop</a></p>
+    </div>
+    
+    <!-- Lightbox div for this image -->
+    <div id="lightbox-side-rolls-and-loop" class="lightbox">
+        <a href="#side-rolls-and-loop" class="close-lightbox">&times;</a>
+        <img src="plots/feedingSideRollsAndLoop/E11_composite_dashboard.png" alt="Composite dashboard for side rolls and loop E11">
+        <p class="lightbox-caption">Example of combined Side Roll and Loop behavior showing integration of multiple feeding techniques.</p>
+    </div>
+</div>
+
+<!-- Vertical Loop -->
+<div class="plot-container" id="vertical-loop">
+    <h3>Vertical Loop</h3>
+    <p>Distinctive vertical looping pattern where the animal performs a complete rotation in the vertical plane, often during active feeding.</p>
+    
+    <!-- Link the image to its lightbox -->
+    <a href="#lightbox-vertical-loop">
+        <img src="plots/feedingVerticalLoop/E32_composite_dashboard.png" alt="Composite dashboard for vertical loop E32" loading="lazy">
+        <span class="zoom-hint">(Click to enlarge)</span>
+    </a>
+    
+    <p class="caption">Example of Vertical Loop behavior showing complete vertical rotation during a feeding event.</p>
+    <div class="behavior-navigation">
+        <p><a href="#behavior-categories">↑ Back to Categories</a> | <a href="#side-rolls-and-loop" class="nav-prev">Previous: Side Rolls and Loop</a> | <a href="#traveling" class="nav-next">Next: Traveling</a></p>
+    </div>
+    
+    <!-- Lightbox div for this image -->
+    <div id="lightbox-vertical-loop" class="lightbox">
+        <a href="#vertical-loop" class="close-lightbox">&times;</a>
+        <img src="plots/feedingVerticalLoop/E32_composite_dashboard.png" alt="Composite dashboard for vertical loop E32">
+        <p class="lightbox-caption">Example of Vertical Loop behavior showing complete vertical rotation during a feeding event.</p>
+    </div>
+</div>
+
+<!-- Traveling -->
+<div class="plot-container" id="traveling">
+    <h3>Traveling</h3>
+    <p>Directed horizontal movement pattern characterized by consistent speed and orientation, representing transit between areas.</p>
+    
+    <!-- Link the image to its lightbox -->
+    <a href="#lightbox-traveling">
+        <img src="plots/traveling/E48_composite_dashboard.png" alt="Composite dashboard for traveling E48" loading="lazy">
+        <span class="zoom-hint">(Click to enlarge)</span>
+    </a>
+    
+    <p class="caption">Example of Traveling behavior showing directed horizontal movement with minimal vertical excursions.</p>
+    <div class="behavior-navigation">
+        <p><a href="#behavior-categories">↑ Back to Categories</a> | <a href="#vertical-loop" class="nav-prev">Previous: Vertical Loop</a> | <span class="nav-next">Next</span></p>
+    </div>
+    
+    <!-- Lightbox div for this image -->
+    <div id="lightbox-traveling" class="lightbox">
+        <a href="#traveling" class="close-lightbox">&times;</a>
+        <img src="plots/traveling/E48_composite_dashboard.png" alt="Composite dashboard for traveling E48">
+        <p class="lightbox-caption">Example of Traveling behavior showing directed horizontal movement with minimal vertical excursions.</p>
+    </div>
+</div>
+
+<p>These diverse feeding strategies highlight the behavioral complexity of marine mammals and demonstrate why sophisticated classification techniques are needed. By correctly identifying these distinct behavioral modes, it becomes possible to better understand how environmental factors influence foraging success and ultimately support conservation efforts.</p>
+</section>
+<section class="plot-section" id="conclusions">
+<h2>Conclusions and Future ML-Driven Research</h2>
+<p>The analysis has revealed several key insights about marine mammal diving behavior that can inform the development of machine learning workflows:</p>
+<ul>
+<li>Diving behavior naturally clusters into distinct functional states that can serve as target classes for supervised learning</li>
+<li>The relationship between dive parameters (depth, duration, movement intensity) provides feature-rich data for classification algorithms</li>
+<li>Temporal patterns in dive sequences could be leveraged for time-series prediction models</li>
+<li>Movement intensity signatures show promise as discriminative features for identifying specific behavioral events</li>
+</ul>
+<p><strong>Optimizing Dataset for ML Classification:</strong></p>
+<ul>
+<li>Class balancing techniques will be necessary to address the uneven distribution of dive phases (surface events being more frequent than deep dives)</li>
+<li>Feature engineering should emphasize the most discriminative parameters identified in the analysis</li>
+<li>Temporal context windows can capture the sequential nature of diving behavior</li>
+<li>Data augmentation techniques may help address the limited number of tagged animals</li>
+</ul>
+<p><strong>Human-in-the-Loop Annotation Refinement:</strong></p>
+<ul>
+<li>A clustering-based annotation suggestion system will be implemented that proposes groupings of similar behaviors</li>
+<li>An interactive visualization UI will allow human experts to validate or modify these suggested groupings</li>
+<li>This iterative refinement process will improve label quality while reducing annotation time</li>
+<li>Uncertainty metrics will highlight ambiguous classifications that require expert review</li>
+</ul>
+<p><strong>ML Pipeline Development:</strong></p>
+<ul>
+<li>Preprocessing will normalize and segment the continuous bio-logging data into analysis-ready formats</li>
+<li>Feature selection will be guided by the domain insights gained from the exploratory analysis</li>
+<li>Model selection will explore both traditional classifiers and deep learning approaches for time-series classification</li>
+<li>Evaluation metrics will focus on correctly identifying behaviorally significant events, with particular emphasis on rare but important behaviors</li>
+</ul>
+<p><strong>3D Data-Driven Simulation with NVIDIA NVAIE &amp; NIMs:</strong></p>
+<p>Future work will include developing a data-driven 3D simulation pipeline that brings the behavioral analyses to life using NVIDIA's AI and simulation technologies:</p>
+<ul>
+<li><strong>Kinematic-Driven Animation:</strong> The high-resolution accelerometer and orientation data from the tags will drive a rigged 3D model of a whale, translating the raw kinematic measurements into realistic motion in real-time</li>
+<li><strong>NVIDIA Omniverse AI Explorer (NVAIE):</strong> Will provide the real-time rendering environment where the whale's movements can be visualized in a physically accurate underwater setting</li>
+<li><strong>Neural Implicit Models (NIMs):</strong> Can be used to generate smooth, continuous representations of movement patterns from discrete sensor data, improving animation fluidity</li>
+<li><strong>Behavioral State Visualization:</strong> The ML-classified behavioral states will be color-coded or otherwise visually indicated in the 3D environment, creating an intuitive representation of the animal's changing behavioral states</li>
+</ul>
+<p><strong>Integration with Annotation Workflow:</strong></p>
+<ul>
+<li>The 3D visualization will serve as a validation tool for annotations, allowing experts to visually confirm if classified behaviors match expected movement patterns</li>
+<li>Ambiguous classifications can be reviewed in the 3D environment, providing additional context for human decision-making</li>
+<li>Iterative refinement between the ML models and 3D visualization will create a feedback loop that improves both classification accuracy and animation realism</li>
+</ul>
+<p><strong>Future Expansions:</strong></p>
+<ul>
+<li>Integration of bathymetry data to recreate the actual underwater terrain where the behaviors occurred</li>
+<li>Addition of GPS tracks to show spatial movement patterns in relation to underwater features</li>
+<li>Environmental data layers (temperature, salinity, prey density) to contextualize behaviors within oceanographic conditions</li>
+<li>Multi-animal simulations to visualize social interactions and group behaviors</li>
+</ul>
+<p>This data-driven approach to marine mammal behavior classification represents a step toward automating the analysis of bio-logging data. By combining machine learning techniques with domain expertise through human-in-the-loop validation, robust tools can be developed for understanding the complex underwater behavior of these fascinating animals and contribute to their conservation through more efficient data processing and pattern recognition. The bottom line is that accurate classification of feeding versus non-feeding behaviors will allow environmental modeling accuracy to be optimized through rigorous annotation validation and refinement steps. This approach ensures that downstream environmental models can reliably correlate animal behavior with oceanographic features, ultimately leading to more accurate predictions of how marine mammals respond to changing ocean conditions.</p>
+</section>
+<footer>
+<p>Data analysis and visualizations created using R | © 2025</p>
+</footer>
+
+<!-- Add JavaScript for collapsible sections -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Convert all sections to collapsible format
+        const sections = document.querySelectorAll('.plot-section');
+        
+        sections.forEach(section => {
+            // Get the existing section content
+            const sectionId = section.id;
+            const sectionTitle = section.querySelector('h2');
+            const existingContent = section.innerHTML;
+            
+            // Skip if already processed
+            if (section.querySelector('.section-header')) return;
+            
+            // Create new structure
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'section-header';
+            
+            // Move the heading to the header div
+            if (sectionTitle) {
+                headerDiv.appendChild(sectionTitle.cloneNode(true));
+                
+                // Add toggle icon
+                const toggleIcon = document.createElement('div');
+                toggleIcon.className = 'toggle-icon';
+                toggleIcon.textContent = '›';
+                headerDiv.appendChild(toggleIcon);
+                
+                // Create content div
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'section-content';
+                
+                // Put everything except the heading into content div
+                contentDiv.innerHTML = existingContent.replace(sectionTitle.outerHTML, '');
+                
+                // Clear and rebuild section
+                section.innerHTML = '';
+                section.appendChild(headerDiv);
+                section.appendChild(contentDiv);
+                
+                // Add click event
+                headerDiv.addEventListener('click', function() {
+                    contentDiv.classList.toggle('show');
+                    toggleIcon.classList.toggle('rotated');
+                });
+            }
+        });
+        
+        // Open the first section by default
+        const firstSection = document.querySelector('.plot-section');
+        if (firstSection) {
+            const firstContent = firstSection.querySelector('.section-content');
+            const firstToggle = firstSection.querySelector('.toggle-icon');
+            if (firstContent && firstToggle) {
+                firstContent.classList.add('show');
+                firstToggle.classList.add('rotated');
+            }
+        }
+        
+        // Handle anchor links
+        if (window.location.hash) {
+            const targetSection = document.querySelector(window.location.hash);
+            if (targetSection) {
+                const targetContent = targetSection.querySelector('.section-content');
+                const targetToggle = targetSection.querySelector('.toggle-icon');
+                if (targetContent && targetToggle) {
+                    targetContent.classList.add('show');
+                    targetToggle.classList.add('rotated');
+                    // Scroll to the section
+                    setTimeout(() => {
+                        targetSection.scrollIntoView();
+                    }, 100);
+                }
+            }
+        }
+        
+        // Update links to toggle sections when clicked
+        const links = document.querySelectorAll('.nav-section a');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    const targetContent = targetSection.querySelector('.section-content');
+                    const targetToggle = targetSection.querySelector('.toggle-icon');
+                    if (targetContent && targetToggle) {
+                        targetContent.classList.add('show');
+                        targetToggle.classList.add('rotated');
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
