@@ -36,25 +36,32 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .plot-container {
-            margin: 20px 0;
+            margin: 30px 0;
+            padding: 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
-            max-height: 90vh; /* Container takes up to 90% of viewport height */
+            max-height: none;
+            position: relative;
+            clear: both;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background-color: #f9f9f9;
         }
         .plot-container img {
             max-width: 100%;
-            max-height: 75vh; /* Reduced from 85vh to leave room for navigation */
+            max-height: 600px;
             width: auto;
             height: auto;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            object-fit: contain;
+            margin: 0 auto;
+            display: block;
         }
         .caption {
+            margin: 15px 0;
             font-style: italic;
-            margin-top: 10px;
             color: #555;
+            text-align: center;
+            width: 100%;
         }
         .nav-section {
             background-color: rgba(225, 240, 250, 0.8);
@@ -149,13 +156,14 @@
         
         /* Add these styles to your existing CSS */
         .behavior-navigation {
-            margin-top: 10px;
-            padding: 8px;
+            margin: 15px 0 0 0;
+            padding: 10px;
             background-color: rgba(10, 93, 126, 0.1);
             border-radius: 5px;
             text-align: center;
-            /* Ensure this is visible within the plot container */
-            flex-shrink: 0; /* Prevent navigation from shrinking */
+            width: 100%;
+            position: static;
+            clear: both;
         }
         
         .behavior-navigation a {
@@ -189,7 +197,7 @@
             background-color: rgba(0, 0, 0, 0.85);
             z-index: 1000;
             text-align: center;
-            padding: 20px;
+            padding: 30px;
             box-sizing: border-box;
             overflow: auto;
         }
@@ -205,7 +213,7 @@
             max-width: 90%;
             max-height: 90%;
             object-fit: contain;
-            margin: 0 auto;
+            margin: 0 auto 15px auto;
         }
         
         .lightbox-caption {
@@ -227,15 +235,45 @@
         
         .zoom-hint {
             display: block;
-            margin-top: 5px;
+            margin: 5px 0;
             font-size: 0.8em;
             color: #0a5d7e;
-            font-style: italic;
+            text-align: center;
         }
         
         /* Make regular images have a pointer cursor to indicate they're clickable */
         .plot-container img {
             cursor: zoom-in;
+        }
+        
+        /* Fix heading display */
+        .plot-container h3 {
+            margin: 0 0 15px 0;
+            padding: 0;
+            font-size: 1.4em;
+            width: 100%;
+            text-align: center;
+            clear: both;
+        }
+        
+        /* Make sure each section is self-contained */
+        #behavior-categories {
+            margin-bottom: 30px;
+            background-color: #f0f7fa;
+            border-radius: 5px;
+            padding: 15px;
+        }
+        
+        /* Ensure no unwanted negative margins */
+        * {
+            margin-bottom: 0;
+        }
+        
+        /* Separate paragraphs properly */
+        .plot-container p {
+            margin: 10px 0;
+            text-align: left;
+            width: 100%;
         }
     </style>
 </head>
