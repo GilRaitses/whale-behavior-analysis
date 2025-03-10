@@ -906,7 +906,52 @@
 <!-- Add this JavaScript for carousel and zoom functionality -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Collapsible sections functionality
+        // First, ensure all sections have the proper structure for collapsibility
+        const sections = document.querySelectorAll('.plot-section');
+        
+        sections.forEach(section => {
+            // Skip if this section is already properly structured
+            if (section.querySelector('.section-header')) {
+                return;
+            }
+            
+            // Get the h2 element
+            const h2 = section.querySelector('h2');
+            if (!h2) return;
+            
+            // Create the section header
+            const sectionHeader = document.createElement('div');
+            sectionHeader.className = 'section-header';
+            
+            // Create the toggle icon
+            const toggleIcon = document.createElement('div');
+            toggleIcon.className = 'toggle-icon';
+            toggleIcon.textContent = '›';
+            
+            // Remove h2 from its current position
+            h2.parentNode.removeChild(h2);
+            
+            // Add h2 and toggle icon to section header
+            sectionHeader.appendChild(h2);
+            sectionHeader.appendChild(toggleIcon);
+            
+            // Insert the section header at the beginning of the section
+            section.insertBefore(sectionHeader, section.firstChild);
+            
+            // Wrap the remaining content in a section-content div
+            const sectionContent = document.createElement('div');
+            sectionContent.className = 'section-content show'; // Start expanded
+            
+            // Move all remaining children into the section-content div
+            while (section.children.length > 1) {
+                sectionContent.appendChild(section.children[1]);
+            }
+            
+            // Add the section-content div to the section
+            section.appendChild(sectionContent);
+        });
+        
+        // Now add the click handlers for toggling sections
         const sectionHeaders = document.querySelectorAll('.section-header');
         
         sectionHeaders.forEach(header => {
@@ -917,7 +962,9 @@
                 
                 // Toggle the rotation of the arrow icon
                 const icon = this.querySelector('.toggle-icon');
-                icon.classList.toggle('rotated');
+                if (icon) {
+                    icon.classList.toggle('rotated');
+                }
             });
         });
         
