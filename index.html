@@ -567,7 +567,7 @@
     <h2>Introduction: ClassifyingMarine Mammal Diving Behavior</h2>
     <div class="toggle-icon">›</div>
 </div>
-<div class="section-content">
+<div class="section-content show">
     <p>Marine mammals such as whales and dolphins have evolved remarkable diving capabilities that allow them to explore the ocean depths in search of food, mates, and shelter. Understanding these diving behaviors is crucial for marine conservation efforts and provides insights into how these animals have adapted to their environment.</p>
     <p>This analysis examines high-resolution bio-logging data collected from tagged marine mammals, specifically focusing on dive profiles, movement patterns, and behavioral states during dives. By analyzing the depth, duration, and movement intensity of dives, the research aims to identify different behavioral states and potentially infer foraging and other important activities.</p>
     <p><strong>Data Source:</strong> The data was collected using animal-borne tags attached to marine mammals. These tags record depth, acceleration, temperature, and other parameters at high sampling rates (typically 5-10 Hz), providing detailed information about the animals' movements and environmental conditions they experience.</p>
@@ -581,267 +581,308 @@
 </div>
 </section>
 <section class="plot-section" id="depth-distribution">
-<h2>Dive Depth Distribution: The Foundation of Diving Behavior</h2>
-<p>Understanding the distribution of dive depths provides critical insight into habitat use and potential foraging zones. The histogram below shows the frequency distribution of dive depths recorded by the tag.</p>
-<div class="plot-container">
-<img src="plots/Analytics/dive_depth_distribution.png" alt="Distribution of dive depths" loading="lazy">
-<p class="caption">Figure 1: Distribution of dive depths showing distinct patterns at different depth ranges. Three key zones are identified: surface (0-5m), shallow (5-15m), and deep (&gt;15m) dives.</p>
+<div class="section-header">
+    <h2>Dive Depth Distribution: The Foundation of Diving Behavior</h2>
+    <div class="toggle-icon">›</div>
 </div>
-<p>The depth distribution reveals several interesting patterns:</p>
-<ul>
-<li>Surface periods (0-5m) represent time when the animal is breathing and recovering between dives</li>
-<li>Shallow dives (5-15m) may represent exploratory behavior or transitions between surface and deep dives</li>
-<li>Deep dives (&gt;15m) likely represent focused foraging efforts, where the animal targets specific prey layers</li>
-</ul>
-<p>The multimodal distribution suggests different functional categories of dives, each potentially serving a different purpose. The thresholds at 5m and 15m (indicated by red dashed lines) represent biologically meaningful transitions between these diving states.</p>
+<div class="section-content">
+    <p>Understanding the distribution of dive depths provides critical insight into habitat use and potential foraging zones. The histogram below shows the frequency distribution of dive depths recorded by the tag.</p>
+    <div class="plot-container">
+        <img src="plots/Analytics/dive_depth_distribution.png" alt="Distribution of dive depths" loading="lazy">
+        <p class="caption">Figure 1: Distribution of dive depths showing distinct patterns at different depth ranges. Three key zones are identified: surface (0-5m), shallow (5-15m), and deep (&gt;15m) dives.</p>
+    </div>
+    <p>The depth distribution reveals several interesting patterns:</p>
+    <ul>
+    <li>Surface periods (0-5m) represent time when the animal is breathing and recovering between dives</li>
+    <li>Shallow dives (5-15m) may represent exploratory behavior or transitions between surface and deep dives</li>
+    <li>Deep dives (&gt;15m) likely represent focused foraging efforts, where the animal targets specific prey layers</li>
+    </ul>
+    <p>The multimodal distribution suggests different functional categories of dives, each potentially serving a different purpose. The thresholds at 5m and 15m (indicated by red dashed lines) represent biologically meaningful transitions between these diving states.</p>
+</div>
 </section>
 <section class="plot-section" id="cluster-analysis">
-<h2>Cluster Analysis of Dive Cycles: Identifying Behavioral Patterns</h2>
-<p>To identify natural groupings in diving behavior without imposing arbitrary thresholds, a cluster analysis was performed based on depth and time parameters. This unsupervised machine learning approach helps reveal inherent patterns in diving behavior.</p>
-<div class="plot-container">
-<img src="plots/Analytics/cluster_analysis_dive_cycles.png" alt="Cluster analysis of dive cycles" loading="lazy">
-<p class="caption">Figure 2: K-means cluster analysis identifying three distinct dive behavior clusters. Colors represent different clusters identified by the algorithm.</p>
+<div class="section-header">
+    <h2>Cluster Analysis of Dive Cycles: Identifying Behavioral Patterns</h2>
+    <div class="toggle-icon">›</div>
 </div>
-<p>The cluster analysis reveals three distinct behavioral states:</p>
-<ul>
-<li><strong>Cluster 1:</strong> Deep dives - characterized by longer durations and greater depths, likely representing dedicated foraging events</li>
-<li><strong>Cluster 2:</strong> Intermediate dives - moderate depths and durations, possibly representing exploratory or transitional behavior</li>
-<li><strong>Cluster 3:</strong> Surface periods - minimal depth, representing breathing and recovery periods between dives</li>
-</ul>
-<p>The emergence of these clusters supports the hypothesis that diving behavior is not continuous but can be categorized into discrete functional states. This clustering approach provides an objective method for classifying diving behavior without relying solely on predefined depth thresholds.</p>
+<div class="section-content">
+    <p>To identify natural groupings in diving behavior without imposing arbitrary thresholds, a cluster analysis was performed based on depth and time parameters. This unsupervised machine learning approach helps reveal inherent patterns in diving behavior.</p>
+    <div class="plot-container">
+        <img src="plots/Analytics/cluster_analysis_dive_cycles.png" alt="Cluster analysis of dive cycles" loading="lazy">
+        <p class="caption">Figure 2: K-means cluster analysis identifying three distinct dive behavior clusters. Colors represent different clusters identified by the algorithm.</p>
+    </div>
+    <p>The cluster analysis reveals three distinct behavioral states:</p>
+    <ul>
+    <li><strong>Cluster 1:</strong> Deep dives - characterized by longer durations and greater depths, likely representing dedicated foraging events</li>
+    <li><strong>Cluster 2:</strong> Intermediate dives - moderate depths and durations, possibly representing exploratory or transitional behavior</li>
+    <li><strong>Cluster 3:</strong> Surface periods - minimal depth, representing breathing and recovery periods between dives</li>
+    </ul>
+    <p>The emergence of these clusters supports the hypothesis that diving behavior is not continuous but can be categorized into discrete functional states. This clustering approach provides an objective method for classifying diving behavior without relying solely on predefined depth thresholds.</p>
+</div>
 </section>
 <section class="plot-section" id="duration-depth">
-<h2>Relationship Between Dive Duration and Depth</h2>
-<p>The relationship between how long an animal dives and how deep it goes can reveal physiological constraints and behavioral strategies. This relationship helps understand the trade-offs these animals make when diving.</p>
-<div class="plot-container">
-<img src="plots/Analytics/dive_duration_vs_depth.png" alt="Relationship between dive duration and depth" loading="lazy">
-<p class="caption">Figure 3: Relationship between dive duration and depth, color-coded by dive phase. The trend line indicates the general relationship between these variables.</p>
+<div class="section-header">
+    <h2>Relationship Between Dive Duration and Depth</h2>
+    <div class="toggle-icon">›</div>
 </div>
-<p>This visualization reveals several key insights:</p>
-<ul>
-<li>A positive correlation between dive duration and depth - deeper dives generally take longer</li>
-<li>Different dive phases (colors) occupy different regions of the depth-duration space</li>
-<li>Significant variability around the trend line suggests that factors beyond depth influence dive duration</li>
-</ul>
-<p>This relationship aligns with diving theory: deeper dives require more travel time and may offer access to different prey resources, justifying the longer duration. However, physiological constraints like oxygen storage capacity limit how long animals can remain at depth.</p>
+<div class="section-content">
+    <p>The relationship between how long an animal dives and how deep it goes can reveal physiological constraints and behavioral strategies. This relationship helps understand the trade-offs these animals make when diving.</p>
+    <div class="plot-container">
+        <img src="plots/Analytics/dive_duration_vs_depth.png" alt="Relationship between dive duration and depth" loading="lazy">
+        <p class="caption">Figure 3: Relationship between dive duration and depth, color-coded by dive phase. The trend line indicates the general relationship between these variables.</p>
+    </div>
+    <p>This visualization reveals several key insights:</p>
+    <ul>
+    <li>A positive correlation between dive duration and depth - deeper dives generally take longer</li>
+    <li>Different dive phases (colors) occupy different regions of the depth-duration space</li>
+    <li>Significant variability around the trend line suggests that factors beyond depth influence dive duration</li>
+    </ul>
+    <p>This relationship aligns with diving theory: deeper dives require more travel time and may offer access to different prey resources, justifying the longer duration. However, physiological constraints like oxygen storage capacity limit how long animals can remain at depth.</p>
+</div>
 </section>
 <section class="plot-section" id="temporal-distribution">
-<h2>Temporal Distribution of Dive Phases</h2>
-<p>Understanding how diving behavior changes over time can reveal activity patterns, responses to environmental conditions, and behavioral sequences. The plot below shows how different dive phases are distributed over time.</p>
-<div class="plot-container">
-<img src="plots/Analytics/temporal_distribution.png" alt="Temporal distribution of dive phases" loading="lazy">
-<p class="caption">Figure 4: Temporal sequence of dive phases throughout the recording period. This visualization reveals how the animal transitions between different behavioral states over time.</p>
+<div class="section-header">
+    <h2>Temporal Distribution of Dive Phases</h2>
+    <div class="toggle-icon">›</div>
 </div>
-<p>The temporal distribution reveals several patterns:</p>
-<ul>
-<li>Cyclic patterns of deep dives followed by recovery at the surface</li>
-<li>Periods of concentrated deep diving activity that may indicate foraging bouts</li>
-<li>Transitions between phases that suggest a structured diving strategy rather than random behavior</li>
-</ul>
-<p>By examining these temporal patterns, it's possible to identify behavioral sequences that might be linked to specific ecological functions like foraging, traveling, or resting. The regularity of certain sequences suggests deliberate behavioral strategies rather than opportunistic responses.</p>
+<div class="section-content">
+    <p>Understanding how diving behavior changes over time can reveal activity patterns, responses to environmental conditions, and behavioral sequences. The plot below shows how different dive phases are distributed over time.</p>
+    <div class="plot-container">
+        <img src="plots/Analytics/temporal_distribution.png" alt="Temporal distribution of dive phases" loading="lazy">
+        <p class="caption">Figure 4: Temporal sequence of dive phases throughout the recording period. This visualization reveals how the animal transitions between different behavioral states over time.</p>
+    </div>
+    <p>The temporal distribution reveals several patterns:</p>
+    <ul>
+    <li>Cyclic patterns of deep dives followed by recovery at the surface</li>
+    <li>Periods of concentrated deep diving activity that may indicate foraging bouts</li>
+    <li>Transitions between phases that suggest a structured diving strategy rather than random behavior</li>
+    </ul>
+    <p>By examining these temporal patterns, it's possible to identify behavioral sequences that might be linked to specific ecological functions like foraging, traveling, or resting. The regularity of certain sequences suggests deliberate behavioral strategies rather than opportunistic responses.</p>
+</div>
 </section>
 <section class="plot-section" id="movement-intensity">
-<h2>Movement Intensity Across Dive Phases: Understanding Energy Expenditure</h2>
-<p>Movement intensity, measured by the normalized jerk (rate of change of acceleration), provides a proxy for energy expenditure and activity level during different dive phases. This metric helps identify active foraging or prey capture events.</p>
-<div class="plot-container">
-<img src="plots/Analytics/movement_intensity.png" alt="Movement intensity across dive phases" loading="lazy">
-<p class="caption">Figure 5: Movement intensity (normalized jerk) across different dive phases and depths. Higher values indicate more intense movement that may be associated with foraging or prey capture attempts.</p>
+<div class="section-header">
+    <h2>Movement Intensity Across Dive Phases: Understanding Energy Expenditure</h2>
+    <div class="toggle-icon">›</div>
 </div>
-<p>This faceted plot reveals distinct movement patterns across dive phases:</p>
-<ul>
-<li><strong>Deep Phase:</strong> Shows bursts of high-intensity movement at specific depths, likely indicating foraging events</li>
-<li><strong>Shallow Phase:</strong> Generally less intense movement, possibly representing exploratory behavior</li>
-<li><strong>Surface Phase:</strong> Relatively low movement intensity, consistent with recovery behavior</li>
-<li><strong>Surfacing:</strong> Brief increases in movement associated with the act of surfacing and breathing</li>
-</ul>
-<p>The relationship between depth and movement intensity within each phase provides evidence for depth-specific foraging strategies and helps identify the depths where prey resources might be concentrated.</p>
+<div class="section-content">
+    <p>Movement intensity, measured by the normalized jerk (rate of change of acceleration), provides a proxy for energy expenditure and activity level during different dive phases. This metric helps identify active foraging or prey capture events.</p>
+    <div class="plot-container">
+        <img src="plots/Analytics/movement_intensity.png" alt="Movement intensity across dive phases" loading="lazy">
+        <p class="caption">Figure 5: Movement intensity (normalized jerk) across different dive phases and depths. Higher values indicate more intense movement that may be associated with foraging or prey capture attempts.</p>
+    </div>
+    <p>This faceted plot reveals distinct movement patterns across dive phases:</p>
+    <ul>
+    <li><strong>Deep Phase:</strong> Shows bursts of high-intensity movement at specific depths, likely indicating foraging events</li>
+    <li><strong>Shallow Phase:</strong> Generally less intense movement, possibly representing exploratory behavior</li>
+    <li><strong>Surface Phase:</strong> Relatively low movement intensity, consistent with recovery behavior</li>
+    <li><strong>Surfacing:</strong> Brief increases in movement associated with the act of surfacing and breathing</li>
+    </ul>
+    <p>The relationship between depth and movement intensity within each phase provides evidence for depth-specific foraging strategies and helps identify the depths where prey resources might be concentrated.</p>
+</div>
 </section>
 <section class="plot-section" id="composite-views">
-<h2>Composite Dive Event Visualizations: Detailed Behavioral Analysis</h2>
-<p>For a more detailed understanding of specific diving events, composite dashboards were created that integrate multiple data streams. These visualizations provide comprehensive views of individual dive events.</p>
-<div class="plot-container">
-<img src="plots/feedingExploratoryDives6/E34_composite_dashboard.png" alt="Composite dashboard for dive event E34" loading="lazy">
-<p class="caption">Figure 6: Composite dashboard showing multiple parameters for a single dive event. From top to bottom: pitch/roll/heading, movement intensity, depth/temperature profile, and context within the broader dive sequence.</p>
+<div class="section-header">
+    <h2>Composite Dive Event Visualizations: Detailed Behavioral Analysis</h2>
+    <div class="toggle-icon">›</div>
 </div>
-<p>These comprehensive visualizations allow examination of:</p>
-<ul>
-<li>Body orientation (pitch, roll, heading) that indicates specific movements and maneuvers</li>
-<li>Peaks in movement intensity that may represent prey capture attempts</li>
-<li>Relationships between depth, temperature, and behavioral parameters</li>
-<li>How specific events fit within the broader context of dive sequences</li>
-</ul>
-<p>By integrating these multiple data streams, a more complete picture can be built of what the animal is doing throughout different phases of a dive, revealing complex behavioral sequences that wouldn't be apparent from depth data alone.</p>
+<div class="section-content">
+    <p>For a more detailed understanding of specific diving events, composite dashboards were created that integrate multiple data streams. These visualizations provide comprehensive views of individual dive events.</p>
+    <div class="plot-container">
+        <img src="plots/feedingExploratoryDives6/E34_composite_dashboard.png" alt="Composite dashboard for dive event E34" loading="lazy">
+        <p class="caption">Figure 6: Composite dashboard showing multiple parameters for a single dive event. From top to bottom: pitch/roll/heading, movement intensity, depth/temperature profile, and context within the broader dive sequence.</p>
+    </div>
+    <p>These comprehensive visualizations allow examination of:</p>
+    <ul>
+    <li>Body orientation (pitch, roll, heading) that indicates specific movements and maneuvers</li>
+    <li>Peaks in movement intensity that may represent prey capture attempts</li>
+    <li>Relationships between depth, temperature, and behavioral parameters</li>
+    <li>How specific events fit within the broader context of dive sequences</li>
+    </ul>
+    <p>By integrating these multiple data streams, a more complete picture can be built of what the animal is doing throughout different phases of a dive, revealing complex behavioral sequences that wouldn't be apparent from depth data alone.</p>
+</div>
 </section>
 <section class="plot-section" id="annotation-types">
-    <h2>Annotation Categories: Diverse Feeding Behaviors</h2>
-    <p>This analysis has identified several distinct feeding behaviors, each with unique movement patterns and dive characteristics. Here examples from each annotation category are showcased to demonstrate the diversity of feeding strategies.</p>
-
-    <!-- Behavior Categories Navigation -->
-    <div class="nav-section" id="behavior-categories">
-        <h3>Feeding Behavior Categories</h3>
-        <div class="category-nav">
-            <button class="category-button active" data-category="exploratory-dives">Exploratory Dives</button>
-            <button class="category-button" data-category="feeding-loops">Feeding Loops</button>
-            <button class="category-button" data-category="kick-feeding">Kick Feeding</button>
-            <button class="category-button" data-category="noodle-feeding">Noodle Feeding</button>
-            <button class="category-button" data-category="side-rolls">Side Rolls</button>
-            <button class="category-button" data-category="side-rolls-and-loop">Side Rolls and Loop</button>
-            <button class="category-button" data-category="vertical-loop">Vertical Loop</button>
-            <button class="category-button" data-category="traveling">Traveling</button>
-        </div>
+    <div class="section-header">
+        <h2>Annotation Categories: Diverse Feeding Behaviors</h2>
+        <div class="toggle-icon">›</div>
     </div>
+    <div class="section-content">
+        <p>This analysis has identified several distinct feeding behaviors, each with unique movement patterns and dive characteristics. Here examples from each annotation category are showcased to demonstrate the diversity of feeding strategies.</p>
 
-    <!-- Carousel Container -->
-    <div class="carousel-container">
-        <!-- Exploratory Dives -->
-        <div class="carousel-slide active" id="exploratory-dives">
-            <h3>Exploratory Dives</h3>
-            <p>Characterized by gradual descent patterns with periodic changes in direction, likely representing search behavior for prey patches.</p>
-            <div class="plot-display">
-                <img src="plots/feedingExploratoryDives6/E34_composite_dashboard.png" alt="Composite dashboard for exploratory dive E34" loading="lazy">
-                <button class="zoom-toggle-btn">Zoom</button>
+        <!-- Behavior Categories Navigation -->
+        <div class="nav-section" id="behavior-categories">
+            <h3>Feeding Behavior Categories</h3>
+            <div class="category-nav">
+                <button class="category-button active" data-category="exploratory-dives">Exploratory Dives</button>
+                <button class="category-button" data-category="feeding-loops">Feeding Loops</button>
+                <button class="category-button" data-category="kick-feeding">Kick Feeding</button>
+                <button class="category-button" data-category="noodle-feeding">Noodle Feeding</button>
+                <button class="category-button" data-category="side-rolls">Side Rolls</button>
+                <button class="category-button" data-category="side-rolls-and-loop">Side Rolls and Loop</button>
+                <button class="category-button" data-category="vertical-loop">Vertical Loop</button>
+                <button class="category-button" data-category="traveling">Traveling</button>
             </div>
-            <p class="caption">Example of an Exploratory Dive pattern showing search behavior with moderate movement intensity.</p>
         </div>
 
-        <!-- Feeding Loops -->
-        <div class="carousel-slide" id="feeding-loops">
-            <h3>Feeding Loops</h3>
-            <p>Circular movement patterns typically observed during active feeding, where the animal loops back through prey aggregations.</p>
-            <div class="plot-display">
-                <img src="plots/feedingFeedingLoop/E13_composite_dashboard.png" alt="Composite dashboard for feeding loop E13" loading="lazy">
-                <button class="zoom-toggle-btn">Zoom</button>
+        <!-- Carousel Container -->
+        <div class="carousel-container">
+            <!-- Exploratory Dives -->
+            <div class="carousel-slide active" id="exploratory-dives">
+                <h3>Exploratory Dives</h3>
+                <p>Characterized by gradual descent patterns with periodic changes in direction, likely representing search behavior for prey patches.</p>
+                <div class="plot-display">
+                    <img src="plots/feedingExploratoryDives6/E34_composite_dashboard.png" alt="Composite dashboard for exploratory dive E34" loading="lazy">
+                    <button class="zoom-toggle-btn">Zoom</button>
+                </div>
+                <p class="caption">Example of an Exploratory Dive pattern showing search behavior with moderate movement intensity.</p>
             </div>
-            <p class="caption">Example of a Feeding Loop pattern showing repeated circular movements through a prey patch.</p>
+
+            <!-- Feeding Loops -->
+            <div class="carousel-slide" id="feeding-loops">
+                <h3>Feeding Loops</h3>
+                <p>Circular movement patterns typically observed during active feeding, where the animal loops back through prey aggregations.</p>
+                <div class="plot-display">
+                    <img src="plots/feedingFeedingLoop/E13_composite_dashboard.png" alt="Composite dashboard for feeding loop E13" loading="lazy">
+                    <button class="zoom-toggle-btn">Zoom</button>
+                </div>
+                <p class="caption">Example of a Feeding Loop pattern showing repeated circular movements through a prey patch.</p>
+            </div>
+
+            <!-- Kick Feeding -->
+            <div class="carousel-slide" id="kick-feeding">
+                <h3>Kick Feeding</h3>
+                <p>Distinctive behavior where the animal uses its tail to stun or corral prey before lunging to capture it.</p>
+                <div class="plot-display">
+                    <img src="plots/feedingKickFeeding/E16_composite_dashboard.png" alt="Composite dashboard for kick feeding E16" loading="lazy">
+                    <button class="zoom-toggle-btn">Zoom</button>
+                </div>
+                <p class="caption">Example of Kick Feeding showing intense movement spikes associated with tail movements.</p>
+            </div>
+
+            <!-- Noodle Feeding -->
+            <div class="carousel-slide" id="noodle-feeding">
+                <h3>Noodle Feeding</h3>
+                <p>Characterized by sinuous, snake-like movements through the water column, potentially used to track prey in complex environments.</p>
+                <div class="plot-display">
+                    <img src="plots/feedingNoodleFeeding/E20_composite_dashboard.png" alt="Composite dashboard for noodle feeding E20" loading="lazy">
+                    <button class="zoom-toggle-btn">Zoom</button>
+                </div>
+                <p class="caption">Example of Noodle Feeding showing distinctive sinuous movement patterns.</p>
+            </div>
+
+            <!-- Side Rolls -->
+            <div class="carousel-slide" id="side-rolls">
+                <h3>Side Rolls</h3>
+                <p>Rolling behavior where the animal rotates along its longitudinal axis, often associated with prey capture or manipulation.</p>
+                <div class="plot-display">
+                    <img src="plots/feedingSideRolls5/E7_composite_dashboard.png" alt="Composite dashboard for side rolls E7" loading="lazy">
+                    <button class="zoom-toggle-btn">Zoom</button>
+                </div>
+                <p class="caption">Example of Side Roll behavior showing distinct rotational movements along the body axis.</p>
+            </div>
+
+            <!-- Side Rolls and Loop -->
+            <div class="carousel-slide" id="side-rolls-and-loop">
+                <h3>Side Rolls and Loop</h3>
+                <p>Combined behavior where side rolling is integrated with looping movements, potentially representing a complex feeding strategy.</p>
+                <div class="plot-display">
+                    <img src="plots/feedingSideRollsAndLoop/E11_composite_dashboard.png" alt="Composite dashboard for side rolls and loop E11" loading="lazy">
+                    <button class="zoom-toggle-btn">Zoom</button>
+                </div>
+                <p class="caption">Example of combined Side Roll and Loop behavior showing integration of multiple feeding techniques.</p>
+            </div>
+
+            <!-- Vertical Loop -->
+            <div class="carousel-slide" id="vertical-loop">
+                <h3>Vertical Loop</h3>
+                <p>Distinctive vertical looping pattern where the animal performs a complete rotation in the vertical plane, often during active feeding.</p>
+                <div class="plot-display">
+                    <img src="plots/feedingVerticalLoop/E32_composite_dashboard.png" alt="Composite dashboard for vertical loop E32" loading="lazy">
+                    <button class="zoom-toggle-btn">Zoom</button>
+                </div>
+                <p class="caption">Example of Vertical Loop behavior showing complete vertical rotation during a feeding event.</p>
+            </div>
+
+            <!-- Traveling -->
+            <div class="carousel-slide" id="traveling">
+                <h3>Traveling</h3>
+                <p>Directed horizontal movement pattern characterized by consistent speed and orientation, representing transit between areas.</p>
+                <div class="plot-display">
+                    <img src="plots/traveling/E48_composite_dashboard.png" alt="Composite dashboard for traveling E48" loading="lazy">
+                    <button class="zoom-toggle-btn">Zoom</button>
+                </div>
+                <p class="caption">Example of Traveling behavior showing directed horizontal movement with minimal vertical excursions.</p>
+            </div>
         </div>
 
-        <!-- Kick Feeding -->
-        <div class="carousel-slide" id="kick-feeding">
-            <h3>Kick Feeding</h3>
-            <p>Distinctive behavior where the animal uses its tail to stun or corral prey before lunging to capture it.</p>
-            <div class="plot-display">
-                <img src="plots/feedingKickFeeding/E16_composite_dashboard.png" alt="Composite dashboard for kick feeding E16" loading="lazy">
-                <button class="zoom-toggle-btn">Zoom</button>
-            </div>
-            <p class="caption">Example of Kick Feeding showing intense movement spikes associated with tail movements.</p>
+        <!-- Carousel Navigation -->
+        <div class="carousel-nav">
+            <button class="carousel-prev">← Previous</button>
+            <button class="carousel-next">Next →</button>
         </div>
 
-        <!-- Noodle Feeding -->
-        <div class="carousel-slide" id="noodle-feeding">
-            <h3>Noodle Feeding</h3>
-            <p>Characterized by sinuous, snake-like movements through the water column, potentially used to track prey in complex environments.</p>
-            <div class="plot-display">
-                <img src="plots/feedingNoodleFeeding/E20_composite_dashboard.png" alt="Composite dashboard for noodle feeding E20" loading="lazy">
-                <button class="zoom-toggle-btn">Zoom</button>
-            </div>
-            <p class="caption">Example of Noodle Feeding showing distinctive sinuous movement patterns.</p>
-        </div>
-
-        <!-- Side Rolls -->
-        <div class="carousel-slide" id="side-rolls">
-            <h3>Side Rolls</h3>
-            <p>Rolling behavior where the animal rotates along its longitudinal axis, often associated with prey capture or manipulation.</p>
-            <div class="plot-display">
-                <img src="plots/feedingSideRolls5/E7_composite_dashboard.png" alt="Composite dashboard for side rolls E7" loading="lazy">
-                <button class="zoom-toggle-btn">Zoom</button>
-            </div>
-            <p class="caption">Example of Side Roll behavior showing distinct rotational movements along the body axis.</p>
-        </div>
-
-        <!-- Side Rolls and Loop -->
-        <div class="carousel-slide" id="side-rolls-and-loop">
-            <h3>Side Rolls and Loop</h3>
-            <p>Combined behavior where side rolling is integrated with looping movements, potentially representing a complex feeding strategy.</p>
-            <div class="plot-display">
-                <img src="plots/feedingSideRollsAndLoop/E11_composite_dashboard.png" alt="Composite dashboard for side rolls and loop E11" loading="lazy">
-                <button class="zoom-toggle-btn">Zoom</button>
-            </div>
-            <p class="caption">Example of combined Side Roll and Loop behavior showing integration of multiple feeding techniques.</p>
-        </div>
-
-        <!-- Vertical Loop -->
-        <div class="carousel-slide" id="vertical-loop">
-            <h3>Vertical Loop</h3>
-            <p>Distinctive vertical looping pattern where the animal performs a complete rotation in the vertical plane, often during active feeding.</p>
-            <div class="plot-display">
-                <img src="plots/feedingVerticalLoop/E32_composite_dashboard.png" alt="Composite dashboard for vertical loop E32" loading="lazy">
-                <button class="zoom-toggle-btn">Zoom</button>
-            </div>
-            <p class="caption">Example of Vertical Loop behavior showing complete vertical rotation during a feeding event.</p>
-        </div>
-
-        <!-- Traveling -->
-        <div class="carousel-slide" id="traveling">
-            <h3>Traveling</h3>
-            <p>Directed horizontal movement pattern characterized by consistent speed and orientation, representing transit between areas.</p>
-            <div class="plot-display">
-                <img src="plots/traveling/E48_composite_dashboard.png" alt="Composite dashboard for traveling E48" loading="lazy">
-                <button class="zoom-toggle-btn">Zoom</button>
-            </div>
-            <p class="caption">Example of Traveling behavior showing directed horizontal movement with minimal vertical excursions.</p>
-        </div>
+        <p>These diverse feeding strategies highlight the behavioral complexity of marine mammals and demonstrate why sophisticated classification techniques are needed. By correctly identifying these distinct behavioral modes, it becomes possible to better understand how environmental factors influence foraging success and ultimately support conservation efforts.</p>
     </div>
-
-    <!-- Carousel Navigation -->
-    <div class="carousel-nav">
-        <button class="carousel-prev">← Previous</button>
-        <button class="carousel-next">Next →</button>
-    </div>
-
-    <p>These diverse feeding strategies highlight the behavioral complexity of marine mammals and demonstrate why sophisticated classification techniques are needed. By correctly identifying these distinct behavioral modes, it becomes possible to better understand how environmental factors influence foraging success and ultimately support conservation efforts.</p>
+</div>
 </section>
 <section class="plot-section" id="conclusions">
-<h2>Conclusions and Future ML-Driven Research</h2>
-<p>The analysis has revealed several key insights about marine mammal diving behavior that can inform the development of machine learning workflows:</p>
-<ul>
-<li>Diving behavior naturally clusters into distinct functional states that can serve as target classes for supervised learning</li>
-<li>The relationship between dive parameters (depth, duration, movement intensity) provides feature-rich data for classification algorithms</li>
-<li>Temporal patterns in dive sequences could be leveraged for time-series prediction models</li>
-<li>Movement intensity signatures show promise as discriminative features for identifying specific behavioral events</li>
-</ul>
-<p><strong>Optimizing Dataset for ML Classification:</strong></p>
-<ul>
-<li>Class balancing techniques will be necessary to address the uneven distribution of dive phases (surface events being more frequent than deep dives)</li>
-<li>Feature engineering should emphasize the most discriminative parameters identified in the analysis</li>
-<li>Temporal context windows can capture the sequential nature of diving behavior</li>
-<li>Data augmentation techniques may help address the limited number of tagged animals</li>
-</ul>
-<p><strong>Human-in-the-Loop Annotation Refinement:</strong></p>
-<ul>
-<li>A clustering-based annotation suggestion system will be implemented that proposes groupings of similar behaviors</li>
-<li>An interactive visualization UI will allow human experts to validate or modify these suggested groupings</li>
-<li>This iterative refinement process will improve label quality while reducing annotation time</li>
-<li>Uncertainty metrics will highlight ambiguous classifications that require expert review</li>
-</ul>
-<p><strong>ML Pipeline Development:</strong></p>
-<ul>
-<li>Preprocessing will normalize and segment the continuous bio-logging data into analysis-ready formats</li>
-<li>Feature selection will be guided by the domain insights gained from the exploratory analysis</li>
-<li>Model selection will explore both traditional classifiers and deep learning approaches for time-series classification</li>
-<li>Evaluation metrics will focus on correctly identifying behaviorally significant events, with particular emphasis on rare but important behaviors</li>
-</ul>
-<p><strong>3D Data-Driven Simulation with NVIDIA NVAIE &amp; NIMs:</strong></p>
-<p>Future work will include developing a data-driven 3D simulation pipeline that brings the behavioral analyses to life using NVIDIA's AI and simulation technologies:</p>
-<ul>
-<li><strong>Kinematic-Driven Animation:</strong> The high-resolution accelerometer and orientation data from the tags will drive a rigged 3D model of a whale, translating the raw kinematic measurements into realistic motion in real-time</li>
-<li><strong>NVIDIA Omniverse AI Explorer (NVAIE):</strong> Will provide the real-time rendering environment where the whale's movements can be visualized in a physically accurate underwater setting</li>
-<li><strong>Neural Implicit Models (NIMs):</strong> Can be used to generate smooth, continuous representations of movement patterns from discrete sensor data, improving animation fluidity</li>
-<li><strong>Behavioral State Visualization:</strong> The ML-classified behavioral states will be color-coded or otherwise visually indicated in the 3D environment, creating an intuitive representation of the animal's changing behavioral states</li>
-</ul>
-<p><strong>Integration with Annotation Workflow:</strong></p>
-<ul>
-<li>The 3D visualization will serve as a validation tool for annotations, allowing experts to visually confirm if classified behaviors match expected movement patterns</li>
-<li>Ambiguous classifications can be reviewed in the 3D environment, providing additional context for human decision-making</li>
-<li>Iterative refinement between the ML models and 3D visualization will create a feedback loop that improves both classification accuracy and animation realism</li>
-</ul>
-<p><strong>Future Expansions:</strong></p>
-<ul>
-<li>Integration of bathymetry data to recreate the actual underwater terrain where the behaviors occurred</li>
-<li>Addition of GPS tracks to show spatial movement patterns in relation to underwater features</li>
-<li>Environmental data layers (temperature, salinity, prey density) to contextualize behaviors within oceanographic conditions</li>
-<li>Multi-animal simulations to visualize social interactions and group behaviors</li>
-</ul>
-<p>This data-driven approach to marine mammal behavior classification represents a step toward automating the analysis of bio-logging data. By combining machine learning techniques with domain expertise through human-in-the-loop validation, robust tools can be developed for understanding the complex underwater behavior of these fascinating animals and contribute to their conservation through more efficient data processing and pattern recognition. The bottom line is that accurate classification of feeding versus non-feeding behaviors will allow environmental modeling accuracy to be optimized through rigorous annotation validation and refinement steps. This approach ensures that downstream environmental models can reliably correlate animal behavior with oceanographic features, ultimately leading to more accurate predictions of how marine mammals respond to changing ocean conditions.</p>
+<div class="section-header">
+    <h2>Conclusions and Future ML-Driven Research</h2>
+    <div class="toggle-icon">›</div>
+</div>
+<div class="section-content">
+    <p>The analysis has revealed several key insights about marine mammal diving behavior that can inform the development of machine learning workflows:</p>
+    <ul>
+    <li>Diving behavior naturally clusters into distinct functional states that can serve as target classes for supervised learning</li>
+    <li>The relationship between dive parameters (depth, duration, movement intensity) provides feature-rich data for classification algorithms</li>
+    <li>Temporal patterns in dive sequences could be leveraged for time-series prediction models</li>
+    <li>Movement intensity signatures show promise as discriminative features for identifying specific behavioral events</li>
+    </ul>
+    <p><strong>Optimizing Dataset for ML Classification:</strong></p>
+    <ul>
+    <li>Class balancing techniques will be necessary to address the uneven distribution of dive phases (surface events being more frequent than deep dives)</li>
+    <li>Feature engineering should emphasize the most discriminative parameters identified in the analysis</li>
+    <li>Temporal context windows can capture the sequential nature of diving behavior</li>
+    <li>Data augmentation techniques may help address the limited number of tagged animals</li>
+    </ul>
+    <p><strong>Human-in-the-Loop Annotation Refinement:</strong></p>
+    <ul>
+    <li>A clustering-based annotation suggestion system will be implemented that proposes groupings of similar behaviors</li>
+    <li>An interactive visualization UI will allow human experts to validate or modify these suggested groupings</li>
+    <li>This iterative refinement process will improve label quality while reducing annotation time</li>
+    <li>Uncertainty metrics will highlight ambiguous classifications that require expert review</li>
+    </ul>
+    <p><strong>ML Pipeline Development:</strong></p>
+    <ul>
+    <li>Preprocessing will normalize and segment the continuous bio-logging data into analysis-ready formats</li>
+    <li>Feature selection will be guided by the domain insights gained from the exploratory analysis</li>
+    <li>Model selection will explore both traditional classifiers and deep learning approaches for time-series classification</li>
+    <li>Evaluation metrics will focus on correctly identifying behaviorally significant events, with particular emphasis on rare but important behaviors</li>
+    </ul>
+    <p><strong>3D Data-Driven Simulation with NVIDIA NVAIE &amp; NIMs:</strong></p>
+    <p>Future work will include developing a data-driven 3D simulation pipeline that brings the behavioral analyses to life using NVIDIA's AI and simulation technologies:</p>
+    <ul>
+    <li><strong>Kinematic-Driven Animation:</strong> The high-resolution accelerometer and orientation data from the tags will drive a rigged 3D model of a whale, translating the raw kinematic measurements into realistic motion in real-time</li>
+    <li><strong>NVIDIA Omniverse AI Explorer (NVAIE):</strong> Will provide the real-time rendering environment where the whale's movements can be visualized in a physically accurate underwater setting</li>
+    <li><strong>Neural Implicit Models (NIMs):</strong> Can be used to generate smooth, continuous representations of movement patterns from discrete sensor data, improving animation fluidity</li>
+    <li><strong>Behavioral State Visualization:</strong> The ML-classified behavioral states will be color-coded or otherwise visually indicated in the 3D environment, creating an intuitive representation of the animal's changing behavioral states</li>
+    </ul>
+    <p><strong>Integration with Annotation Workflow:</strong></p>
+    <ul>
+    <li>The 3D visualization will serve as a validation tool for annotations, allowing experts to visually confirm if classified behaviors match expected movement patterns</li>
+    <li>Ambiguous classifications can be reviewed in the 3D environment, providing additional context for human decision-making</li>
+    <li>Iterative refinement between the ML models and 3D visualization will create a feedback loop that improves both classification accuracy and animation realism</li>
+    </ul>
+    <p><strong>Future Expansions:</strong></p>
+    <ul>
+    <li>Integration of bathymetry data to recreate the actual underwater terrain where the behaviors occurred</li>
+    <li>Addition of GPS tracks to show spatial movement patterns in relation to underwater features</li>
+    <li>Environmental data layers (temperature, salinity, prey density) to contextualize behaviors within oceanographic conditions</li>
+    <li>Multi-animal simulations to visualize social interactions and group behaviors</li>
+    </ul>
+    <p>This data-driven approach to marine mammal behavior classification represents a step toward automating the analysis of bio-logging data. By combining machine learning techniques with domain expertise through human-in-the-loop validation, robust tools can be developed for understanding the complex underwater behavior of these fascinating animals and contribute to their conservation through more efficient data processing and pattern recognition. The bottom line is that accurate classification of feeding versus non-feeding behaviors will allow environmental modeling accuracy to be optimized through rigorous annotation validation and refinement steps. This approach ensures that downstream environmental models can reliably correlate animal behavior with oceanographic features, ultimately leading to more accurate predictions of how marine mammals respond to changing ocean conditions.</p>
+</div>
 </section>
 <footer>
 <p>Data analysis and visualizations created using R | © 2025</p>
