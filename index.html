@@ -275,6 +275,55 @@
             text-align: left;
             width: 100%;
         }
+        
+        /* Enhanced lightbox with zoom functionality */
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: 0 auto;
+        }
+        
+        .lightbox img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            margin: 0 auto 15px auto;
+            transition: transform 0.3s ease;
+            cursor: zoom-in;
+        }
+        
+        .lightbox img.zoomed {
+            transform: scale(1.5);
+            cursor: zoom-out;
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1010;
+        }
+        
+        .zoom-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .zoom-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
     </style>
 </head>
 <body>
@@ -444,7 +493,13 @@
     <!-- Lightbox div for this image -->
     <div id="lightbox-exploratory" class="lightbox">
         <a href="#exploratory-dives" class="close-lightbox">&times;</a>
-        <img src="plots/feedingExploratoryDives6/E34_composite_dashboard.png" alt="Composite dashboard for exploratory dive E34">
+        <div class="zoom-controls">
+            <button class="zoom-button zoom-in">+</button>
+            <button class="zoom-button zoom-out">-</button>
+        </div>
+        <div class="lightbox-content">
+            <img src="plots/feedingExploratoryDives6/E34_composite_dashboard.png" alt="Composite dashboard for exploratory dive E34">
+        </div>
         <p class="lightbox-caption">Example of an Exploratory Dive pattern showing search behavior with moderate movement intensity.</p>
     </div>
 </div>
@@ -467,7 +522,13 @@
     
     <div id="lightbox-feeding-loops" class="lightbox">
         <a href="#feeding-loops" class="close-lightbox">&times;</a>
-        <img src="plots/feedingFeedingLoop/E13_composite_dashboard.png" alt="Composite dashboard for feeding loop E13">
+        <div class="zoom-controls">
+            <button class="zoom-button zoom-in">+</button>
+            <button class="zoom-button zoom-out">-</button>
+        </div>
+        <div class="lightbox-content">
+            <img src="plots/feedingFeedingLoop/E13_composite_dashboard.png" alt="Composite dashboard for feeding loop E13">
+        </div>
         <p class="lightbox-caption">Example of a Feeding Loop pattern showing repeated circular movements through a prey patch.</p>
     </div>
 </div>
@@ -491,7 +552,13 @@
     <!-- Lightbox div for this image -->
     <div id="lightbox-kick-feeding" class="lightbox">
         <a href="#kick-feeding" class="close-lightbox">&times;</a>
-        <img src="plots/feedingKickFeeding/E16_composite_dashboard.png" alt="Composite dashboard for kick feeding E16">
+        <div class="zoom-controls">
+            <button class="zoom-button zoom-in">+</button>
+            <button class="zoom-button zoom-out">-</button>
+        </div>
+        <div class="lightbox-content">
+            <img src="plots/feedingKickFeeding/E16_composite_dashboard.png" alt="Composite dashboard for kick feeding E16">
+        </div>
         <p class="lightbox-caption">Example of Kick Feeding showing intense movement spikes associated with tail movements.</p>
     </div>
 </div>
@@ -515,7 +582,13 @@
     <!-- Lightbox div for this image -->
     <div id="lightbox-noodle-feeding" class="lightbox">
         <a href="#noodle-feeding" class="close-lightbox">&times;</a>
-        <img src="plots/feedingNoodleFeeding/E20_composite_dashboard.png" alt="Composite dashboard for noodle feeding E20">
+        <div class="zoom-controls">
+            <button class="zoom-button zoom-in">+</button>
+            <button class="zoom-button zoom-out">-</button>
+        </div>
+        <div class="lightbox-content">
+            <img src="plots/feedingNoodleFeeding/E20_composite_dashboard.png" alt="Composite dashboard for noodle feeding E20">
+        </div>
         <p class="lightbox-caption">Example of Noodle Feeding showing distinctive sinuous movement patterns.</p>
     </div>
 </div>
@@ -539,7 +612,13 @@
     <!-- Lightbox div for this image -->
     <div id="lightbox-side-rolls" class="lightbox">
         <a href="#side-rolls" class="close-lightbox">&times;</a>
-        <img src="plots/feedingSideRolls5/E7_composite_dashboard.png" alt="Composite dashboard for side rolls E7">
+        <div class="zoom-controls">
+            <button class="zoom-button zoom-in">+</button>
+            <button class="zoom-button zoom-out">-</button>
+        </div>
+        <div class="lightbox-content">
+            <img src="plots/feedingSideRolls5/E7_composite_dashboard.png" alt="Composite dashboard for side rolls E7">
+        </div>
         <p class="lightbox-caption">Example of Side Roll behavior showing distinct rotational movements along the body axis.</p>
     </div>
 </div>
@@ -563,7 +642,13 @@
     <!-- Lightbox div for this image -->
     <div id="lightbox-side-rolls-and-loop" class="lightbox">
         <a href="#side-rolls-and-loop" class="close-lightbox">&times;</a>
-        <img src="plots/feedingSideRollsAndLoop/E11_composite_dashboard.png" alt="Composite dashboard for side rolls and loop E11">
+        <div class="zoom-controls">
+            <button class="zoom-button zoom-in">+</button>
+            <button class="zoom-button zoom-out">-</button>
+        </div>
+        <div class="lightbox-content">
+            <img src="plots/feedingSideRollsAndLoop/E11_composite_dashboard.png" alt="Composite dashboard for side rolls and loop E11">
+        </div>
         <p class="lightbox-caption">Example of combined Side Roll and Loop behavior showing integration of multiple feeding techniques.</p>
     </div>
 </div>
@@ -587,7 +672,13 @@
     <!-- Lightbox div for this image -->
     <div id="lightbox-vertical-loop" class="lightbox">
         <a href="#vertical-loop" class="close-lightbox">&times;</a>
-        <img src="plots/feedingVerticalLoop/E32_composite_dashboard.png" alt="Composite dashboard for vertical loop E32">
+        <div class="zoom-controls">
+            <button class="zoom-button zoom-in">+</button>
+            <button class="zoom-button zoom-out">-</button>
+        </div>
+        <div class="lightbox-content">
+            <img src="plots/feedingVerticalLoop/E32_composite_dashboard.png" alt="Composite dashboard for vertical loop E32">
+        </div>
         <p class="lightbox-caption">Example of Vertical Loop behavior showing complete vertical rotation during a feeding event.</p>
     </div>
 </div>
@@ -611,7 +702,13 @@
     <!-- Lightbox div for this image -->
     <div id="lightbox-traveling" class="lightbox">
         <a href="#traveling" class="close-lightbox">&times;</a>
-        <img src="plots/traveling/E48_composite_dashboard.png" alt="Composite dashboard for traveling E48">
+        <div class="zoom-controls">
+            <button class="zoom-button zoom-in">+</button>
+            <button class="zoom-button zoom-out">-</button>
+        </div>
+        <div class="lightbox-content">
+            <img src="plots/traveling/E48_composite_dashboard.png" alt="Composite dashboard for traveling E48">
+        </div>
         <p class="lightbox-caption">Example of Traveling behavior showing directed horizontal movement with minimal vertical excursions.</p>
     </div>
 </div>
@@ -767,6 +864,59 @@
                     }
                 }
             });
+        });
+        
+        // Add zoom functionality
+        const lightboxes = document.querySelectorAll('.lightbox');
+        
+        lightboxes.forEach(lightbox => {
+            const img = lightbox.querySelector('img');
+            const zoomInBtn = lightbox.querySelector('.zoom-in');
+            const zoomOutBtn = lightbox.querySelector('.zoom-out');
+            
+            if (img && zoomInBtn && zoomOutBtn) {
+                let scale = 1;
+                const maxScale = 3;
+                const minScale = 1;
+                const scaleStep = 0.5;
+                
+                // Toggle zoom on image click
+                img.addEventListener('click', function() {
+                    if (scale === 1) {
+                        scale = 2;
+                    } else {
+                        scale = 1;
+                    }
+                    updateZoom();
+                });
+                
+                // Zoom in button
+                zoomInBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (scale < maxScale) {
+                        scale += scaleStep;
+                        updateZoom();
+                    }
+                });
+                
+                // Zoom out button
+                zoomOutBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (scale > minScale) {
+                        scale -= scaleStep;
+                        updateZoom();
+                    }
+                });
+                
+                function updateZoom() {
+                    img.style.transform = `scale(${scale})`;
+                    if (scale > 1) {
+                        img.classList.add('zoomed');
+                    } else {
+                        img.classList.remove('zoomed');
+                    }
+                }
+            }
         });
     });
 </script>
