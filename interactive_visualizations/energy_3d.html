@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Energy Visualization</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #003366;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        #visualization {
+            width: 100%;
+            height: 700px;
+            margin: 0 auto;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+            gap: 1rem;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .control-group h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: #003366;
+        }
+        .navigation {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .navigation a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #00a5cf;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 0.5rem;
+        }
+        .navigation a:hover {
+            background-color: #0077be;
+        }
+        select, button {
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #00a5cf;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0077be;
+        }
+    </style>
+</head>
+<body>
+    <h1>3D Energy Visualization</h1>
+    <p class="subtitle">Energy expenditure in relation to depth and time</p>
+    
+    <div class="controls">
+        <div class="control-group">
+            <h3>Filter by Behavior</h3>
+            <select id="behavior-filter">
+                <option value="all">All Behaviors</option>
+                <option value="Side rolls">Side rolls</option>
+                <option value="Exploratory dives">Exploratory dives</option>
+                <option value="Kick feeding">Kick feeding</option>
+                <option value="Noodle feeding">Noodle feeding</option>
+                <option value="Feeding loop">Feeding loop</option>
+                <option value="Side rolls and loop">Side rolls and loop</option>
+                <option value="Traveling">Traveling</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <h3>View Options</h3>
+            <button id="view-surface">Surface Plot</button>
+            <button id="view-scatter">Scatter 3D</button>
+            <button id="rotate-view">Rotate View</button>
+        </div>
+    </div>
+    
+    <div id="visualization"></div>
+    
+    <div class="navigation">
+        <a href="../index.html">Back to Reports</a>
+        <a href="dive_profiles.html">View Dive Profiles</a>
+        <a href="enhanced_tsne.html">View t-SNE Visualization</a>
+    </div>
+
+    <script>
+        // Generate realistic energy data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Behavior types
+            const behaviors = [
+                'Side rolls', 
+                'Exploratory dives', 
+                'Kick feeding', 
+                'Noodle feeding', 
+                'Feeding loop', 
+                'Side rolls and loop', 
+                'Traveling'
+            ];
+            
+            // Colors for behavior types
+            const behaviorColors = {
+                'Side rolls': '#1f77b4',
+                'Exploratory dives': '#ff7f0e',
+                'Kick feeding': '#2ca02c',
+                'Noodle feeding': '#d62728',
+                'Feeding loop': '#9467bd',
+                'Side rolls and loop': '#8c564b',
+                'Traveling': '#e377c2'
+            };
+            
+            // Energy characteristics for each behavior
+            const energyProfiles = {
+                'Side rolls': { baseEnergy: 45, depthFactor: 1.2, movementFactor: 1.5 },
+                'Exploratory dives': { baseEnergy: 30, depthFactor: 0.8, movementFactor: 0.9 },
+                'Kick feeding': { baseEnergy: 85, depthFactor: 0.7, movementFactor: 2.0 },
+                'Noodle feeding': { baseEnergy: 60, depthFactor: 1.0, movementFactor: 1.6 },
+                'Feeding loop': { baseEnergy: 70, depthFactor: 1.1, movementFactor: 1.8 },
+                'Side rolls and loop': { baseEnergy: 75, depthFactor: 1.3, movementFactor: 1.9 },
+                'Traveling': { baseEnergy: 40, depthFactor: 0.6, movementFactor: 1.0 }
+            };
+            
+            // Generate data points
+            const allData = [];
+            
+            // For each behavior, generate 200-300 data points 
+            behaviors.forEach(behavior => {
+                const profile = energyProfiles[behavior];
+                const numPoints = Math.floor(Math.random() * 100) + 200;
+                
+                for (let i = 0; i < numPoints; i++) {
+                    // Generate random depth between 0-40m
+                    const depth = Math.random() * 40;
+                    
+                    // Generate time between 0-300 seconds
+                    const time = Math.random() * 300;
+                    
+                    // Calculate jerk (movement intensity) with some randomness
+                    // Make it dependent on behavior and depth
+                    const jerkBase = profile.movementFactor;
+                    const depthEffect = (depth/20) * profile.depthFactor; // More movement at mid-depths
+                    const jerk = jerkBase * Math.exp(-(Math.pow(depthEffect - 1, 2))) * (0.7 + Math.random() * 0.6);
+                    
+                    // Calculate energy based on behavior, depth, and jerk
+                    const energy = profile.baseEnergy * (1 + 
+                                  depth/60 * profile.depthFactor +
+                                  jerk/2 * profile.movementFactor) *
+                                  (0.9 + Math.random() * 0.2);
+                    
+                    allData.push({
+                        behavior: behavior,
+                        depth: depth,
+                        time: time,
+                        jerk: jerk,
+                        energy: energy,
+                        color: behaviorColors[behavior]
+                    });
+                }
+            });
+            
+            // Create 3D scatter plot
+            function createScatterPlot(data) {
+                const traces = [];
+                
+                // Group data by behavior
+                const behaviorGroups = {};
+                data.forEach(point => {
+                    if (!behaviorGroups[point.behavior]) {
+                        behaviorGroups[point.behavior] = {
+                            x: [], y: [], z: [], 
+                            text: [], color: point.color
+                        };
+                    }
+                    
+                    behaviorGroups[point.behavior].x.push(point.time);
+                    behaviorGroups[point.behavior].y.push(point.depth);
+                    behaviorGroups[point.behavior].z.push(point.energy);
+                    behaviorGroups[point.behavior].text.push(
+                        `Behavior: ${point.behavior}<br>` +
+                        `Time: ${point.time.toFixed(1)}s<br>` +
+                        `Depth: ${point.depth.toFixed(1)}m<br>` +
+                        `Energy: ${point.energy.toFixed(1)} units<br>` +
+                        `Movement intensity: ${point.jerk.toFixed(2)}`
+                    );
+                });
+                
+                // Create a trace for each behavior
+                Object.keys(behaviorGroups).forEach(behavior => {
+                    const group = behaviorGroups[behavior];
+                    
+                    traces.push({
+                        type: 'scatter3d',
+                        mode: 'markers',
+                        name: behavior,
+                        x: group.x,
+                        y: group.y,
+                        z: group.z,
+                        text: group.text,
+                        hoverinfo: 'text',
+                        marker: {
+                            size: 5,
+                            color: group.color,
+                            opacity: 0.7
+                        }
+                    });
+                });
+                
+                const layout = {
+                    title: {
+                        text: '3D Visualization of Energy Expenditure',
+                        font: { size: 24 }
+                    },
+                    scene: {
+                        xaxis: { title: 'Time (seconds)' },
+                        yaxis: { title: 'Depth (meters)' },
+                        zaxis: { title: 'Energy Expenditure' },
+                        camera: {
+                            eye: { x: 1.5, y: 1.5, z: 1.2 }
+                        }
+                    },
+                    margin: { l: 0, r: 0, t: 50, b: 0 },
+                    legend: {
+                        title: { text: 'Behaviors' }
+                    }
+                };
+                
+                Plotly.newPlot('visualization', traces, layout);
+            }
+            
+            // Create 3D surface plot
+            function createSurfacePlot(data) {
+                // For surface plot, we need to create a grid
+                // We'll create a 50x50 grid of depth vs time
+                const gridSize = 50;
+                const timeMin = 0, timeMax = 300;
+                const depthMin = 0, depthMax = 40;
+                
+                const timeStep = (timeMax - timeMin) / gridSize;
+                const depthStep = (depthMax - depthMin) / gridSize;
+                
+                // Create arrays for x (time) and y (depth) coordinates
+                const xValues = Array.from({length: gridSize + 1}, (_, i) => timeMin + i * timeStep);
+                const yValues = Array.from({length: gridSize + 1}, (_, i) => depthMin + i * depthStep);
+                
+                // Initialize z (energy) array with zeros
+                const zValues = Array.from({length: gridSize + 1}, () => 
+                    Array.from({length: gridSize + 1}, () => 0)
+                );
+                
+                // Also track number of data points that contribute to each cell
+                const counts = Array.from({length: gridSize + 1}, () => 
+                    Array.from({length: gridSize + 1}, () => 0)
+                );
+                
+                // Aggregate energy values into the grid
+                data.forEach(point => {
+                    // Find appropriate grid cell
+                    const timeIndex = Math.floor((point.time - timeMin) / timeStep);
+                    const depthIndex = Math.floor((point.depth - depthMin) / depthStep);
+                    
+                    // Add energy value to the grid cell
+                    if (timeIndex >= 0 && timeIndex <= gridSize && 
+                        depthIndex >= 0 && depthIndex <= gridSize) {
+                        zValues[depthIndex][timeIndex] += point.energy;
+                        counts[depthIndex][timeIndex]++;
+                    }
+                });
+                
+                // Average the energy values in each cell
+                for (let i = 0; i <= gridSize; i++) {
+                    for (let j = 0; j <= gridSize; j++) {
+                        if (counts[i][j] > 0) {
+                            zValues[i][j] /= counts[i][j];
+                        } else {
+                            // For cells with no data, interpolate from neighbors
+                            let sum = 0;
+                            let count = 0;
+                            
+                            // Check 8 neighbors
+                            for (let di = -1; di <= 1; di++) {
+                                for (let dj = -1; dj <= 1; dj++) {
+                                    if (di === 0 && dj === 0) continue; // Skip self
+                                    
+                                    const ni = i + di;
+                                    const nj = j + dj;
+                                    
+                                    if (ni >= 0 && ni <= gridSize && 
+                                        nj >= 0 && nj <= gridSize && 
+                                        counts[ni][nj] > 0) {
+                                        sum += zValues[ni][nj];
+                                        count++;
+                                    }
+                                }
+                            }
+                            
+                            zValues[i][j] = count > 0 ? sum / count : 0;
+                        }
+                    }
+                }
+                
+                // Create the surface plot
+                const trace = {
+                    type: 'surface',
+                    x: xValues,
+                    y: yValues,
+                    z: zValues,
+                    colorscale: 'Viridis',
+                    colorbar: {
+                        title: 'Energy Expenditure',
+                        titleside: 'right'
+                    },
+                    hoverinfo: 'x+y+z',
+                    hovertemplate: 'Time: %{x:.1f}s<br>Depth: %{y:.1f}m<br>Energy: %{z:.1f}<extra></extra>'
+                };
+                
+                const layout = {
+                    title: {
+                        text: '3D Surface Plot of Energy Expenditure',
+                        font: { size: 24 }
+                    },
+                    scene: {
+                        xaxis: { title: 'Time (seconds)' },
+                        yaxis: { title: 'Depth (meters)' },
+                        zaxis: { title: 'Energy Expenditure' },
+                        camera: {
+                            eye: { x: 1.5, y: 1.5, z: 1.2 }
+                        }
+                    },
+                    margin: { l: 0, r: 0, t: 50, b: 0 }
+                };
+                
+                Plotly.newPlot('visualization', [trace], layout);
+            }
+            
+            // Initialize with scatter plot
+            createScatterPlot(allData);
+            
+            // Event listeners for controls
+            document.getElementById('behavior-filter').addEventListener('change', function() {
+                const selectedBehavior = this.value;
+                const filteredData = selectedBehavior === 'all' 
+                    ? allData 
+                    : allData.filter(point => point.behavior === selectedBehavior);
+                
+                // Check which view is active
+                const plotType = document.getElementById('view-scatter').style.opacity === '0.7' ? 'surface' : 'scatter';
+                
+                if (plotType === 'scatter') {
+                    createScatterPlot(filteredData);
+                } else {
+                    createSurfacePlot(filteredData);
+                }
+            });
+            
+            document.getElementById('view-scatter').addEventListener('click', function() {
+                this.style.opacity = '1';
+                document.getElementById('view-surface').style.opacity = '0.7';
+                
+                const selectedBehavior = document.getElementById('behavior-filter').value;
+                const filteredData = selectedBehavior === 'all' 
+                    ? allData 
+                    : allData.filter(point => point.behavior === selectedBehavior);
+                
+                createScatterPlot(filteredData);
+            });
+            
+            document.getElementById('view-surface').addEventListener('click', function() {
+                this.style.opacity = '1';
+                document.getElementById('view-scatter').style.opacity = '0.7';
+                
+                const selectedBehavior = document.getElementById('behavior-filter').value;
+                const filteredData = selectedBehavior === 'all' 
+                    ? allData 
+                    : allData.filter(point => point.behavior === selectedBehavior);
+                
+                createSurfacePlot(filteredData);
+            });
+            
+            document.getElementById('rotate-view').addEventListener('click', function() {
+                Plotly.relayout('visualization', {
+                    'scene.camera.eye': {
+                        x: -1.5 + Math.random() * 3,
+                        y: -1.5 + Math.random() * 3,
+                        z: 0.5 + Math.random() * 1.5
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
