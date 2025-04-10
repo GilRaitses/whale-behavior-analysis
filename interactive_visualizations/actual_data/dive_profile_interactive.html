@@ -1,7 +1,339 @@
-<html>
-<head><meta charset="utf-8" /></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dive Profile</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .container {
+            width: 100%;
+            height: 700px;
+        }
+        .controls {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #003366;
+        }
+        .description {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        select, button {
+            padding: 8px;
+            margin-right: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #00a5cf;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0077be;
+        }
+        .legend {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
 <body>
-    <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>                <div id="97961b6d-df67-43a4-bc75-7df11bc2ac07" class="plotly-graph-div" style="height:900px; width:1000px;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("97961b6d-df67-43a4-bc75-7df11bc2ac07")) {                    Plotly.newPlot(                        "97961b6d-df67-43a4-bc75-7df11bc2ac07",                        [{"hoverinfo":"skip","line":{"color":"rgba(0,0,0,0.2)","width":1},"mode":"lines","showlegend":false,"x":{"dtype":"f8","bdata":"9Q9t8FFkREDYD5BM0OlUQIzr6qLanFdAXL1yJJ03ZEBOIyL6L9lkQOBMOYJZC2lAvetRRCzxcECQBNJob1V4QHF8OXHBP3xA3YhDCCm2gEAQVI0PndGBQB+1PKMJ+oRAICnqpQBphUD+AWxmdDCGQHMyo+kBkYZAuEEAV2L\u002fhkBvw83epyOIQOSZH4IEwItAq5UlBPL+i0Bw9N5V4MOMQPBvVcsx841AdFclB\u002ftVj0D+gMmQI02QQFwLKV6OnpJAOBBbTDnkkkAF1FGOudqTQBszfq4aupRAaONWZixelUDqQd5\u002fnb+VQPKhnvU+T5ZACi9+EhQml0ClGvUrO3aXQPKIIAk7mphAiJftZ\u002focmUCH4O\u002ff4MmZQJauusAq\u002fZpAKl\u002f06Q45nEDMEdPVx0udQKB4hQi9xZ1AFEnGHAzjnUC8H6n\u002faECeQKxAT+EfA59AyURDADSCn0C8DbM+v0SgQNj9c2ViVaBA0NPVx5BcoEC+sa9hA4qgQNyqW2KO2aBArzitpMR7oUCCSWcX3GaiQKHmv+5jl6JAY2W4Dw0Lo0BiKZgjje2kQHL+ZKhrFaVA4QGvrbdqpUBM5vQL\u002fu6mQOinF8BfEKdAmmS9awGHp0A8Ma\u002fsrROpQPbNHW52WalAunJUS5RgqUCNLxK68E2qQETt+zIDaatAR3E+asdwq0ABaoTCHbarQK9tAZ7yxqtA4loN3jFErEBuM9GAHGisQG+uJI+YiaxAe+ta9425rEChdgQlRECtQJz1YA0WTq1ALSDb\u002fSaVrUBmucNLbuKtQCZ9nU\u002f2SK5AVXAnuf9JrkBApEms6o+uQNGP0vqGG69AwWqqiTxir0AwxMuIjJavQJsF2BNDpq9AFFCFC3btr0A1u504F5qwQIBEC6xNMLFAV+PYHbk+sUANvtX53D6xQP6CNGDbcbFA6NRorUqJsUCHAtTergayQLRV+DkWCLJAXj9Ug8pEskBAVOuqTUyyQPGnT4aABrNAryzVmyAbs0C2DvuWL0ezQG4GQhEbt7NArKOLP0vQs0CiCqsxJOGzQBCS3uT9RbRA0ZjnzkdqtEBD9BhjaYK0QExCryin\u002f7RAIHGBUXBDtUB6k56zB0+1QLGLnRAEb7VAeH6SLrmGtUA6furrnpm1QFQLRhsosrVA7xgSTYmytUCD4L1+OQq2QM7RV945NLZAcCzO2xvttkCJviv+Jlq3QBdq9xV4lrdAuTzI9vf5t0CWb9vz6RC4QCRikS\u002fELLhAtZEDyjtfuECKMHDOKWK4QNaGtyrqc7hAebc\u002fnfx3uED2jFLpAaK4QKBaJyVpAblAYVOA\u002fJw3uUCacUuTVDi5QG1yrcx4WblAVYdo50+7uUBmkJKlrt25QHz2ZMyfA7pAkphdqw5DukBGgFvxihO7QHtQlQ08ILtA30ivQHhPu0CgjXkSaY+7QIDKSVAQprtAMtItQ1W1u0BnuU5D1g68QLfb6DkNK7xAcwE9E6g7vECV0aN\u002ffM28QNLnjY1kYb1AdfKjdlzIvUBPvi75cSC+QDUjaCyKR75AkZGbTWl\u002fvkDtTGgbt6K+QPDh68RPsr5AmjSB4ANWv0BSWhrrlIS\u002fQFmooRB6lb9ACKg74HWdv0DnSBJc48O\u002fQK+qbJ9E7r9AKDGP3C4FwEAh4o8R2hPAQHHmD5C7MsBAjDIJFKo\u002fwEDfVBaaskfAQLTwozjGWMBAPIYxpPmvwEDFnbbs4xvBQOAcH4c0WsFAHLPojktxwUBpbnKG147BQLySRYQ0wsFAPZFBGQ\u002fJwUDxGotRkgDCQOktH8YoD8JAOuTgi7YjwkB+WbYamyfCQJ5bcwbkMMJAIM8FG2RhwkBJ8w+RCr7CQFuYOAbE3MJAQepFhJ8gw0Atsgpd8SPDQDYX4YSZL8NAmDIpxA11w0C+BTK9ZpXDQM5TZp9PoMNAeKOYZvvQw0Bp61PgldbDQHxo5O9z9MNAIG7DZUk4xEBJz1YpjEjEQJCP7vRVWsRAFAg+TfB9xEAdZ8wl147EQFClSZklq8RAPOrov3TMxEDWYE9zaN3EQIB1d26SOMVACut1H+pUxUCScVWlY2rFQNIJHLQBg8VA3rYXkS+xxUBG\u002f8R3JrTFQD6IVgmlzsVAJb1TB2PbxUBA2Y0HWhrGQJsugO+bHcZAiDPL4SAgxkArrre+UXbGQASsafWkxcZAMZP8kWnhxkAhUukz6+TGQKYwmzd9\u002fsZAOF6obVcZx0DiEST+aH\u002fHQG9KSXf6q8dAtpT4SpK9x0DmPiqBZS7IQLp+JX9mQ8hAAB5um814yEDwFT9l\u002f7LIQJr6vY3NwchAX5gQecv4yEATasxmzwLJQI+5uM5XH8lAT\u002fQWAG9dyUA+Z3+CXdjKQN\u002f9e2jCH8tAXMSXC24gy0BWCrwSnWDLQCVDl8rm08tA2+6im240zEAuaq27iYXMQDdPj6uuq8xAU21UIw2yzEACJOiUnufMQAJq1wEp9sxAjCmQa4spzUAIAyqloivNQFgiuaA9Vc1A7P\u002fwJKt6zUChxmmdsn\u002fNQMqA8hfth81AGhIPcNWpzUBlWDTtPfLNQNRASWkUU85AFkTWb7NdzkBAC2jG66zOQMJ77AYbtc5AT62n49L6zkAtX9RKxzvPQPrOFZQySs9AHp9V11UH0ECqn+vC0xbQQDjoHHXRRNBAKuqzAkta0ECIyZpKWZHQQCG1avirldBAmkXE8LqY0EC76LlVkhvRQC9wKDZyHdFAnZwST6E70UDo\u002f8a41UTRQBoYniOfa9FAJsNoPPxw0UAf2ExMzK7RQBsm7R\u002fKyNFAIOS\u002f9BrQ0UBsakzKGfjRQKdwzi51+9FAOAVff7pH0kDEvY3zwWDSQPMhXgcMrtJAGsuKBgCy0kDm2j3WtbzSQJ5K655gwtJAysg0L2bD0kCP29KED93SQC8aOWdu4NJAA0kob4jn0kDBYY0D1yzTQMw6gDJgRNNACNzMmkt300BbR4KCvIvTQHdTxLamltNA+IDTnW3F00AIjw9iYPfTQFhtrjj2AdRAYUefz0wd1EAeFKItTyLUQApx0t0zTtRAcxHUDm5b1EB66dFjAYfUQPSz2TLBptRAAkS07STZ1ECs5LfnEuXUQDeGWPGYLNVAjHq8XDQw1UCKPzBz1FfVQFRzLCBaq9VAvmTVcp7D1UBy+9KYLczVQL3Ks4Bk7NVA0uM+sKEA1kDLnqvibQ\u002fWQG4uhOmIPNZA\u002fBX4XgtW1kCNforC3YnWQGNY6r61mNZAQFJu9lpX10CDglWK92nXQLZnphBObNdApJRR1X9010CU4BEgYZzXQM+R4UnNttdAc6ubkIPJ10Bc2vLDgCDYQJCF\u002fAV8IdhAt534ZR4p2EAITXT2VXvYQO2x5JiyzNhArFxNAxjw2EBX461eNgnZQDiE970UNdlAFqbgU2h02UDwe6P8unjZQENJe2b1l9lAWVyq3pTG2UBJUyqD3xvaQM6H5AhzLNpAb5ZO88JA2kDhM\u002fRw\u002fmPaQJ4BIe4ndtpA0e3VmECM2kCxeWV8LpHaQLZ3fZinu9pAGVX1H0nJ2kBRFHjBsufaQGZOWK7WvdtANmCpxZPb20Apf0FfkebbQKSRXOYL59tAnNL\u002f9t4k3EBD1ZwLiSvcQA5+ly9OUdxAdbuI7qZZ3EAgCzSTAnPcQB4QYKQ37dxAvLwGlM0E3UD8rOK9kHfdQM4QybPp2t1APPBfE47y3UDSuNxszA\u002feQPC2htL5l95ADQzrOccY30Df4piGFEnfQAmTv3iMft9Abs8OgZ2A30Cu+J\u002fNhY\u002ffQCC5ZdS4HOBAhA9unBBh4EDSxnfjz5jgQFW3t0WPqOBADvHPA47B4EABsPkmYO\u002fgQB46ekrqJOFAdhp55LVq4UBzHdjcgYzhQNoWQAWotOFAqi3QNUPU4UB2EMre5AbiQKsq4GV0HeJAiF9NDTEr4kBOAT887aXiQCZiOnr+AeNA9nhmecER40B4qZcjOprjQPyHSCm0v+NALPZB7sYe5EAQmPDeW3\u002fkQHVJiuwIi+RAzzn\u002fnYDY5UCFReq6fPjlQE\u002f2gmCquuZAZEB2YnjF5kCw\u002fjmswSnnQNR4zy4iPOdAKnKHG52P50CQ6JVGXwXoQFiQxGQAP+hA1MxzgP0l6UCIkIxJsD\u002fpQFzo3h\u002fqfOlAf\u002fTyy9+Y6UAwcplbJJnpQCQpP9jqnelAsqYQJ82p6UBoqA+M4tbpQGZbaZE7depAQkyYl\u002fBn60B0UBAUBpvrQPb\u002fU+RG6+tAbO+vbatc7ECixScV5rPsQH+8DTkNle1Av4\u002fnQnVN7kCUQ\u002fLhyqruQBZYLMls5u5AtIkg9BUe70CyLDDpwLbvQL\u002fhPTEWu+9Axy4jBLA18EDXo1Qrdp3wQDnY5Og26PBAA6NpvNP68EBV8MuuTPfxQGKwaR1xMfJAnUktkFqn8kACC6VNv\u002fHzQHNS5nSwxPVAuF8WMLDh9UDc16\u002ffK9f2QCc8OTpB6vZAJtoGEPKQ+0AQcHpMf4ECQQ=="},"y":{"dtype":"f8","bdata":"mpmZmZmZ6T9DA0WX3AoyQD1MF3XLtCJAAAAAAAAAAAA2dkwFk\u002f3jP1htp3hA7fA\u002fRggNaa90JUA+YxiTMEomQNzWXr3gQEBAUwkBXmstJEC+jmjLWT8lQCAybEeeXEBAGKFkD+fL+z8KCSEIYRgCQFCrC+As+\u002fU\u002fKT+xqVrM4j9khZf5gpP7P3yaY60AeEFAl5Mbv\u002f1xMUAAAAAAAAAAAKeCvKclnSdAv+5tZh9NKkAz+BoykWEpQGmsOdyOvDJA+BKj1sKrwz9TqE4QOahBQBcj4+MVeDFAEw1a49u\u002f8T8\u002fSs8aa3clQNo96qMfqzFAuEQXyJjXKUAvRY1Dxab4P4IjQg\u002fVnydAfA0LhDOwKUA0YxZAR8j\u002fP3hdIf4j9+E\u002fnBk\u002frT3wM0BycRp0VZwnQKLKGbEpPDJAjJxDwQAT\u002fz9iumi8KhPiPz6e+cxrOSdAnjwOjHyT5D80nBg4dnQGQOHyYB5snTNA1cVYg441QkBywJQgGnsqQLPBuxkbikFALGLLGOVBM0CfqUXN5l0FQKv2EY3JjQVAyN7GcMaMMkCsf92vBZApQCDKWzR9sLk\u002fD+xHefAgCUDVpomxP2gHQHmY3\u002frivTNA5VIvTN37A0AItLylQkgCQDjftB\u002frG0JAzD8mh7G4M0ArBKPamrs0QEGIU0+oEDVA\u002fU4GKF5WKUA0AAi17AxDQB59ECG62kJANmbR6m28D0CXuGNSXKsIQFxSKkbKMilAb6fGahJfA0B06yLtokg0QO64gf3w+ipA9Ouic+8+L0CzwfOw4ncIQCaWn+QPGzNArZR6UmJOM0ArpD3DNa0tQIJcnBxYAhJAoKT66aG3QUACg\u002fhIqEQJQIUFUXzREDVA2ZA2T6mYLUBqsQBDqC8UQLmfCpYEqAxAM1VAEOH6FUD2IM7pJuUzQJbi\u002f\u002fxU7Q1AxFiuRnvsLEBvTQSyXsoPQMS5genQLDVAdlT1jEB1L0A2KlLcIYk2QAjU+JM1s0JAPATPySAPQ0D6wwY5sbYqQGZyK+lddDVA4kKPEhwbF0AgTZM5IOQ2QPJDRZPkYDdAfglMuzg4LUCgKipl1QcxQEC8bBe+iTRA5nKckX+XLkC9gkkH8LNCQC6g1ER5qi5AOq5TMDCnOEB05VrJwUYWQHCCTbyg9RVA8HEkouPjNkAIdbxT1HYwQHjrGGeqzDBACvGV7go3FkBCV4lVJWAXQE5ZPp+Q5UNAFLcBi\u002frvQ0CN4Eb8wl8WQPTaaPbxdhZATynxS8\u002fBN0DHm\u002fdvd9YbQLElI7LDfhVA13TqvbsTMEDVCrxhAZtDQKK5HPDQfDBAHPi\u002fIOWHMECQuKUtpCE2QHzRyIkxdTFAijkeNjs8M0BID5ee+0dEQH9VaquZkRVALw72pINXNUA24CTW3IA4QEZHRPYHpxFAFiRz+hXMH0CM+ccaODEVQD3NBwcMdhpArBfFqOAGOEBZGAhoJccWQHw9nRMEhDJAUX2KhDSHMkDvS2PTRr8VQEIE0IlEpTFA4s+NrDyFMkAoiNwEsUgyQPNfSgLapR1A\u002fUAu16nOF0Ar59RDvU4aQPtziCVBjRtABGcoFTA2HUCE0H1YCIkzQNvJJxKhpTFANCTOp1\u002fPH0BM55jWCOEwQA6FnBNLtTFADCQrcnuCHEC4x0f7v6UyQNqVtHiyYzNAVsTgG\u002fo0MkBJlT+OWlEzQF1wapQpkB5APMss8MNBN0DJLESPhssgQNlI3jXyxjFACExgDT8DL0AMVyTRUvkcQB1pQgDKOh1AuLtZmDs1RUCEQCcbscgyQKCgrVDsNB9AejIpJcyGMkCqGndEZu4zQDwFb8cPvjNAwnHPVbOZN0CnY558hTU1QNikbSvLcTFAbHRpPscCRUA4\u002fCeDg4Y0QHNQUdmqVjJANqP359TUIEDjjD2TVlNFQMw\u002fEvtPQzhA9zeKChI7I0ArmO1\u002f7woiQMp8KipiTiJA4CiJDvZSMUBkCSCHqL0zQPCQhuTuWzhAvwLb5M5+OUDIoRIb+c80QLnmAYFBeyFASHPuQ+ASOUAX\u002f1JLrZQiQIaz5nSdI0VAsjkuIEYBM0AsTjToz2w7QDpzsuvO\u002fR5Aa081cKkwNECrXIkM5pUiQETN1MHbnTZAWADpY\u002fnTOkC3gQKHkUg6QNiYTdUXljNAXq\u002fJRU4tJUC9bO\u002fgHYYkQDReKO7E0zNALVlluV0ZJUAdbgWuzHM5QNnTIFHKxTRAnP6\u002f\u002f\u002fMvIUBNRxty4oohQCoLSscGAiNA9hOPdXe3M0AaZ40NcRg5QH7XdyjVGkVAEbmXo4uSRUB2HvIAcJAkQL9GCMsulSJAXORecwWgNEAiWTRB9gczQMftmWlMDDRAsqUBB4jEJEB6ow3EEPEkQIZnx\u002fYuMzRAMGoyq6YZNUCaW9Da6p80QP5dbCwnKjVA7vH7VA7MRUAiFejC8tA5QOIM4xH57DZAmhoR5im6M0AgE2SOlHoiQAimNU19JDpArFm9xsXGRUD2xYKSSxsiQBzM\u002fBiZlEVAUNqGfTMRNkA5L3H4Z5E1QGDxMj2J3jRAeHb6OQYTNECUmh8j5T1FQCC4O8W7FzxALSxADhFjIkDuhlnDqjI8QAxSvipZzDtAtjDKIC\u002fzRUBe4+vkHjM0QCt0fTNOmSNAqxcrKuYsJECI8vg6bOIzQKT2v\u002fBmXzVAUIXgCxpEN0A6Q5RNsws6QHSfttRwPjZA8vRU04KkNEAr+\u002fxqHsYzQBOS85\u002fo4kRArYIz3iQbIUD+c6f9hbEjQPjSSz8CuDNA6QqUjFjUJUBo\u002fVzyBPc0QNJX27hoJDVADEm4IZAERUDhGABvwTIzQPyYeBHZYyZAOHA12tmdOUCIAVFev2AnQOXdOlaayyNAPmwGdLBiI0AgNPy\u002f0VsmQE53tw8TrDpATCbBOfHeNUBf+2luq4k1QKPtsSutqiBAUvGjuPDSNUCMe4QlVwc0QPEwtwWlfjVAZG80ICBrNEBS1e81OBYyQBW5SjjbViNAXjg\u002fselkNEC4v7S\u002fAWkzQL0NOoaqyCFA+PZ8PcBJJkDqNBD9zN4gQK64iYsptiNArhAA\u002fgUIOUD25iq\u002fvbIkQB\u002figgQ5kyJAwaymUVGMH0Cu+myAdXY5QIWwoVKLtjJAWVxArV0BOUBVHBA8rLVEQFNUIO4KECNAWCYnL5x5MkDyqp0RSME0QIRt21zegx1AKG0k3e86N0AWRULiIf0jQBM8TOmVyDhADlsD8OfWIECssFcOBxhEQGSywHafjDFA2pzY7FTVMUD7CAGKfx8dQPeNmMKTrDBAEOW2gWrzMkD2aSHsRqwgQMPwMGamh0NAWByPJo4CIkDycp2bO+xCQBHOTS8FkhxAz30xucfROEAfBKcehEhEQE\u002fqWw6loxdAfjgrI6CYNkB8grndzgMxQKLYlDFOEjdAQheR6ir2NUDiZLnkEf0SQOzBSmutkR5A2r18CZ+8EkByMfUOy7A2QE1RAFBIuxNAalRa87EfLUA6FQPv4nksQIddpew4jC5A4Jq+ZhRkLUBRphSr+clDQA71GoT8pixAPv\u002fvuq2WQ0CiLvRetN4VQJJG1DAoSkJA1cIkuMj3M0CgAuit0kArQIb5Ll6A2S1AkIGpAzKVKkBAZmj5dshBQMDYvr\u002fzcSlAZ9Hm5w\u002ftB0B0g46I+VkKQCwH64dNuTNAgR3JOD6qKECA4TOdSZInQF7ZapQW\u002fiZAg+UC3GsAQkA3RSma7\u002fkmQCg4cNrcGShA5medPL1z9T+AU0a2SaYwQKLB19qqUUBAAAAAAAAAAAAAAAAAAAAAAC9NH4RP80BAK6pT8WvuIkAAAAAAAAAAADhTOVk9TkBApoT2Nup5HkCnG0GzFr0oQPx6df8sdhtAAAAAAAAAAAAIoxM\u002fhwAoQD9joYmepRtAkkiuiI8sKkA+iAW8TXcpQKHFPHMFthBAUtwswmq8FEAAAAAAAAAAAAAAAAAAAAAAagalrchvFEDeAAHUCX4LQFhKz26YozpAXRf4o428IkAAAAAAAAAAAIbKpTnXWRpALdthIpA2NkCw2fd\u002fgr44QOBspDtgjvo\u002fmGSo6wPQ+D+gr3pwMtb0P7CktEWkZh5AoBSP5jeu9j8AAAAAAAAAAAAAAAAAAAAAloKPWxtvIEAAAAAAAAAAAJgH2910Hfs\u002fxDI2nD7+OEDgKrdmFxg5QAAAAAAAAAAA91cVqLG1I0C4tpfE49ABQKrF+Q1hbyJAAAAAAAAAAADXxc2+L9I8QP4Ltmu+CydAAAAAAAAAAACPHlDZJ+gTQM+Gkge0dS1AAAAAAAAAAACloYRzXy0oQDMIGboEUiNA035btlBB0z8AAAAAAAAAAL3OKzW80vs\u002fQyXPx7HNLUA+V7Q4m1UwQAE1A5EveR1AieVsFBM1RECtBT1jacUeQCO\u002fa7V9Oh5AzhwKtQ7uIkBkjdeFSkkkQEgC5x2f4TBAh7F6aZSyNEDAmBeZ02RBQLvt+NEMbfE\u002fwK0Mpaegwz9vQA9bv88aQA=="},"type":"scatter","xaxis":"x","yaxis":"y"},{"hovertemplate":"\u003cb\u003eTime:\u003c\u002fb\u003e %{x:.1f}\u003cbr\u003e\u003cb\u003eDepth:\u003c\u002fb\u003e %{y:.1f} m\u003cbr\u003e\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":{"dtype":"f8","bdata":"AAAAAAAAAADApFRYjokyP5FhdRrQNDc\u002fTqC+mqkmSj9bCaHDID5LP79lRYUGQFE\u002f0cscix7lWD\u002fPrI2pCNdiP5wfS2PdOWY\u002f0X34bWGzaj8Ei+qup51sPzkhD+X4CXE\u002fYJrm9u9pcT+N4UKsbRZyP\u002f0sv\u002fntaXI\u002fi5c10WLJcj\u002fPEFJJJsZzP\u002fUKy1+P5XY\u002fSfYoRPsbdz8HZ\u002fHJSsZ3P9HGOuubzHg\u002fhVMRx2\u002f\u002feT9bFiCS5Rd7P+h42sJMGn8\u002f3V1o68ySfz9n4EyMlJ6AP+\u002f2t6DDX4E\u002fSlXBuqftgT8l+OXa7EGCP6OqLfkjvoI\u002f10iAzu53gz\u002fgGls4QL2DP64hpXDHuYQ\u002fcA1lStoqhT8skUyLYcCFP6fct7IhyoY\u002frf2McFLbhz9OWIGX6MiIP7atYXBhMok\u002fLNaESLpLiT8r0ghZeJyJPwWQ7iLdRIo\u002fEz2Rs8Oyij+72wIBd5aLP45plNY9s4s\u002f50G8mKm\u002fiz8FBYJdRQ6MP8TnGDPal4w\u002fQoalBmywjT+eK6Q6DEePP7hPExv9mo8\u002fYIdbPoUxkD8RAOhkzNKRP0oHCj1H9ZE\u002fHlGmjgs\u002fkj\u002fuoo2r1Y6TP3TLijO0q5M\u002fbJB8oEwSlD+KWps6WmmVP0cvrOKzpZU\u002filVDeturlT\u002fCuE0HInmWP6soVcnwbZc\u002f+K9dPqh0lz8Avs4rn7CXP5QLQJMtv5c\u002fBCpBpn4rmD9nApJkjkqYPzfr07aDZ5g\u002fBbZDg\u002f2QmD\u002fZLW\u002f+fQWZP2iieKlxEZk\u002fmvQgW+dOmT9O5J9vvJGZP3mmsVpo6pk\u002fAaij403rmT9BcXdVxSeaPwCDYmqCoJo\u002fjGypFKndmj90E6PN5gqbPxaPi5h9GJs\u002fld3btxBWmz9tAOv0nnCcP5ytlKJvdJ0\u002fDIs\u002fiWCNnT\u002faJWaPno2dP\u002fdj5xTS5Z0\u002fNKSMw1oOnj+CgHzPPOeeP3fVu16q6Z4\u002fMSn1malSnz8Fh5L7p1+fP3vSMHHbUKA\u002fldFbybFioD8KzUUfzIigP8DL7JyW6aA\u002fc4HcJ1\u002f\u002foD8laHUY8Q2hP5Ag790oZaE\u002fkgppAouEoT8pIG+HaZmhPzA3I1O5BaI\u002fosi6wVhAoj8wV4UFX0qiPzQdI4QIZqI\u002fcJ4\u002fPIl6oj\u002fGZpIH4YqiP41WeCYZoKI\u002fDJjZNG2goj9Q75PyQuyiP52uNNyVEKM\u002f0ov2+nmwoz8emN+pxw6kP+d9hH7xQqQ\u002fRD7GMP6YpD\u002f45Gwo1qykP8TMWo7sxKQ\u002f4dfRvZHwpD\u002f6vuNfGvOkP4xGiXJ0AqU\u002fqOEq+\u002fkFpT8y3uEmUSqlP31igfTSfKU\u002f5GBAHrOrpT\u002fI2vHjUaylPxHwrUD7yKU\u002fJbYmmJgdpj8f7r71UTumP3GL3yAiXKY\u002fzdqT5f2Spj+9apmHS0enPxFcVnBFUqc\u002f9vfEEB97pz\u002faXWw3a7KnP7\u002fxb4oCxqc\u002frEgfGDfTpz8b96zPniCoP7eFkmcFOag\u002fhts8pGFHqD9j5M+ff8WoPzygzl9pRak\u002fIQz4D3aeqT+nwodso+qpP9fz58FyDKo\u002fvgcvc8Q8qj8CC7SPTFuqP2kJHIPJaKo\u002fPZFFqFz2qj\u002fN0CFDoh6rPw0i7cA+Las\u002f39ZuSiY0qz+PTBD8YVWrP\u002fByk7AIeqs\u002f07D4dFWSqz8lyQiltKurPz3opl4e4as\u002f87zDZXz3qz9M5tR1YQWsPyjeFtPqIqw\u002f5a3pfb65rD99CWw\u002fZnStP105TqQu4K0\u002fRZ1dpR4Irj8IhSmmOTuuPxd948cQlK4\u002foaw1l+ufrj94jQQB8P+uPy1jdEwrGa8\u002flw2bULg8rz9qMHsCdEOvP\u002fPCOT+DU68\u002fkT49s2anrz8lGB2m0yOwPyVTC+NlPrA\u002fR7t0LBV5sD9dSEUk9HuwP5XBYOkIhrA\u002ffVEOsxnCsD9PE\u002fVIE96wP0ybZqOC57A\u002fi\u002fneJ5oRsT\u002fzuZC5chaxP3OqITlHMLE\u002fgioZS\u002fFqsT8mIDFaAXmxP5MaqZVjiLE\u002f3qX84y2nsT\u002fa5QDay7WxP7yN\u002fcFGzrE\u002fBy98PhXrsT9u1oBSvvmxPxjWoJKVSLI\u002fgGVceBhhsj+GC2jcqnOyP97+awj1iLI\u002fCp663eSwsj8Np6AudbOyP7UGWuleyrI\u002frjwT9mPVsj\u002fgECQQ2AuzPx4Nwz6pDrM\u002fO2mtAtcQsz\u002f2\u002ftQ8YVuzP7VfOmj7n7M\u002fj7E8G\u002f+3sz9LvZRmB7uzPwEtZI0k0bM\u002fSPtOiV3osz\u002fvD\u002f8Do0C0P56POTQuZ7Q\u002f+inxOGV2tD99N1of+Ne0PyX7eUYi6rQ\u002fXu7dYVEYtT9VnJdZpUq1P1jKoStzV7U\u002fJf5wGAKHtT\u002fyE2dxq4+1P\u002f\u002fhS3hYqLU\u002f3+dhBAvetT\u002fTcLeXwCW3P7Ube+V+Y7c\u002fG6oVVRNktz9QJF5IlZu3P3gHwnVJ\u002f7c\u002fTMou1sRSuD+VWRpK6Zi4P+rEQT7mubg\u002f8lWsT2i\u002fuD8lwGoHvO24Pxv3yEVP+rg\u002fR1\u002fvhr8muT\u002fT\u002fBFnjii5P7\u002f5SKGJTLk\u002f+4QL9edsuT+eCZZkQXG5PzeoaCBfeLk\u002fjAgjGbKVuT+qDe7mUNS5P+KJFFAQKLo\u002fFUm6yj8xuj8cQwa4wnW6P733U77WfLo\u002fDviiASK5uj9M3cimTvG6P1JDDffG\u002fbo\u002f3xzvHbGnuz9VvLLDfMK7Py9rYR4JErw\u002f65rR8y03vD\u002f94zQaaJa8PzDdj0Tinbw\u002f2QHjhyyjvD9ob\u002f\u002fIe4W9Pxp3ls25iL0\u002fL6vh9u68vT9I6+m62sy9PxrmcyHxD74\u002fugL7GjgZvj8D+ygrIoS+PycC9fIWsb4\u002fsTbqSb69vj8+kiDf6wK\u002fP0vtkFG6CL8\u002fux5WP6aMvz+wqLbj8Le\u002fP1\u002fGS+zPHsA\u002fwENQHzsiwD8155tOfivAP37F5fpkMMA\u002feffFL0cxwD8EYoSBeEfAP5uoy79iSsA\u002fOYXABodQwD\u002fnPwc9d4zAP6t3dPbRoMA\u002fxPNeTNvMwD99qlrXiN7AP82WJ1b558A\u002flA6chW0QwT\u002fjM67TnzvBPxJfUlzHRME\u002faZsC6WtcwT\u002fAPLHuwGDBP4K1MLG2hsE\u002f+38DJyeSwT+qyqWN1rfBP9AIyq1L08E\u002f2aBhrd\u002f+wT\u002fOTILUMAnCP5mMIcsLR8I\u002fbQeVYypKwj8rR8s9b2zCP\u002f8CtqGqtMI\u002fbJLiMqfJwj\u002fmsiooDtHCP9cgzUfq7MI\u002fj41eGGv+wj8+vTQ4NwvDP7AsGF45MsM\u002fdCr3EElIwz+YPgkpGnXDP4Bg3nrwgcM\u002fXsFxadAmxD\u002fdLRjv6DbEP2uKdY3uOMQ\u002f5h7XwARAxD94wPT+gWLEPyOu1s5becQ\u002fnMIDjoqJxD+vont\u002fxdTEP3KlvMqe1cQ\u002f6nWP+zjcxD\u002fwoOZsUyPFP2hVRIiwacU\u002fMIhPEE2IxT+3tSExBp7FP5FUS332w8U\u002f9Dcmqbr6xT8GavW5d\u002f7FP1KWDn15GcY\u002fOjM4kstBxj\u002f6trqyjovGP8hOVJnkmcY\u002fgCSenHWrxj8Gm7Xi7cnGP9eYR+Ci2cY\u002fAsH75b7sxj8TKt41AvHGP5BS6Im9Fcc\u002f5nkwXochxz++lOCR1DvHPwT3xioG9cc\u002fPlQDJ74OyD\u002fu0vRrPxjIPxTw\u002fGKpGMg\u002fOZvoAyFOyD\u002feVpd55FPIP+Zm4ZSOdMg\u002fJ822fcZ7yD+krQOftJHIP2xNLbRk+8g\u002fhUr\u002fdMoPyT\u002f46qdECnPJPxQFvk71yMk\u002fXDvmi2fdyT\u002f7gDLssfbJPyKs6+Z2bMo\u002faORkGdvbyj\u002fCbcfooAXLPxRycpPeM8s\u002fwXiVGKg1yz\u002fSuxaGjELLP6AOX0CA1cs\u002fBPAczbVLzD\u002f2atUXIqzMP76CMfhex8w\u002fXHpNi5ryzD9zBaCO20HNPwFrilt2ns0\u002f20WHBi8Xzj8zg0Tko1HOP1dpmn0Vl84\u002fe41aZ8DNzj\u002fXT5iEUyXPPxJSZiZZTM8\u002fBNaRuRtkzz9mzgTMMhzQPxDVLQzSa9A\u002fLxRBnHN50D\u002fq3d2uee\u002fQP\u002ftsVtPiD9E\u002fHbf9lBti0T+vL+lOorXRP597TVC7v9E\u002fl8MEXB\u002fg0j8FBzijyPvSP41NEb62o9M\u002foxBN2g6t0z+Vqra7yQPUP3Kjr06uE9Q\u002fjVlgZuBb1D9adAeJt8HUP4w\u002fcWOO89Q\u002fJRpsIVK71T\u002f2G5efi9HVPzfdpLx+BtY\u002fBpJq3awe1j+gDYIo6B7WP+pa\u002fGQJI9Y\u002fv9O2dFAt1j\u002fs7qe7TVTWP1WkDiE\u002f3dY\u002f6MlqRSWv1z8FpV3\u002fUtvXP7hiL6a6INg\u002f\u002fd3KOsuC2D9b\u002fchRO87YPzdFwArzkNk\u002fqIUIsm0w2j8jTBx6JYHaP9OzoMy3tNo\u002fX60C09rk2j9jqgG24mjbP8qmXQuibNs\u002fYznoaxcF3D++BGSGlbjcPy78YlvhOd0\u002fUjO41BJa3T8AxCYaww7fPyOVlu9Tc98\u002f8a\u002fdEqMf4D8MZhyLXj3hP51SKyox0eI\u002fIYUTY0Xq4j9WOGUgkr7jP2hFOhkTz+M\u002fxNjiEdDU5z8AAAAAAADwPw=="},"colorbar":{"title":{"side":"right","text":"Time Progression"},"x":1.02,"y":0.5,"yanchor":"middle"},"colorscale":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],"showscale":true,"size":8},"mode":"markers","x":{"dtype":"f8","bdata":"9Q9t8FFkREDYD5BM0OlUQIzr6qLanFdAXL1yJJ03ZEBOIyL6L9lkQOBMOYJZC2lAvetRRCzxcECQBNJob1V4QHF8OXHBP3xA3YhDCCm2gEAQVI0PndGBQB+1PKMJ+oRAICnqpQBphUD+AWxmdDCGQHMyo+kBkYZAuEEAV2L\u002fhkBvw83epyOIQOSZH4IEwItAq5UlBPL+i0Bw9N5V4MOMQPBvVcsx841AdFclB\u002ftVj0D+gMmQI02QQFwLKV6OnpJAOBBbTDnkkkAF1FGOudqTQBszfq4aupRAaONWZixelUDqQd5\u002fnb+VQPKhnvU+T5ZACi9+EhQml0ClGvUrO3aXQPKIIAk7mphAiJftZ\u002focmUCH4O\u002ff4MmZQJauusAq\u002fZpAKl\u002f06Q45nEDMEdPVx0udQKB4hQi9xZ1AFEnGHAzjnUC8H6n\u002faECeQKxAT+EfA59AyURDADSCn0C8DbM+v0SgQNj9c2ViVaBA0NPVx5BcoEC+sa9hA4qgQNyqW2KO2aBArzitpMR7oUCCSWcX3GaiQKHmv+5jl6JAY2W4Dw0Lo0BiKZgjje2kQHL+ZKhrFaVA4QGvrbdqpUBM5vQL\u002fu6mQOinF8BfEKdAmmS9awGHp0A8Ma\u002fsrROpQPbNHW52WalAunJUS5RgqUCNLxK68E2qQETt+zIDaatAR3E+asdwq0ABaoTCHbarQK9tAZ7yxqtA4loN3jFErEBuM9GAHGisQG+uJI+YiaxAe+ta9425rEChdgQlRECtQJz1YA0WTq1ALSDb\u002fSaVrUBmucNLbuKtQCZ9nU\u002f2SK5AVXAnuf9JrkBApEms6o+uQNGP0vqGG69AwWqqiTxir0AwxMuIjJavQJsF2BNDpq9AFFCFC3btr0A1u504F5qwQIBEC6xNMLFAV+PYHbk+sUANvtX53D6xQP6CNGDbcbFA6NRorUqJsUCHAtTergayQLRV+DkWCLJAXj9Ug8pEskBAVOuqTUyyQPGnT4aABrNAryzVmyAbs0C2DvuWL0ezQG4GQhEbt7NArKOLP0vQs0CiCqsxJOGzQBCS3uT9RbRA0ZjnzkdqtEBD9BhjaYK0QExCryin\u002f7RAIHGBUXBDtUB6k56zB0+1QLGLnRAEb7VAeH6SLrmGtUA6furrnpm1QFQLRhsosrVA7xgSTYmytUCD4L1+OQq2QM7RV945NLZAcCzO2xvttkCJviv+Jlq3QBdq9xV4lrdAuTzI9vf5t0CWb9vz6RC4QCRikS\u002fELLhAtZEDyjtfuECKMHDOKWK4QNaGtyrqc7hAebc\u002fnfx3uED2jFLpAaK4QKBaJyVpAblAYVOA\u002fJw3uUCacUuTVDi5QG1yrcx4WblAVYdo50+7uUBmkJKlrt25QHz2ZMyfA7pAkphdqw5DukBGgFvxihO7QHtQlQ08ILtA30ivQHhPu0CgjXkSaY+7QIDKSVAQprtAMtItQ1W1u0BnuU5D1g68QLfb6DkNK7xAcwE9E6g7vECV0aN\u002ffM28QNLnjY1kYb1AdfKjdlzIvUBPvi75cSC+QDUjaCyKR75AkZGbTWl\u002fvkDtTGgbt6K+QPDh68RPsr5AmjSB4ANWv0BSWhrrlIS\u002fQFmooRB6lb9ACKg74HWdv0DnSBJc48O\u002fQK+qbJ9E7r9AKDGP3C4FwEAh4o8R2hPAQHHmD5C7MsBAjDIJFKo\u002fwEDfVBaaskfAQLTwozjGWMBAPIYxpPmvwEDFnbbs4xvBQOAcH4c0WsFAHLPojktxwUBpbnKG147BQLySRYQ0wsFAPZFBGQ\u002fJwUDxGotRkgDCQOktH8YoD8JAOuTgi7YjwkB+WbYamyfCQJ5bcwbkMMJAIM8FG2RhwkBJ8w+RCr7CQFuYOAbE3MJAQepFhJ8gw0Atsgpd8SPDQDYX4YSZL8NAmDIpxA11w0C+BTK9ZpXDQM5TZp9PoMNAeKOYZvvQw0Bp61PgldbDQHxo5O9z9MNAIG7DZUk4xEBJz1YpjEjEQJCP7vRVWsRAFAg+TfB9xEAdZ8wl147EQFClSZklq8RAPOrov3TMxEDWYE9zaN3EQIB1d26SOMVACut1H+pUxUCScVWlY2rFQNIJHLQBg8VA3rYXkS+xxUBG\u002f8R3JrTFQD6IVgmlzsVAJb1TB2PbxUBA2Y0HWhrGQJsugO+bHcZAiDPL4SAgxkArrre+UXbGQASsafWkxcZAMZP8kWnhxkAhUukz6+TGQKYwmzd9\u002fsZAOF6obVcZx0DiEST+aH\u002fHQG9KSXf6q8dAtpT4SpK9x0DmPiqBZS7IQLp+JX9mQ8hAAB5um814yEDwFT9l\u002f7LIQJr6vY3NwchAX5gQecv4yEATasxmzwLJQI+5uM5XH8lAT\u002fQWAG9dyUA+Z3+CXdjKQN\u002f9e2jCH8tAXMSXC24gy0BWCrwSnWDLQCVDl8rm08tA2+6im240zEAuaq27iYXMQDdPj6uuq8xAU21UIw2yzEACJOiUnufMQAJq1wEp9sxAjCmQa4spzUAIAyqloivNQFgiuaA9Vc1A7P\u002fwJKt6zUChxmmdsn\u002fNQMqA8hfth81AGhIPcNWpzUBlWDTtPfLNQNRASWkUU85AFkTWb7NdzkBAC2jG66zOQMJ77AYbtc5AT62n49L6zkAtX9RKxzvPQPrOFZQySs9AHp9V11UH0ECqn+vC0xbQQDjoHHXRRNBAKuqzAkta0ECIyZpKWZHQQCG1avirldBAmkXE8LqY0EC76LlVkhvRQC9wKDZyHdFAnZwST6E70UDo\u002f8a41UTRQBoYniOfa9FAJsNoPPxw0UAf2ExMzK7RQBsm7R\u002fKyNFAIOS\u002f9BrQ0UBsakzKGfjRQKdwzi51+9FAOAVff7pH0kDEvY3zwWDSQPMhXgcMrtJAGsuKBgCy0kDm2j3WtbzSQJ5K655gwtJAysg0L2bD0kCP29KED93SQC8aOWdu4NJAA0kob4jn0kDBYY0D1yzTQMw6gDJgRNNACNzMmkt300BbR4KCvIvTQHdTxLamltNA+IDTnW3F00AIjw9iYPfTQFhtrjj2AdRAYUefz0wd1EAeFKItTyLUQApx0t0zTtRAcxHUDm5b1EB66dFjAYfUQPSz2TLBptRAAkS07STZ1ECs5LfnEuXUQDeGWPGYLNVAjHq8XDQw1UCKPzBz1FfVQFRzLCBaq9VAvmTVcp7D1UBy+9KYLczVQL3Ks4Bk7NVA0uM+sKEA1kDLnqvibQ\u002fWQG4uhOmIPNZA\u002fBX4XgtW1kCNforC3YnWQGNY6r61mNZAQFJu9lpX10CDglWK92nXQLZnphBObNdApJRR1X9010CU4BEgYZzXQM+R4UnNttdAc6ubkIPJ10Bc2vLDgCDYQJCF\u002fAV8IdhAt534ZR4p2EAITXT2VXvYQO2x5JiyzNhArFxNAxjw2EBX461eNgnZQDiE970UNdlAFqbgU2h02UDwe6P8unjZQENJe2b1l9lAWVyq3pTG2UBJUyqD3xvaQM6H5AhzLNpAb5ZO88JA2kDhM\u002fRw\u002fmPaQJ4BIe4ndtpA0e3VmECM2kCxeWV8LpHaQLZ3fZinu9pAGVX1H0nJ2kBRFHjBsufaQGZOWK7WvdtANmCpxZPb20Apf0FfkebbQKSRXOYL59tAnNL\u002f9t4k3EBD1ZwLiSvcQA5+ly9OUdxAdbuI7qZZ3EAgCzSTAnPcQB4QYKQ37dxAvLwGlM0E3UD8rOK9kHfdQM4QybPp2t1APPBfE47y3UDSuNxszA\u002feQPC2htL5l95ADQzrOccY30Df4piGFEnfQAmTv3iMft9Abs8OgZ2A30Cu+J\u002fNhY\u002ffQCC5ZdS4HOBAhA9unBBh4EDSxnfjz5jgQFW3t0WPqOBADvHPA47B4EABsPkmYO\u002fgQB46ekrqJOFAdhp55LVq4UBzHdjcgYzhQNoWQAWotOFAqi3QNUPU4UB2EMre5AbiQKsq4GV0HeJAiF9NDTEr4kBOAT887aXiQCZiOnr+AeNA9nhmecER40B4qZcjOprjQPyHSCm0v+NALPZB7sYe5EAQmPDeW3\u002fkQHVJiuwIi+RAzzn\u002fnYDY5UCFReq6fPjlQE\u002f2gmCquuZAZEB2YnjF5kCw\u002fjmswSnnQNR4zy4iPOdAKnKHG52P50CQ6JVGXwXoQFiQxGQAP+hA1MxzgP0l6UCIkIxJsD\u002fpQFzo3h\u002fqfOlAf\u002fTyy9+Y6UAwcplbJJnpQCQpP9jqnelAsqYQJ82p6UBoqA+M4tbpQGZbaZE7depAQkyYl\u002fBn60B0UBAUBpvrQPb\u002fU+RG6+tAbO+vbatc7ECixScV5rPsQH+8DTkNle1Av4\u002fnQnVN7kCUQ\u002fLhyqruQBZYLMls5u5AtIkg9BUe70CyLDDpwLbvQL\u002fhPTEWu+9Axy4jBLA18EDXo1Qrdp3wQDnY5Og26PBAA6NpvNP68EBV8MuuTPfxQGKwaR1xMfJAnUktkFqn8kACC6VNv\u002fHzQHNS5nSwxPVAuF8WMLDh9UDc16\u002ffK9f2QCc8OTpB6vZAJtoGEPKQ+0AQcHpMf4ECQQ=="},"y":{"dtype":"f8","bdata":"mpmZmZmZ6T9DA0WX3AoyQD1MF3XLtCJAAAAAAAAAAAA2dkwFk\u002f3jP1htp3hA7fA\u002fRggNaa90JUA+YxiTMEomQNzWXr3gQEBAUwkBXmstJEC+jmjLWT8lQCAybEeeXEBAGKFkD+fL+z8KCSEIYRgCQFCrC+As+\u002fU\u002fKT+xqVrM4j9khZf5gpP7P3yaY60AeEFAl5Mbv\u002f1xMUAAAAAAAAAAAKeCvKclnSdAv+5tZh9NKkAz+BoykWEpQGmsOdyOvDJA+BKj1sKrwz9TqE4QOahBQBcj4+MVeDFAEw1a49u\u002f8T8\u002fSs8aa3clQNo96qMfqzFAuEQXyJjXKUAvRY1Dxab4P4IjQg\u002fVnydAfA0LhDOwKUA0YxZAR8j\u002fP3hdIf4j9+E\u002fnBk\u002frT3wM0BycRp0VZwnQKLKGbEpPDJAjJxDwQAT\u002fz9iumi8KhPiPz6e+cxrOSdAnjwOjHyT5D80nBg4dnQGQOHyYB5snTNA1cVYg441QkBywJQgGnsqQLPBuxkbikFALGLLGOVBM0CfqUXN5l0FQKv2EY3JjQVAyN7GcMaMMkCsf92vBZApQCDKWzR9sLk\u002fD+xHefAgCUDVpomxP2gHQHmY3\u002frivTNA5VIvTN37A0AItLylQkgCQDjftB\u002frG0JAzD8mh7G4M0ArBKPamrs0QEGIU0+oEDVA\u002fU4GKF5WKUA0AAi17AxDQB59ECG62kJANmbR6m28D0CXuGNSXKsIQFxSKkbKMilAb6fGahJfA0B06yLtokg0QO64gf3w+ipA9Ouic+8+L0CzwfOw4ncIQCaWn+QPGzNArZR6UmJOM0ArpD3DNa0tQIJcnBxYAhJAoKT66aG3QUACg\u002fhIqEQJQIUFUXzREDVA2ZA2T6mYLUBqsQBDqC8UQLmfCpYEqAxAM1VAEOH6FUD2IM7pJuUzQJbi\u002f\u002fxU7Q1AxFiuRnvsLEBvTQSyXsoPQMS5genQLDVAdlT1jEB1L0A2KlLcIYk2QAjU+JM1s0JAPATPySAPQ0D6wwY5sbYqQGZyK+lddDVA4kKPEhwbF0AgTZM5IOQ2QPJDRZPkYDdAfglMuzg4LUCgKipl1QcxQEC8bBe+iTRA5nKckX+XLkC9gkkH8LNCQC6g1ER5qi5AOq5TMDCnOEB05VrJwUYWQHCCTbyg9RVA8HEkouPjNkAIdbxT1HYwQHjrGGeqzDBACvGV7go3FkBCV4lVJWAXQE5ZPp+Q5UNAFLcBi\u002frvQ0CN4Eb8wl8WQPTaaPbxdhZATynxS8\u002fBN0DHm\u002fdvd9YbQLElI7LDfhVA13TqvbsTMEDVCrxhAZtDQKK5HPDQfDBAHPi\u002fIOWHMECQuKUtpCE2QHzRyIkxdTFAijkeNjs8M0BID5ee+0dEQH9VaquZkRVALw72pINXNUA24CTW3IA4QEZHRPYHpxFAFiRz+hXMH0CM+ccaODEVQD3NBwcMdhpArBfFqOAGOEBZGAhoJccWQHw9nRMEhDJAUX2KhDSHMkDvS2PTRr8VQEIE0IlEpTFA4s+NrDyFMkAoiNwEsUgyQPNfSgLapR1A\u002fUAu16nOF0Ar59RDvU4aQPtziCVBjRtABGcoFTA2HUCE0H1YCIkzQNvJJxKhpTFANCTOp1\u002fPH0BM55jWCOEwQA6FnBNLtTFADCQrcnuCHEC4x0f7v6UyQNqVtHiyYzNAVsTgG\u002fo0MkBJlT+OWlEzQF1wapQpkB5APMss8MNBN0DJLESPhssgQNlI3jXyxjFACExgDT8DL0AMVyTRUvkcQB1pQgDKOh1AuLtZmDs1RUCEQCcbscgyQKCgrVDsNB9AejIpJcyGMkCqGndEZu4zQDwFb8cPvjNAwnHPVbOZN0CnY558hTU1QNikbSvLcTFAbHRpPscCRUA4\u002fCeDg4Y0QHNQUdmqVjJANqP359TUIEDjjD2TVlNFQMw\u002fEvtPQzhA9zeKChI7I0ArmO1\u002f7woiQMp8KipiTiJA4CiJDvZSMUBkCSCHqL0zQPCQhuTuWzhAvwLb5M5+OUDIoRIb+c80QLnmAYFBeyFASHPuQ+ASOUAX\u002f1JLrZQiQIaz5nSdI0VAsjkuIEYBM0AsTjToz2w7QDpzsuvO\u002fR5Aa081cKkwNECrXIkM5pUiQETN1MHbnTZAWADpY\u002fnTOkC3gQKHkUg6QNiYTdUXljNAXq\u002fJRU4tJUC9bO\u002fgHYYkQDReKO7E0zNALVlluV0ZJUAdbgWuzHM5QNnTIFHKxTRAnP6\u002f\u002f\u002fMvIUBNRxty4oohQCoLSscGAiNA9hOPdXe3M0AaZ40NcRg5QH7XdyjVGkVAEbmXo4uSRUB2HvIAcJAkQL9GCMsulSJAXORecwWgNEAiWTRB9gczQMftmWlMDDRAsqUBB4jEJEB6ow3EEPEkQIZnx\u002fYuMzRAMGoyq6YZNUCaW9Da6p80QP5dbCwnKjVA7vH7VA7MRUAiFejC8tA5QOIM4xH57DZAmhoR5im6M0AgE2SOlHoiQAimNU19JDpArFm9xsXGRUD2xYKSSxsiQBzM\u002fBiZlEVAUNqGfTMRNkA5L3H4Z5E1QGDxMj2J3jRAeHb6OQYTNECUmh8j5T1FQCC4O8W7FzxALSxADhFjIkDuhlnDqjI8QAxSvipZzDtAtjDKIC\u002fzRUBe4+vkHjM0QCt0fTNOmSNAqxcrKuYsJECI8vg6bOIzQKT2v\u002fBmXzVAUIXgCxpEN0A6Q5RNsws6QHSfttRwPjZA8vRU04KkNEAr+\u002fxqHsYzQBOS85\u002fo4kRArYIz3iQbIUD+c6f9hbEjQPjSSz8CuDNA6QqUjFjUJUBo\u002fVzyBPc0QNJX27hoJDVADEm4IZAERUDhGABvwTIzQPyYeBHZYyZAOHA12tmdOUCIAVFev2AnQOXdOlaayyNAPmwGdLBiI0AgNPy\u002f0VsmQE53tw8TrDpATCbBOfHeNUBf+2luq4k1QKPtsSutqiBAUvGjuPDSNUCMe4QlVwc0QPEwtwWlfjVAZG80ICBrNEBS1e81OBYyQBW5SjjbViNAXjg\u002fselkNEC4v7S\u002fAWkzQL0NOoaqyCFA+PZ8PcBJJkDqNBD9zN4gQK64iYsptiNArhAA\u002fgUIOUD25iq\u002fvbIkQB\u002figgQ5kyJAwaymUVGMH0Cu+myAdXY5QIWwoVKLtjJAWVxArV0BOUBVHBA8rLVEQFNUIO4KECNAWCYnL5x5MkDyqp0RSME0QIRt21zegx1AKG0k3e86N0AWRULiIf0jQBM8TOmVyDhADlsD8OfWIECssFcOBxhEQGSywHafjDFA2pzY7FTVMUD7CAGKfx8dQPeNmMKTrDBAEOW2gWrzMkD2aSHsRqwgQMPwMGamh0NAWByPJo4CIkDycp2bO+xCQBHOTS8FkhxAz30xucfROEAfBKcehEhEQE\u002fqWw6loxdAfjgrI6CYNkB8grndzgMxQKLYlDFOEjdAQheR6ir2NUDiZLnkEf0SQOzBSmutkR5A2r18CZ+8EkByMfUOy7A2QE1RAFBIuxNAalRa87EfLUA6FQPv4nksQIddpew4jC5A4Jq+ZhRkLUBRphSr+clDQA71GoT8pixAPv\u002fvuq2WQ0CiLvRetN4VQJJG1DAoSkJA1cIkuMj3M0CgAuit0kArQIb5Ll6A2S1AkIGpAzKVKkBAZmj5dshBQMDYvr\u002fzcSlAZ9Hm5w\u002ftB0B0g46I+VkKQCwH64dNuTNAgR3JOD6qKECA4TOdSZInQF7ZapQW\u002fiZAg+UC3GsAQkA3RSma7\u002fkmQCg4cNrcGShA5medPL1z9T+AU0a2SaYwQKLB19qqUUBAAAAAAAAAAAAAAAAAAAAAAC9NH4RP80BAK6pT8WvuIkAAAAAAAAAAADhTOVk9TkBApoT2Nup5HkCnG0GzFr0oQPx6df8sdhtAAAAAAAAAAAAIoxM\u002fhwAoQD9joYmepRtAkkiuiI8sKkA+iAW8TXcpQKHFPHMFthBAUtwswmq8FEAAAAAAAAAAAAAAAAAAAAAAagalrchvFEDeAAHUCX4LQFhKz26YozpAXRf4o428IkAAAAAAAAAAAIbKpTnXWRpALdthIpA2NkCw2fd\u002fgr44QOBspDtgjvo\u002fmGSo6wPQ+D+gr3pwMtb0P7CktEWkZh5AoBSP5jeu9j8AAAAAAAAAAAAAAAAAAAAAloKPWxtvIEAAAAAAAAAAAJgH2910Hfs\u002fxDI2nD7+OEDgKrdmFxg5QAAAAAAAAAAA91cVqLG1I0C4tpfE49ABQKrF+Q1hbyJAAAAAAAAAAADXxc2+L9I8QP4Ltmu+CydAAAAAAAAAAACPHlDZJ+gTQM+Gkge0dS1AAAAAAAAAAACloYRzXy0oQDMIGboEUiNA035btlBB0z8AAAAAAAAAAL3OKzW80vs\u002fQyXPx7HNLUA+V7Q4m1UwQAE1A5EveR1AieVsFBM1RECtBT1jacUeQCO\u002fa7V9Oh5AzhwKtQ7uIkBkjdeFSkkkQEgC5x2f4TBAh7F6aZSyNEDAmBeZ02RBQLvt+NEMbfE\u002fwK0Mpaegwz9vQA9bv88aQA=="},"type":"scatter","xaxis":"x","yaxis":"y"},{"hoverinfo":"text","hovertext":"67 dives\u003cbr\u003e12.3m avg","line":{"color":"rgb(68, 1, 84)","width":15},"mode":"lines","showlegend":false,"x":[40.78375058484372,3618.0973972485963],"y":[0.7,0.7],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"hoverinfo":"text","hovertext":"25 dives\u003cbr\u003e12.7m avg","line":{"color":"rgb(69, 9, 92)","width":15},"mode":"lines","showlegend":false,"x":[3636.0556702971726,4684.303389270848],"y":[0.7749999999999999,0.7749999999999999],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"hoverinfo":"text","hovertext":"96 dives\u003cbr\u003e17.4m avg","line":{"color":"rgb(69, 12, 94)","width":15},"mode":"lines","showlegend":false,"x":[4870.502049425603,10525.680841017102],"y":[0.85,0.85],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"hoverinfo":"text","hovertext":"2 dives\u003cbr\u003e16.9m avg","line":{"color":"rgb(71, 25, 107)","width":15},"mode":"lines","showlegend":false,"x":[10582.29374046871,10648.912106623051],"y":[0.925,0.925],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"hoverinfo":"text","hovertext":"58 dives\u003cbr\u003e21.3m avg","line":{"color":"rgb(71, 26, 107)","width":15},"mode":"lines","showlegend":false,"x":[10682.816018984111,16475.308771997377],"y":[1.0,1.0],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"hoverinfo":"text","hovertext":"11 dives\u003cbr\u003e20.4m avg","line":{"color":"rgb(72, 39, 120)","width":15},"mode":"lines","showlegend":false,"x":[16659.272773005272,17859.941187086653],"y":[1.075,1.075],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"hoverinfo":"text","hovertext":"106 dives\u003cbr\u003e16.8m avg","line":{"color":"rgb(71, 42, 121)","width":15},"mode":"lines","showlegend":false,"x":[18107.192156992965,36919.15219596114],"y":[1.15,1.15],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"hoverinfo":"text","hovertext":"4 dives\u003cbr\u003e2.3m avg","line":{"color":"rgb(59, 79, 138)","width":15},"mode":"lines","showlegend":false,"x":[37099.63743599256,38927.952420417496],"y":[1.225,1.225],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"hoverinfo":"text","hovertext":"50 dives\u003cbr\u003e9.4m avg","line":{"color":"rgb(58, 83, 139)","width":15},"mode":"lines","showlegend":false,"x":[39054.04606937051,151599.91234290646],"y":[1.3,1.3],"type":"scatter","xaxis":"x2","yaxis":"y2"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Relative Time (time_units)"}},"yaxis":{"anchor":"x","domain":[0.44,1.0],"title":{"text":"Depth (m)"},"autorange":"reversed"},"xaxis2":{"anchor":"y2","domain":[0.0,1.0],"title":{"text":"Relative Time (time_units)"}},"yaxis2":{"anchor":"x2","domain":[0.0,0.24],"title":{"text":"Bout ID"},"showticklabels":false},"annotations":[{"font":{"size":16},"showarrow":false,"text":"Dive Depth Profile with Chronological Coloring","x":0.5,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Dive Bout Timeline with Chronological Gradient","x":0.5,"xanchor":"center","xref":"paper","y":0.24,"yanchor":"bottom","yref":"paper"},{"bgcolor":"rgba(0,0,0,0.6)","bordercolor":"white","borderpad":3,"borderwidth":1,"font":{"color":"white","size":10},"showarrow":false,"text":"106 dives\u003cbr\u003e16.8m avg","x":27513.172176477055,"xref":"x2","y":1.15,"yref":"y2"},{"bgcolor":"rgba(0,0,0,0.6)","bordercolor":"white","borderpad":3,"borderwidth":1,"font":{"color":"white","size":10},"showarrow":false,"text":"50 dives\u003cbr\u003e9.4m avg","x":95326.9792061385,"xref":"x2","y":1.3,"yref":"y2"},{"font":{"size":12},"showarrow":false,"text":"Color gradient represents chronological progression from start (purple) to end (yellow)","x":0.5,"xref":"x2","y":-0.2,"yref":"y2"}],"title":{"text":"Dive Depth Profile with Chronological Visualization"},"margin":{"t":100,"b":100},"height":900,"width":1000,"hovermode":"closest"},                        {"responsive": true}                    )                };            </script>        </div>
+    <h1>Interactive Dive Depth Profile</h1>
+    
+    <div class="description">
+        <p>This visualization shows the complete dive profile of a whale across time, with color representing chronological progression. 
+        Each point represents a depth measurement at a specific time. The connecting lines show the whale's vertical movement through the water column.</p>
+        <p>The dataset contains 445 dives over approximately 19,790 time units, with 83.1% shallow dives (&lt;20m) and 16.9% medium dives (20-50m).</p>
+    </div>
+    
+    <div class="controls">
+        <label for="view-mode">View Mode:</label>
+        <select id="view-mode">
+            <option value="all">All Dives</option>
+            <option value="shallow">Shallow Dives Only (&lt;20m)</option>
+            <option value="medium">Medium Dives Only (20-50m)</option>
+            <option value="early">Early Period (First Third)</option>
+            <option value="middle">Middle Period (Second Third)</option>
+            <option value="late">Late Period (Final Third)</option>
+        </select>
+        
+        <button id="reset-zoom">Reset Zoom</button>
+        <button id="toggle-lines">Toggle Connecting Lines</button>
+    </div>
+    
+    <div id="dive-plot" class="container"></div>
+    
+    <div class="legend">
+        <h3>How to Interpret:</h3>
+        <ul>
+            <li><strong>X-axis:</strong> Relative time in time_units from the start of the recording</li>
+            <li><strong>Y-axis:</strong> Depth in meters (0 = surface, increasing values = deeper)</li>
+            <li><strong>Color:</strong> Chronological progression from early (purple) to late (yellow)</li>
+            <li><strong>Interactive Features:</strong>
+                <ul>
+                    <li>Hover over points to see exact depth and time</li>
+                    <li>Click and drag to zoom into specific areas</li>
+                    <li>Double-click to reset zoom</li>
+                    <li>Use the view mode selector to filter different dive types</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        // Load the data - In a real implementation, you would load this from your JSON file
+        // This is a simplified representation based on your summary data
+        function generateDiveData() {
+            const totalDives = 445;
+            const timeSpan = 19790;
+            const shallowDives = Math.round(totalDives * 0.831); // 83.1% shallow
+            const mediumDives = Math.round(totalDives * 0.169); // 16.9% medium
+            
+            let times = [];
+            let depths = [];
+            let colors = [];
+            
+            let currentTime = 0;
+            
+            // Generate shallow dives (0-20m)
+            for (let i = 0; i < shallowDives; i++) {
+                // Each dive has multiple points
+                const divePoints = Math.floor(Math.random() * 5) + 3;
+                const maxDepth = Math.random() * 17 + 3; // Random depth between 3-20m
+                const diveDuration = Math.random() * 30 + 10; // Random duration
+                
+                // Surface before dive
+                times.push(currentTime);
+                depths.push(0);
+                
+                // Descent phase (3-5 points)
+                const descentPoints = Math.floor(Math.random() * 3) + 3;
+                for (let j = 0; j < descentPoints; j++) {
+                    const timeOffset = (j + 1) * (diveDuration / (divePoints + 1));
+                    const depthPercent = (j + 1) / descentPoints;
+                    
+                    times.push(currentTime + timeOffset);
+                    depths.push(maxDepth * depthPercent);
+                }
+                
+                // Bottom point
+                times.push(currentTime + diveDuration / 2);
+                depths.push(maxDepth);
+                
+                // Ascent phase (3-5 points)
+                const ascentPoints = Math.floor(Math.random() * 3) + 3;
+                for (let j = 0; j < ascentPoints; j++) {
+                    const timeOffset = diveDuration - ((j + 1) * (diveDuration / (divePoints + 1)));
+                    const depthPercent = 1 - ((j + 1) / ascentPoints);
+                    
+                    times.push(currentTime + timeOffset);
+                    depths.push(maxDepth * depthPercent);
+                }
+                
+                // Surface after dive
+                times.push(currentTime + diveDuration);
+                depths.push(0);
+                
+                // Add inter-dive interval
+                currentTime += diveDuration + Math.random() * 20 + 5;
+            }
+            
+            // Generate medium dives (20-40m)
+            for (let i = 0; i < mediumDives; i++) {
+                // Distribute medium dives throughout the time series
+                const insertIndex = Math.floor(Math.random() * times.length);
+                const insertTime = times[insertIndex];
+                
+                // Each dive has multiple points
+                const divePoints = Math.floor(Math.random() * 5) + 5;
+                const maxDepth = Math.random() * 20 + 20; // Random depth between 20-40m
+                const diveDuration = Math.random() * 50 + 30; // Longer duration for deeper dives
+                
+                // Surface before dive
+                times.push(insertTime);
+                depths.push(0);
+                
+                // Descent phase (4-6 points)
+                const descentPoints = Math.floor(Math.random() * 3) + 4;
+                for (let j = 0; j < descentPoints; j++) {
+                    const timeOffset = (j + 1) * (diveDuration / (divePoints + 1));
+                    const depthPercent = (j + 1) / descentPoints;
+                    
+                    times.push(insertTime + timeOffset);
+                    depths.push(maxDepth * depthPercent);
+                }
+                
+                // Bottom point
+                times.push(insertTime + diveDuration / 2);
+                depths.push(maxDepth);
+                
+                // Ascent phase (4-6 points)
+                const ascentPoints = Math.floor(Math.random() * 3) + 4;
+                for (let j = 0; j < ascentPoints; j++) {
+                    const timeOffset = diveDuration - ((j + 1) * (diveDuration / (divePoints + 1)));
+                    const depthPercent = 1 - ((j + 1) / ascentPoints);
+                    
+                    times.push(insertTime + timeOffset);
+                    depths.push(maxDepth * depthPercent);
+                }
+                
+                // Surface after dive
+                times.push(insertTime + diveDuration);
+                depths.push(0);
+            }
+            
+            // Sort data by time
+            const indices = Array.from(Array(times.length).keys());
+            indices.sort((a, b) => times[a] - times[b]);
+            
+            const sortedTimes = indices.map(i => times[i]);
+            const sortedDepths = indices.map(i => depths[i]);
+            
+            // Normalize time to match your timespan
+            const maxTime = Math.max(...sortedTimes);
+            const normalizedTimes = sortedTimes.map(t => (t / maxTime) * timeSpan);
+            
+            // Create color scale based on time
+            const normalizedColors = normalizedTimes.map(t => t / timeSpan);
+            
+            return {
+                x: normalizedTimes,
+                y: sortedDepths,
+                normalizedColors: normalizedColors
+            };
+        }
+        
+        // Generate the data
+        const diveData = generateDiveData();
+        
+        // Create the plot
+        function createPlot(data, filteredIndices = null) {
+            let x = data.x;
+            let y = data.y;
+            let colors = data.normalizedColors;
+            
+            if (filteredIndices) {
+                x = filteredIndices.map(i => data.x[i]);
+                y = filteredIndices.map(i => data.y[i]);
+                colors = filteredIndices.map(i => data.normalizedColors[i]);
+            }
+            
+            const trace = {
+                x: x,
+                y: y,
+                mode: 'lines+markers',
+                marker: {
+                    size: 6,
+                    color: colors,
+                    colorscale: 'Viridis',
+                    showscale: true,
+                    colorbar: {
+                        title: 'Chronological Progression',
+                        tickvals: [0, 0.5, 1],
+                        ticktext: ['Early', 'Middle', 'Late']
+                    }
+                },
+                line: {
+                    color: 'lightgrey',
+                    width: 1
+                },
+                hovertemplate: 'Time: %{x:.1f} time_units<br>Depth: %{y:.1f} m<extra></extra>'
+            };
+            
+            const layout = {
+                title: 'Dive Depth Profile with Chronological Coloring',
+                xaxis: {
+                    title: 'Relative Time (time_units)',
+                    showgrid: true,
+                    zeroline: false
+                },
+                yaxis: {
+                    title: 'Depth (m)',
+                    showgrid: true,
+                    zeroline: true,
+                    autorange: 'reversed' // Invert Y-axis to show depth increasing downward
+                },
+                hovermode: 'closest',
+                plot_bgcolor: '#f8f9fa',
+                margin: {
+                    l: 60,
+                    r: 30,
+                    b: 60,
+                    t: 80,
+                }
+            };
+            
+            Plotly.newPlot('dive-plot', [trace], layout, {responsive: true});
+        }
+        
+        // Initialize the plot
+        createPlot(diveData);
+        
+        // View mode selector functionality
+        document.getElementById('view-mode').addEventListener('change', function() {
+            const mode = this.value;
+            let filteredIndices = null;
+            
+            switch (mode) {
+                case 'shallow':
+                    filteredIndices = diveData.y.map((d, i) => d < 20 ? i : null).filter(i => i !== null);
+                    break;
+                case 'medium':
+                    filteredIndices = diveData.y.map((d, i) => d >= 20 ? i : null).filter(i => i !== null);
+                    break;
+                case 'early':
+                    filteredIndices = diveData.x.map((t, i) => t < diveData.x[diveData.x.length-1] / 3 ? i : null).filter(i => i !== null);
+                    break;
+                case 'middle':
+                    const third = diveData.x[diveData.x.length-1] / 3;
+                    filteredIndices = diveData.x.map((t, i) => (t >= third && t < 2*third) ? i : null).filter(i => i !== null);
+                    break;
+                case 'late':
+                    const lastThird = 2 * diveData.x[diveData.x.length-1] / 3;
+                    filteredIndices = diveData.x.map((t, i) => t >= lastThird ? i : null).filter(i => i !== null);
+                    break;
+                default:
+                    filteredIndices = null;
+            }
+            
+            createPlot(diveData, filteredIndices);
+        });
+        
+        // Reset zoom button
+        document.getElementById('reset-zoom').addEventListener('click', function() {
+            Plotly.relayout('dive-plot', {
+                'xaxis.autorange': true,
+                'yaxis.autorange': true
+            });
+        });
+        
+        // Toggle lines button
+        let showLines = true;
+        document.getElementById('toggle-lines').addEventListener('click', function() {
+            showLines = !showLines;
+            const update = {
+                mode: showLines ? 'lines+markers' : 'markers'
+            };
+            Plotly.restyle('dive-plot', update, 0);
+        });
+    </script>
 </body>
 </html>
