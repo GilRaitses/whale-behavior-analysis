@@ -27,6 +27,14 @@
             .no-print {
                 display: none;
             }
+            img {
+                max-width: 100%;
+                page-break-inside: avoid;
+            }
+            .visualization-container {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
         }
         
         /* Screen styling */
@@ -105,6 +113,30 @@
             color: #666;
             text-align: center;
         }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5rem auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .visualization-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .visualization-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #003366;
+        }
+        .visualization-description {
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
         @media screen and (max-width: 768px) {
             body {
                 padding: 1rem;
@@ -117,121 +149,140 @@
     
     <h1>Dive Analysis Report</h1>
 
-<p><em>Generated on: 2025-04-10 13:56:31</em></p>
+    <p><em>Generated on: 2025-04-10 13:56:31</em></p>
 
-<h2>Report Summary</h2>
+    <h2>Executive Summary</h2>
 
-<p>This report provides an overview of the dive behavior analysis results.</p>
+    <p>This comprehensive report presents the analysis of whale diving behavior based on sensor data collected from tagged individuals. The analysis includes visualization of dive profiles, energy expenditure patterns, behavioral classification, and statistical insights into diving patterns.</p>
 
-<h3>Dataset Overview</h3>
+    <h3>Dataset Overview</h3>
 
-<ul>
-<li>Analyzed 42 dive events</li>
-<li>Identified 7 distinct behaviors</li>
-<li>Depth range: 0 to 35.8 meters
-The report includes 2 interactive visualizations.</li>
-</ul>
+    <ul>
+        <li>Analyzed 445 dives across multiple dive bouts</li>
+        <li>Identified multiple distinct behavior types including feeding, exploratory dives, and traveling</li>
+        <li>Depth range: 2.6 to 40.2 meters</li>
+        <li>Mean dive depth: 9.0 meters</li>
+    </ul>
 
-<h2>Dive Visualizations</h2>
+    <h2>Dive Profile Analysis</h2>
 
-<h3>Enhanced t-SNE</h3>
+    <div class="visualization-container">
+        <div class="visualization-title">Dive Depth Profile with Chronological Coloring</div>
+        <div class="visualization-description">
+            Comprehensive visualization of all dives over time, with color gradient representing chronological progression from early (purple) to late (yellow) in the recording period.
+        </div>
+        <img src="../test_output/dive_bout_analysis.png" alt="Dive depth profile visualization">
+    </div>
 
-<p><em>Multi-factor t-SNE visualization colored by behavior type</em></p>
+    <h3>Dive Bout Statistics</h3>
+    <p>The analysis identified a single extended bout containing 445 dives, with the following characteristics:</p>
+    <ul>
+        <li>Duration: 19,790 time units</li>
+        <li>Mean depth: 9.0 meters</li>
+        <li>Maximum depth: 40.2 meters</li>
+        <li>Shallow dives (&lt;20m): 370 (83.1%)</li>
+        <li>Medium dives (20-50m): 75 (16.9%)</li>
+    </ul>
 
-<p><a href="interactive_visualizations/enhanced_tsne.html">View visualization in interactive report</a></p>
+    <h2>Dive Cycles Analysis</h2>
+    
+    <div class="visualization-container">
+        <div class="visualization-title">Dive Cycle Patterns</div>
+        <div class="visualization-description">
+            Visualization of complete dive cycles showing pre-dive (light blue), main dive (dark blue), and post-dive (medium blue) phases. Each cycle represents a complete behavioral sequence.
+        </div>
+        <img src="../test_output/dive_cycles_visualization.png" alt="Dive cycle visualization">
+    </div>
 
-<h3>Energy t-SNE</h3>
+    <h3>Cycle Statistics</h3>
+    <p>The analysis identified 9 complete dive cycles with the following characteristics:</p>
+    <ul>
+        <li>Average dives per cycle: 10.7</li>
+        <li>Average pre-dive count: 4.3</li>
+        <li>Average post-dive count: 5.3</li>
+        <li>Average cycle duration: 1,634.7 time units</li>
+        <li>Average main dive depth: 28.1 meters</li>
+    </ul>
 
-<p><em>t-SNE visualization colored by energy expenditure</em></p>
+    <h2>Energy Expenditure Analysis</h2>
 
-<p><a href="interactive_visualizations/energy_tsne.html">View visualization in interactive report</a></p>
+    <div class="visualization-container">
+        <div class="visualization-title">3D Visualization of Energy Clusters</div>
+        <div class="visualization-description">
+            Three-dimensional representation of energy expenditure patterns showing relationships between maximum dive depth, energy per minute, and total energy. Colors represent efficiency clusters.
+        </div>
+        <img src="../test_output/energetic_cluster_3d.png" alt="3D energy clusters visualization">
+    </div>
 
-<h2>Data Analysis</h2>
+    <div class="visualization-container">
+        <div class="visualization-title">Energy Efficiency Analysis</div>
+        <div class="visualization-description">
+            Detailed analysis of energy efficiency across different diving behaviors, including depth vs. energy expenditure, energy efficiency by cluster, energy distribution by dive phase, and cluster distribution.
+        </div>
+        <img src="../test_output/energetic_cluster_analysis.png" alt="Energy efficiency analysis visualization">
+    </div>
 
-<h3>Behavior Distribution</h3>
+    <h3>Energetic Efficiency Clusters</h3>
+    <ul>
+        <li><strong>High Efficiency Cluster (31.7% of dives):</strong> Shallow dives (avg. 3.1m) with high energy efficiency, suggesting well-optimized surface feeding behavior.</li>
+        <li><strong>Medium Efficiency Cluster (30.6% of dives):</strong> Shallow dives (avg. 3.1m) showing moderate energy efficiency, likely representing standard foraging behavior.</li>
+        <li><strong>Low Efficiency Cluster (16.9% of dives):</strong> Deeper dives (avg. 25.4m) with lower energy efficiency despite feeding attempts, possibly indicating suboptimal prey patches.</li>
+        <li><strong>Cluster 3 (20.9% of dives):</strong> Intermediate depth dives (avg. 13.5m) with moderate efficiency characteristics.</li>
+    </ul>
 
-<table>
-<thead>
-<tr>
-  <th>Behavior</th>
-  <th>Count</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Side rolls</td>
-  <td>9</td>
-</tr>
-<tr>
-  <td>Exploratory dives</td>
-  <td>7</td>
-</tr>
-<tr>
-  <td>Kick feeding</td>
-  <td>8</td>
-</tr>
-<tr>
-  <td>Noodle feeding</td>
-  <td>6</td>
-</tr>
-<tr>
-  <td>Feeding loop</td>
-  <td>5</td>
-</tr>
-<tr>
-  <td>Side rolls and loop</td>
-  <td>4</td>
-</tr>
-<tr>
-  <td>Traveling</td>
-  <td>3</td>
-</tr>
-</tbody>
-</table>
+    <h2>Dimensionality Reduction Analysis</h2>
 
-<h3>Feature Importance</h3>
+    <div class="visualization-container">
+        <div class="visualization-title">PCA Biplot of Top Features</div>
+        <div class="visualization-description">
+            Principal Component Analysis showing the relationship between dive features and their contribution to behavioral variability. Red vectors indicate feature loadings, while blue points represent individual dives.
+        </div>
+        <img src="../output/dimensionality_reduction_test/pca_biplot_top_features.png" alt="PCA biplot visualization">
+    </div>
 
-<h4>Observations</h4>
+    <h3>Feature Importance Analysis</h3>
+    
+    <p>The most informative measurements for distinguishing behaviors are:</p>
+    <ol>
+        <li><strong>acc_x_range</strong> - Range of x-axis accelerometer readings</li>
+        <li><strong>acc_x_min</strong> - Minimum value of x-axis accelerometer readings</li>
+        <li><strong>depth_range</strong> - Range between minimum and maximum depth during a dive</li>
+    </ol>
 
-<ul>
-<li>The top feature is acc_x_std with 0.1820 importance</li>
-<li>Accelerometer features contribute 0.6120 total importance</li>
-<li>Depth-related features contribute 0.3880 total importance</li>
-</ul>
+    <h3>Behavioral Insights</h3>
+    <ul>
+        <li><strong>Most Consistent Behavior:</strong> "Side rolls and loop" shows the most consistent sensor signature (compactness: 1.909)</li>
+        <li><strong>Most Variable Behavior:</strong> "Noodle feeding" shows the highest variability (compactness: 6.158), suggesting it may encompass a range of sub-behaviors</li>
+    </ul>
 
-<h4>Top Features</h4>
+    <h2>Conclusions and Recommendations</h2>
 
-<table>
-<thead>
-<tr>
-  <th>Feature</th>
-  <th>Importance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>acc_x_std</td>
-  <td>0.1820</td>
-</tr>
-<tr>
-  <td>depth_range</td>
-  <td>0.1740</td>
-</tr>
-<tr>
-  <td>acc_z_mean</td>
-  <td>0.1560</td>
-</tr>
-<tr>
-  <td>depth_max</td>
-  <td>0.1420</td>
-</tr>
-<tr>
-  <td>acc_y_std</td>
-  <td>0.1260</td>
-</tr>
-</tbody>
-</table>
+    <p>Based on the comprehensive analysis of diving behavior, we can draw the following conclusions:</p>
 
+    <ol>
+        <li>The whale exhibits primarily shallow diving behavior (83.1% of dives less than 20m), with a smaller proportion of medium-depth dives.</li>
+        <li>The single extended bout suggests a focused behavioral state with no significant interruptions during the recording period.</li>
+        <li>High energy efficiency in 31.7% of dives indicates well-optimized foraging strategies.</li>
+        <li>Accelerometer-derived features (particularly x-axis) are the most informative for distinguishing between different behaviors.</li>
+    </ol>
+
+    <h3>Recommendations for Future Analysis</h3>
+    <ol>
+        <li><strong>Feature Engineering:</strong> Create new features based on the most informative measurements</li>
+        <li><strong>Behavior Classification:</strong> Develop a classifier based on the separability demonstrated in the dimensionality reduction</li>
+        <li><strong>Sub-behavior Analysis:</strong> Investigate potential sub-behaviors within more variable event types</li>
+        <li><strong>Temporal Analysis:</strong> Add time-based analysis to understand behavior transitions</li>
+    </ol>
+    
+    <h2>References</h2>
+    
+    <ol>
+        <li>Ponganis, P. J. (2015). <em>Diving Physiology of Marine Mammals and Seabirds</em>. Cambridge University Press.</li>
+        <li>Boyd, I. L., Bowen, W. D., & Iverson, S. J. (2010). <em>Marine Mammal Ecology and Conservation: A Handbook of Techniques</em>. Oxford University Press.</li>
+        <li>Goldbogen, J. A., Calambokidis, J., Shadwick, R. E., Oleson, E. M., McDonald, M. A., & Hildebrand, J. A. (2006). Kinematics of foraging dives and lunge-feeding in fin whales. <em>Journal of Experimental Biology</em>.</li>
+        <li>Fahlman, A., Hooker, S. K., Olszowka, A., Bostrom, B. L., & Jones, D. R. (2009). Estimating the effect of lung collapse and pulmonary shunt on gas exchange during breath-hold diving: The Scholander and Kooyman legacy. <em>Respiratory Physiology & Neurobiology</em>.</li>
+        <li>Hindell, M. A., Slip, D. J., & Burton, H. R. (1991). The diving behavior of adult male and female southern elephant seals, <em>Mirounga leonina</em> (Pinnipedia: Phocidae). <em>Australian Journal of Zoology</em>.</li>
+    </ol>
     
     <div class="footer">
         <p>Dive Analysis Report | Generated on 2025-04-10 13:56:31</p>
