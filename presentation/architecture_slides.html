@@ -158,7 +158,30 @@
             <h1>System Architecture</h1>
             <h2>Whale Behavior Classification System</h2>
             
-            <img src="../assets/architecture/performance_metrics.svg" alt="Performance Metrics" class="architecture-img">
+            <!-- Performance Metrics HTML replacement -->
+            <div style="width: 100%; padding: 20px; background-color: #f8f9fa; border-radius: 10px; margin: 20px 0; text-align: center;">
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Whale Behavior Classification Performance</h3>
+                <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px; background: white; padding: 15px; border-radius: 10px; margin: 10px; border: 2px solid #3498db;">
+                        <h4 style="color: #3498db; margin-top: 0;">Validation Accuracy</h4>
+                        <div style="font-size: 36px; font-weight: bold; margin: 15px 0;">57.2%</div>
+                        <div style="color: #7f8c8d;">Individual Behaviors</div>
+                        <div style="color: #7f8c8d; font-size: 12px;">(9 distinct classes)</div>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; background: white; padding: 15px; border-radius: 10px; margin: 10px; border: 2px solid #e74c3c;">
+                        <h4 style="color: #e74c3c; margin-top: 0;">Hierarchical Accuracy</h4>
+                        <div style="font-size: 36px; font-weight: bold; margin: 15px 0;">63.1%</div>
+                        <div style="color: #7f8c8d;">Behavior Groups</div>
+                        <div style="color: #7f8c8d; font-size: 12px;">(feeding, movement, etc.)</div>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; background: white; padding: 15px; border-radius: 10px; margin: 10px; border: 2px solid #2ecc71;">
+                        <h4 style="color: #2ecc71; margin-top: 0;">Training Accuracy</h4>
+                        <div style="font-size: 36px; font-weight: bold; margin: 15px 0;">72.3%</div>
+                        <div style="color: #7f8c8d;">With SMOTE &amp; Weights</div>
+                        <div style="color: #7f8c8d; font-size: 12px;">(balanced from 6→129 samples)</div>
+                    </div>
+                </div>
+            </div>
             
             <div style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 4px;">
                 <h3 style="color: #856404; margin-top: 0;">Important: Data Limitation Notice</h3>
@@ -179,7 +202,29 @@
         <div class="slide-content">
             <h2>minGRU Architecture</h2>
             
-            <img src="../assets/architecture/mingru_architecture.svg" alt="minGRU Architecture" class="architecture-img">
+            <!-- minGRU Architecture HTML replacement -->
+            <div style="width: 100%; padding: 20px; background-color: #f8f9fa; border-radius: 10px; margin: 20px 0;">
+                <h3 style="text-align: center; margin-bottom: 20px;">Minimal Gated Recurrent Unit (minGRU)</h3>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #3498db;">
+                        <h4 style="margin-top: 0;">Architecture Highlights</h4>
+                        <ul>
+                            <li>Only 39,690 parameters (vs ~120K for standard GRU)</li>
+                            <li>Two gates: update gate (z) and reset gate (r)</li>
+                            <li>Input shape: (batch_size, time_steps, features)</li>
+                            <li>Output shape: (batch_size, num_classes)</li>
+                        </ul>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                        <h4 style="margin-top: 0;">Layer Structure</h4>
+                        <ul>
+                            <li>Input Layer → minGRU(64) → Dropout(0.3) → Dense(32) → Dropout(0.3) → Output</li>
+                            <li>Learning rate: 0.001 with Adam optimizer</li>
+                            <li>Batch size: 16 (optimized for small dataset)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             
             <p>The minGRU (Minimal Gated Recurrent Unit) architecture offers several advantages over traditional RNNs:</p>
             
@@ -195,9 +240,47 @@
     <!-- Slide 3: Challenges & Solutions -->
     <div id="slide3" class="slide">
         <div class="slide-content">
-            <h2>Challenges & Solutions</h2>
+            <h2>Challenges &amp; Solutions</h2>
             
-            <img src="../assets/architecture/challenges.svg" alt="Challenges and Solutions" class="architecture-img">
+            <!-- Challenges & Solutions HTML replacement -->
+            <div style="width: 100%; padding: 20px; background-color: #f8f9fa; border-radius: 10px; margin: 20px 0;">
+                <h3 style="text-align: center; margin-bottom: 20px;">Current Challenges &amp; Solutions</h3>
+                <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+                    <div style="flex: 1; min-width: 300px; background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                        <h4 style="color: #e74c3c; margin-top: 0;">Data Limitations</h4>
+                        <ul>
+                            <li>Small dataset (599 windows)</li>
+                            <li>Severe class imbalance (6 vs 216 samples)</li>
+                            <li>High dimensionality (3 axes × 200 samples)</li>
+                        </ul>
+                        <div style="background: #ecf0f1; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                            <strong>Solution:</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>SMOTE augmentation to balance classes</li>
+                                <li>Class weights for gradient correction</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="flex: 1; min-width: 300px; background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #3498db;">
+                        <h4 style="color: #3498db; margin-top: 0;">Model Limitations</h4>
+                        <ul>
+                            <li>Training instability with small batch sizes</li>
+                            <li>Overfitting indicators in validation performance</li>
+                            <li>Limited generalization to unseen whales</li>
+                        </ul>
+                        <div style="background: #ecf0f1; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                            <strong>Solution:</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>minGRU architecture (39,690 parameters)</li>
+                                <li>Hierarchical classification approach (63.1%)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: #e8f8f5; padding: 15px; border-radius: 5px; margin-top: 20px; text-align: center; border: 1px solid #2ecc71;">
+                    The optimized model achieves <strong>57.2%</strong> validation accuracy on direct classification and <strong>63.1%</strong> on hierarchical groups
+                </div>
+            </div>
             
             <p>The reported metrics are <strong>highly preliminary</strong> due to significant dataset limitations:</p>
             <ul>
