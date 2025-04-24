@@ -366,7 +366,110 @@
         <section id="training">
             <div class="section-content">
                 <h2>Model Training</h2>
-                <iframe src="presentation/training_slides.html" title="Training Slides"></iframe>
+                
+                <!-- Training Overview -->
+                <div class="card">
+                    <h3>Training Pipeline</h3>
+                    <p>The training process was designed to maximize performance with the limited data available:</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #3498db;">
+                            <h4 style="margin-top: 0;">Data Preparation</h4>
+                            <ul>
+                                <li>Standardized sequence length to 384 timesteps</li>
+                                <li>Feature scaling per sensor axis</li>
+                                <li>SMOTE augmentation for minority classes</li>
+                                <li>Class-weighted loss function</li>
+                            </ul>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                            <h4 style="margin-top: 0;">Training Configuration</h4>
+                            <ul>
+                                <li>Batch size: 16 (optimized for small dataset)</li>
+                                <li>Learning rate: 1e-4 with Adam optimizer</li>
+                                <li>Early stopping with patience of 10 epochs</li>
+                                <li>Model checkpointing for best validation accuracy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Training Process -->
+                <div class="card">
+                    <h3>Training Process</h3>
+                    
+                    <div style="margin-top: 15px; background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                            <div style="flex: 1; text-align: center; padding: 0 10px;">
+                                <div style="font-weight: bold; margin-bottom: 5px;">Step 1: Data Preparation</div>
+                                <div>Sequence standardization and feature scaling</div>
+                            </div>
+                            <div style="flex: 1; text-align: center; padding: 0 10px;">
+                                <div style="font-weight: bold; margin-bottom: 5px;">Step 2: Class Balancing</div>
+                                <div>SMOTE augmentation and class weighting</div>
+                            </div>
+                            <div style="flex: 1; text-align: center; padding: 0 10px;">
+                                <div style="font-weight: bold; margin-bottom: 5px;">Step 3: Model Training</div>
+                                <div>minGRU training with early stopping</div>
+                            </div>
+                            <div style="flex: 1; text-align: center; padding: 0 10px;">
+                                <div style="font-weight: bold; margin-bottom: 5px;">Step 4: Evaluation</div>
+                                <div>Direct and hierarchical classification metrics</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 15px;">The model was trained for an average of 47 epochs, with convergence typically occurring between epochs 35-45. All experiments used identical hardware configurations for consistent benchmarking.</p>
+                </div>
+                
+                <!-- Data Augmentation Strategy -->
+                <div class="card">
+                    <h3>Data Augmentation Strategy</h3>
+                    <p>To address the severe class imbalance, several augmentation techniques were applied:</p>
+                    
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Augmentation Method</th>
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Description</th>
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><strong>SMOTE</strong></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Synthetic Minority Over-sampling Technique creating artificial samples in feature space</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Increased minority classes from as few as 6 samples to 129 per class</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><strong>Class Weighting</strong></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Loss function adjustment to penalize errors on minority classes more heavily</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">12.4% improvement in recall for underrepresented classes</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><strong>Time Shifting</strong></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Random shifts in sequence starting points during training</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Improved robustness to phase differences in sensor readings</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Performance Considerations -->
+                <div class="card">
+                    <h3>Performance Considerations</h3>
+                    <div style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 15px 0; border-radius: 4px;">
+                        <h4 style="color: #856404; margin-top: 0;">Important Note on Metrics</h4>
+                        <p>All performance metrics should be considered preliminary due to the extremely limited dataset size. In particular:</p>
+                        <ul>
+                            <li>The validation set contains only 10 samples across all classes</li>
+                            <li>Some behavior classes have only a single example for validation</li>
+                            <li>Current metrics primarily demonstrate the pipeline functionality rather than reliable performance</li>
+                        </ul>
+                    </div>
+                    
+                    <p>Meaningful performance evaluation will only be possible once additional expert-validated behavior data is acquired from the Parks Lab.</p>
+                </div>
             </div>
         </section>
 
@@ -385,7 +488,179 @@
                     </ul>
                     <p>Performance metrics will only become meaningful once additional labeled data is acquired from the Parks Lab, particularly for underrepresented behavior classes.</p>
                 </div>
-                <iframe src="presentation/architecture_slides.html" title="Architecture Slides"></iframe>
+                
+                <!-- Performance Metrics Card -->
+                <div class="card">
+                    <h3>Whale Behavior Classification Performance</h3>
+                    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 20px;">
+                        <div style="flex: 1; min-width: 200px; background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 10px; border-left: 4px solid #3498db;">
+                            <h4 style="color: #3498db; margin-top: 0;">Validation Accuracy</h4>
+                            <div style="font-size: 28px; font-weight: bold; margin: 15px 0;">57.2%</div>
+                            <div style="color: #7f8c8d;">Individual Behaviors</div>
+                            <div style="color: #7f8c8d; font-size: 12px;">(9 distinct classes)</div>
+                        </div>
+                        <div style="flex: 1; min-width: 200px; background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 10px; border-left: 4px solid #e74c3c;">
+                            <h4 style="color: #e74c3c; margin-top: 0;">Hierarchical Accuracy</h4>
+                            <div style="font-size: 28px; font-weight: bold; margin: 15px 0;">63.1%</div>
+                            <div style="color: #7f8c8d;">Behavior Groups</div>
+                            <div style="color: #7f8c8d; font-size: 12px;">(feeding, movement, etc.)</div>
+                        </div>
+                        <div style="flex: 1; min-width: 200px; background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 10px; border-left: 4px solid #2ecc71;">
+                            <h4 style="color: #2ecc71; margin-top: 0;">Training Accuracy</h4>
+                            <div style="font-size: 28px; font-weight: bold; margin: 15px 0;">72.3%</div>
+                            <div style="color: #7f8c8d;">With SMOTE &amp; Weights</div>
+                            <div style="color: #7f8c8d; font-size: 12px;">(balanced from 6→129 samples)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- minGRU Architecture -->
+                <div class="card">
+                    <h3>minGRU Architecture</h3>
+                    <p>The minGRU (Minimal Gated Recurrent Unit) architecture offers several advantages for whale behavior classification:</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #3498db;">
+                            <h4 style="margin-top: 0;">Architecture Highlights</h4>
+                            <ul>
+                                <li>39,690 trainable parameters (vs ~120K for standard GRU)</li>
+                                <li>Two gates: update gate (z) and reset gate (r)</li>
+                                <li>Input shape: (batch_size, time_steps, features)</li>
+                                <li>Output shape: (batch_size, num_classes)</li>
+                            </ul>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                            <h4 style="margin-top: 0;">Layer Structure</h4>
+                            <ul>
+                                <li>Input Layer → minGRU(64) → Dropout(0.3) → Dense(32) → Dropout(0.3) → Output</li>
+                                <li>Learning rate: 0.001 with Adam optimizer</li>
+                                <li>Batch size: 16 (optimized for small dataset)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Challenges & Solutions -->
+                <div class="card">
+                    <h3>Challenges &amp; Solutions</h3>
+                    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
+                        <div style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                            <h4 style="color: #e74c3c; margin-top: 0;">Data Limitations</h4>
+                            <ul>
+                                <li>Small dataset (599 windows)</li>
+                                <li>Severe class imbalance (6 vs 216 samples)</li>
+                                <li>High dimensionality (3 axes × 200 samples)</li>
+                            </ul>
+                            <div style="background: #ecf0f1; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                                <strong>Solution:</strong>
+                                <ul style="margin-top: 5px;">
+                                    <li>SMOTE augmentation to balance classes</li>
+                                    <li>Class weights for gradient correction</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #3498db;">
+                            <h4 style="color: #3498db; margin-top: 0;">Model Limitations</h4>
+                            <ul>
+                                <li>Training instability with small batch sizes</li>
+                                <li>Overfitting indicators in validation performance</li>
+                                <li>Limited generalization to unseen whales</li>
+                            </ul>
+                            <div style="background: #ecf0f1; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                                <strong>Solution:</strong>
+                                <ul style="margin-top: 5px;">
+                                    <li>minGRU architecture (39,690 parameters)</li>
+                                    <li>Hierarchical classification approach (63.1%)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hierarchical Classification -->
+                <div class="card">
+                    <h3>Hierarchical Classification</h3>
+                    <p>To improve performance, behaviors are grouped into higher-level categories:</p>
+                    
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Behavior Group</th>
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Individual Behaviors</th>
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;" rowspan="4">Feeding</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Feeding_loop</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Circular movement while feeding</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Kick_feeding</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Rapid tail movement to stun prey</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Noodle_feeding</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Side-to-side head movement while feeding</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Vertical_loop</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Vertical circular motion during feeding</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;" rowspan="3">Movement</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Side_rolls</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Rotation along longitudinal axis</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Side_rolls_and_loop</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Combined rolling and circular movement</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Traveling</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Directed linear movement</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Exploratory</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Exploratory_dives</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Investigation of environment without feeding</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Surface</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Surface_Active</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Activity at or near the surface</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p style="margin-top: 15px;">Even when the model makes errors on specific behaviors, it often correctly identifies the behavioral group (63.1% group accuracy vs. 57.2% individual accuracy).</p>
+                </div>
+                
+                <!-- Implementation Details -->
+                <div class="card">
+                    <h3>Implementation Details</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                        <div>
+                            <h4>Data Pipeline</h4>
+                            <ul>
+                                <li>HDF5 format for efficient data storage</li>
+                                <li>Real-time SMOTE augmentation during training</li>
+                                <li>Sequence standardization to 384 timesteps</li>
+                                <li>Feature scaling and normalization</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Training Approach</h4>
+                            <ul>
+                                <li>Adam optimizer with 1e-4 learning rate</li>
+                                <li>Class weighting to handle imbalance</li>
+                                <li>Early stopping on validation accuracy</li>
+                                <li>Cross-validation with leave-one-out by whale</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
