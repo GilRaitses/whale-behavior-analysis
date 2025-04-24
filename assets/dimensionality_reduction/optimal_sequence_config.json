@@ -1,0 +1,16 @@
+{
+  "sequence_length": 384,
+  "mean_info_loss": 13.08070500642853,
+  "mean_padding_added": 27.154820261437912,
+  "percent_downsampled": 35.294117647058826,
+  "percent_padded": 64.70588235294117,
+  "percent_perfect_fit": 0.0,
+  "original_length_stats": {
+    "min": 0,
+    "max": 1619,
+    "mean": 391.921568627451,
+    "median": 298,
+    "std": 301.43232213701293
+  },
+  "timestamp": "2025-04-24 03:45:15"
+}

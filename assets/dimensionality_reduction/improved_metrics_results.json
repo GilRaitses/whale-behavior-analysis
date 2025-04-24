@@ -1,0 +1,20 @@
+{
+  "pca": {
+    "trustworthiness": 0.9925714285714285,
+    "neighborhood_preservation": 0.9946470565493667,
+    "cluster_separation_index": 2.0260122766632365,
+    "label_alignment_score": 0.5716172579601165,
+    "silhouette": -0.06155049902625863,
+    "davies_bouldin": -1.814131782828132,
+    "calinski_harabasz": 4.697909761126556
+  },
+  "tsne": {
+    "trustworthiness": 0.9312380952380952,
+    "neighborhood_preservation": 0.6620397410971115,
+    "cluster_separation_index": 1.65608202102735,
+    "label_alignment_score": 0.4676189422607422,
+    "silhouette": -0.2568286657333374,
+    "davies_bouldin": -4.9841283758732,
+    "calinski_harabasz": 5.983274511256224
+  }
+}
