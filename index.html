@@ -312,6 +312,19 @@
                     </ul>
                 </div>
             </div>
+            
+            <div class="slide-section">
+                <h3>Project Goals</h3>
+                <div class="highlight-box">
+                    <ul>
+                        <li><strong>Annotation Acquisition:</strong> Acquire additional expert annotations from the Parks Lab</li>
+                        <li><strong>Parallelization of RNN:</strong> Implement parallel processing in the minGRU architecture</li>
+                        <li><strong>Architecture Optimization:</strong> Explore Optisim/complexity-aware model architecture searching</li>
+                        <li><strong>Model Refinement:</strong> Fine-tune as more data becomes available</li>
+                        <li><strong>Transfer Learning:</strong> Maximize utility of limited data</li>
+                    </ul>
+                </div>
+            </div>
         </div>
         
         <!-- Problem & Stakeholder Slide -->
@@ -478,16 +491,26 @@
         <!-- Plan Slide -->
         <div id="plan-slide" class="rubric-slide">
             <span class="close-modal">&times;</span>
-            <h2>Plan & Goals</h2>
+            <h2>Data Needs & Next Steps</h2>
             
             <div class="slide-section">
-                <h3>Critical Next Steps</h3>
-                <ol>
-                    <li><strong>Data Acquisition:</strong> Work with Parks Lab to acquire additional expert-validated behavior annotations</li>
-                    <li><strong>Model Refinement:</strong> Fine-tune minGRU architecture once sufficient data is available</li>
-                    <li><strong>Validation Methodology:</strong> Establish proper cross-validation with adequate samples per class</li>
-                    <li><strong>Transfer Learning:</strong> Explore approaches to maximize utility of limited data</li>
-                </ol>
+                <h3>Critical Data Limitations</h3>
+                <ul>
+                    <li><strong>Extreme Data Scarcity:</strong> Only ~20,000 frames with just 50 expert annotations total</li>
+                    <li><strong>Insufficient Examples:</strong> Most behavior classes have fewer than 10 samples</li>
+                    <li><strong>Validation Impossible:</strong> Cannot validate without proper ground truth dataset</li>
+                    <li><strong>Augmentation Limits:</strong> SMOTE cannot overcome lack of diverse examples</li>
+                </ul>
+            </div>
+            
+            <div class="slide-section">
+                <h3>Primary Data Needs</h3>
+                <p>This project <strong>urgently requires</strong> additional expert-validated behavior annotations from the Parks Lab, particularly for:</p>
+                <ul>
+                    <li>Underrepresented behavior classes with fewer than 10 examples</li>
+                    <li>A proper validation set with sufficient examples of each behavior class</li>
+                    <li>More diverse contexts and environmental conditions</li>
+                </ul>
             </div>
             
             <div class="slide-section">
@@ -513,7 +536,7 @@
             <div class="rubric-nav-item" onclick="scrollToSection('data')">Data</div>
             <div class="rubric-nav-item" onclick="scrollToSection('results')">Initial Results</div>
             <div class="rubric-nav-item" onclick="scrollToSection('challenges')">Challenges</div>
-            <div class="rubric-nav-item" onclick="scrollToSection('plan')">Plan & Goals</div>
+            <div class="rubric-nav-item" onclick="scrollToSection('plan')">Data Needs & Next Steps</div>
         </div>
     </nav>
     
@@ -538,6 +561,17 @@
                 <img src="assets/dive_overview.png" alt="Overview of 128 Detected Dives" class="overview-img">
                 <div class="card">
                     <p>This visualization provides an overview of 128 detected dive patterns, showcasing depth variations and relative twistiness across multiple dives. The color intensity represents the relative twistiness of the whale's movement during each dive segment.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Project Goals</h3>
+                    <ul>
+                        <li><strong>Annotation Acquisition:</strong> Acquire additional expert annotations from the Parks Lab</li>
+                        <li><strong>Parallelization of RNN:</strong> Implement parallel processing in the minGRU architecture</li>
+                        <li><strong>Architecture Optimization:</strong> Explore Optisim/complexity-aware model architecture searching</li>
+                        <li><strong>Model Refinement:</strong> Fine-tune as more data becomes available</li>
+                        <li><strong>Transfer Learning:</strong> Maximize utility of limited data</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -1371,16 +1405,6 @@
                         <li>Underrepresented behavior classes with fewer than 10 examples</li>
                         <li>A proper validation set with sufficient examples of each behavior class</li>
                         <li>More diverse contexts and environmental conditions</li>
-                    </ul>
-                </div>
-
-                <div class="subsection">
-                    <h3>Future Work</h3>
-                    <ul>
-                        <li><strong>Annotation Acquisition:</strong> Pending additional expert annotations from the Parks Lab.</li>
-                        <li><strong>Model Refinement:</strong> Fine-tuning of architecture and parameters once sufficient data is available.</li>
-                        <li><strong>Performance Improvement:</strong> Expected significant performance gains once data limitations are addressed.</li>
-                        <li><strong>Transfer Learning:</strong> Exploration of transfer learning approaches to maximize utility of limited data.</li>
                     </ul>
                 </div>
             </div>
