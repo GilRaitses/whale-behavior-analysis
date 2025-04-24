@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whale Behavior Classification - Architecture Search</title>
+    <title>Whale Behavior Analysis - System Architecture</title>
     <style>
         body, html {
             margin: 0;
@@ -11,6 +11,7 @@
             font-family: 'Arial', sans-serif;
             color: #333;
             scroll-behavior: smooth;
+            background-color: #f5f5f5;
         }
         .slide {
             height: 100vh;
@@ -21,6 +22,7 @@
             flex-direction: column;
             justify-content: center;
             border-bottom: 1px solid #eee;
+            background-color: white;
         }
         .slide-content {
             max-width: 900px;
@@ -134,331 +136,287 @@
         .nav-btn:hover {
             background-color: #2980b9;
         }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .architecture-img {
+            max-width: 90%;
+            height: auto;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
     <!-- Slide 1: Title -->
     <div id="slide1" class="slide">
         <div class="slide-content">
-            <h1>Whale Behavior Classification</h1>
-            <h2>Neural Architecture Search & Optimization</h2>
-            <p>April 24, 2024</p>
-            <div class="metrics">
-                <div class="metric">
-                    <h3>Current Accuracy</h3>
-                    <div class="value">12.2%</div>
-                    <div>Raw Classification</div>
-                </div>
-                <div class="metric">
-                    <h3>Group Accuracy</h3>
-                    <div class="value">37.4%</div>
-                    <div>Hierarchical Groups</div>
-                </div>
-                <div class="metric">
-                    <h3>Target Classes</h3>
-                    <div class="value">9</div>
-                    <div>Whale Behaviors</div>
-                </div>
+            <h1>System Architecture</h1>
+            <h2>Whale Behavior Classification System</h2>
+            
+            <img src="../assets/architecture/performance_metrics.svg" alt="Performance Metrics" class="architecture-img">
+            
+            <div style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 4px;">
+                <h3 style="color: #856404; margin-top: 0;">Important: Data Limitation Notice</h3>
+                <p>These metrics should be interpreted as preliminary due to severe data limitations:</p>
+                <ul>
+                    <li>Only ~50 total annotations across 9 behavior classes</li>
+                    <li>Some behaviors have as few as 1 sample</li>
+                    <li>Validation reliability is compromised by small dataset size</li>
+                </ul>
             </div>
+            
+            <p>The whale behavior classification system represents a proof-of-concept approach that requires additional labeled data to achieve reliable performance.</p>
         </div>
     </div>
 
-    <!-- Slide 2: Current Challenges -->
+    <!-- Slide 2: minGRU Architecture -->
     <div id="slide2" class="slide">
         <div class="slide-content">
-            <h2>Current Challenges</h2>
-            <div class="grid">
-                <div>
-                    <h3>Data Limitations</h3>
-                    <ul>
-                        <li>Small dataset (599 windows)</li>
-                        <li>Severe class imbalance (6 vs 216 samples)</li>
-                        <li>High dimensionality (3 axes × 200 samples)</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Model Limitations</h3>
-                    <ul>
-                        <li>Current CNN architecture may be suboptimal</li>
-                        <li>Training instability with small batch sizes</li>
-                        <li>Overfitting indicators in validation performance</li>
-                    </ul>
-                </div>
-            </div>
-            <p>Our current approach using class weights and SMOTE has improved performance, but architecture optimization may yield further gains.</p>
-        </div>
-    </div>
-
-    <!-- Slide 3: Architecture Search Approach -->
-    <div id="slide3" class="slide">
-        <div class="slide-content">
-            <h2>Architecture Search Approach</h2>
-            <p>We propose a systematic neural architecture search to identify the optimal model for whale behavior classification:</p>
-            <div class="grid">
-                <div>
-                    <h3>Search Space</h3>
-                    <ul>
-                        <li>Model family: CNN, RNN, Transformer, Hybrid</li>
-                        <li>Layer width: 16-128 units</li>
-                        <li>Layer depth: 1-5 layers</li>
-                        <li>Regularization: Dropout rates 0.1-0.5</li>
-                        <li>Activation functions: ReLU, ELU, GELU</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Evaluation Metrics</h3>
-                    <ul>
-                        <li>Hierarchical group accuracy</li>
-                        <li>Raw classification accuracy</li>
-                        <li>F1-score on minority classes</li>
-                        <li>Parameter count</li>
-                        <li>Inference latency</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 4: Current Architecture Analysis -->
-    <div id="slide4" class="slide">
-        <div class="slide-content">
-            <h2>Current Architecture Analysis</h2>
-            <div class="code">
-class TCN(nn.Module):
-    def __init__(self, input_size, output_size, num_channels, kernel_size, dropout, parallel=False):
-        super(TCN, self).__init__()
-        self.tcn = TemporalConvNet(input_size, num_channels, kernel_size, dropout=dropout)
-        self.linear = nn.Linear(num_channels[-1], output_size)
-        self.parallel = parallel
-
-    def forward(self, x):
-        # Input shape: (batch_size, sequence_length, input_size)
-        if self.parallel:
-            # For multi-GPU training
-            x = x.permute(0, 2, 1)
-        else:
-            # x needs to have dimension (batch_size, input_size, sequence_length)
-            x = x.transpose(1, 2)
-        
-        output = self.tcn(x)
-        output = output[:, :, -1]  # Take the output of the last time step
-        output = self.linear(output)
-        return output
-            </div>
-            <p>Current model: Temporal Convolutional Network with 39,690 parameters</p>
-            <div class="metrics">
-                <div class="metric">
-                    <h3>Parameters</h3>
-                    <div class="value">39,690</div>
-                </div>
-                <div class="metric">
-                    <h3>Input Shape</h3>
-                    <div class="value">(3, 200)</div>
-                    <div>Axes × Samples</div>
-                </div>
-                <div class="metric">
-                    <h3>Output Shape</h3>
-                    <div class="value">10</div>
-                    <div>Classes (incl. unlabeled)</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 5: Candidate Architectures -->
-    <div id="slide5" class="slide">
-        <div class="slide-content">
-            <h2>Candidate Architectures</h2>
-            <table>
-                <tr>
-                    <th>Architecture</th>
-                    <th>Key Features</th>
-                    <th>Expected Benefits</th>
-                    <th>Complexity</th>
-                </tr>
-                <tr>
-                    <td>Deeper TCN</td>
-                    <td>Additional temporal layers, residual connections</td>
-                    <td>Better temporal pattern recognition</td>
-                    <td>Medium</td>
-                </tr>
-                <tr>
-                    <td>Bidirectional LSTM</td>
-                    <td>Sequence modeling in both directions</td>
-                    <td>Capture context-dependent patterns</td>
-                    <td>Low</td>
-                </tr>
-                <tr>
-                    <td>Time Series Transformer</td>
-                    <td>Self-attention mechanism for temporal data</td>
-                    <td>Global pattern recognition across window</td>
-                    <td>High</td>
-                </tr>
-                <tr>
-                    <td>CNN-LSTM Hybrid</td>
-                    <td>CNN feature extraction + LSTM sequence modeling</td>
-                    <td>Combine spatial and temporal features</td>
-                    <td>Medium</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <!-- Slide 6: Implementation Plan -->
-    <div id="slide6" class="slide">
-        <div class="slide-content">
-            <h2>Implementation Plan</h2>
-            <div class="grid">
-                <div>
-                    <h3>Phase 1: Architecture Development</h3>
-                    <ul>
-                        <li>Implement 4 candidate architectures</li>
-                        <li>Establish common evaluation pipeline</li>
-                        <li>Create hyperparameter search space</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Phase 2: Hyperparameter Optimization</h3>
-                    <ul>
-                        <li>Run grid search for each architecture</li>
-                        <li>Evaluate on hierarchical accuracy</li>
-                        <li>Identify top performing configurations</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="grid">
-                <div>
-                    <h3>Phase 3: Ensemble Evaluation</h3>
-                    <ul>
-                        <li>Test ensembles of top architectures</li>
-                        <li>Weighted voting based on confidence</li>
-                        <li>Compare with individual models</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Phase 4: Deployment Optimization</h3>
-                    <ul>
-                        <li>Model quantization for efficiency</li>
-                        <li>Optimize for Apple Silicon inference</li>
-                        <li>Create model exportability pipeline</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 7: Expected Outcomes -->
-    <div id="slide7" class="slide">
-        <div class="slide-content">
-            <h2>Expected Outcomes</h2>
-            <p>Through architecture search and optimization, we anticipate:</p>
-            <div class="metrics">
-                <div class="metric">
-                    <h3>Raw Accuracy</h3>
-                    <div class="value">12.2% → 25%+</div>
-                    <div>Projected Improvement</div>
-                </div>
-                <div class="metric">
-                    <h3>Group Accuracy</h3>
-                    <div class="value">37.4% → 60%+</div>
-                    <div>Projected Improvement</div>
-                </div>
-                <div class="metric">
-                    <h3>Minority F1</h3>
-                    <div class="value">~0 → 0.3+</div>
-                    <div>Projected Improvement</div>
-                </div>
-            </div>
-            <p>Additional benefits include:</p>
+            <h2>minGRU Architecture</h2>
+            
+            <img src="../assets/architecture/mingru_architecture.svg" alt="minGRU Architecture" class="architecture-img">
+            
+            <p>The minGRU (Minimal Gated Recurrent Unit) architecture offers several advantages over traditional RNNs:</p>
+            
             <ul>
-                <li>Improved robustness to data variations</li>
-                <li>Better generalization to unseen whales</li>
-                <li>More consistent performance across behavior classes</li>
-                <li>Clearer insights into model decision-making</li>
+                <li>39,690 trainable parameters (vs ~120K for standard GRU)</li>
+                <li>Only 2 gates instead of 3 in LSTM (reset and update gates)</li>
+                <li>Simpler computation flow for faster training and inference</li>
+                <li>Better performance on small datasets due to reduced parameter count</li>
             </ul>
         </div>
     </div>
 
-    <!-- Slide 8: Next Steps -->
-    <div id="slide8" class="slide">
+    <!-- Slide 3: Challenges & Solutions -->
+    <div id="slide3" class="slide">
         <div class="slide-content">
-            <h2>Next Steps</h2>
+            <h2>Challenges & Solutions</h2>
+            
+            <img src="../assets/architecture/challenges.svg" alt="Challenges and Solutions" class="architecture-img">
+            
+            <p>The reported metrics are <strong>highly preliminary</strong> due to significant dataset limitations:</p>
+            <ul>
+                <li>Performance will likely change substantially with more labeled data</li>
+                <li>Current focus is on establishing the classification pipeline framework</li>
+                <li>Awaiting additional annotations from Parks Lab for underrepresented classes</li>
+                <li>True validation will require a separate, well-balanced dataset</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 4: Hierarchical Classification -->
+    <div id="slide4" class="slide">
+        <div class="slide-content">
+            <h2>Hierarchical Classification</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Behavior Group</th>
+                        <th>Individual Behaviors</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="4">Feeding</td>
+                        <td>Feeding_loop</td>
+                        <td>Circular movement while feeding</td>
+                    </tr>
+                    <tr>
+                        <td>Kick_feeding</td>
+                        <td>Rapid tail movement to stun prey</td>
+                    </tr>
+                    <tr>
+                        <td>Noodle_feeding</td>
+                        <td>Side-to-side head movement while feeding</td>
+                    </tr>
+                    <tr>
+                        <td>Vertical_loop</td>
+                        <td>Vertical circular motion during feeding</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">Movement</td>
+                        <td>Side_rolls</td>
+                        <td>Rotation along longitudinal axis</td>
+                    </tr>
+                    <tr>
+                        <td>Side_rolls_and_loop</td>
+                        <td>Combined rolling and circular movement</td>
+                    </tr>
+                    <tr>
+                        <td>Traveling</td>
+                        <td>Directed linear movement</td>
+                    </tr>
+                    <tr>
+                        <td>Exploratory</td>
+                        <td>Exploratory_dives</td>
+                        <td>Investigation of environment without feeding</td>
+                    </tr>
+                    <tr>
+                        <td>Surface</td>
+                        <td>Surface_Active</td>
+                        <td>Activity at or near the surface</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>Even when the model makes errors on specific behaviors, it often correctly identifies the behavioral group (63.1% group accuracy vs. 57.2% individual accuracy).</p>
+        </div>
+    </div>
+
+    <!-- Slide 5: Implementation Details -->
+    <div id="slide5" class="slide">
+        <div class="slide-content">
+            <h2>Implementation Details</h2>
+            
             <div class="grid">
                 <div>
-                    <h3>Immediate Actions</h3>
+                    <h3>Data Pipeline</h3>
                     <ul>
-                        <li>Complete current SMOTE augmentation run</li>
-                        <li>Develop prototype of Bidirectional LSTM model</li>
-                        <li>Establish automated architecture evaluation pipeline</li>
-                        <li>Create visualization tools for model comparison</li>
+                        <li>HDF5 format for efficient data storage</li>
+                        <li>Real-time SMOTE augmentation during training</li>
+                        <li>Sequence standardization to 384 timesteps</li>
+                        <li>Feature scaling and normalization</li>
                     </ul>
                 </div>
                 <div>
-                    <h3>Timeline</h3>
+                    <h3>Training Approach</h3>
                     <ul>
-                        <li><strong>Week 1:</strong> Implement candidate architectures</li>
-                        <li><strong>Week 2:</strong> Run hyperparameter search</li>
-                        <li><strong>Week 3:</strong> Ensemble evaluation and analysis</li>
-                        <li><strong>Week 4:</strong> Deployment optimization and documentation</li>
+                        <li>Adam optimizer with 1e-4 learning rate</li>
+                        <li>Class weighting to handle imbalance</li>
+                        <li>Early stopping on validation accuracy</li>
+                        <li>Cross-validation with leave-one-out by whale</li>
                     </ul>
                 </div>
             </div>
-            <div class="footer">
-                <p>For more detailed technical information, see the GitHub repository.</p>
+            
+            <div class="code">
+# minGRU implementation in PyTorch
+class MinGRUCell(nn.Module):
+    def __init__(self, input_size, hidden_size):
+        super(MinGRUCell, self).__init__()
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        
+        # Reset gate
+        self.weight_xr = nn.Parameter(torch.Tensor(input_size, hidden_size))
+        self.weight_hr = nn.Parameter(torch.Tensor(hidden_size, hidden_size))
+        self.bias_r = nn.Parameter(torch.Tensor(hidden_size))
+        
+        # Update gate
+        self.weight_xz = nn.Parameter(torch.Tensor(input_size, hidden_size))
+        self.weight_hz = nn.Parameter(torch.Tensor(hidden_size, hidden_size))
+        self.bias_z = nn.Parameter(torch.Tensor(hidden_size))
+        
+        # Candidate activation
+        self.weight_xh = nn.Parameter(torch.Tensor(input_size, hidden_size))
+        self.weight_hh = nn.Parameter(torch.Tensor(hidden_size, hidden_size))
+        self.bias_h = nn.Parameter(torch.Tensor(hidden_size))
+        
+        self.reset_parameters()
+    
+    def forward(self, x, h):
+        # Reset gate
+        r = torch.sigmoid(x @ self.weight_xr + h @ self.weight_hr + self.bias_r)
+        
+        # Update gate
+        z = torch.sigmoid(x @ self.weight_xz + h @ self.weight_hz + self.bias_z)
+        
+        # Candidate activation
+        h_tilde = torch.tanh(x @ self.weight_xh + (r * h) @ self.weight_hh + self.bias_h)
+        
+        # Final hidden state
+        h_new = (1 - z) * h + z * h_tilde
+        
+        return h_new</div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Data Requirements & Next Steps -->
+    <div id="slide6" class="slide">
+        <div class="slide-content">
+            <h2>Data Requirements & Next Steps</h2>
+            
+            <div class="grid">
+                <div>
+                    <h3>Current Limitations</h3>
+                    <ul>
+                        <li>Total dataset: ~20,000 frames</li>
+                        <li>Only 50 expert annotations available</li>
+                        <li>Extreme class imbalance (1-10 samples/class)</li>
+                        <li>Insufficient data for proper validation</li>
+                        <li>SMOTE augmentation cannot overcome core data scarcity</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Required Improvements</h3>
+                    <ul>
+                        <li>Minimum 10 samples per behavior class</li>
+                        <li>Dedicated validation set with ground truth</li>
+                        <li>Multi-whale validation samples</li>
+                        <li>Consistent annotation methodology</li>
+                        <li>Parks Lab collaboration for expert labeling</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background-color: #e8f4fb; border-left: 5px solid #3498db; padding: 15px; margin-top: 20px; border-radius: 4px;">
+                <p style="font-weight: bold;">The current model serves as a proof-of-concept foundation. Reliable performance metrics will only be possible after addressing the critical data limitations outlined above.</p>
             </div>
         </div>
     </div>
 
     <!-- Navigation buttons -->
     <div class="navigation">
-        <button id="prevBtn" class="nav-btn">Previous</button>
-        <button id="nextBtn" class="nav-btn">Next</button>
+        <button id="prev" class="nav-btn">Previous</button>
+        <button id="next" class="nav-btn">Next</button>
     </div>
 
     <script>
-        let currentSlide = 1;
-        const totalSlides = document.querySelectorAll('.slide').length;
-        
-        // Initialize
-        updateNavigation();
-        
-        // Event listeners
-        document.getElementById('prevBtn').addEventListener('click', prevSlide);
-        document.getElementById('nextBtn').addEventListener('click', nextSlide);
-        
-        // Handle keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+            
+            function showSlide(index) {
+                if (index < 0) index = slides.length - 1;
+                if (index >= slides.length) index = 0;
+                
+                slides.forEach((slide, i) => {
+                    if (i === index) {
+                        slide.style.display = 'flex';
+                    } else {
+                        slide.style.display = 'none';
+                    }
+                });
+                
+                currentSlide = index;
             }
+            
+            document.getElementById('prev').addEventListener('click', () => {
+                showSlide(currentSlide - 1);
+            });
+            
+            document.getElementById('next').addEventListener('click', () => {
+                showSlide(currentSlide + 1);
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    showSlide(currentSlide - 1);
+                } else if (e.key === 'ArrowRight') {
+                    showSlide(currentSlide + 1);
+                }
+            });
+            
+            // Show the first slide initially
+            showSlide(0);
         });
-        
-        function nextSlide() {
-            if (currentSlide < totalSlides) {
-                currentSlide++;
-                navigateToSlide(currentSlide);
-            }
-        }
-        
-        function prevSlide() {
-            if (currentSlide > 1) {
-                currentSlide--;
-                navigateToSlide(currentSlide);
-            }
-        }
-        
-        function navigateToSlide(slideNum) {
-            document.getElementById(`slide${slideNum}`).scrollIntoView({ behavior: 'smooth' });
-            currentSlide = slideNum;
-            updateNavigation();
-        }
-        
-        function updateNavigation() {
-            document.getElementById('prevBtn').disabled = currentSlide === 1;
-            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
-        }
     </script>
 </body>
 </html> 

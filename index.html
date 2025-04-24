@@ -374,6 +374,17 @@
         <section id="architecture">
             <div class="section-content">
                 <h2>System Architecture</h2>
+                <div class="card" style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin-bottom: 20px;">
+                    <h3 style="color: #856404; margin-top: 0;">Data Limitation Notice</h3>
+                    <p><strong>Important:</strong> Current metrics are essentially meaningless and should NOT be interpreted as indicative of model performance. The model is trained on an extremely limited dataset:</p>
+                    <ul>
+                        <li>Only ~20,000 frames total with just 50 expert annotations across all behavior classes</li>
+                        <li>Most behaviors have fewer than 10 labeled examples, some as few as 1 single sample</li>
+                        <li>Validation is fundamentally impossible given the extreme data scarcity</li>
+                        <li>SMOTE augmentation and class weighting cannot overcome the core issue of insufficient ground truth data</li>
+                    </ul>
+                    <p>Performance metrics will only become meaningful once additional labeled data is acquired from the Parks Lab, particularly for underrepresented behavior classes.</p>
+                </div>
                 <iframe src="presentation/architecture_slides.html" title="Architecture Slides"></iframe>
             </div>
         </section>
@@ -381,26 +392,35 @@
         <!-- Conclusions Section -->
         <section id="conclusions">
             <div class="section-content">
-                <h2>Conclusions and Next Steps</h2>
-                <div class="card">
-                    <h3>Key Findings</h3>
+                <h2>Conclusions</h2>
+                
+                <div class="subsection">
+                    <h3>Critical Data Limitations</h3>
                     <ul>
-                        <li>Identified distinct dive patterns correlated with specific foraging behaviors</li>
-                        <li>Developed robust classification system for automated behavior detection</li>
-                        <li>Quantified energetic expenditure across different dive types</li>
-                        <li>Established correlation between environmental factors and dive behaviors</li>
-                        <li>Discovered previously unidentified behavioral states through unsupervised learning</li>
+                        <li><strong>Extreme Data Scarcity:</strong> The current dataset consists of only ~20,000 frames with just 50 expert annotations total across all behavior classes.</li>
+                        <li><strong>Insufficient Examples:</strong> Most behavior classes have fewer than 10 samples, with some having only a single example.</li>
+                        <li><strong>Validation Impossible:</strong> Current metrics are essentially meaningless without a proper validation dataset containing ground truth labels for the behaviors used in training.</li>
+                        <li><strong>Augmentation Limits:</strong> While SMOTE augmentation and class weighting were implemented, they cannot overcome the fundamental lack of diverse real-world examples.</li>
                     </ul>
                 </div>
-                <div class="card">
+
+                <div class="subsection">
+                    <h3>Primary Data Needs</h3>
+                    <p>This project <strong>urgently requires</strong> additional expert-validated behavior annotations from the Parks Lab, particularly for:</p>
+                    <ul>
+                        <li>Underrepresented behavior classes with fewer than 10 examples</li>
+                        <li>A proper validation set with sufficient examples of each behavior class</li>
+                        <li>More diverse contexts and environmental conditions</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
                     <h3>Future Work</h3>
                     <ul>
-                        <li>Expand dataset to include additional whale species for comparative analysis</li>
-                        <li>Incorporate environmental data (temperature, prey density) for contextual analysis</li>
-                        <li>Develop real-time monitoring capabilities for conservation applications</li>
-                        <li>Integrate acoustic data for comprehensive behavioral analysis</li>
-                        <li>Apply transfer learning to species with limited tagging data</li>
-                        <li>Develop predictive models for behavioral responses to environmental changes</li>
+                        <li><strong>Annotation Acquisition:</strong> Pending additional expert annotations from the Parks Lab.</li>
+                        <li><strong>Model Refinement:</strong> Fine-tuning of architecture and parameters once sufficient data is available.</li>
+                        <li><strong>Performance Improvement:</strong> Expected significant performance gains once data limitations are addressed.</li>
+                        <li><strong>Transfer Learning:</strong> Exploration of transfer learning approaches to maximize utility of limited data.</li>
                     </ul>
                 </div>
             </div>
