@@ -20,36 +20,158 @@
     </nav>
 
     <div id="content-container">
-        <!-- Main content will be loaded here -->
+        <!-- Overview Section -->
+        <section id="overview">
+            <div class="section-content">
+                <h1>Whale Behavior Analysis</h1>
+                <h2>Overview of 128 Detected Dives</h2>
+                <img src="assets/dive_overview.png" alt="Overview of 128 Detected Dives" class="overview-img">
+                <div class="card">
+                    <p>This visualization provides an overview of 128 detected dive patterns, showcasing depth variations and relative twistiness across multiple dives. The color intensity represents the relative twistiness of the whale's movement during each dive segment.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dive Frames Section -->
+        <section id="frames">
+            <div class="section-content">
+                <h2>Dive Frame Analysis</h2>
+                <div class="frames-container">
+                    <div class="frame-viewer">
+                        <img id="current-frame" src="assets/dive_frames/dive_001.png" alt="Dive Frame" class="frame-img">
+                        <div class="frame-counter">Frame: <span id="frame-number">1</span> of 128</div>
+                    </div>
+                    <div class="frame-controls">
+                        <button id="prev-frame">Previous</button>
+                        <button id="next-frame">Next</button>
+                        <button id="play-frames">Play</button>
+                    </div>
+                    <input type="range" min="1" max="128" value="1" class="frame-selector" id="frame-slider">
+                </div>
+                <div class="card">
+                    <p>Scroll through individual dive frames to analyze specific patterns and behaviors. Each frame represents a unique dive profile with depth and orientation data, extracted from our whale tagging dataset.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hierarchical Visualization Section -->
+        <section id="hierarchical">
+            <div class="section-content">
+                <h2>Hierarchical Dive Visualization</h2>
+                <iframe src="visualizations/hierarchical_dive_visualization.html" title="Hierarchical Dive Visualization"></iframe>
+                <div class="card">
+                    <p>This hierarchical visualization allows you to explore the relationship between different dive patterns and identify clusters of similar behaviors. The visualization organizes dives based on their similarity in features like depth profile, duration, and movement patterns.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard">
+            <div class="section-content">
+                <h2>Interactive Dashboard</h2>
+                <div class="dashboard-links">
+                    <a href="dashboard/overview.html" target="_blank" class="dashboard-link">Overview Dashboard</a>
+                    <a href="dashboard/metrics.html" target="_blank" class="dashboard-link">Metrics Dashboard</a>
+                    <a href="dashboard/energetics.html" target="_blank" class="dashboard-link">Energetics Dashboard</a>
+                </div>
+                <div class="card">
+                    <p>Access interactive dashboards to explore different aspects of whale diving behavior:</p>
+                    <ul>
+                        <li><strong>Overview Dashboard:</strong> A comprehensive view of the entire dataset with key statistics and patterns</li>
+                        <li><strong>Metrics Dashboard:</strong> Detailed dive metrics including depth, duration, descent/ascent rates and body orientation</li>
+                        <li><strong>Energetics Dashboard:</strong> Analysis of energy expenditure and conservation strategies during different dive phases</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dimensionality Reduction Section -->
+        <section id="dimension">
+            <div class="section-content">
+                <h2>Dimensionality Reduction</h2>
+                <iframe src="presentation/dimensionality_reduction_slides.html" title="Dimensionality Reduction Slides"></iframe>
+            </div>
+        </section>
+
+        <!-- Training Section -->
+        <section id="training">
+            <div class="section-content">
+                <h2>Model Training</h2>
+                <iframe src="presentation/training_slides.html" title="Training Slides"></iframe>
+            </div>
+        </section>
+
+        <!-- Architecture Section -->
+        <section id="architecture">
+            <div class="section-content">
+                <h2>System Architecture</h2>
+                <iframe src="presentation/architecture_slides.html" title="Architecture Slides"></iframe>
+            </div>
+        </section>
+
+        <!-- Conclusions Section -->
+        <section id="conclusions">
+            <div class="section-content">
+                <h2>Conclusions and Next Steps</h2>
+                <div class="card">
+                    <h3>Key Findings</h3>
+                    <ul>
+                        <li>Identified distinct dive patterns correlated with specific foraging behaviors</li>
+                        <li>Developed robust classification system for automated behavior detection</li>
+                        <li>Quantified energetic expenditure across different dive types</li>
+                        <li>Established correlation between environmental factors and dive behaviors</li>
+                        <li>Discovered previously unidentified behavioral states through unsupervised learning</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Future Work</h3>
+                    <ul>
+                        <li>Expand dataset to include additional whale species for comparative analysis</li>
+                        <li>Incorporate environmental data (temperature, prey density) for contextual analysis</li>
+                        <li>Develop real-time monitoring capabilities for conservation applications</li>
+                        <li>Integrate acoustic data for comprehensive behavioral analysis</li>
+                        <li>Apply transfer learning to species with limited tagging data</li>
+                        <li>Develop predictive models for behavioral responses to environmental changes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources">
+            <div class="section-content">
+                <h2>Scientific Resources</h2>
+                <div class="card">
+                    <h3>Key References and Resources</h3>
+                    <ul class="resources">
+                        <li>Johnson, M. P., & Tyack, P. L. (2003). A digital acoustic recording tag for measuring the response of wild marine mammals to sound. IEEE Journal of Oceanic Engineering, 28(1), 3-12.</li>
+                        <li>Goldbogen, J. A., et al. (2017). Using accelerometers to determine the calling behavior of tagged baleen whales. Journal of Experimental Biology, 220(22), 4150-4159.</li>
+                        <li>Cade, D. E., et al. (2018). Kinematic diversity in rorqual whale feeding mechanisms. Current Biology, 28(19), 3204-3213.</li>
+                        <li>Friedlaender, A. S., et al. (2016). Multiple-stage decisions in a marine central-place forager. Royal Society Open Science, 3(10), 160043.</li>
+                        <li>Williams, T. M. (1999). The evolution of cost efficient swimming in marine mammals: limits to energetic optimization. Philosophical Transactions of the Royal Society of London. Series B: Biological Sciences, 354(1380), 193-201.</li>
+                        <li>Ware, C., Friedlaender, A. S., & Nowacek, D. P. (2011). Shallow and deep lunge feeding of humpback whales in fjords of the West Antarctic Peninsula. Marine Mammal Science, 27(3), 587-605.</li>
+                        <li>Baumgartner, M. F., & Mate, B. R. (2003). Summertime foraging ecology of North Atlantic right whales. Marine Ecology Progress Series, 264, 123-135.</li>
+                        <li>Feng, L., Tung, F., Ahmed, M. O., Bengio, Y., & Hajimirsadeghi, H. (2024). Were RNNs All We Needed? Revisiting Minimal RNNs for Sequential Tasks. arXiv:2410.01201.</li>
+                        <li>Patil, P., et al. (2023). Searching for Efficient Neural Architectures for On-Device ML: Model Complexity and Hardware Constraints. Available at: https://pratikpatil.io/papers/model-complexity.pdf</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </div>
 
     <script src="js/main.js"></script>
     <script src="presentation/presentation_helper.js"></script>
     <script>
-        // Load the main content
         document.addEventListener('DOMContentLoaded', function() {
-            const contentContainer = document.getElementById('content-container');
+            // Initialize the frame viewer
+            if (typeof initFrameViewer === 'function') {
+                initFrameViewer();
+            }
             
-            // Fetch the main content HTML
-            fetch('presentation/main_content.html')
-                .then(response => response.text())
-                .then(html => {
-                    contentContainer.innerHTML = html;
-                    
-                    // Initialize the frame viewer after content is loaded
-                    if (typeof initFrameViewer === 'function') {
-                        initFrameViewer();
-                    }
-                    
-                    // Initialize smooth scrolling after content is loaded
-                    if (typeof initSmoothScrolling === 'function') {
-                        initSmoothScrolling();
-                    }
-                })
-                .catch(error => {
-                    console.error('Error loading content:', error);
-                    contentContainer.innerHTML = '<div class="error-message">Error loading content. Please try refreshing the page.</div>';
-                });
+            // Initialize smooth scrolling
+            if (typeof initSmoothScrolling === 'function') {
+                initSmoothScrolling();
+            }
         });
     </script>
 </body>
