@@ -213,11 +213,12 @@
             position: relative;
             width: 90%;
             max-width: 1000px;
-            background-color: #fff;
+            background-color: #1e2126;
+            color: #ffffff;
             margin: 50px auto;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
         
         .close-modal {
@@ -226,17 +227,17 @@
             right: 15px;
             font-size: 28px;
             font-weight: bold;
-            color: #aaa;
+            color: #ddd;
             cursor: pointer;
             transition: color 0.2s;
         }
         
         .close-modal:hover {
-            color: #555;
+            color: #fff;
         }
         
         .rubric-slide h2 {
-            color: #2c3e50;
+            color: #3498db;
             margin-top: 0;
             border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
@@ -248,12 +249,12 @@
         }
         
         .slide-section h3 {
-            color: #2980b9;
+            color: #5dade2;
             margin-bottom: 10px;
         }
         
         .data-point {
-            background-color: #f8f9fa;
+            background-color: #2c3e50;
             border-left: 4px solid #3498db;
             padding: 10px 15px;
             margin-bottom: 15px;
@@ -261,7 +262,7 @@
         }
         
         .highlight-box {
-            background-color: #eaf2f8;
+            background-color: #2c3e50;
             border-radius: 6px;
             padding: 15px;
             margin: 15px 0;
@@ -279,14 +280,14 @@
         
         .feature-tag {
             display: inline-block;
-            background-color: #e8f4f8;
-            color: #2980b9;
+            background-color: #2c3e50;
+            color: #5dade2;
             padding: 5px 10px;
             border-radius: 4px;
             margin-right: 8px;
             margin-bottom: 8px;
             font-size: 14px;
-            border: 1px solid #aed6f1;
+            border: 1px solid #3498db;
         }
     </style>
 </head>
@@ -326,7 +327,7 @@
             <div class="slide-section">
                 <h3>Primary Stakeholder</h3>
                 <div class="data-point">
-                    <p>The Parks Lab at Stanford University's Hopkins Marine Station collects extensive whale sensor data but struggles with efficient behavior classification and analysis at scale.</p>
+                    <p>The Parks Lab at Syracuse University's Bioinspired Institute collects extensive whale sensor data but struggles with efficient behavior classification and analysis at scale.</p>
                 </div>
             </div>
             
@@ -375,7 +376,7 @@
             <div class="slide-section">
                 <h3>Dataset Overview</h3>
                 <ul>
-                    <li><strong>Source:</strong> Stanford University's Hopkins Marine Station Parks Lab</li>
+                    <li><strong>Source:</strong> Syracuse University's Bioinspired Institute Parks Lab</li>
                     <li><strong>Format:</strong> HDF5 files containing sensor readings from whale tags</li>
                     <li><strong>Scope:</strong> ~20,000 frames with approximately 50 expert annotations</li>
                     <li><strong>Features:</strong> Accelerometer (3 axes), gyroscope (3 axes), depth, and other environmental sensors</li>
