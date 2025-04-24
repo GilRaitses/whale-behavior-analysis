@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whale Behavior Classification - Architecture Search</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+        .slide {
+            height: 100vh;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 1px solid #eee;
+        }
+        .slide-content {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        p {
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        .code {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+        .highlight {
+            background-color: #fffacd;
+            padding: 0 3px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .chart {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .metrics {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+        }
+        .metric {
+            text-align: center;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            flex: 1;
+            margin: 0 0.5rem;
+        }
+        .metric h3 {
+            margin-top: 0;
+            color: #3498db;
+        }
+        .metric .value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #777;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .nav-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .nav-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Title -->
+    <div id="slide1" class="slide">
+        <div class="slide-content">
+            <h1>Whale Behavior Classification</h1>
+            <h2>Neural Architecture Search & Optimization</h2>
+            <p>April 24, 2024</p>
+            <div class="metrics">
+                <div class="metric">
+                    <h3>Current Accuracy</h3>
+                    <div class="value">12.2%</div>
+                    <div>Raw Classification</div>
+                </div>
+                <div class="metric">
+                    <h3>Group Accuracy</h3>
+                    <div class="value">37.4%</div>
+                    <div>Hierarchical Groups</div>
+                </div>
+                <div class="metric">
+                    <h3>Target Classes</h3>
+                    <div class="value">9</div>
+                    <div>Whale Behaviors</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Current Challenges -->
+    <div id="slide2" class="slide">
+        <div class="slide-content">
+            <h2>Current Challenges</h2>
+            <div class="grid">
+                <div>
+                    <h3>Data Limitations</h3>
+                    <ul>
+                        <li>Small dataset (599 windows)</li>
+                        <li>Severe class imbalance (6 vs 216 samples)</li>
+                        <li>High dimensionality (3 axes × 200 samples)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Model Limitations</h3>
+                    <ul>
+                        <li>Current CNN architecture may be suboptimal</li>
+                        <li>Training instability with small batch sizes</li>
+                        <li>Overfitting indicators in validation performance</li>
+                    </ul>
+                </div>
+            </div>
+            <p>Our current approach using class weights and SMOTE has improved performance, but architecture optimization may yield further gains.</p>
+        </div>
+    </div>
+
+    <!-- Slide 3: Architecture Search Approach -->
+    <div id="slide3" class="slide">
+        <div class="slide-content">
+            <h2>Architecture Search Approach</h2>
+            <p>We propose a systematic neural architecture search to identify the optimal model for whale behavior classification:</p>
+            <div class="grid">
+                <div>
+                    <h3>Search Space</h3>
+                    <ul>
+                        <li>Model family: CNN, RNN, Transformer, Hybrid</li>
+                        <li>Layer width: 16-128 units</li>
+                        <li>Layer depth: 1-5 layers</li>
+                        <li>Regularization: Dropout rates 0.1-0.5</li>
+                        <li>Activation functions: ReLU, ELU, GELU</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Evaluation Metrics</h3>
+                    <ul>
+                        <li>Hierarchical group accuracy</li>
+                        <li>Raw classification accuracy</li>
+                        <li>F1-score on minority classes</li>
+                        <li>Parameter count</li>
+                        <li>Inference latency</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Current Architecture Analysis -->
+    <div id="slide4" class="slide">
+        <div class="slide-content">
+            <h2>Current Architecture Analysis</h2>
+            <div class="code">
+class TCN(nn.Module):
+    def __init__(self, input_size, output_size, num_channels, kernel_size, dropout, parallel=False):
+        super(TCN, self).__init__()
+        self.tcn = TemporalConvNet(input_size, num_channels, kernel_size, dropout=dropout)
+        self.linear = nn.Linear(num_channels[-1], output_size)
+        self.parallel = parallel
+
+    def forward(self, x):
+        # Input shape: (batch_size, sequence_length, input_size)
+        if self.parallel:
+            # For multi-GPU training
+            x = x.permute(0, 2, 1)
+        else:
+            # x needs to have dimension (batch_size, input_size, sequence_length)
+            x = x.transpose(1, 2)
+        
+        output = self.tcn(x)
+        output = output[:, :, -1]  # Take the output of the last time step
+        output = self.linear(output)
+        return output
+            </div>
+            <p>Current model: Temporal Convolutional Network with 39,690 parameters</p>
+            <div class="metrics">
+                <div class="metric">
+                    <h3>Parameters</h3>
+                    <div class="value">39,690</div>
+                </div>
+                <div class="metric">
+                    <h3>Input Shape</h3>
+                    <div class="value">(3, 200)</div>
+                    <div>Axes × Samples</div>
+                </div>
+                <div class="metric">
+                    <h3>Output Shape</h3>
+                    <div class="value">10</div>
+                    <div>Classes (incl. unlabeled)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Candidate Architectures -->
+    <div id="slide5" class="slide">
+        <div class="slide-content">
+            <h2>Candidate Architectures</h2>
+            <table>
+                <tr>
+                    <th>Architecture</th>
+                    <th>Key Features</th>
+                    <th>Expected Benefits</th>
+                    <th>Complexity</th>
+                </tr>
+                <tr>
+                    <td>Deeper TCN</td>
+                    <td>Additional temporal layers, residual connections</td>
+                    <td>Better temporal pattern recognition</td>
+                    <td>Medium</td>
+                </tr>
+                <tr>
+                    <td>Bidirectional LSTM</td>
+                    <td>Sequence modeling in both directions</td>
+                    <td>Capture context-dependent patterns</td>
+                    <td>Low</td>
+                </tr>
+                <tr>
+                    <td>Time Series Transformer</td>
+                    <td>Self-attention mechanism for temporal data</td>
+                    <td>Global pattern recognition across window</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>CNN-LSTM Hybrid</td>
+                    <td>CNN feature extraction + LSTM sequence modeling</td>
+                    <td>Combine spatial and temporal features</td>
+                    <td>Medium</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 6: Implementation Plan -->
+    <div id="slide6" class="slide">
+        <div class="slide-content">
+            <h2>Implementation Plan</h2>
+            <div class="grid">
+                <div>
+                    <h3>Phase 1: Architecture Development</h3>
+                    <ul>
+                        <li>Implement 4 candidate architectures</li>
+                        <li>Establish common evaluation pipeline</li>
+                        <li>Create hyperparameter search space</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Phase 2: Hyperparameter Optimization</h3>
+                    <ul>
+                        <li>Run grid search for each architecture</li>
+                        <li>Evaluate on hierarchical accuracy</li>
+                        <li>Identify top performing configurations</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid">
+                <div>
+                    <h3>Phase 3: Ensemble Evaluation</h3>
+                    <ul>
+                        <li>Test ensembles of top architectures</li>
+                        <li>Weighted voting based on confidence</li>
+                        <li>Compare with individual models</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Phase 4: Deployment Optimization</h3>
+                    <ul>
+                        <li>Model quantization for efficiency</li>
+                        <li>Optimize for Apple Silicon inference</li>
+                        <li>Create model exportability pipeline</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Expected Outcomes -->
+    <div id="slide7" class="slide">
+        <div class="slide-content">
+            <h2>Expected Outcomes</h2>
+            <p>Through architecture search and optimization, we anticipate:</p>
+            <div class="metrics">
+                <div class="metric">
+                    <h3>Raw Accuracy</h3>
+                    <div class="value">12.2% → 25%+</div>
+                    <div>Projected Improvement</div>
+                </div>
+                <div class="metric">
+                    <h3>Group Accuracy</h3>
+                    <div class="value">37.4% → 60%+</div>
+                    <div>Projected Improvement</div>
+                </div>
+                <div class="metric">
+                    <h3>Minority F1</h3>
+                    <div class="value">~0 → 0.3+</div>
+                    <div>Projected Improvement</div>
+                </div>
+            </div>
+            <p>Additional benefits include:</p>
+            <ul>
+                <li>Improved robustness to data variations</li>
+                <li>Better generalization to unseen whales</li>
+                <li>More consistent performance across behavior classes</li>
+                <li>Clearer insights into model decision-making</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 8: Next Steps -->
+    <div id="slide8" class="slide">
+        <div class="slide-content">
+            <h2>Next Steps</h2>
+            <div class="grid">
+                <div>
+                    <h3>Immediate Actions</h3>
+                    <ul>
+                        <li>Complete current SMOTE augmentation run</li>
+                        <li>Develop prototype of Bidirectional LSTM model</li>
+                        <li>Establish automated architecture evaluation pipeline</li>
+                        <li>Create visualization tools for model comparison</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Timeline</h3>
+                    <ul>
+                        <li><strong>Week 1:</strong> Implement candidate architectures</li>
+                        <li><strong>Week 2:</strong> Run hyperparameter search</li>
+                        <li><strong>Week 3:</strong> Ensemble evaluation and analysis</li>
+                        <li><strong>Week 4:</strong> Deployment optimization and documentation</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer">
+                <p>For more detailed technical information, see the GitHub repository.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="navigation">
+        <button id="prevBtn" class="nav-btn">Previous</button>
+        <button id="nextBtn" class="nav-btn">Next</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = document.querySelectorAll('.slide').length;
+        
+        // Initialize
+        updateNavigation();
+        
+        // Event listeners
+        document.getElementById('prevBtn').addEventListener('click', prevSlide);
+        document.getElementById('nextBtn').addEventListener('click', nextSlide);
+        
+        // Handle keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                navigateToSlide(currentSlide);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                navigateToSlide(currentSlide);
+            }
+        }
+        
+        function navigateToSlide(slideNum) {
+            document.getElementById(`slide${slideNum}`).scrollIntoView({ behavior: 'smooth' });
+            currentSlide = slideNum;
+            updateNavigation();
+        }
+        
+        function updateNavigation() {
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+        }
+    </script>
+</body>
+</html> 

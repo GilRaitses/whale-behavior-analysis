@@ -1,50 +1,52 @@
-# Whale Behavior Analysis
+# Whale Behavior Analysis Presentation
 
-## Overview
-This repository contains interactive visualizations and reports analyzing marine mammal diving behavior patterns. The analysis uses a variety of visualization techniques to classify different behavior types including side rolls, exploratory dives, kick feeding, and more.
+This is an interactive presentation website for the Whale Behavior Analysis project, built for the Applied Machine Learning course.
+
+## Structure
+
+The presentation is organized as follows:
+
+- **Visualizations**: Interactive dashboard showing dive data
+- **Dive Frames**: Static visualizations of individual dives
+- **Classification Results**: Training outcomes and challenges
+- **Model Architecture**: minGRU implementation details
+- **Technical Details**: Implementation specifics
+
+## How to Run
+
+1. Make sure all files are properly organized by running the included script:
+   ```bash
+   chmod +x reorganize.sh
+   ./reorganize.sh
+   ```
+
+2. Open `index.html` in a modern web browser (Chrome, Firefox, Safari)
 
 ## Contents
-- Interactive dive profile visualizations showing behavior-specific depth patterns
-- 3D energy expenditure visualization with both scatter and surface plot capabilities
-- t-SNE dimensionality reduction visualizations showing behavior clustering and energy patterns
-- Detailed dive analysis reports in HTML and Markdown formats
-- Comprehensive behavior classification of 7 distinct diving behaviors
 
-## Visualizations
+- `/assets/` - Static images and dive frames
+- `/css/` - Stylesheet for the presentation
+- `/js/` - JavaScript functionality
+- `/presentation/` - Technical content (markdown files)
+- `/visualizations/` - Interactive dive visualizations
+- `/dashboard/` - Overview dashboards
 
-### Dive Profiles Visualization
-Shows detailed dive profiles for each behavior type, with options to:
-- Filter by specific behaviors
-- View all dives simultaneously
-- Stack dives for easier comparison
-- Align dives at the surface
+## Technical Notes
 
-### 3D Energy Visualization
-Displays energy expenditure in relation to dive depth and time:
-- 3D scatter plot colored by behavior type
-- 3D surface plot showing energy hotspots
-- Interactive filtering and rotation capabilities
+- The website uses basic markdown parsing for technical content
+- Interactive visualizations are loaded in iframes
+- Navigation between sections uses anchor links
+- Tabs are used to organize related content within sections
 
-### t-SNE Visualizations
-Two complementary t-SNE visualizations:
-1. **Enhanced t-SNE by Behavior Type**: Shows the clustering of different diving behaviors
-2. **Energy t-SNE**: Displays energy expenditure patterns across behavior clusters
+## Features
 
-Visit the [GitHub Pages site](https://[your-username].github.io/whale-behavior-analysis/) to view the interactive visualizations.
+- Interactive dashboard for dive visualization
+- Individual dive selection and visualization
+- Static frame viewer with 128 dive frames
+- Technical presentation of minGRU architecture
+- Overview of classification challenges and solutions
 
-## Behavior Types Analyzed
-- Side rolls
-- Exploratory dives
-- Kick feeding
-- Noodle feeding
-- Feeding loop
-- Side rolls and loop
-- Traveling
+## Requirements
 
-## Technologies
-- Data analysis: Python with pandas and scikit-learn
-- Visualizations: Plotly.js
-- Web interface: HTML/CSS/JavaScript
-
-## Author
-Gil Raitses
+- Modern web browser with JavaScript enabled
+- Local file access (no server required) 
