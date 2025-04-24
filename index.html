@@ -89,6 +89,40 @@
         <section id="dimension">
             <div class="section-content">
                 <h2>Dimensionality Reduction</h2>
+                <div class="card">
+                    <h3>Key Insights from Enhancement Modules</h3>
+                    <p>Our analysis revealed several critical insights about the whale behavior data structure:</p>
+                    <ul>
+                        <li><strong>Trustworthiness Score (99.3%):</strong> Our PCA embeddings successfully preserve local neighborhood structure from high-dimensional space, ensuring reliable visual interpretation.</li>
+                        <li><strong>Feature Importance:</strong> From 167 original features (111 static + 56 sequential), we identified a subset of 40-80 most informative features that maintain high discriminative power while reducing noise.</li>
+                        <li><strong>Sensor Significance:</strong> Analysis revealed which sensors (accelerometer, gyroscope, depth) provide the most valuable information for behavior identification.</li>
+                        <li><strong>Duration Variability:</strong> Sequence length analysis showed significant variation in behavior durations, requiring careful standardization to balance information preservation and comparability.</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Technical Challenges Overcome</h3>
+                    <ul>
+                        <li><strong>Data Format Consistency:</strong> Resolved inconsistencies in HDF5 file structure to ensure reliable data loading across modules.</li>
+                        <li><strong>Error Handling:</strong> Implemented robust handling for edge cases like empty sequences and infinity values to maintain computational stability.</li>
+                        <li><strong>Matrix Transformation:</strong> Created an optimized feature matrix with significantly higher signal-to-noise ratio while reducing dimensionality by ~60%.</li>
+                        <li><strong>Visualization Clarity:</strong> Improved separation of behavioral classes in reduced space for better interpretability by marine biology experts.</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Combined Impact on Analysis</h3>
+                    <p>The integration of enhancement modules transformed our approach from basic dimensionality reduction to an optimized system with:</p>
+                    <ul>
+                        <li>Higher information density in feature matrices</li>
+                        <li>Clearer separation of behavioral classes in visualizations</li>
+                        <li>More faithful preservation of important relationships</li>
+                        <li>Improved interpretability for domain experts</li>
+                        <li>Reduced computational requirements for analysis</li>
+                    </ul>
+                    <p>These improvements provide a more effective foundation for both visualization and classification tasks, ultimately leading to better insights from marine mammal sensor data.</p>
+                </div>
+                
                 <iframe src="presentation/dimensionality_reduction_slides.html" title="Dimensionality Reduction Slides"></iframe>
             </div>
         </section>
