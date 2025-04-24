@@ -1,0 +1,245 @@
+/* Dark Mode Dive Frame Styling */
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode .technical-section {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .tab {
+    color: #e0e0e0;
+}
+
+.dark-mode .tab:hover {
+    background-color: #2a2a2a;
+}
+
+.dark-mode .tab.active {
+    border-bottom-color: #3498db;
+    background-color: #2a2a2a;
+}
+
+/* Dive frame styling */
+.frame-display {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.frame-display img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Heatmap filter for dive frames to show twistiness */
+.heatmap-filter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Canvas-based heatmap */
+.heatmap-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Dark mode selector */
+.dark-mode-switch {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dark-mode-switch:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.dark-mode-switch span {
+    color: white;
+    margin-right: 5px;
+    font-size: 0.8rem;
+}
+
+.dark-mode-toggle {
+    width: 40px;
+    height: 20px;
+    background-color: #555;
+    border-radius: 10px;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.dark-mode .dark-mode-toggle {
+    background-color: #3498db;
+}
+
+.dark-mode-toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+    transition: left 0.3s;
+}
+
+.dark-mode .dark-mode-toggle::after {
+    left: 22px;
+}
+
+/* Slider for dive selection */
+.dive-slider-container {
+    width: 100%;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.dive-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(to right, #3498db, #2ecc71, #f1c40f, #e74c3c);
+    border-radius: 4px;
+    outline: none;
+}
+
+.dive-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.dive-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .dive-slider::-webkit-slider-thumb {
+    background-color: #3498db;
+}
+
+.dark-mode .dive-slider::-moz-range-thumb {
+    background-color: #3498db;
+}
+
+.dive-slider-value {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.dark-mode .dive-slider-value {
+    color: #e0e0e0;
+}
+
+/* Interactive 3D visualization container */
+.three-overview-container {
+    width: 100%;
+    height: 500px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+#three-overview {
+    width: 100%;
+    height: 100%;
+    background-color: #0a0a0f;
+}
+
+.three-controls {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+}
+
+.three-controls button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.3s;
+}
+
+.three-controls button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Legend for twistiness colors */
+.twistiness-legend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.twistiness-legend-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.twistiness-gradient {
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to right, #0000ff, #00ffff, #00ff00, #ffff00, #ff0000);
+    border-radius: 4px;
+}
+
+.twistiness-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 0.8rem;
+}
+
+.dark-mode .twistiness-labels {
+    color: #e0e0e0;
+} 

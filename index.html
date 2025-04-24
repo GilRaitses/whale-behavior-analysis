@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whale Behavior Analysis | AML Presentation</title>
     <link rel="stylesheet" href="css/presentation.css">
+    <link rel="stylesheet" href="css/markdown-styles.css">
+    <link rel="stylesheet" href="css/dark-dive-frames.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <!-- Three.js Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.min.js"></script>
 </head>
-<body>
+<body class="dark-mode">
     <header>
         <div class="header-content">
             <div class="logo">
@@ -16,8 +22,8 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#visualizations" class="active">Visualizations</a></li>
-                    <li><a href="#dive-frames">Dive Frames</a></li>
+                    <li><a href="#dive-frames" class="active">Dive Frames</a></li>
+                    <li><a href="#visualizations">Visualizations</a></li>
                     <li><a href="#classification">Classification</a></li>
                     <li><a href="#architecture">Architecture</a></li>
                     <li><a href="#technical">Technical Details</a></li>
@@ -27,57 +33,6 @@
     </header>
 
     <main class="container">
-        <!-- Main Visualization Section -->
-        <section id="visualizations">
-            <h2 class="section-title">Whale Dive Visualizations</h2>
-            
-            <div class="viz-container">
-                <div class="viz-header">
-                    <h3>Interactive Visualization Dashboard</h3>
-                </div>
-                
-                <div class="viz-controls">
-                    <div class="btn-group">
-                        <button class="btn viz-btn active" data-viz="overview">Overview</button>
-                        <button class="btn viz-btn" data-viz="metrics">Metrics</button>
-                        <button class="btn viz-btn" data-viz="energetics">Energetics</button>
-                        <button class="btn viz-btn" data-viz="dive">Individual Dive</button>
-                    </div>
-                    
-                    <div class="dive-selector">
-                        <label for="dive-select">Select Dive:</label>
-                        <select id="dive-select">
-                            <option value="1">Dive 1</option>
-                            <option value="2">Dive 2</option>
-                            <option value="3">Dive 3</option>
-                            <!-- Generate options for dives 4-128 -->
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    const diveSelect = document.getElementById('dive-select');
-                                    // Already added dives 1-3, now add 4-128
-                                    for (let i = 4; i <= 128; i++) {
-                                        const option = document.createElement('option');
-                                        option.value = i;
-                                        option.textContent = `Dive ${i}`;
-                                        diveSelect.appendChild(option);
-                                    }
-                                });
-                            </script>
-                        </select>
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button class="btn feature-toggle active" data-feature="depth">Depth</button>
-                        <button class="btn feature-toggle" data-feature="orientation">Orientation</button>
-                        <button class="btn feature-toggle" data-feature="phases">Phases</button>
-                        <button class="btn feature-toggle" data-feature="metrics">Metrics</button>
-                    </div>
-                </div>
-                
-                <iframe id="viz-frame" class="viz-frame" src="dashboard/overview.html"></iframe>
-            </div>
-        </section>
-
         <!-- Dive Frames Section -->
         <section id="dive-frames">
             <h2 class="section-title">Dive Frame Analysis</h2>
@@ -92,7 +47,6 @@
                 
                 <div class="tabs">
                     <div class="tab active" data-target="individual-frames">Individual Frames</div>
-                    <div class="tab" data-target="energetics-view">Energetics View</div>
                 </div>
                 
                 <div id="individual-frames" class="tab-content active">
@@ -117,15 +71,19 @@
                         <img id="selected-frame" src="assets/dive_frames/dive_001.png" alt="Selected dive frame" style="width: 100%; max-width: 800px; margin-top: 20px;">
                     </div>
                 </div>
-                
-                <div id="energetics-view" class="tab-content">
-                    <h3>Dive Energetics Overview</h3>
-                    <p>This visualization shows the energetic expenditure across all dives:</p>
-                    
-                    <div class="energetics-image">
-                        <img src="assets/dive_energetics.png" alt="Dive energetics visualization" style="width: 100%; max-width: 1200px;">
-                    </div>
+            </div>
+        </section>
+
+        <!-- Main Visualization Section - Moved under Dive Frames -->
+        <section id="visualizations">
+            <h2 class="section-title">Interactive Dive Visualizations</h2>
+            
+            <div class="viz-container dark-theme">
+                <div class="viz-header">
+                    <h3>Interactive Visualization Dashboard</h3>
                 </div>
+                
+                <iframe id="viz-frame" class="viz-frame" src="dashboard/overview.html" style="background-color: #121212;"></iframe>
             </div>
         </section>
 
@@ -353,6 +311,11 @@
         </div>
     </footer>
 
+    <!-- Application Scripts -->
     <script src="js/presentation.js"></script>
+    <script src="js/presentation_helper.js"></script>
+    <script src="data/prepare_data.js"></script>
+    <script src="js/three-overview.js"></script>
+    <script src="js/dive-frame-processor.js"></script>
 </body>
 </html> 
