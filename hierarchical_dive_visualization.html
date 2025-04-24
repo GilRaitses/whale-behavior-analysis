@@ -1,1 +1,56 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Whale Behavior Analysis</title><link rel="stylesheet" href="css/styles.css"></head><body><nav class="navbar"><a href="#overview">Overview</a><a href="#frames">Dive Frames</a><a href="#hierarchical">Hierarchical Visualization</a><a href="#dashboard">Dashboard</a><a href="#dimension">Dimensionality Reduction</a><a href="#training">Training</a><a href="#architecture">Architecture</a><a href="#conclusions">Conclusions</a><a href="#resources">Resources</a></nav><div id="content-container"><!-- Main content will be loaded here --></div><script src="js/main.js"></script><script src="presentation/presentation_helper.js"></script><script>document.addEventListener("DOMContentLoaded",function(){const e=document.getElementById("content-container");fetch("presentation/main_content.html").then(t=>t.text()).then(t=>{e.innerHTML=t,"function"==typeof initFrameViewer&&initFrameViewer(),"function"==typeof initSmoothScrolling&&initSmoothScrolling()}).catch(t=>{console.error("Error loading content:",t),e.innerHTML="<div class=\"error-message\">Error loading content. Please try refreshing the page.</div>"})});</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whale Behavior Analysis</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#overview">Overview</a>
+        <a href="#frames">Dive Frames</a>
+        <a href="#hierarchical">Hierarchical Visualization</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#dimension">Dimensionality Reduction</a>
+        <a href="#training">Training</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#conclusions">Conclusions</a>
+        <a href="#resources">Resources</a>
+    </nav>
+
+    <div id="content-container">
+        <!-- Main content will be loaded here -->
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="presentation/presentation_helper.js"></script>
+    <script>
+        // Load the main content
+        document.addEventListener('DOMContentLoaded', function() {
+            const contentContainer = document.getElementById('content-container');
+            
+            // Fetch the main content HTML
+            fetch('presentation/main_content.html')
+                .then(response => response.text())
+                .then(html => {
+                    contentContainer.innerHTML = html;
+                    
+                    // Initialize the frame viewer after content is loaded
+                    if (typeof initFrameViewer === 'function') {
+                        initFrameViewer();
+                    }
+                    
+                    // Initialize smooth scrolling after content is loaded
+                    if (typeof initSmoothScrolling === 'function') {
+                        initSmoothScrolling();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading content:', error);
+                    contentContainer.innerHTML = '<div class="error-message">Error loading content. Please try refreshing the page.</div>';
+                });
+        });
+    </script>
+</body>
+</html>

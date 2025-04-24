@@ -31,7 +31,7 @@ function initFrameViewer() {
         // Format the frame number with leading zeros
         const formattedIndex = String(index).padStart(3, '0');
         
-        // Update the image source
+        // Update the image source - use correct path to dive frames
         currentFrame.src = `assets/dive_frames/dive_${formattedIndex}.png`;
         
         // Update the frame number display
