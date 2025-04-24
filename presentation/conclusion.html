@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conclusions</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .conclusion-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .conclusion-box {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .conclusion-box h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .data-warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .future-box {
+            background-color: #e8f4fb;
+            border-left: 5px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="conclusion-container">
+        <div class="conclusion-box">
+            <h2>Project Accomplishments</h2>
+            <div class="data-warning">
+                <h3 style="color: #856404; margin-top: 0;">Data Limitation Notice</h3>
+                <p>The results presented are preliminary proof-of-concept findings with significant limitations:</p>
+                <ul>
+                    <li>Current dataset: ~20,000 frames with only ~50 expert annotations</li>
+                    <li>Extreme class imbalance: some behaviors have only 1 example</li>
+                    <li>Validation metrics should be interpreted with extreme caution</li>
+                </ul>
+            </div>
+            
+            <p>Despite data limitations, this project established:</p>
+            <ul>
+                <li>A complete machine learning pipeline for whale behavior classification</li>
+                <li>Effective dimensionality reduction techniques for visualization</li>
+                <li>Interactive tools for analyzing dive patterns and behaviors</li>
+                <li>Framework for integrating expert annotations with automatic classification</li>
+                <li>Hierarchical visualization approach for multi-level behavior analysis</li>
+            </ul>
+        </div>
+        
+        <div class="grid-container">
+            <div class="conclusion-box">
+                <h2>Data Challenges</h2>
+                <p>The current project faces critical data limitations:</p>
+                <ul>
+                    <li>Insufficient samples for reliable model training</li>
+                    <li>Underrepresented classes preventing proper validation</li>
+                    <li>SMOTE and other augmentation techniques cannot fully compensate for fundamental data scarcity</li>
+                    <li>Lack of properly validated ground truth data</li>
+                    <li>Annotation inconsistencies across limited samples</li>
+                </ul>
+            </div>
+            
+            <div class="conclusion-box">
+                <h2>Primary Data Needs</h2>
+                <p>To establish reliable metrics and models, we need:</p>
+                <ul>
+                    <li>Minimum 10 expert-annotated examples per behavior class</li>
+                    <li>Separate validation dataset with confirmed ground truth</li>
+                    <li>Consistent annotation methodology</li>
+                    <li>Additional whale subjects to validate generalization</li>
+                    <li>Expanded temporal coverage to capture seasonal variations</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="conclusion-box">
+            <h2>Future Directions</h2>
+            <div class="future-box">
+                <h3>Data Collection Priorities</h3>
+                <ol>
+                    <li>Collaborate with Parks Lab to obtain additional expert annotations</li>
+                    <li>Establish a proper validation methodology with separate test dataset</li>
+                    <li>Focus on increasing examples for underrepresented behavior classes</li>
+                    <li>Develop a standardized annotation protocol for consistency</li>
+                </ol>
+            </div>
+            
+            <p>Once data limitations are addressed, future work includes:</p>
+            <ul>
+                <li>Refining model architecture based on expanded dataset</li>
+                <li>Improving temporal modeling across extended behavior sequences</li>
+                <li>Developing more sophisticated ensemble methods</li>
+                <li>Exploring behavioral transfer learning across subjects</li>
+                <li>Expanding the interactive dashboard capabilities for researchers</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 
