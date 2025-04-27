@@ -289,6 +289,26 @@
             font-size: 14px;
             border: 1px solid #3498db;
         }
+        
+        /* Architecture Section */
+        section#architecture {
+            background-color: #121212;
+        }
+        
+        /* Training Section */
+        section#training {
+            background-color: #121212;
+        }
+        
+        /* Conclusions Section */
+        section#conclusions {
+            background-color: #121212;
+        }
+        
+        /* Resources Section */
+        section#resources {
+            background-color: #121212;
+        }
     </style>
 </head>
 <body>
@@ -666,16 +686,10 @@
                     <div id="energetics-tab" class="tab-content">
                         <div class="visualization-container">
                             <div class="visualization-card">
-                                <h3>Energy Expenditure by Dive Phase</h3>
+                                <h3>Dive Energetics Overview</h3>
                                 <div class="content">
-                                    <canvas id="energy-chart"></canvas>
-                                </div>
-                            </div>
-                            
-                            <div class="visualization-card">
-                                <h3>Oxygen Consumption</h3>
-                                <div class="content">
-                                    <canvas id="oxygen-chart"></canvas>
+                                    <img src="assets/dive_energetics.png" alt="Dive Energetics Overview">
+                                    <p>This visualization shows the energy expenditure and oxygen consumption patterns across different dive behaviors.</p>
                                 </div>
                             </div>
                         </div>
@@ -686,13 +700,6 @@
                             <div class="visualization-card">
                                 <h3>Duration by Behavior Type</h3>
                                 <img src="assets/dimensionality_reduction/duration_distribution.png" alt="Duration by Behavior Type">
-                            </div>
-                            
-                            <div class="visualization-card">
-                                <h3>Sample Count by Behavior Type</h3>
-                                <div class="content">
-                                    <canvas id="sample-count-chart"></canvas>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -784,6 +791,82 @@
                         <li>Reduced computational requirements for analysis</li>
                     </ul>
                     <p>These improvements provide a more effective foundation for both visualization and classification tasks, ultimately leading to better insights from marine mammal sensor data.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Interactive Feature Matrix</h3>
+                    <p>The interactive feature matrix allows you to explore the relationships between different behavioral patterns and features.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" onclick="openTab('metrics-tab')">Dive Metrics</button>
+                            <button class="tab-button" onclick="openTab('energetics-tab')">Energetics</button>
+                            <button class="tab-button" onclick="openTab('comparison-tab')">Behavior Comparison</button>
+                        </div>
+                        
+                        <div id="metrics-tab" class="tab-content active">
+                            <div class="dive-selector">
+                                <label for="dive-slider">Select Dive: <span id="selected-dive-number">1</span></label>
+                                <input type="range" id="dive-slider" min="1" max="128" value="1">
+                            </div>
+                            
+                            <div class="metrics-grid">
+                                <div class="metric-card">
+                                    <h4>Maximum Depth</h4>
+                                    <div class="metric-value" id="max-depth">124.3 m</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Duration</h4>
+                                    <div class="metric-value" id="duration">175 s</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Descent Rate</h4>
+                                    <div class="metric-value" id="descent-rate">1.7 m/s</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Ascent Rate</h4>
+                                    <div class="metric-value" id="ascent-rate">1.2 m/s</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Twistiness</h4>
+                                    <div class="metric-value" id="twistiness">0.68</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Energy Cost</h4>
+                                    <div class="metric-value" id="energy-cost">1240 J</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Roll Variance</h4>
+                                    <div class="metric-value" id="roll-variance">0.47</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Behavior Class</h4>
+                                    <div class="metric-value" id="behavior-class">Foraging</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="energetics-tab" class="tab-content">
+                            <div class="visualization-container">
+                                <div class="visualization-card">
+                                    <h3>Dive Energetics Overview</h3>
+                                    <div class="content">
+                                        <img src="assets/dive_energetics.png" alt="Dive Energetics Overview">
+                                        <p>This visualization shows the energy expenditure and oxygen consumption patterns across different dive behaviors.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="comparison-tab" class="tab-content">
+                            <div class="visualization-container">
+                                <div class="visualization-card">
+                                    <h3>Duration by Behavior Type</h3>
+                                    <img src="assets/dimensionality_reduction/duration_distribution.png" alt="Duration by Behavior Type">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <iframe src="presentation/dimensionality_reduction_slides.html" title="Dimensionality Reduction Slides"></iframe>

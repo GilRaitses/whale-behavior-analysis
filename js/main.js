@@ -7,6 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize smooth scrolling
     initSmoothScrolling();
+
+    // Handle interactive matrix button
+    const openMatrixButton = document.getElementById('open-interactive-matrix');
+    
+    if (openMatrixButton) {
+        openMatrixButton.addEventListener('click', function() {
+            // Show modal or alert explaining that the interactive version is coming soon
+            alert('The interactive feature matrix will be available in the next update. This feature is currently in development.');
+        });
+    }
 });
 
 // Dive frames viewer functionality

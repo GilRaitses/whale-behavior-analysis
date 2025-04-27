@@ -9,8 +9,7 @@ library(tidyr)
 library(signal)
 library(zoo)
 
-# Instead of defining format_time_smart here, we'll use the utility function from setup
-
+# Using Global Environment Variables
 create_dive_frames <- function(hdf5_data, output_dir) {
   cat("Creating individual dive frame visualizations...\n")
   
@@ -21,7 +20,7 @@ create_dive_frames <- function(hdf5_data, output_dir) {
   
   # Extract data
   depth_data <- hdf5_data$depth
-  eti_data <- hdf5_data$eti  # ETI values are already in seconds
+  eti_data <- hdf5_data$eti  
   sample_rate <- hdf5_data$sample_rate
   orientation_data <- hdf5_data$orientation
   dive_indices <- hdf5_data$dive_indices
