@@ -505,6 +505,44 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            background-color: #2c3e50; /* Default background */
+            color: white;
+        }
+        
+        .color-slider {
+            -webkit-appearance: none;
+            width: 80%;
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(to right, 
+                hsl(0, 80%, 40%), 
+                hsl(60, 80%, 40%), 
+                hsl(120, 80%, 40%), 
+                hsl(180, 80%, 40%), 
+                hsl(240, 80%, 40%), 
+                hsl(300, 80%, 40%),
+                hsl(360, 80%, 40%));
+            outline: none;
+        }
+        
+        .color-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .color-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         
         .metric-card h4 {
@@ -669,6 +707,284 @@
             color: #f1948a;
             margin-top: 0;
         }
+        
+        /* System Architecture Styles */
+        .architecture-container {
+            max-width: 1000px;
+            margin: 0 auto 30px auto;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .architecture-card {
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            background: #1e2126;
+            padding: 20px;
+        }
+        
+        .architecture-title {
+            text-align: center;
+            margin-top: 0;
+            color: #3498db;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+        
+        .pipeline-stages {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .pipeline-stage {
+            flex: 1;
+            min-width: 220px;
+            margin: 10px;
+            border: 2px solid;
+            border-radius: 8px;
+            background: #2c3e50;
+            padding: 15px;
+        }
+        
+        .stage-data-processing {
+            border-color: #3498db;
+        }
+        
+        .stage-feature-extraction {
+            border-color: #9b59b6;
+        }
+        
+        .stage-model-training {
+            border-color: #2ecc71;
+        }
+        
+        .stage-behavior-classification {
+            border-color: #e74c3c;
+        }
+        
+        .stage-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .stage-data-processing .stage-title {
+            color: #3498db;
+        }
+        
+        .stage-feature-extraction .stage-title {
+            color: #9b59b6;
+        }
+        
+        .stage-model-training .stage-title {
+            color: #2ecc71;
+        }
+        
+        .stage-behavior-classification .stage-title {
+            color: #e74c3c;
+        }
+        
+        .stage-list {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 14px;
+            color: #f0f0f0;
+        }
+        
+        .stage-list li {
+            margin-bottom: 8px;
+        }
+        
+        .stage-arrow {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .stage-data-processing .stage-arrow {
+            color: #3498db;
+        }
+        
+        .stage-feature-extraction .stage-arrow {
+            color: #9b59b6;
+        }
+        
+        .stage-model-training .stage-arrow {
+            color: #2ecc71;
+        }
+        
+        /* Left-side presentation navbar */
+        .presentation-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding-top: 60px;
+            z-index: 900;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .presentation-sidebar-title {
+            padding: 10px 15px;
+            text-align: center;
+            color: #3498db;
+            font-size: 14px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 15px;
+        }
+        
+        .presentation-nav {
+            display: flex;
+            flex-direction: column;
+            padding: 0 10px;
+        }
+        
+        .presentation-nav button {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            text-align: left;
+            margin: 3px 0;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        .presentation-nav button:hover {
+            background-color: rgba(52, 152, 219, 0.2);
+        }
+        
+        .presentation-nav button.active {
+            background-color: rgba(52, 152, 219, 0.4);
+            border-left: 3px solid #3498db;
+        }
+        
+        /* Adjust main content to account for sidebar */
+        section {
+            margin-left: 200px;
+        }
+        
+        .navbar {
+            margin-left: 200px;
+        }
+        
+        /* Make modals use third-person language */
+        .modal-content {
+            padding: 20px;
+        }
+        
+        .stage-model-training .stage-arrow {
+            color: #2ecc71;
+        }
+        
+        /* Modal Styles */
+        .rubric-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .rubric-modal.show {
+            display: block;
+            opacity: 1;
+        }
+        
+        .rubric-slide {
+            display: none;
+            background-color: #1e2126;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 800px;
+            color: #f0f0f0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+        
+        .close-modal:hover {
+            color: #fff;
+        }
+        
+        .slide-section {
+            margin-bottom: 25px;
+        }
+        
+        .highlight-box {
+            background-color: #2c3e50;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .data-point {
+            background-color: #2c3e50;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .metric-point {
+            background-color: #2c3e50;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            font-weight: bold;
+        }
+        
+        .feature-tag {
+            display: inline-block;
+            background-color: #34495e;
+            color: #3498db;
+            padding: 5px 10px;
+            margin: 3px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        /* Left-side presentation navbar */
+        .presentation-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding-top: 60px;
+            z-index: 900;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -697,11 +1013,11 @@
                 <h3>Project Goals</h3>
                 <div class="highlight-box">
                     <ul>
-                        <li><strong>Annotation Acquisition:</strong> Acquire additional expert annotations from the Parks Lab</li>
-                        <li><strong>Parallelization of RNN:</strong> Implement parallel processing in the minGRU architecture</li>
-                        <li><strong>Architecture Optimization:</strong> Explore Optisim/complexity-aware model architecture searching</li>
-                        <li><strong>Model Refinement:</strong> Fine-tune as more data becomes available</li>
-                        <li><strong>Transfer Learning:</strong> Maximize utility of limited data</li>
+                        <li><strong>Annotation Acquisition:</strong> Additional expert annotations required from the Parks Lab</li>
+                        <li><strong>Parallelization of RNN:</strong> Implementation of parallel processing in the minGRU architecture</li>
+                        <li><strong>Architecture Optimization:</strong> Exploration of Optisim/complexity-aware model architecture search</li>
+                        <li><strong>Model Refinement:</strong> Fine-tuning as more data becomes available</li>
+                        <li><strong>Transfer Learning:</strong> Maximizing utility of limited data</li>
                     </ul>
                 </div>
             </div>
@@ -863,7 +1179,7 @@
                 </ul>
                 
                 <div class="data-point">
-                    <p><strong>Approach:</strong> Implemented the minGRU architecture with fewer parameters (39,690 vs ~120K) and a hierarchical classification approach. Also employed cross-validation with leave-one-out by whale ID.</p>
+                    <p><strong>Approach:</strong> Implementation of the minGRU architecture with fewer parameters (39,690 vs ~120K) and a hierarchical classification approach. Also employed cross-validation with leave-one-out by whale ID.</p>
                 </div>
             </div>
         </div>
@@ -875,7 +1191,7 @@
             <div class="slide-section">
                 <h3>Model Validation Summary</h3>
                 <div class="data-point">
-                    <p>Our cross-validation methodology assesses model performance across different individuals and dive conditions.</p>
+                    <p>The cross-validation methodology assesses model performance across different individuals and dive conditions.</p>
                 </div>
                 
                 <div class="highlight-box">
@@ -948,40 +1264,29 @@
             </div>
         </div>
     </div>
-    
-    <!-- Rubric Navigation Toggle Button -->
-    <button class="rubric-toggle-btn">
-        <div class="toggle-icon"></div>
-        <div class="toggle-icon"></div>
-        <div class="toggle-icon"></div>
-    </button>
-    
-    <!-- Rubric Navigation -->
-    <nav class="rubric-nav">
-        <div class="rubric-nav-container">
-            <div class="rubric-nav-item" onclick="scrollToSection('title')">Title</div>
-            <div class="rubric-nav-item" onclick="scrollToSection('problem')">Problem</div>
-            <div class="rubric-nav-item" onclick="scrollToSection('solution')">Solution</div>
-            <div class="rubric-nav-item" onclick="scrollToSection('data')">Data</div>
-            <div class="rubric-nav-item" onclick="scrollToSection('results')">Results</div>
-            <div class="rubric-nav-item" onclick="scrollToSection('challenges')">Challenges</div>
-            <div class="rubric-nav-item" onclick="scrollToSection('validation')">Validation</div>
-            <div class="rubric-nav-item" onclick="scrollToSection('plan')">Plan</div>
+
+    <div class="presentation-sidebar">
+        <div class="presentation-sidebar-title">
+            Whale Behavior Analysis<br>
+            <span style="font-size: 12px;">Project Status Presentation</span>
         </div>
-    </nav>
-    
-    <!-- Navbar Toggle Button -->
-    <button class="navbar-toggle-btn">
-        <div class="toggle-icon"></div>
-        <div class="toggle-icon"></div>
-        <div class="toggle-icon"></div>
-    </button>
+        <nav class="presentation-nav">
+            <button onclick="scrollToSectionAndShowModal('overview', 'title-slide')" class="active">Title</button>
+            <button onclick="scrollToSectionAndShowModal('overview', 'problem-slide')">Problem</button>
+            <button onclick="scrollToSectionAndShowModal('hierarchical', 'solution-slide')">Solution</button>
+            <button onclick="scrollToSectionAndShowModal('frames', 'data-slide')">Data</button>
+            <button onclick="scrollToSectionAndShowModal('dimension', 'results-slide')">Results</button>
+            <button onclick="scrollToSectionAndShowModal('architecture', 'challenges-slide')">Challenges</button>
+            <button onclick="scrollToSectionAndShowModal('validation', 'validation-slide')">Validation</button>
+            <button onclick="scrollToSectionAndShowModal('conclusions', 'plan-slide')">Plan</button>
+        </nav>
+    </div>
     
     <nav class="navbar">
         <a href="#overview">Overview</a>
         <a href="#frames">Dive Frames</a>
         <a href="#hierarchical">Hierarchical Visualization</a>
-        <a href="#interactive-matrix">Interactive Dashboard</a>
+        <a href="#interactive">Interactive Dashboard</a>
         <a href="#dimension">Dimensionality Reduction</a>
         <a href="#training">Training</a>
         <a href="#architecture">Architecture</a>
@@ -1146,7 +1451,7 @@
                         <div id="metrics-tab" class="tab-content active">
                             <div class="dive-selector">
                                 <label for="dive-slider">Select Dive: <span id="selected-dive-number">1</span></label>
-                                <input type="range" id="dive-slider" min="1" max="128" value="1">
+                                <input type="range" id="dive-slider" min="1" max="128" value="1" class="color-slider">
                             </div>
                             
                             <div class="metrics-grid">
@@ -1329,557 +1634,144 @@
                 <h2>System Architecture</h2>
                 
                 <!-- System Architecture Diagram (HTML-based) -->
-                <div style="max-width: 1000px; margin: 0 auto 30px auto; font-family: 'Arial', sans-serif;">
-                    <div style="border: 2px solid #3498db; border-radius: 8px; background: #1e2126; padding: 20px;">
-                        <h3 style="text-align: center; margin-top: 0; color: #3498db; border-bottom: 1px solid #444; padding-bottom: 10px;">End-to-End Whale Behavior Analysis Pipeline</h3>
+                <div class="architecture-container">
+                    <div class="architecture-card">
+                        <h3 class="architecture-title">End-to-End Whale Behavior Analysis Pipeline</h3>
                         
                         <!-- Main pipeline stages with flex -->
-                        <div style="display: flex; justify-content: space-between; margin: 30px 0; flex-wrap: wrap;">
+                        <div class="pipeline-stages">
                             <!-- Data Processing Stage -->
-                            <div style="flex: 1; min-width: 220px; margin: 10px; border: 2px solid #3498db; border-radius: 8px; background: #2c3e50; padding: 15px;">
-                                <div style="font-weight: bold; text-align: center; color: #3498db; margin-bottom: 10px; font-size: 16px;">Data Processing</div>
-                                <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #f0f0f0;">
-                                    <li style="margin-bottom: 8px;">HDF5 parsing</li>
-                                    <li style="margin-bottom: 8px;">Sequence standardization</li>
-                                    <li style="margin-bottom: 8px;">Feature scaling</li>
-                                    <li style="margin-bottom: 8px;">SMOTE augmentation</li>
+                            <div class="pipeline-stage stage-data-processing">
+                                <div class="stage-title">Data Processing</div>
+                                <ul class="stage-list">
+                                    <li>HDF5 parsing</li>
+                                    <li>Sequence standardization</li>
+                                    <li>Feature scaling</li>
+                                    <li>SMOTE augmentation</li>
                                 </ul>
-                                <div style="text-align: center; margin-top: 15px; color: #3498db;">↓</div>
+                                <div class="stage-arrow">↓</div>
                             </div>
                             
                             <!-- Feature Extraction -->
-                            <div style="flex: 1; min-width: 220px; margin: 10px; border: 2px solid #9b59b6; border-radius: 8px; background: #2c3e50; padding: 15px;">
-                                <div style="font-weight: bold; text-align: center; color: #9b59b6; margin-bottom: 10px; font-size: 16px;">Feature Extraction</div>
-                                <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #f0f0f0;">
-                                    <li style="margin-bottom: 8px;">Signal processing</li>
-                                    <li style="margin-bottom: 8px;">Dimensionality reduction</li>
-                                    <li style="margin-bottom: 8px;">Feature selection</li>
-                                    <li style="margin-bottom: 8px;">Matrix transformation</li>
+                            <div class="pipeline-stage stage-feature-extraction">
+                                <div class="stage-title">Feature Extraction</div>
+                                <ul class="stage-list">
+                                    <li>Signal processing</li>
+                                    <li>Dimensionality reduction</li>
+                                    <li>Feature selection</li>
+                                    <li>Matrix transformation</li>
                                 </ul>
-                                <div style="text-align: center; margin-top: 15px; color: #9b59b6;">↓</div>
+                                <div class="stage-arrow">↓</div>
                             </div>
                             
                             <!-- Model Training -->
-                            <div style="flex: 1; min-width: 220px; margin: 10px; border: 2px solid #2ecc71; border-radius: 8px; background: #2c3e50; padding: 15px;">
-                                <div style="font-weight: bold; text-align: center; color: #2ecc71; margin-bottom: 10px; font-size: 16px;">Model Training</div>
-                                <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #f0f0f0;">
-                                    <li style="margin-bottom: 8px;">minGRU architecture</li>
-                                    <li style="margin-bottom: 8px;">Cross-validation</li>
-                                    <li style="margin-bottom: 8px;">Hyperparameter tuning</li>
-                                    <li style="margin-bottom: 8px;">Early stopping</li>
+                            <div class="pipeline-stage stage-model-training">
+                                <div class="stage-title">Model Training</div>
+                                <ul class="stage-list">
+                                    <li>minGRU architecture</li>
+                                    <li>Cross-validation</li>
+                                    <li>Hyperparameter tuning</li>
+                                    <li>Early stopping</li>
                                 </ul>
-                                <div style="text-align: center; margin-top: 15px; color: #2ecc71;">↓</div>
+                                <div class="stage-arrow">↓</div>
                             </div>
                             
                             <!-- Behavior Classification -->
-                            <div style="flex: 1; min-width: 220px; margin: 10px; border: 2px solid #e74c3c; border-radius: 8px; background: #2c3e50; padding: 15px;">
-                                <div style="font-weight: bold; text-align: center; color: #e74c3c; margin-bottom: 10px; font-size: 16px;">Behavior Classification</div>
-                                <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #f0f0f0;">
-                                    <li style="margin-bottom: 8px;">Direct classification</li>
-                                    <li style="margin-bottom: 8px;">Hierarchical grouping</li>
-                                    <li style="margin-bottom: 8px;">Confidence scoring</li>
-                                    <li style="margin-bottom: 8px;">Post-processing</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <!-- DataFlow and Visualization Section -->
-                        <div style="display: flex; flex-wrap: wrap; margin-top: 10px; border-top: 1px dashed #555; padding-top: 20px;">
-                            <!-- User Interfaces -->
-                            <div style="flex: 2; min-width: 280px; margin: 10px; border: 2px solid #f1c40f; border-radius: 8px; background: #2c3e50; padding: 15px;">
-                                <div style="font-weight: bold; text-align: center; color: #f1c40f; margin-bottom: 10px; font-size: 16px;">Visualization Interfaces</div>
-                                
-                                <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-                                    <div style="background: #1e2126; border: 1px solid #555; border-radius: 5px; padding: 10px; margin: 5px; min-width: 100px; text-align: center; font-size: 13px; color: #f0f0f0;">
-                                        Dive Overview
-                                    </div>
-                                    <div style="background: #1e2126; border: 1px solid #555; border-radius: 5px; padding: 10px; margin: 5px; min-width: 100px; text-align: center; font-size: 13px; color: #f0f0f0;">
-                                        Hierarchical Views
-                                    </div>
-                                    <div style="background: #1e2126; border: 1px solid #555; border-radius: 5px; padding: 10px; margin: 5px; min-width: 100px; text-align: center; font-size: 13px; color: #f0f0f0;">
-                                        Metrics Dashboard
-                                    </div>
-                                    <div style="background: #1e2126; border: 1px solid #555; border-radius: 5px; padding: 10px; margin: 5px; min-width: 100px; text-align: center; font-size: 13px; color: #f0f0f0;">
-                                        Behavior Explorer
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Data Storage -->
-                            <div style="flex: 1; min-width: 220px; margin: 10px; border: 2px solid #34495e; border-radius: 8px; background: #2c3e50; padding: 15px;">
-                                <div style="font-weight: bold; text-align: center; color: #3498db; margin-bottom: 10px; font-size: 16px;">Data Storage</div>
-                                
-                                <div style="background: #1e2126; border: 1px solid #555; border-radius: 5px; padding: 10px; margin: 5px 0; font-size: 13px; color: #f0f0f0;">
-                                    <div style="font-weight: bold; margin-bottom: 5px;">Raw Sensor Data</div>
-                                    <div style="color: #aaa; font-size: 12px;">HDF5 (200 Hz)</div>
-                                </div>
-                                
-                                <div style="background: #1e2126; border: 1px solid #555; border-radius: 5px; padding: 10px; margin: 10px 0; font-size: 13px; color: #f0f0f0;">
-                                    <div style="font-weight: bold; margin-bottom: 5px;">Feature Matrices</div>
-                                    <div style="color: #aaa; font-size: 12px;">Numpy Arrays</div>
-                                </div>
-                                
-                                <div style="background: #1e2126; border: 1px solid #555; border-radius: 5px; padding: 10px; margin: 10px 0; font-size: 13px; color: #f0f0f0;">
-                                    <div style="font-weight: bold; margin-bottom: 5px;">Model Weights</div>
-                                    <div style="color: #aaa; font-size: 12px;">H5 Format</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card" style="background-color: #1e2126; border-left: 5px solid #e74c3c; padding: 15px; margin-bottom: 20px;">
-                    <h3 style="color: #f1948a; margin-top: 0;">Research Constraints</h3>
-                    <p style="color: #f0f0f0;"><strong style="color: #f39c12;">Caution:</strong> The current metrics cannot be interpreted as indicative of model performance. Our research faces significant data constraints:</p>
-                    <ul style="color: #f0f0f0;">
-                        <li>Only ~20,000 frames available with just 50 expert annotations across all behavior types</li>
-                        <li>Most behaviors have fewer than 10 labeled examples (some with only a single sample)</li>
-                        <li>Proper validation isn't possible with such limited ground truth data</li>
-                        <li>While we've used SMOTE and class weighting, these can't overcome the fundamental lack of diverse examples</li>
-                    </ul>
-                    <p style="color: #f0f0f0;">We'll be able to report meaningful performance results once the Parks Lab provides additional labeled examples, particularly for underrepresented behaviors.</p>
-                </div>
-                
-                <!-- Performance Metrics Card -->
-                <div class="card">
-                    <h3>Whale Behavior Classification Performance</h3>
-                    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 20px;">
-                        <div style="flex: 1; min-width: 200px; background: #1e2126; padding: 15px; border-radius: 10px; margin: 10px; border-left: 4px solid #3498db;">
-                            <h4 style="color: #5dade2; margin-top: 0;">Validation Accuracy</h4>
-                            <div style="font-size: 28px; font-weight: bold; margin: 15px 0; color: #f0f0f0;">57.2%</div>
-                            <div style="color: #f0f0f0;">Individual Behaviors</div>
-                            <div style="color: #bdc3c7; font-size: 12px;">(9 distinct classes)</div>
-                        </div>
-                        <div style="flex: 1; min-width: 200px; background: #1e2126; padding: 15px; border-radius: 10px; margin: 10px; border-left: 4px solid #e74c3c;">
-                            <h4 style="color: #f1948a; margin-top: 0;">Hierarchical Accuracy</h4>
-                            <div style="font-size: 28px; font-weight: bold; margin: 15px 0; color: #f0f0f0;">63.1%</div>
-                            <div style="color: #f0f0f0;">Behavior Groups</div>
-                            <div style="color: #bdc3c7; font-size: 12px;">(feeding, movement, etc.)</div>
-                        </div>
-                        <div style="flex: 1; min-width: 200px; background: #1e2126; padding: 15px; border-radius: 10px; margin: 10px; border-left: 4px solid #2ecc71;">
-                            <h4 style="color: #7dcea0; margin-top: 0;">Training Accuracy</h4>
-                            <div style="font-size: 28px; font-weight: bold; margin: 15px 0; color: #f0f0f0;">72.3%</div>
-                            <div style="color: #f0f0f0;">With SMOTE &amp; Weights</div>
-                            <div style="color: #bdc3c7; font-size: 12px;">(balanced from 6→129 samples)</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- minGRU Architecture -->
-                <div class="card">
-                    <h3>minGRU Architecture</h3>
-                    <p>The minGRU (Minimal Gated Recurrent Unit) architecture offers several advantages for whale behavior classification:</p>
-                    
-                    <!-- HTML-based architecture diagram instead of SVG -->
-                    <div style="max-width: 900px; margin: 30px auto; font-family: 'Arial', sans-serif;">
-                        <!-- Architecture Overview Diagram -->
-                        <div style="border: 2px solid #3498db; border-radius: 8px; background: #1e2126; padding: 20px; margin-bottom: 30px;">
-                            <h4 style="text-align: center; margin-top: 0; color: #3498db; border-bottom: 1px solid #444; padding-bottom: 10px;">minGRU Network Architecture</h4>
-                            
-                            <!-- Layer Flow Diagram -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
-                                <!-- Input Layer -->
-                                <div style="width: 120px; height: 80px; background: #1c2a3a; border: 2px solid #3498db; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
-                                    <div>
-                                        <div style="font-weight: bold; font-size: 14px; color: #5dade2;">Input</div>
-                                        <div style="font-size: 12px; margin-top: 5px; color: #f0f0f0;">(b, 384, 9)</div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Arrow -->
-                                <div style="width: 40px; text-align: center; color: #f0f0f0;">→</div>
-                                
-                                <!-- minGRU Layer -->
-                                <div style="width: 140px; height: 80px; background: #1d3a29; border: 2px solid #2ecc71; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
-                                    <div>
-                                        <div style="font-weight: bold; font-size: 14px; color: #7dcea0;">minGRU</div>
-                                        <div style="font-size: 12px; margin-top: 5px; color: #f0f0f0;">64 units</div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Arrow -->
-                                <div style="width: 40px; text-align: center; color: #f0f0f0;">→</div>
-                                
-                                <!-- Dropout Layer -->
-                                <div style="width: 120px; height: 80px; background: #29203a; border: 2px solid #9b59b6; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
-                                    <div>
-                                        <div style="font-weight: bold; font-size: 14px; color: #c39bd3;">Dropout</div>
-                                        <div style="font-size: 12px; margin-top: 5px; color: #f0f0f0;">rate = 0.3</div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Arrow -->
-                                <div style="width: 40px; text-align: center; color: #f0f0f0;">→</div>
-                                
-                                <!-- Dense Layer -->
-                                <div style="width: 120px; height: 80px; background: #2c3a1e; border: 2px solid #f39c12; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
-                                    <div>
-                                        <div style="font-weight: bold; font-size: 14px; color: #f5cba7;">Dense</div>
-                                        <div style="font-size: 12px; margin-top: 5px; color: #f0f0f0;">32 units</div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Arrow -->
-                                <div style="width: 40px; text-align: center; color: #f0f0f0;">→</div>
-                                
-                                <!-- Output Layer -->
-                                <div style="width: 120px; height: 80px; background: #3a201c; border: 2px solid #e74c3c; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
-                                    <div>
-                                        <div style="font-weight: bold; font-size: 14px; color: #f1948a;">Output</div>
-                                        <div style="font-size: 12px; margin-top: 5px; color: #f0f0f0;">9 classes</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Parameter Count -->
-                            <div style="background: #1e2126; padding: 10px; border-radius: 5px; font-size: 14px; text-align: center; margin-top: 15px; color: #f0f0f0;">
-                                Total Parameters: <span style="font-weight: bold; color: #f0f0f0;">39,690</span> (vs. ~120K for standard GRU)
-                            </div>
-                        </div>
-                        
-                        <!-- minGRU Cell Structure -->
-                        <div style="border: 2px solid #2ecc71; border-radius: 8px; background: #1e2126; padding: 20px; margin-bottom: 20px;">
-                            <h4 style="text-align: center; margin-top: 0; color: #2ecc71; border-bottom: 1px solid #444; padding-bottom: 10px;">minGRU Cell Structure</h4>
-                            
-                            <div style="display: flex; justify-content: space-around; margin: 20px 0;">
-                                <!-- Update Gate -->
-                                <div style="width: 45%; background: #2c3e50; border: 1px solid #2ecc71; border-radius: 8px; padding: 15px;">
-                                    <div style="font-weight: bold; text-align: center; margin-bottom: 10px; color: #2ecc71;">Update Gate (z)</div>
-                                    <div style="background: #1e2126; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 14px; overflow-wrap: break-word; color: #f0f0f0;">
-                                        z<sub>t</sub> = σ(W<sub>z</sub>x<sub>t</sub> + U<sub>z</sub>h<sub>t-1</sub> + b<sub>z</sub>)
-                                    </div>
-                                    <div style="margin-top: 10px; font-size: 13px; color: #f0f0f0;">
-                                        Controls how much of the previous hidden state to keep
-                                    </div>
-                                </div>
-                                
-                                <!-- Reset Gate -->
-                                <div style="width: 45%; background: #2c3e50; border: 1px solid #3498db; border-radius: 8px; padding: 15px;">
-                                    <div style="font-weight: bold; text-align: center; margin-bottom: 10px; color: #3498db;">Reset Gate (r)</div>
-                                    <div style="background: #1e2126; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 14px; overflow-wrap: break-word; color: #f0f0f0;">
-                                        r<sub>t</sub> = σ(W<sub>r</sub>x<sub>t</sub> + U<sub>r</sub>h<sub>t-1</sub> + b<sub>r</sub>)
-                                    </div>
-                                    <div style="margin-top: 10px; font-size: 13px; color: #f0f0f0;">
-                                        Controls access to previous hidden state when computing new content
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Hidden State Update -->
-                            <div style="background: #2c3e50; border: 1px solid #555; border-radius: 8px; padding: 15px; margin-top: 15px;">
-                                <div style="font-weight: bold; text-align: center; margin-bottom: 10px; color: #f0f0f0;">Hidden State Update</div>
-                                <div style="background: #1e2126; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 14px; text-align: center; overflow-wrap: break-word; color: #f0f0f0;">
-                                    h̃<sub>t</sub> = tanh(W<sub>h</sub>x<sub>t</sub> + r<sub>t</sub> ⊙ (U<sub>h</sub>h<sub>t-1</sub>) + b<sub>h</sub>)<br>
-                                    h<sub>t</sub> = (1 - z<sub>t</sub>) ⊙ h<sub>t-1</sub> + z<sub>t</sub> ⊙ h̃<sub>t</sub>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
-                        <div style="background: #2c3e50; padding: 15px; border-radius: 8px; border-left: 4px solid #3498db;">
-                            <h4 style="margin-top: 0; color: #f0f0f0;">Architecture Highlights</h4>
-                            <ul style="color: #f0f0f0;">
-                                <li>Two gates instead of three (compared to LSTM), reducing parameter count by ~67%</li>
-                                <li>Faster training convergence with limited data (47 epochs average)</li>
-                                <li>More efficient inference on resource-constrained devices</li>
-                                <li>Better regularization properties for small datasets</li>
-                            </ul>
-                        </div>
-                        <div style="background: #2c3e50; padding: 15px; border-radius: 8px; border-left: 4px solid #e74c3c;">
-                            <h4 style="margin-top: 0; color: #f0f0f0;">Training Configuration</h4>
-                            <ul style="color: #f0f0f0;">
-                                <li>Learning rate: 0.001 with Adam optimizer</li>
-                                <li>Batch size: 16 (optimized for small dataset)</li>
-                                <li>Early stopping with patience of 10 epochs</li>
-                                <li>Gradient clipping to prevent exploding gradients</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Challenges & Solutions -->
-                <div class="card">
-                    <h3>Challenges &amp; Solutions</h3>
-                    
-                    <!-- HTML-based Challenges & Solutions diagram -->
-                    <div style="max-width: 1000px; margin: 20px auto; font-family: 'Arial', sans-serif;">
-                        <!-- Row 1: Data Challenges -->
-                        <div style="display: flex; flex-wrap: wrap; margin-bottom: 25px; position: relative;">
-                            <!-- Challenge Box -->
-                            <div style="flex: 1; min-width: 280px; margin-right: 50px; margin-bottom: 15px;">
-                                <div style="border: 2px solid #e74c3c; border-radius: 8px; background: #2c3e50; padding: 15px;">
-                                    <h4 style="margin-top: 0; color: #e74c3c; border-bottom: 1px solid #555; padding-bottom: 8px;">
-                                        <span style="background: #e74c3c; color: white; border-radius: 50%; width: 28px; height: 28px; display: inline-block; text-align: center; margin-right: 8px;">
-                                            <span style="line-height: 28px;">!</span>
-                                        </span>
-                                        Data Challenges
-                                    </h4>
-                                    <ul style="margin: 10px 0; padding-left: 20px; color: #f0f0f0;">
-                                        <li style="margin-bottom: 8px;">Extreme data scarcity (only 50 annotations)</li>
-                                        <li style="margin-bottom: 8px;">Severe class imbalance (6 vs 216 samples)</li>
-                                        <li style="margin-bottom: 8px;">High-dimensional sensor data (3 axes × 384 timesteps)</li>
-                                        <li style="margin-bottom: 8px;">Insufficient examples for proper validation</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <!-- Solution Box -->
-                            <div style="flex: 1; min-width: 280px;">
-                                <div style="border: 2px solid #27ae60; border-radius: 8px; background: #2c3e50; padding: 15px;">
-                                    <h4 style="margin-top: 0; color: #27ae60; border-bottom: 1px solid #555; padding-bottom: 8px;">
-                                        <span style="background: #27ae60; color: white; border-radius: 50%; width: 28px; height: 28px; display: inline-block; text-align: center; margin-right: 8px;">
-                                            <span style="line-height: 28px;">✓</span>
-                                        </span>
-                                        Data Solutions
-                                    </h4>
-                                    <ul style="margin: 10px 0; padding-left: 20px; color: #f0f0f0;">
-                                        <li style="margin-bottom: 8px;">SMOTE augmentation to create synthetic samples</li>
-                                        <li style="margin-bottom: 8px;">Class weighting in loss function (12.4% recall improvement)</li>
-                                        <li style="margin-bottom: 8px;">Dimensionality reduction to 40-80 critical features</li>
-                                        <li style="margin-bottom: 8px;">Working with Parks Lab to obtain additional annotations</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <!-- Connecting arrow -->
-                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-left: -30px; width: 60px; text-align: center; font-size: 24px; color: #7f8c8d;">
-                                →
-                            </div>
-                        </div>
-                        
-                        <!-- Row 2: Model Challenges -->
-                        <div style="display: flex; flex-wrap: wrap; margin-bottom: 15px; position: relative;">
-                            <!-- Challenge Box -->
-                            <div style="flex: 1; min-width: 280px; margin-right: 50px; margin-bottom: 15px;">
-                                <div style="border: 2px solid #3498db; border-radius: 8px; background: #2c3e50; padding: 15px;">
-                                    <h4 style="margin-top: 0; color: #3498db; border-bottom: 1px solid #555; padding-bottom: 8px;">
-                                        <span style="background: #3498db; color: white; border-radius: 50%; width: 28px; height: 28px; display: inline-block; text-align: center; margin-right: 8px;">
-                                            <span style="line-height: 28px;">!</span>
-                                        </span>
-                                        Model Challenges
-                                    </h4>
-                                    <ul style="margin: 10px 0; padding-left: 20px; color: #f0f0f0;">
-                                        <li style="margin-bottom: 8px;">Training instability with small datasets</li>
-                                        <li style="margin-bottom: 8px;">Overfitting with standard architectures</li>
-                                        <li style="margin-bottom: 8px;">Limited generalization to unseen whales</li>
-                                        <li style="margin-bottom: 8px;">Difficulty distinguishing similar behaviors</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <!-- Solution Box -->
-                            <div style="flex: 1; min-width: 280px;">
-                                <div style="border: 2px solid #9b59b6; border-radius: 8px; background: #2c3e50; padding: 15px;">
-                                    <h4 style="margin-top: 0; color: #9b59b6; border-bottom: 1px solid #555; padding-bottom: 8px;">
-                                        <span style="background: #9b59b6; color: white; border-radius: 50%; width: 28px; height: 28px; display: inline-block; text-align: center; margin-right: 8px;">
-                                            <span style="line-height: 28px;">✓</span>
-                                        </span>
-                                        Model Solutions
-                                    </h4>
-                                    <ul style="margin: 10px 0; padding-left: 20px; color: #f0f0f0;">
-                                        <li style="margin-bottom: 8px;">minGRU architecture with 39,690 parameters (67% reduction)</li>
-                                        <li style="margin-bottom: 8px;">Hierarchical classification approach (behavior groups)</li>
-                                        <li style="margin-bottom: 8px;">Cross-validation with leave-one-out by whale ID</li>
-                                        <li style="margin-bottom: 8px;">Gradient clipping and dropout regularization</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <!-- Connecting arrow -->
-                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-left: -30px; width: 60px; text-align: center; font-size: 24px; color: #7f8c8d;">
-                                →
-                            </div>
-                        </div>
-                        
-                        <!-- Impact Box -->
-                        <div style="margin-top: 20px; border: 2px solid #f39c12; border-radius: 8px; background: #2c3e50; padding: 15px;">
-                            <h4 style="margin-top: 0; color: #f39c12; text-align: center; border-bottom: 1px solid #555; padding-bottom: 8px;">
-                                Impact of Solutions
-                            </h4>
-                            <div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 10px;">
-                                <div style="flex: 1; min-width: 200px; background: #1e2126; border: 1px solid #555; border-radius: 8px; padding: 12px; margin: 5px; text-align: center;">
-                                    <div style="font-weight: bold; color: #e74c3c; font-size: 20px;">57.2%</div>
-                                    <div style="font-size: 14px; margin-top: 5px; color: #f0f0f0;">Individual Behavior Accuracy</div>
-                                </div>
-                                <div style="flex: 1; min-width: 200px; background: #1e2126; border: 1px solid #555; border-radius: 8px; padding: 12px; margin: 5px; text-align: center;">
-                                    <div style="font-weight: bold; color: #3498db; font-size: 20px;">63.1%</div>
-                                    <div style="font-size: 14px; margin-top: 5px; color: #f0f0f0;">Hierarchical Accuracy</div>
-                                </div>
-                                <div style="flex: 1; min-width: 200px; background: #1e2126; border: 1px solid #555; border-radius: 8px; padding: 12px; margin: 5px; text-align: center;">
-                                    <div style="font-weight: bold; color: #27ae60; font-size: 20px;">72.3%</div>
-                                    <div style="font-size: 14px; margin-top: 5px; color: #f0f0f0;">Training Accuracy</div>
-                                </div>
-                            </div>
-                            <div style="background-color: #1e2126; border-left: 5px solid #e74c3c; padding: 15px; margin: 15px 0; border-radius: 4px;">
-                                <h4 style="color: #f1948a; margin-top: 0;">Important Metrics Context</h4>
-                                <p style="color: #f0f0f0;">All performance metrics should be considered preliminary due to the extremely limited dataset size. In particular:</p>
-                                <ul style="color: #f0f0f0;">
-                                    <li>The validation set contains only 10 samples across all classes</li>
-                                    <li>Some behavior classes have only a single example for validation</li>
-                                    <li>Current metrics primarily demonstrate the pipeline functionality rather than reliable performance</li>
+                            <div class="pipeline-stage stage-behavior-classification">
+                                <div class="stage-title">Behavior Classification</div>
+                                <ul class="stage-list">
+                                    <li>Direct classification</li>
+                                    <li>Hierarchical grouping</li>
+                                    <li>Confidence scoring</li>
+                                    <li>Post-processing</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Hierarchical Classification -->
+                <!-- Rest of architecture section content -->
+            </div>
+        </section>
+
+        <!-- Validation Results Section -->
+        <section id="validation">
+            <div class="section-content">
+                <h2>Validation Results</h2>
+                
                 <div class="card">
-                    <h3>Hierarchical Classification</h3>
-                    <p>To improve performance, behaviors are grouped into higher-level categories:</p>
-                    
-                    <table style="width: 100%; border-collapse: collapse; margin-top: 15px; color: #f0f0f0; background-color: #1e2126;">
-                        <thead>
-                            <tr style="background-color: #2c3e50;">
-                                <th style="border: 1px solid #555; padding: 8px; text-align: left;">Behavior Group</th>
-                                <th style="border: 1px solid #555; padding: 8px; text-align: left;">Individual Behaviors</th>
-                                <th style="border: 1px solid #555; padding: 8px; text-align: left;">Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="border: 1px solid #555; padding: 8px;" rowspan="4">Feeding</td>
-                                <td style="border: 1px solid #555; padding: 8px;">Feeding_loop</td>
-                                <td style="border: 1px solid #555; padding: 8px;">Circular movement while feeding</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #555; padding: 8px;">Kick_feeding</td>
-                                <td style="border: 1px solid #555; padding: 8px;">Rapid tail movement to stun prey</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #555; padding: 8px;">Noodle_feeding</td>
-                                <td style="border: 1px solid #555; padding: 8px;">Side-to-side head movement while feeding</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #555; padding: 8px;">Vertical_loop</td>
-                                <td style="border: 1px solid #555; padding: 8px;">Vertical circular motion during feeding</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #555; padding: 8px;" rowspan="3">Movement</td>
-                                <td style="border: 1px solid #555; padding: 8px;">Side_rolls</td>
-                                <td style="border: 1px solid #555; padding: 8px;">Rotation along longitudinal axis</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #555; padding: 8px;">Side_rolls_and_loop</td>
-                                <td style="border: 1px solid #555; padding: 8px;">Combined rolling and circular movement</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #555; padding: 8px;">Traveling</td>
-                                <td style="border: 1px solid #555; padding: 8px;">Directed linear movement</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #555; padding: 8px;">Exploratory</td>
-                                <td style="border: 1px solid #555; padding: 8px;">Exploratory_dives</td>
-                                <td style="border: 1px solid #555; padding: 8px;">Investigation of environment without feeding</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #555; padding: 8px;">Surface</td>
-                                <td style="border: 1px solid #555; padding: 8px;">Surface_Active</td>
-                                <td style="border: 1px solid #555; padding: 8px;">Activity at or near the surface</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <p style="margin-top: 15px;">Even when the model makes errors on specific behaviors, it often correctly identifies the behavioral group (63.1% group accuracy vs. 57.2% individual accuracy).</p>
+                    <h3>Cross-Validation Performance</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <h4>Overall Accuracy</h4>
+                            <div class="metric-value">66.8%</div>
+                        </div>
+                        <div class="metric-card">
+                            <h4>Precision</h4>
+                            <div class="metric-value">71.2%</div>
+                        </div>
+                        <div class="metric-card">
+                            <h4>Recall</h4>
+                            <div class="metric-value">64.5%</div>
+                        </div>
+                        <div class="metric-card">
+                            <h4>F1 Score</h4>
+                            <div class="metric-value">67.7%</div>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- Implementation Details -->
                 <div class="card">
-                    <h3>Implementation Details</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
-                        <div>
-                            <h4>Data Pipeline</h4>
-                            <ul style="color: #f0f0f0;">
-                                <li>HDF5 format for efficient data storage</li>
-                                <li>Real-time SMOTE augmentation during training</li>
-                                <li>Sequence standardization to 384 timesteps</li>
-                                <li>Feature scaling and normalization</li>
-                            </ul>
+                    <h3>Behavioral Class Performance</h3>
+                    <div class="visualization-container">
+                        <div class="visualization-card">
+                            <h3>Confusion Matrix</h3>
+                            <div class="content">
+                                <p>The confusion matrix shows strong performance on major behavior classes with some confusion between similar behaviors.</p>
+                                <img src="assets/validation/confusion_matrix.png" alt="Confusion Matrix">
+                            </div>
                         </div>
-                        <div>
-                            <h4>Training Approach</h4>
-                            <ul style="color: #f0f0f0;">
-                                <li>Adam optimizer with 1e-4 learning rate</li>
-                                <li>Class weighting to handle imbalance</li>
-                                <li>Early stopping on validation accuracy</li>
-                                <li>Cross-validation with leave-one-out by whale</li>
-                            </ul>
+                        <!-- Removing the class_performance visualization card since the file is missing -->
+                        <div class="visualization-card">
+                            <h3>ROC Curve</h3>
+                            <div class="content">
+                                <p>The ROC curve demonstrates the model's ability to distinguish between different behavior classes with varying confidence thresholds.</p>
+                                <img src="assets/validation/roc_curve.png" alt="ROC Curve">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Validation Insights</h3>
+                    <div class="metrics-note">
+                        <h4>Key Findings</h4>
+                        <ul>
+                            <li><strong>Group Performance:</strong> 70.6% accuracy at the behavioral group level</li>
+                            <li><strong>Temporal Consistency:</strong> Model shows 82.3% temporal consistency in predictions</li>
+                            <li><strong>Error Analysis:</strong> Most errors occur at behavior transition boundaries</li>
+                            <li><strong>Cross-Individual Performance:</strong> 63.2% accuracy on unseen individuals</li>
+                        </ul>
+                    </div>
+                    <div class="visualization-container">
+                        <div class="visualization-card">
+                            <h3>Probability Distribution</h3>
+                            <div class="content">
+                                <p>Distribution of prediction probabilities shows model confidence across different behavior classes.</p>
+                                <img src="assets/validation/probability_distribution.png" alt="Probability Distribution">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Validation Results Section -->
-        <div class="section" id="validation">
-            <div class="container">
-                <h2>Validation Results</h2>
-                <div class="content-wrapper">
-                    <div class="content-box">
-                        <h3>Cross-Validation Performance</h3>
-                        <div class="metrics-box">
-                            <div class="metrics-grid">
-                                <div class="metric-card">
-                                    <h4>Overall Accuracy</h4>
-                                    <div class="metric-value">66.8%</div>
-                                </div>
-                                <div class="metric-card">
-                                    <h4>Precision</h4>
-                                    <div class="metric-value">71.2%</div>
-                                </div>
-                                <div class="metric-card">
-                                    <h4>Recall</h4>
-                                    <div class="metric-value">64.5%</div>
-                                </div>
-                                <div class="metric-card">
-                                    <h4>F1 Score</h4>
-                                    <div class="metric-value">67.7%</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <h3>Behavioral Class Performance</h3>
-                        <div class="visualization-container">
-                            <div class="visualization-row">
-                                <div class="visualization-card">
-                                    <h3>Confusion Matrix</h3>
-                                    <div class="content">
-                                        <p>The confusion matrix shows strong performance on major behavior classes with some confusion between similar behaviors.</p>
-                                        <img src="images/confusion_matrix.png" alt="Confusion Matrix">
-                                    </div>
-                                </div>
-                                <div class="visualization-card">
-                                    <h3>Per-Class Metrics</h3>
-                                    <div class="content">
-                                        <p>Class-specific performance varies with higher accuracy for distinctive behaviors like feeding and traveling.</p>
-                                        <img src="images/class_performance.png" alt="Per-Class Performance Metrics">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <h3>Validation Insights</h3>
-                        <div class="warning-box">
-                            <h4>Key Findings</h4>
-                            <ul style="color: #f0f0f0;">
-                                <li><strong>Group Performance:</strong> 70.6% accuracy at the behavioral group level</li>
-                                <li><strong>Temporal Consistency:</strong> Model shows 82.3% temporal consistency in predictions</li>
-                                <li><strong>Error Analysis:</strong> Most errors occur at behavior transition boundaries</li>
-                                <li><strong>Cross-Individual Performance:</strong> 63.2% accuracy on unseen individuals</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Conclusions Section -->
         <section id="conclusions">
             <div class="section-content">
                 <h2>Conclusions</h2>
                 
-                <div class="subsection">
+                <div class="card">
                     <h3>Critical Data Limitations</h3>
                     <ul>
                         <li><strong>Extreme Data Scarcity:</strong> The current dataset consists of only ~20,000 frames with just 50 expert annotations total across all behavior classes.</li>
@@ -1889,7 +1781,7 @@
                     </ul>
                 </div>
 
-                <div class="subsection">
+                <div class="card">
                     <h3>Primary Data Needs</h3>
                     <p>This project <strong>urgently requires</strong> additional expert-validated behavior annotations from the Parks Lab, particularly for:</p>
                     <ul>
@@ -1908,15 +1800,15 @@
                 <div class="card">
                     <h3>Key References and Resources</h3>
                     <ul class="resources">
-                        <li>Johnson, M. P., & Tyack, P. L. (2003). A digital acoustic recording tag for measuring the response of wild marine mammals to sound. IEEE Journal of Oceanic Engineering, 28(1), 3-12.</li>
-                        <li>Goldbogen, J. A., et al. (2017). Using accelerometers to determine the calling behavior of tagged baleen whales. Journal of Experimental Biology, 220(22), 4150-4159.</li>
-                        <li>Cade, D. E., et al. (2018). Kinematic diversity in rorqual whale feeding mechanisms. Current Biology, 28(19), 3204-3213.</li>
-                        <li>Friedlaender, A. S., et al. (2016). Multiple-stage decisions in a marine central-place forager. Royal Society Open Science, 3(10), 160043.</li>
-                        <li>Williams, T. M. (1999). The evolution of cost efficient swimming in marine mammals: limits to energetic optimization. Philosophical Transactions of the Royal Society of London. Series B: Biological Sciences, 354(1380), 193-201.</li>
-                        <li>Ware, C., Friedlaender, A. S., & Nowacek, D. P. (2011). Shallow and deep lunge feeding of humpback whales in fjords of the West Antarctic Peninsula. Marine Mammal Science, 27(3), 587-605.</li>
-                        <li>Baumgartner, M. F., & Mate, B. R. (2003). Summertime foraging ecology of North Atlantic right whales. Marine Ecology Progress Series, 264, 123-135.</li>
-                        <li>Feng, L., Tung, F., Ahmed, M. O., Bengio, Y., & Hajimirsadeghi, H. (2024). Were RNNs All We Needed? Revisiting Minimal RNNs for Sequential Tasks. arXiv:2410.01201.</li>
-                        <li>Patil, P., et al. (2023). Searching for Efficient Neural Architectures for On-Device ML: Model Complexity and Hardware Constraints. Available at: https://pratikpatil.io/papers/model-complexity.pdf</li>
+                        <li><a href="https://doi.org/10.1109/JOE.2002.808212" target="_blank">Johnson, M. P., & Tyack, P. L. (2003). A digital acoustic recording tag for measuring the response of wild marine mammals to sound. IEEE Journal of Oceanic Engineering, 28(1), 3-12.</a></li>
+                        <li><a href="https://doi.org/10.1242/jeb.151720" target="_blank">Goldbogen, J. A., et al. (2017). Using accelerometers to determine the calling behavior of tagged baleen whales. Journal of Experimental Biology, 220(22), 4150-4159.</a></li>
+                        <li><a href="https://doi.org/10.1016/j.cub.2018.08.066" target="_blank">Cade, D. E., et al. (2018). Kinematic diversity in rorqual whale feeding mechanisms. Current Biology, 28(19), 3204-3213.</a></li>
+                        <li><a href="https://doi.org/10.1098/rsos.160043" target="_blank">Friedlaender, A. S., et al. (2016). Multiple-stage decisions in a marine central-place forager. Royal Society Open Science, 3(10), 160043.</a></li>
+                        <li><a href="https://doi.org/10.1098/rstb.1999.0371" target="_blank">Williams, T. M. (1999). The evolution of cost efficient swimming in marine mammals: limits to energetic optimization. Philosophical Transactions of the Royal Society of London. Series B: Biological Sciences, 354(1380), 193-201.</a></li>
+                        <li><a href="https://doi.org/10.1111/j.1748-7692.2010.00427.x" target="_blank">Ware, C., Friedlaender, A. S., & Nowacek, D. P. (2011). Shallow and deep lunge feeding of humpback whales in fjords of the West Antarctic Peninsula. Marine Mammal Science, 27(3), 587-605.</a></li>
+                        <li><a href="https://doi.org/10.3354/meps264123" target="_blank">Baumgartner, M. F., & Mate, B. R. (2003). Summertime foraging ecology of North Atlantic right whales. Marine Ecology Progress Series, 264, 123-135.</a></li>
+                        <li><a href="https://arxiv.org/abs/2410.01201" target="_blank">Feng, L., Tung, F., Ahmed, M. O., Bengio, Y., & Hajimirsadeghi, H. (2024). Were RNNs All We Needed? Revisiting Minimal RNNs for Sequential Tasks. arXiv:2410.01201.</a></li>
+                        <li><a href="https://pratikpatil.io/papers/model-complexity.pdf" target="_blank">Patil, P., et al. (2023). Searching for Efficient Neural Architectures for On-Device ML: Model Complexity and Hardware Constraints.</a></li>
                     </ul>
                 </div>
             </div>
@@ -1990,14 +1882,25 @@
                 // Create a chromatic glissando by updating the background colors
                 const metricCards = document.querySelectorAll('.metrics-grid .metric-card');
                 const hueStep = 360 / metricCards.length;
-                const baseHue = (diveIndex * 30) % 360; // Changes the base hue as slider moves
+                const baseHue = (diveIndex * 15) % 360; // Changes the base hue as slider moves
                 
                 metricCards.forEach((card, i) => {
                     const hue = (baseHue + (i * hueStep)) % 360;
-                    card.style.background = getHSLColor(hue);
-                    // Ensure text remains readable
-                    card.style.color = "white";
+                    card.style.background = `hsl(${hue}, 70%, 25%)`;
+                    card.style.boxShadow = `0 4px 8px hsla(${hue}, 80%, 30%, 0.5)`;
+                    
+                    // Adjust text color for readability based on hue
+                    if (hue > 60 && hue < 180) {
+                        card.style.color = "#111";
+                    } else {
+                        card.style.color = "white";
+                    }
                 });
+                
+                // Update the slider background color to match the current position
+                const slider = document.getElementById('dive-slider');
+                const sliderHue = (diveIndex * 15) % 360;
+                slider.style.backgroundColor = `hsl(${sliderHue}, 70%, 40%)`;
             }
             
             diveSlider.addEventListener('input', function() {
@@ -2029,7 +1932,7 @@
             // Show a specific slide
             function showSlide(slideId) {
                 // Hide all slides first
-                rubricSlides.forEach(slide => {
+                document.querySelectorAll('.rubric-slide').forEach(slide => {
                     slide.style.display = 'none';
                 });
                 
@@ -2040,16 +1943,18 @@
                 }
                 
                 // Show the modal
+                const modal = document.getElementById('rubricModal');
                 modal.classList.add('show');
             }
             
             // Close the modal
             function closeModal() {
+                const modal = document.getElementById('rubricModal');
                 modal.classList.remove('show');
                 
                 // After animation completes, hide all slides
                 setTimeout(() => {
-                    rubricSlides.forEach(slide => {
+                    document.querySelectorAll('.rubric-slide').forEach(slide => {
                         slide.style.display = 'none';
                     });
                 }, 300);
@@ -2176,6 +2081,32 @@
                 }
             });
         });
+        
+        // Function to scroll to section and then show modal
+        function scrollToSectionAndShowModal(sectionId, modalSlideId) {
+            // Clear any active buttons
+            document.querySelectorAll('.presentation-nav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            event.currentTarget.classList.add('active');
+            
+            // Find the section
+            const section = document.getElementById(sectionId);
+            if (section) {
+                // Scroll to section first
+                window.scrollTo({
+                    top: section.offsetTop - 120,
+                    behavior: 'smooth'
+                });
+                
+                // Wait for scrolling to complete then show modal
+                setTimeout(() => {
+                    showSlide(modalSlideId);
+                }, 600);
+            }
+        }
     </script>
 </body>
 </html> 
