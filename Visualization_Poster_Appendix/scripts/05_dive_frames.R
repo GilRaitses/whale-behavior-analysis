@@ -34,14 +34,13 @@ create_dive_frames <- function(hdf5_data, output_dir) {
   # Get dark theme from utility function
   dark_theme <- create_dark_theme(background_color = "#1A1A1A", text_color = "white")
   
-  # Set max number of dives (limit to 14)
+  # Get total number of dives without limiting to 14
   num_dives <- ncol(dive_indices)
-  max_dives <- min(num_dives, 14)
   
-  cat("Processing", max_dives, "dives\n")
+  cat("Processing", num_dives, "dives\n")
   
   # Process each dive
-  for (i in 1:max_dives) {
+  for (i in 1:num_dives) {
     # Get indices from the 3×N matrix (rows: start, max, end)
     start_idx <- dive_indices[1, i]
     max_depth_idx <- dive_indices[2, i]
@@ -242,6 +241,6 @@ create_dive_frames <- function(hdf5_data, output_dir) {
     )
   }
   
-  cat(sprintf("Saved %d individual dive plots to %s\n", max_dives, dive_frames_dir))
+  cat(sprintf("Saved %d individual dive plots to %s\n", num_dives, dive_frames_dir))
   return(dive_frames_dir)
 } 
