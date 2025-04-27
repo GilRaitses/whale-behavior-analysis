@@ -1,0 +1,39 @@
+# Whale Behavior Analysis - Data Configuration
+# This file defines the paths to different data elements in the HDF5 file
+
+# Paths to data elements
+paths:
+  # Data paths
+  depth: "/depth/values"
+  eti: "/eti/values"
+  pitch: "/data/pitch"
+  roll: "/data/roll"
+  head: "/data/head"
+  acceleration_x: "/data/Aw.1"
+  acceleration_y: "/data/Aw.2"
+  acceleration_z: "/data/Aw.3"
+  dive_indices: "/dives/dive_indices"
+  dive_segments: "/dives/segments"  # Path to dive segments for attributes
+  sample_rate: "/analysis/metadata/sample_rate"
+  min_dive_depth: "/analysis/metadata/min_dive_depth"
+  min_dive_duration: "/analysis/metadata/min_dive_duration"
+  
+  # Annotation paths
+  annotations_root: "/annotations"
+  behavior_types: "/behaviors/types"
+  
+  # Derived metrics
+  jerk: "/analysis/animal_frame_metrics/jerk_magnitude"
+  odba: "/analysis/animal_frame_metrics/odba"
+  vdba: "/analysis/animal_frame_metrics/vdba"
+  
+  # Dive-level metrics
+  dive_odba: "/dives/metrics/odba"
+  dive_vdba: "/dives/metrics/vdba"
+  
+  # Dive phase metrics
+  descent_duration: "/dives/metrics/descent_duration"
+  descent_rate: "/dives/metrics/descent_rate"
+  bottom_duration: "/dives/metrics/bottom_duration"
+  ascent_duration: "/dives/metrics/ascent_duration"
+  ascent_rate: "/dives/metrics/ascent_rate"
