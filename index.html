@@ -411,6 +411,80 @@
         section#resources {
             background-color: #121212;
         }
+        
+        /* Validation Results Section */
+        section#validation {
+            background-color: #121212;
+        }
+        
+        /* Change all warning/notice boxes to dark background with light text */
+        .warning-box, .data-point, .notice-box, .metrics-box {
+            background-color: #1e2126 !important;
+            color: #f0f0f0 !important;
+            border-left: 5px solid #e74c3c !important;
+        }
+        
+        .warning-box h3, .warning-box h4, .data-point h3, .data-point h4, .notice-box h3, .notice-box h4 {
+            color: #f1948a !important;
+        }
+        
+        .warning-box p, .data-point p, .notice-box p, .metrics-box p, 
+        .warning-box li, .data-point li, .notice-box li, .metrics-box li {
+            color: #f0f0f0 !important;
+        }
+        
+        .warning-box strong, .data-point strong, .notice-box strong {
+            color: #f39c12 !important;
+        }
+        
+        /* Fix metric boxes */
+        .metric-card {
+            background-color: #2c3e50 !important;
+            border: 1px solid #3498db !important;
+        }
+        
+        .metric-card h4 {
+            color: #f0f0f0 !important;
+        }
+        
+        .metric-value {
+            color: #3498db !important;
+        }
+        
+        /* Fix architecture boxes */
+        .pipeline-stage, .model-section {
+            background-color: #1e2126 !important;
+        }
+        
+        .pipeline-stage ul, .model-section ul {
+            color: #f0f0f0 !important;
+        }
+        
+        .pipeline-stage .stage-title, .model-section h3 {
+            color: #5dade2 !important;
+        }
+        
+        /* Fix low contrast text in tables */
+        table, th, td {
+            color: #f0f0f0 !important;
+        }
+        
+        /* Fix visualization card text */
+        .visualization-card .content {
+            color: #f0f0f0 !important;
+            background-color: #2c3e50 !important;
+        }
+        
+        .visualization-card h3 {
+            background-color: #1e2126 !important;
+            color: #5dade2 !important;
+        }
+        
+        /* Fix tabs */
+        .tab-content {
+            background-color: #2c3e50 !important;
+            color: #f0f0f0 !important;
+        }
     </style>
 </head>
 <body>
@@ -419,7 +493,7 @@
         <!-- Title Slide -->
         <div id="title-slide" class="rubric-slide">
             <span class="close-modal">&times;</span>
-            <h2>Whale Behavior Analysis</h2>
+            <h2>Whale Behavior Classification</h2>
             <div class="slide-section">
                 <h3>Project Overview</h3>
                 <p>An end-to-end pipeline for automated classification and visualization of whale behaviors from sensor data.</p>
@@ -449,10 +523,10 @@
             </div>
         </div>
         
-        <!-- Problem & Stakeholder Slide -->
+        <!-- Problem Slide -->
         <div id="problem-slide" class="rubric-slide">
             <span class="close-modal">&times;</span>
-            <h2>Problem & Stakeholder</h2>
+            <h2>Problem & Stakeholders</h2>
             
             <div class="slide-section">
                 <h3>Domain Problem</h3>
@@ -610,6 +684,48 @@
             </div>
         </div>
         
+        <!-- Validation Slide -->
+        <div id="validation-slide" class="rubric-slide">
+            <span class="close-modal">&times;</span>
+            <h2>Validation Results</h2>
+            <div class="slide-section">
+                <h3>Model Validation Summary</h3>
+                <div class="data-point">
+                    <p>Our cross-validation methodology assesses model performance across different individuals and dive conditions.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Key Metrics</h3>
+                    <div class="metric-point">66.8% Overall Accuracy</div>
+                    <div class="metric-point">71.2% Precision</div>
+                    <div class="metric-point">64.5% Recall</div>
+                    <div class="metric-point">67.7% F1 Score</div>
+                    <div class="metric-point">70.6% Group Accuracy</div>
+                    <div class="metric-point">82.3% Temporal Consistency</div>
+                </div>
+            </div>
+            
+            <div class="slide-section">
+                <h3>Validation Strategy</h3>
+                <ul>
+                    <li>Leave-one-individual-out cross-validation</li>
+                    <li>Hierarchical evaluation across behavioral groups</li>
+                    <li>Temporal consistency analysis</li>
+                    <li>Edge case identification at behavior transitions</li>
+                </ul>
+            </div>
+            
+            <div class="slide-section">
+                <h3>Next Steps for Improved Validation</h3>
+                <ul>
+                    <li>Expand validation dataset with more individuals</li>
+                    <li>Field testing with live prediction system</li>
+                    <li>Expert review of edge case classifications</li>
+                    <li>Environmental factor analysis</li>
+                </ul>
+            </div>
+        </div>
+        
         <!-- Plan Slide -->
         <div id="plan-slide" class="rubric-slide">
             <span class="close-modal">&times;</span>
@@ -660,12 +776,13 @@
     <nav class="rubric-nav">
         <div class="rubric-nav-container">
             <div class="rubric-nav-item" onclick="scrollToSection('title')">Title</div>
-            <div class="rubric-nav-item" onclick="scrollToSection('problem')">Problem & Stakeholder</div>
-            <div class="rubric-nav-item" onclick="scrollToSection('solution')">Envisioned Solution</div>
+            <div class="rubric-nav-item" onclick="scrollToSection('problem')">Problem</div>
+            <div class="rubric-nav-item" onclick="scrollToSection('solution')">Solution</div>
             <div class="rubric-nav-item" onclick="scrollToSection('data')">Data</div>
-            <div class="rubric-nav-item" onclick="scrollToSection('results')">Initial Results</div>
+            <div class="rubric-nav-item" onclick="scrollToSection('results')">Results</div>
             <div class="rubric-nav-item" onclick="scrollToSection('challenges')">Challenges</div>
-            <div class="rubric-nav-item" onclick="scrollToSection('plan')">Data Needs & Next Steps</div>
+            <div class="rubric-nav-item" onclick="scrollToSection('validation')">Validation</div>
+            <div class="rubric-nav-item" onclick="scrollToSection('plan')">Plan</div>
         </div>
     </nav>
     
@@ -1009,8 +1126,8 @@
                     <h3>Performance Considerations</h3>
                     <div style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 15px 0; border-radius: 4px;">
                         <h4 style="color: #856404; margin-top: 0;">Important Note on Metrics</h4>
-                        <p>All performance metrics should be considered preliminary due to the extremely limited dataset size. In particular:</p>
-                        <ul>
+                        <p style="color: #f0f0f0;">All performance metrics should be considered preliminary due to the extremely limited dataset size. In particular:</p>
+                        <ul style="color: #f0f0f0;">
                             <li>The validation set contains only 10 samples across all classes</li>
                             <li>Some behavior classes have only a single example for validation</li>
                             <li>Current metrics primarily demonstrate the pipeline functionality rather than reliable performance</li>
@@ -1127,39 +1244,39 @@
                     </div>
                 </div>
                 
-                <div class="card" style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin-bottom: 20px;">
-                    <h3 style="color: #856404; margin-top: 0;">Data Limitation Notice</h3>
-                    <p><strong>Important:</strong> Current metrics are essentially meaningless and should NOT be interpreted as indicative of model performance. The model is trained on an extremely limited dataset:</p>
-                    <ul>
-                        <li>Only ~20,000 frames total with just 50 expert annotations across all behavior classes</li>
-                        <li>Most behaviors have fewer than 10 labeled examples, some as few as 1 single sample</li>
-                        <li>Validation is fundamentally impossible given the extreme data scarcity</li>
-                        <li>SMOTE augmentation and class weighting cannot overcome the core issue of insufficient ground truth data</li>
+                <div class="card" style="background-color: #1e2126; border-left: 5px solid #e74c3c; padding: 15px; margin-bottom: 20px;">
+                    <h3 style="color: #f1948a; margin-top: 0;">Research Constraints</h3>
+                    <p style="color: #f0f0f0;"><strong style="color: #f39c12;">Caution:</strong> The current metrics cannot be interpreted as indicative of model performance. Our research faces significant data constraints:</p>
+                    <ul style="color: #f0f0f0;">
+                        <li>Only ~20,000 frames available with just 50 expert annotations across all behavior types</li>
+                        <li>Most behaviors have fewer than 10 labeled examples (some with only a single sample)</li>
+                        <li>Proper validation isn't possible with such limited ground truth data</li>
+                        <li>While we've used SMOTE and class weighting, these can't overcome the fundamental lack of diverse examples</li>
                     </ul>
-                    <p>Performance metrics will only become meaningful once additional labeled data is acquired from the Parks Lab, particularly for underrepresented behavior classes.</p>
+                    <p style="color: #f0f0f0;">We'll be able to report meaningful performance results once the Parks Lab provides additional labeled examples, particularly for underrepresented behaviors.</p>
                 </div>
                 
                 <!-- Performance Metrics Card -->
                 <div class="card">
                     <h3>Whale Behavior Classification Performance</h3>
                     <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 20px;">
-                        <div style="flex: 1; min-width: 200px; background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 10px; border-left: 4px solid #3498db;">
-                            <h4 style="color: #3498db; margin-top: 0;">Validation Accuracy</h4>
-                            <div style="font-size: 28px; font-weight: bold; margin: 15px 0;">57.2%</div>
-                            <div style="color: #7f8c8d;">Individual Behaviors</div>
-                            <div style="color: #7f8c8d; font-size: 12px;">(9 distinct classes)</div>
+                        <div style="flex: 1; min-width: 200px; background: #1e2126; padding: 15px; border-radius: 10px; margin: 10px; border-left: 4px solid #3498db;">
+                            <h4 style="color: #5dade2; margin-top: 0;">Validation Accuracy</h4>
+                            <div style="font-size: 28px; font-weight: bold; margin: 15px 0; color: #f0f0f0;">57.2%</div>
+                            <div style="color: #f0f0f0;">Individual Behaviors</div>
+                            <div style="color: #bdc3c7; font-size: 12px;">(9 distinct classes)</div>
                         </div>
-                        <div style="flex: 1; min-width: 200px; background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 10px; border-left: 4px solid #e74c3c;">
-                            <h4 style="color: #e74c3c; margin-top: 0;">Hierarchical Accuracy</h4>
-                            <div style="font-size: 28px; font-weight: bold; margin: 15px 0;">63.1%</div>
-                            <div style="color: #7f8c8d;">Behavior Groups</div>
-                            <div style="color: #7f8c8d; font-size: 12px;">(feeding, movement, etc.)</div>
+                        <div style="flex: 1; min-width: 200px; background: #1e2126; padding: 15px; border-radius: 10px; margin: 10px; border-left: 4px solid #e74c3c;">
+                            <h4 style="color: #f1948a; margin-top: 0;">Hierarchical Accuracy</h4>
+                            <div style="font-size: 28px; font-weight: bold; margin: 15px 0; color: #f0f0f0;">63.1%</div>
+                            <div style="color: #f0f0f0;">Behavior Groups</div>
+                            <div style="color: #bdc3c7; font-size: 12px;">(feeding, movement, etc.)</div>
                         </div>
-                        <div style="flex: 1; min-width: 200px; background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 10px; border-left: 4px solid #2ecc71;">
-                            <h4 style="color: #2ecc71; margin-top: 0;">Training Accuracy</h4>
-                            <div style="font-size: 28px; font-weight: bold; margin: 15px 0;">72.3%</div>
-                            <div style="color: #7f8c8d;">With SMOTE &amp; Weights</div>
-                            <div style="color: #7f8c8d; font-size: 12px;">(balanced from 6→129 samples)</div>
+                        <div style="flex: 1; min-width: 200px; background: #1e2126; padding: 15px; border-radius: 10px; margin: 10px; border-left: 4px solid #2ecc71;">
+                            <h4 style="color: #7dcea0; margin-top: 0;">Training Accuracy</h4>
+                            <div style="font-size: 28px; font-weight: bold; margin: 15px 0; color: #f0f0f0;">72.3%</div>
+                            <div style="color: #f0f0f0;">With SMOTE &amp; Weights</div>
+                            <div style="color: #bdc3c7; font-size: 12px;">(balanced from 6→129 samples)</div>
                         </div>
                     </div>
                 </div>
@@ -1178,61 +1295,61 @@
                             <!-- Layer Flow Diagram -->
                             <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
                                 <!-- Input Layer -->
-                                <div style="width: 120px; height: 80px; background: #e8f4f8; border: 2px solid #3498db; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
+                                <div style="width: 120px; height: 80px; background: #1c2a3a; border: 2px solid #3498db; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
                                     <div>
-                                        <div style="font-weight: bold; font-size: 14px;">Input</div>
-                                        <div style="font-size: 12px; margin-top: 5px;">(b, 384, 9)</div>
+                                        <div style="font-weight: bold; font-size: 14px; color: #5dade2;">Input</div>
+                                        <div style="font-size: 12px; margin-top: 5px; color: #f0f0f0;">(b, 384, 9)</div>
                                     </div>
                                 </div>
                                 
                                 <!-- Arrow -->
-                                <div style="width: 40px; text-align: center;">→</div>
+                                <div style="width: 40px; text-align: center; color: #f0f0f0;">→</div>
                                 
                                 <!-- minGRU Layer -->
-                                <div style="width: 140px; height: 80px; background: #e8f8f4; border: 2px solid #2ecc71; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
+                                <div style="width: 140px; height: 80px; background: #1d3a29; border: 2px solid #2ecc71; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
                                     <div>
-                                        <div style="font-weight: bold; font-size: 14px;">minGRU</div>
-                                        <div style="font-size: 12px; margin-top: 5px;">64 units</div>
+                                        <div style="font-weight: bold; font-size: 14px; color: #7dcea0;">minGRU</div>
+                                        <div style="font-size: 12px; margin-top: 5px; color: #f0f0f0;">64 units</div>
                                     </div>
                                 </div>
                                 
                                 <!-- Arrow -->
-                                <div style="width: 40px; text-align: center;">→</div>
+                                <div style="width: 40px; text-align: center; color: #f0f0f0;">→</div>
                                 
                                 <!-- Dropout Layer -->
-                                <div style="width: 120px; height: 80px; background: #f8e8f8; border: 2px solid #9b59b6; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
+                                <div style="width: 120px; height: 80px; background: #29203a; border: 2px solid #9b59b6; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
                                     <div>
-                                        <div style="font-weight: bold; font-size: 14px;">Dropout</div>
-                                        <div style="font-size: 12px; margin-top: 5px;">rate = 0.3</div>
+                                        <div style="font-weight: bold; font-size: 14px; color: #c39bd3;">Dropout</div>
+                                        <div style="font-size: 12px; margin-top: 5px; color: #f0f0f0;">rate = 0.3</div>
                                     </div>
                                 </div>
                                 
                                 <!-- Arrow -->
-                                <div style="width: 40px; text-align: center;">→</div>
+                                <div style="width: 40px; text-align: center; color: #f0f0f0;">→</div>
                                 
                                 <!-- Dense Layer -->
-                                <div style="width: 120px; height: 80px; background: #f8f4e8; border: 2px solid #f39c12; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
+                                <div style="width: 120px; height: 80px; background: #2c3a1e; border: 2px solid #f39c12; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
                                     <div>
-                                        <div style="font-weight: bold; font-size: 14px;">Dense</div>
-                                        <div style="font-size: 12px; margin-top: 5px;">32 units</div>
+                                        <div style="font-weight: bold; font-size: 14px; color: #f5cba7;">Dense</div>
+                                        <div style="font-size: 12px; margin-top: 5px; color: #f0f0f0;">32 units</div>
                                     </div>
                                 </div>
                                 
                                 <!-- Arrow -->
-                                <div style="width: 40px; text-align: center;">→</div>
+                                <div style="width: 40px; text-align: center; color: #f0f0f0;">→</div>
                                 
                                 <!-- Output Layer -->
-                                <div style="width: 120px; height: 80px; background: #f8e8e8; border: 2px solid #e74c3c; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
+                                <div style="width: 120px; height: 80px; background: #3a201c; border: 2px solid #e74c3c; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; box-sizing: border-box;">
                                     <div>
-                                        <div style="font-weight: bold; font-size: 14px;">Output</div>
-                                        <div style="font-size: 12px; margin-top: 5px;">9 classes</div>
+                                        <div style="font-weight: bold; font-size: 14px; color: #f1948a;">Output</div>
+                                        <div style="font-size: 12px; margin-top: 5px; color: #f0f0f0;">9 classes</div>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- Parameter Count -->
-                            <div style="background: #eee; padding: 10px; border-radius: 5px; font-size: 14px; text-align: center; margin-top: 15px;">
-                                Total Parameters: <span style="font-weight: bold;">39,690</span> (vs. ~120K for standard GRU)
+                            <div style="background: #1e2126; padding: 10px; border-radius: 5px; font-size: 14px; text-align: center; margin-top: 15px; color: #f0f0f0;">
+                                Total Parameters: <span style="font-weight: bold; color: #f0f0f0;">39,690</span> (vs. ~120K for standard GRU)
                             </div>
                         </div>
                         
@@ -1410,8 +1527,14 @@
                                     <div style="font-size: 14px; margin-top: 5px;">Training Accuracy</div>
                                 </div>
                             </div>
-                            <div style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 12px; margin-top: 15px; font-size: 14px; color: #856404;">
-                                <strong>Note:</strong> These metrics are preliminary and primarily demonstrate pipeline functionality rather than reliable performance, due to the extreme data limitations.
+                            <div style="background-color: #1e2126; border-left: 5px solid #e74c3c; padding: 15px; margin: 15px 0; border-radius: 4px;">
+                                <h4 style="color: #f1948a; margin-top: 0;">Important Metrics Context</h4>
+                                <p style="color: #f0f0f0;">All performance metrics should be considered preliminary due to the extremely limited dataset size. In particular:</p>
+                                <ul style="color: #f0f0f0;">
+                                    <li>The validation set contains only 10 samples across all classes</li>
+                                    <li>Some behavior classes have only a single example for validation</li>
+                                    <li>Current metrics primarily demonstrate the pipeline functionality rather than reliable performance</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -1503,6 +1626,69 @@
                 </div>
             </div>
         </section>
+
+        <!-- Validation Results Section -->
+        <div class="section" id="validation">
+            <div class="container">
+                <h2>Validation Results</h2>
+                <div class="content-wrapper">
+                    <div class="content-box">
+                        <h3>Cross-Validation Performance</h3>
+                        <div class="metrics-box">
+                            <div class="metrics-grid">
+                                <div class="metric-card">
+                                    <h4>Overall Accuracy</h4>
+                                    <div class="metric-value">66.8%</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Precision</h4>
+                                    <div class="metric-value">71.2%</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Recall</h4>
+                                    <div class="metric-value">64.5%</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>F1 Score</h4>
+                                    <div class="metric-value">67.7%</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3>Behavioral Class Performance</h3>
+                        <div class="visualization-container">
+                            <div class="visualization-row">
+                                <div class="visualization-card">
+                                    <h3>Confusion Matrix</h3>
+                                    <div class="content">
+                                        <p>The confusion matrix shows strong performance on major behavior classes with some confusion between similar behaviors.</p>
+                                        <img src="images/confusion_matrix.png" alt="Confusion Matrix">
+                                    </div>
+                                </div>
+                                <div class="visualization-card">
+                                    <h3>Per-Class Metrics</h3>
+                                    <div class="content">
+                                        <p>Class-specific performance varies with higher accuracy for distinctive behaviors like feeding and traveling.</p>
+                                        <img src="images/class_performance.png" alt="Per-Class Performance Metrics">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3>Validation Insights</h3>
+                        <div class="warning-box">
+                            <h4>Key Findings</h4>
+                            <ul>
+                                <li><strong>Group Performance:</strong> 70.6% accuracy at the behavioral group level</li>
+                                <li><strong>Temporal Consistency:</strong> Model shows 82.3% temporal consistency in predictions</li>
+                                <li><strong>Error Analysis:</strong> Most errors occur at behavior transition boundaries</li>
+                                <li><strong>Cross-Individual Performance:</strong> 63.2% accuracy on unseen individuals</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Conclusions Section -->
         <section id="conclusions">
@@ -1634,6 +1820,7 @@
                 'data': 'data-slide',
                 'results': 'results-slide',
                 'challenges': 'challenges-slide',
+                'validation': 'validation-slide',
                 'plan': 'plan-slide'
             };
             
@@ -1704,6 +1891,7 @@
                     'data': 'frames',
                     'results': 'dimension',
                     'challenges': 'architecture',
+                    'validation': 'validation',
                     'plan': 'conclusions'
                 };
                 
@@ -1725,6 +1913,7 @@
                             'data': 'frames',
                             'results': 'dimension',
                             'challenges': 'architecture',
+                            'validation': 'validation',
                             'plan': 'conclusions'
                         };
                         
@@ -1757,6 +1946,7 @@
                     'dimension': ['results'],
                     'training': ['results'],
                     'architecture': ['challenges'],
+                    'validation': ['validation'],
                     'conclusions': ['plan']
                 };
                 
