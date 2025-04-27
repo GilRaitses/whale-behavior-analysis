@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize smooth scrolling
     initSmoothScrolling();
 
+    // Initialize mobile navigation
+    initMobileNavigation();
+
     // Handle interactive matrix button
     const openMatrixButton = document.getElementById('open-interactive-matrix');
     
@@ -18,6 +21,69 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Mobile navigation functionality
+function initMobileNavigation() {
+    const rubricToggleBtn = document.querySelector('.rubric-toggle-btn');
+    const rubricNavContainer = document.querySelector('.rubric-nav-container');
+    const navbarToggleBtn = document.querySelector('.navbar-toggle-btn');
+    const navbar = document.querySelector('.navbar');
+    
+    // Toggle rubric navigation
+    if (rubricToggleBtn && rubricNavContainer) {
+        rubricToggleBtn.addEventListener('click', function() {
+            rubricToggleBtn.classList.toggle('active');
+            rubricNavContainer.classList.toggle('expanded');
+        });
+    }
+    
+    // Toggle main navbar
+    if (navbarToggleBtn && navbar) {
+        navbarToggleBtn.addEventListener('click', function() {
+            navbarToggleBtn.classList.toggle('active');
+            navbar.classList.toggle('expanded');
+        });
+    }
+    
+    // Close menu when a navigation item is clicked
+    document.querySelectorAll('.rubric-nav-item, .navbar a').forEach(item => {
+        item.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                if (rubricToggleBtn && rubricNavContainer) {
+                    rubricToggleBtn.classList.remove('active');
+                    rubricNavContainer.classList.remove('expanded');
+                }
+                if (navbarToggleBtn && navbar) {
+                    navbarToggleBtn.classList.remove('active');
+                    navbar.classList.remove('expanded');
+                }
+            }
+        });
+    });
+    
+    // Show toggle buttons only on mobile
+    function adjustForScreenSize() {
+        if (window.innerWidth <= 768) {
+            if (rubricToggleBtn) rubricToggleBtn.style.display = 'flex';
+            if (navbarToggleBtn) navbarToggleBtn.style.display = 'flex';
+            // Make sure the containers are collapsed on mobile by default
+            if (rubricNavContainer) rubricNavContainer.style.maxHeight = '0';
+            if (navbar) navbar.style.maxHeight = '50px';
+        } else {
+            if (rubricToggleBtn) rubricToggleBtn.style.display = 'none';
+            if (navbarToggleBtn) navbarToggleBtn.style.display = 'none';
+            // Ensure the containers are fully visible on desktop
+            if (rubricNavContainer) rubricNavContainer.style.maxHeight = 'none';
+            if (navbar) navbar.style.maxHeight = 'none';
+        }
+    }
+    
+    // Initial adjustment
+    adjustForScreenSize();
+    
+    // Adjust whenever window is resized
+    window.addEventListener('resize', adjustForScreenSize);
+}
 
 // Dive frames viewer functionality
 function initFrameViewer() {
