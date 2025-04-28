@@ -1392,6 +1392,42 @@
                     </ul>
                 </div>
                 
+                <div class="card">
+                    <h3>Sequential Processing with Window-Level Normalization</h3>
+                    <p>Our enhanced sequential feature extraction system implements window-level normalization to improve pattern recognition in time-series whale behavior data:</p>
+                    <ul>
+                        <li><strong>Adaptive Window Segmentation:</strong> Sequences are dynamically segmented based on signal complexity, using smaller windows for rapidly changing signals and larger windows for stable regions.</li>
+                        <li><strong>Per-Window Normalization:</strong> Each window is individually normalized, preserving local patterns that would be lost in global normalization, especially for behaviors with varying amplitude ranges.</li>
+                        <li><strong>Multi-Channel Processing:</strong> Each sensor channel is processed independently before feature extraction, allowing channel-specific normalization to capture finer behavioral nuances.</li>
+                        <li><strong>Feature Consistency:</strong> Consistent feature extraction across windows enables meaningful comparison between different behavior segments regardless of absolute magnitude.</li>
+                    </ul>
+                    <p>This approach significantly improves the model's ability to detect subtle behavior patterns by ensuring that important signal variations are preserved regardless of their absolute magnitude.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Integration with Parallel MinGRU Architecture</h3>
+                    <p>Our window-normalized features are specifically designed to work with the parallel forward pass training of the MinGRU architecture:</p>
+                    <ul>
+                        <li><strong>Parallel Batch Processing:</strong> Normalized windows produce feature vectors that can be processed in parallel batches, maximizing GPU utilization during training.</li>
+                        <li><strong>Reduced Sequence Variance:</strong> Window normalization reduces the variance in input sequences, making parallel training more stable and convergence more reliable.</li>
+                        <li><strong>Feature Consistency:</strong> Normalized features maintain consistent statistical properties across different behavior sequences, allowing the MinGRU to better learn temporal patterns rather than absolute magnitudes.</li>
+                        <li><strong>Computation Efficiency:</strong> Parallelized feature processing with normalized windows significantly reduces training time, enabling faster model iteration and experimentation.</li>
+                    </ul>
+                    <p>The combination of window-level normalization and parallel MinGRU processing creates a system that can efficiently detect behavior patterns across different individuals, conditions, and recording sessions, while maintaining computational efficiency.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Technical Implementation Details</h3>
+                    <p>The implementation involves several key technical components:</p>
+                    <ul>
+                        <li><strong>Time Domain Features:</strong> Extract statistical properties from normalized windows (mean, standard deviation, median, range, percentiles) for each sensor channel.</li>
+                        <li><strong>Frequency Domain Features:</strong> Process normalized signals to extract spectral properties (dominant frequency, spectral centroid, bandwidth, flatness, roll-off) to capture oscillatory patterns.</li>
+                        <li><strong>SequenceProcessor:</strong> Handles varying-length sequences by intelligently padding, truncating, and normalizing windows based on signal characteristics.</li>
+                        <li><strong>Parallel Data Loading:</strong> Customized DiveSequenceDataset for efficient batch loading of normalized feature windows during MinGRU training.</li>
+                    </ul>
+                    <p>This technical approach ensures that the feature extraction pipeline produces normalized, consistent features that can be effectively processed by the parallel MinGRU architecture, maximizing both model performance and computational efficiency.</p>
+                </div>
+                
                 <div class="visualization-container">
                     <div class="visualization-row">
                         <div class="visualization-card">
