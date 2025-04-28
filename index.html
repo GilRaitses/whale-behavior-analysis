@@ -1344,7 +1344,7 @@
             </div>
         </section>
 
-        <!-- Dive Frames Section -->
+        <!-- Data Section -->
         <section id="frames">
             <div class="section-content">
                 <h2>Dive Frame Analysis</h2>
@@ -1362,6 +1362,70 @@
                 </div>
                 <div class="card">
                     <p>Scroll through individual dive frames to analyze specific patterns and behaviors. Each frame represents a unique dive profile with depth and orientation data, extracted from the whale tagging dataset.</p>
+                </div>
+                
+                <!-- Interactive Feature Matrix (moved from Dimensionality Reduction section) -->
+                <div class="card">
+                    <h3>Interactive Feature Matrix</h3>
+                    <p>The interactive feature matrix allows you to explore the relationships between different behavioral patterns and features.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" onclick="showTab('dive-metrics')">Dive Metrics</button>
+                            <button class="tab-button" onclick="showTab('energetics')">Energetics</button>
+                            <button class="tab-button" onclick="showTab('behavior-comparison')">Behavior Comparison</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="dive-metrics">
+                            <div class="dive-selector">
+                                <label for="dive-selector">Select Dive: <span id="dive-number">1</span></label>
+                                <input type="range" min="1" max="128" value="1" id="dive-selector">
+                            </div>
+                            
+                            <div class="metrics-grid">
+                                <div class="metric-card">
+                                    <h4>Maximum Depth</h4>
+                                    <div class="metric-value">124.3 m</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Duration</h4>
+                                    <div class="metric-value">175 s</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Descent Rate</h4>
+                                    <div class="metric-value">1.7 m/s</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Ascent Rate</h4>
+                                    <div class="metric-value">1.2 m/s</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Twistiness</h4>
+                                    <div class="metric-value">0.68</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Energy Cost</h4>
+                                    <div class="metric-value">1240 J</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Roll Variance</h4>
+                                    <div class="metric-value">0.47</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Behavior Class</h4>
+                                    <div class="metric-value">Foraging</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="energetics">
+                            <!-- Energetics content -->
+                        </div>
+                        
+                        <div class="tab-content" id="behavior-comparison">
+                            <!-- Behavior comparison content -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1402,6 +1466,64 @@
                         <li><strong>Feature Consistency:</strong> Consistent feature extraction across windows enables meaningful comparison between different behavior segments regardless of absolute magnitude.</li>
                     </ul>
                     <p>This approach significantly improves the model's ability to detect subtle behavior patterns by ensuring that important signal variations are preserved regardless of their absolute magnitude.</p>
+                </div>
+                
+                <!-- New Feature Matrix Sequences Visualization in place of the moved Interactive Feature Matrix -->
+                <div class="card">
+                    <h3>Feature Matrix Sequence Analysis</h3>
+                    <p>The interactive sequential feature visualization allows you to explore patterns in time-series sensor data and how they translate to extracted features.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" onclick="showTab('sequence-features')">Sequence Features</button>
+                            <button class="tab-button" onclick="showTab('feature-extraction')">Feature Extraction</button>
+                            <button class="tab-button" onclick="showTab('pattern-comparison')">Pattern Comparison</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="sequence-features">
+                            <div class="sequence-selector">
+                                <label for="sequence-selector">Select Sequence: <span id="sequence-number">1</span></label>
+                                <input type="range" min="1" max="50" value="1" id="sequence-selector">
+                            </div>
+                            
+                            <div class="sequence-visualization">
+                                <img src="assets/dimensionality_reduction/sequence_visualization_1.png" alt="Sequence Visualization" id="sequence-viz">
+                            </div>
+                            
+                            <div class="metrics-grid">
+                                <div class="metric-card">
+                                    <h4>Sequence Length</h4>
+                                    <div class="metric-value">384 steps</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Feature Count</h4>
+                                    <div class="metric-value">56</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Time Features</h4>
+                                    <div class="metric-value">29,088</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Freq Features</h4>
+                                    <div class="metric-value">66</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="feature-extraction">
+                            <div class="feature-extraction-visualization">
+                                <img src="assets/dimensionality_reduction/feature_extraction_process.png" alt="Feature Extraction Process">
+                            </div>
+                            <p>Visualization of how raw sensor data is transformed into extracted features through windowing, normalization, and feature computation.</p>
+                        </div>
+                        
+                        <div class="tab-content" id="pattern-comparison">
+                            <div class="pattern-comparison-visualization">
+                                <img src="assets/dimensionality_reduction/pattern_comparison.png" alt="Pattern Comparison">
+                            </div>
+                            <p>Comparison of feature patterns across different behavior types, highlighting distinctive signatures for each class.</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="card">
@@ -1498,93 +1620,14 @@
                     </ul>
                     <p>These improvements establish a more effective foundation for visualization and classification tasks, supporting deeper insights from marine mammal sensor data.</p>
                 </div>
-                
-                <div class="card" id="interactive-matrix">
-                    <h3>Interactive Feature Matrix</h3>
-                    <p>The interactive feature matrix allows you to explore the relationships between different behavioral patterns and features.</p>
-                    
-                    <div class="tab-container">
-                        <div class="tab-buttons">
-                            <button class="tab-button active" onclick="openTab('metrics-tab')">Dive Metrics</button>
-                            <button class="tab-button" onclick="openTab('energetics-tab')">Energetics</button>
-                            <button class="tab-button" onclick="openTab('comparison-tab')">Behavior Comparison</button>
-                        </div>
-                        
-                        <div id="metrics-tab" class="tab-content active">
-                            <div class="dive-selector">
-                                <label for="dive-slider">Select Dive: <span id="selected-dive-number">1</span></label>
-                                <input type="range" id="dive-slider" min="1" max="128" value="1" class="color-slider">
-                            </div>
-                            
-                            <div class="metrics-grid">
-                                <div class="metric-card">
-                                    <h4>Maximum Depth</h4>
-                                    <div class="metric-value" id="max-depth">124.3 m</div>
-                                </div>
-                                <div class="metric-card">
-                                    <h4>Duration</h4>
-                                    <div class="metric-value" id="duration">175 s</div>
-                                </div>
-                                <div class="metric-card">
-                                    <h4>Descent Rate</h4>
-                                    <div class="metric-value" id="descent-rate">1.7 m/s</div>
-                                </div>
-                                <div class="metric-card">
-                                    <h4>Ascent Rate</h4>
-                                    <div class="metric-value" id="ascent-rate">1.2 m/s</div>
-                                </div>
-                                <div class="metric-card">
-                                    <h4>Twistiness</h4>
-                                    <div class="metric-value" id="twistiness">0.68</div>
-                                </div>
-                                <div class="metric-card">
-                                    <h4>Energy Cost</h4>
-                                    <div class="metric-value" id="energy-cost">1240 J</div>
-                                </div>
-                                <div class="metric-card">
-                                    <h4>Roll Variance</h4>
-                                    <div class="metric-value" id="roll-variance">0.47</div>
-                                </div>
-                                <div class="metric-card">
-                                    <h4>Behavior Class</h4>
-                                    <div class="metric-value" id="behavior-class">Foraging</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div id="energetics-tab" class="tab-content">
-                            <div class="visualization-container">
-                                <div class="visualization-card">
-                                    <h3>Dive Energetics Overview</h3>
-                                    <div class="content">
-                                        <img src="assets/dive_energetics.png" alt="Dive Energetics Overview">
-                                        <p>This visualization shows the energy expenditure patterns across different dive behaviors.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div id="comparison-tab" class="tab-content">
-                            <div class="visualization-container">
-                                <div class="visualization-card">
-                                    <h3>Duration by Behavior Type</h3>
-                                    <img src="assets/dimensionality_reduction/duration_distribution.png" alt="Duration by Behavior Type">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <iframe src="presentation/dimensionality_reduction_slides.html" title="Dimensionality Reduction Slides"></iframe>
             </div>
         </section>
 
-        <!-- Training Section -->
+        <!-- Training Section with correct content -->
         <section id="training">
             <div class="section-content">
                 <h2>Model Training</h2>
                 
-                <!-- Training Overview -->
                 <div class="card">
                     <h3>Training Pipeline</h3>
                     <p>The training process was designed to maximize performance with the limited data available:</p>
@@ -1599,6 +1642,7 @@
                                 <li>Class-weighted loss function</li>
                             </ul>
                         </div>
+                        
                         <div class="training-card training-config-card">
                             <h4>Training Configuration</h4>
                             <ul>
@@ -1609,37 +1653,32 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Training Process -->
-                <div class="card">
-                    <h3>Training Process</h3>
                     
                     <div class="training-process">
+                        <h4>Training Process</h4>
                         <div class="process-steps">
                             <div class="process-step">
                                 <div class="step-title">Step 1: Data Preparation</div>
-                                <div>Sequence standardization and feature scaling</div>
+                                <div class="step-description">Sequence standardization and feature scaling</div>
                             </div>
                             <div class="process-step">
                                 <div class="step-title">Step 2: Class Balancing</div>
-                                <div>SMOTE augmentation and class weighting</div>
+                                <div class="step-description">SMOTE augmentation and class weighting</div>
                             </div>
                             <div class="process-step">
                                 <div class="step-title">Step 3: Model Training</div>
-                                <div>minGRU training with early stopping</div>
+                                <div class="step-description">minGRU training with early stopping</div>
                             </div>
                             <div class="process-step">
                                 <div class="step-title">Step 4: Evaluation</div>
-                                <div>Direct and hierarchical classification metrics</div>
+                                <div class="step-description">Direct and hierarchical classification metrics</div>
                             </div>
                         </div>
+                        
+                        <p>The model was trained for an average of 47 epochs, with convergence typically occurring between epochs 35-45. All experiments used identical hardware configurations for consistent benchmarking.</p>
                     </div>
-                    
-                    <p style="margin-top: 15px;">The model was trained for an average of 47 epochs, with convergence typically occurring between epochs 35-45. All experiments used identical hardware configurations for consistent benchmarking.</p>
                 </div>
                 
-                <!-- Data Augmentation Strategy -->
                 <div class="card">
                     <h3>Data Augmentation Strategy</h3>
                     <p>To address the severe class imbalance, several augmentation techniques were applied:</p>
@@ -1654,17 +1693,17 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>SMOTE</strong></td>
+                                <td>SMOTE</td>
                                 <td>Synthetic Minority Over-sampling Technique creating artificial samples in feature space</td>
                                 <td>Increased minority classes from as few as 6 samples to 129 per class</td>
                             </tr>
                             <tr>
-                                <td><strong>Class Weighting</strong></td>
+                                <td>Class Weighting</td>
                                 <td>Loss function adjustment to penalize errors on minority classes more heavily</td>
                                 <td>12.4% improvement in recall for underrepresented classes</td>
                             </tr>
                             <tr>
-                                <td><strong>Time Shifting</strong></td>
+                                <td>Time Shifting</td>
                                 <td>Random shifts in sequence starting points during training</td>
                                 <td>Improved robustness to phase differences in sensor readings</td>
                             </tr>
@@ -1672,7 +1711,6 @@
                     </table>
                 </div>
                 
-                <!-- Performance Considerations -->
                 <div class="card">
                     <h3>Performance Considerations</h3>
                     <div class="metrics-note">
@@ -1684,43 +1722,6 @@
                             <li><strong>Technical Infrastructure Ready:</strong> While we've implemented the complete training pipeline including the MinGRU architecture with parallel forward processing, it cannot be meaningfully trained without labeled data</li>
                         </ul>
                     </div>
-                    
-                    <div class="visualization-container">
-                        <div class="visualization-card">
-                            <h3>MinGRU Architecture</h3>
-                            <img src="assets/mingru_architecture.png" alt="MinGRU Architecture">
-                            <div class="content">
-                                <p>Implemented MinGRU architecture with optimized parallel forward pass for efficient sequential data processing.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="visualization-card">
-                            <h3>Data Label Distribution</h3>
-                            <div class="content" style="text-align: center; padding: 20px;">
-                                <div style="width: 100%; height: 40px; background: #3498db; margin-bottom: 10px; position: relative;">
-                                    <span style="position: absolute; left: 50%; transform: translateX(-50%); color: white; font-weight: bold; line-height: 40px;">Unlabeled Data: 99,925 samples (100%)</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-                                    <div style="text-align: left; color: #777;">
-                                        <p>No labeled examples available for the target behaviors:</p>
-                                        <ul style="text-align: left; padding-left: 20px;">
-                                            <li>Feeding_loop</li>
-                                            <li>Kick_feeding</li>
-                                            <li>Noodle_feeding</li>
-                                            <li>Side_rolls</li>
-                                            <li>Side_rolls_and_loop</li>
-                                            <li>Surface_Active</li>
-                                            <li>Traveling</li>
-                                            <li>Vertical_loop</li>
-                                            <li>Exploratory_dives</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <p>Meaningful classification performance evaluation will only be possible once expert-validated behavior data is acquired from the Parks Lab.</p>
                 </div>
             </div>
         </section>
