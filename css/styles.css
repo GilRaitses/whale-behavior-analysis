@@ -59,6 +59,10 @@ h1, h2, h3 {
     margin: 0 auto;
 }
 
+.section-content h2, .section-content h3, .card h2, .card h3 {
+    margin-top: 40px;
+}
+
 /* Overview section */
 .overview-img {
     max-width: 100%;
@@ -251,6 +255,16 @@ ul.resources li:before {
     color: #00a6ff;
     position: absolute;
     left: 0;
+}
+
+ul.resources li a {
+    color: #e0e0e0 !important;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+ul.resources li a:hover {
+    color: #00a6ff !important;
 }
 
 /* Responsive design */

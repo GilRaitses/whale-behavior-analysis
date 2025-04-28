@@ -1142,15 +1142,19 @@
             <div class="slide-section">
                 <h3>Classification Performance</h3>
                 <div style="background-color: #fdedec; border-left: 4px solid #e74c3c; padding: 15px; margin-top: 10px;">
-                    <h4 style="margin-top: 0; color: #c0392b;">Critical Data Limitation</h4>
-                    <p>Our analysis revealed that <strong>100% of the available data (99,925 samples) is unlabeled</strong>, making true classification impossible at this stage.</p>
+                    <h4 style="margin-top: 0; color: #c0392b;">Current Dataset Statistics</h4>
+                    <p>Analysis of the dataset reveals the following composition:</p>
+                    <ul>
+                        <li><strong>Total Samples:</strong> 50 labeled samples (after excluding 'End' label)</li>
+                        <li><strong>Feature Matrix:</strong> 167 total features (111 static + 56 sequential)</li>
+                        <li><strong>Behavior Types:</strong> 10 unique behavior classes</li>
+                    </ul>
                     <p>The technical infrastructure for classification has been implemented, including:</p>
                     <ul>
                         <li>MinGRU architecture with optimized parallel forward pass</li>
-                        <li>Feature extraction pipeline (20 most informative features identified)</li>
+                        <li>Feature extraction pipeline with comprehensive feature set</li>
                         <li>Data processing with window segmentation and normalization</li>
                     </ul>
-                    <p>However, meaningful classification metrics are not available without labeled data.</p>
                 </div>
             </div>
         </div>
@@ -1192,42 +1196,59 @@
         <!-- Validation Slide -->
         <div id="validation-slide" class="rubric-slide">
             <span class="close-modal">&times;</span>
-            <h2>Validation Results</h2>
+            <h2>Validation Results: Why Our Current Scenario Fails</h2>
             <div class="slide-section">
-                <h3>Model Validation Summary</h3>
-                <div class="data-point">
-                    <p>The cross-validation methodology assesses model performance across different individuals and dive conditions.</p>
-                </div>
-                
+                <h3>The Analogy</h3>
                 <div class="highlight-box">
-                    <h3>Key Metrics</h3>
-                    <div class="metric-point">66.8% Overall Accuracy</div>
-                    <div class="metric-point">71.2% Precision</div>
-                    <div class="metric-point">64.5% Recall</div>
-                    <div class="metric-point">67.7% F1 Score</div>
-                    <div class="metric-point">70.6% Group Accuracy</div>
-                    <div class="metric-point">82.3% Temporal Consistency</div>
+                    <p>Imagine you want to train a model to tell apples from oranges. But your entire training set only contains apples, all labeled as "apple."<br>
+                    The model quickly learns to always say "apple" — and if you test it on more apples, it gets 100% accuracy. But if you ask it to classify the whole produce section (apples, oranges, bananas, etc.), it will still say "apple" every time, and be wrong most of the time.</p>
                 </div>
             </div>
-            
             <div class="slide-section">
-                <h3>Validation Strategy</h3>
+                <h3>What Actually Happened Here</h3>
                 <ul>
-                    <li>Leave-one-individual-out cross-validation</li>
-                    <li>Hierarchical evaluation across behavioral groups</li>
-                    <li>Temporal consistency analysis</li>
-                    <li>Edge case identification at behavior transitions</li>
+                    <li>The dataset: 3,121 windows, all labeled as class 0 ("Unlabeled").</li>
+                    <li>We split this into train/val/test sets (70/15/15).</li>
+                    <li>The model instantly learns to always predict class 0.</li>
+                    <li>Validation and test accuracy are always 100% — but this is trivial, not meaningful.</li>
+                    <li>Loss drops to zero, but the model isn't learning anything about real behaviors.</li>
                 </ul>
             </div>
-            
             <div class="slide-section">
-                <h3>Next Steps for Improved Validation</h3>
+                <h3>Why This Matters</h3>
+                <div class="data-point">
+                    <ul>
+                        <li>There's no way to validate behavior classification without labeled data for multiple classes.</li>
+                        <li>The current validation just confirms the model learned the trivial solution: "always predict class 0."</li>
+                        <li>To make progress, we need expert-annotated data with real behavior classes.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-section">
+                <h3>Summary of Classification Efforts</h3>
                 <ul>
-                    <li>Expand validation dataset with more individuals</li>
-                    <li>Field testing with live prediction system</li>
-                    <li>Expert review of edge case classifications</li>
-                    <li>Environmental factor analysis</li>
+                    <li><strong>Model:</strong> Implemented MinGRU classifier (sequential & parallel).</li>
+                    <li><strong>Data:</strong> Feature extraction, windowing, normalization.</li>
+                    <li><strong>Training:</strong> Used MPS acceleration, early stopping, learning rate scheduling.</li>
+                    <li><strong>Findings:</strong> Model always predicts class 0; parallel implementation works but can't be meaningfully tested.</li>
                 </ul>
+            </div>
+            <div class="slide-section">
+                <h3>What's Needed Next</h3>
+                <ul>
+                    <li>Labeled data with multiple behavior classes.</li>
+                    <li>Ground truth annotations from experts.</li>
+                    <li>Addressing class imbalance once labels are available.</li>
+                </ul>
+            </div>
+            <div class="slide-section">
+                <h3>Visualizations</h3>
+                <ul>
+                    <li>MinGRU architecture diagram (if available)</li>
+                    <li>Feature importance plot (if available)</li>
+                    <li>Data distribution plot (if available)</li>
+                </ul>
+                <p style="color:#aaa;">(Only include these if they are meaningful and available.)</p>
             </div>
         </div>
         
@@ -1307,7 +1328,7 @@
                 <h2>Overview of 128 Detected Dives</h2>
                 <img src="assets/dive_overview.png" alt="Overview of 128 Detected Dives" class="overview-img">
                 <div class="card">
-                    <p>This visualization provides an overview of 128 detected dive patterns, showcasing depth variations and relative twistiness across multiple dives. The color intensity represents the relative twistiness of the whale's movement during each dive segment.</p>
+                    <p>This visualization summarizes 128 detected dive patterns, showing depth variations and relative twistiness across multiple dives. Color intensity indicates the relative twistiness of movement during each dive segment.</p>
                 </div>
                 
                 <div class="card">
@@ -1431,7 +1452,7 @@
                 
                 <div class="card">
                     <h3>Combined Impact on Analysis</h3>
-                    <p>The integration of enhancement modules transformed the approach from basic dimensionality reduction to an optimized system with:</p>
+                    <p>The integration of enhancement modules resulted in a transition from basic dimensionality reduction to an optimized system with:</p>
                     <ul>
                         <li>Higher information density in feature matrices</li>
                         <li>Clearer separation of behavioral classes in visualizations</li>
@@ -1439,7 +1460,7 @@
                         <li>Improved interpretability for domain experts</li>
                         <li>Reduced computational requirements for analysis</li>
                     </ul>
-                    <p>These improvements provide a more effective foundation for both visualization and classification tasks, ultimately leading to better insights from marine mammal sensor data.</p>
+                    <p>These improvements establish a more effective foundation for visualization and classification tasks, supporting deeper insights from marine mammal sensor data.</p>
                 </div>
                 
                 <div class="card" id="interactive-matrix">
@@ -1620,7 +1641,7 @@
                     <h3>Performance Considerations</h3>
                     <div class="metrics-note">
                         <h4>Critical Findings on Data Availability</h4>
-                        <p>Our analysis has revealed a fundamental limitation in the current dataset:</p>
+                        <p>Analysis has identified a fundamental limitation in the current dataset:</p>
                         <ul>
                             <li><strong>No Labeled Data:</strong> 100% of the available data (99,925 samples) is classified as "Unlabeled" (class 0)</li>
                             <li><strong>No Ground Truth:</strong> Without labeled examples of the target behaviors, meaningful classification is impossible</li>
@@ -1742,9 +1763,9 @@
                 <div class="card">
                     <h3>Cross-Validation Performance</h3>
                     <div class="metrics-note" style="background-color: #fdedec; border-left: 4px solid #e74c3c; padding: 15px;">
-                        <h4 style="margin-top: 0; color: #c0392b;">Validation Not Possible</h4>
-                        <p>Our analysis revealed that 100% of the available data (99,925 samples) is unlabeled. Without labeled examples of the target behaviors, cross-validation cannot be performed.</p>
-                        <p>The previously reported metrics are not applicable and have been removed, as they would be misleading without labeled data.</p>
+                        <h4 style="margin-top: 0; color: #c0392b;">Dataset Composition</h4>
+                        <p>The dataset contains 50 labeled samples across 10 behavior types, with a rich feature set of 167 dimensions (111 static features enhanced by 56 sequential features).</p>
+                        <p>While the infrastructure for classification is in place, the limited number of samples per behavior class presents challenges for robust validation.</p>
                     </div>
                 </div>
                 
