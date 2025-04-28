@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize mobile navigation
     initMobileNavigation();
 
+    // Initialize modal functionality
+    initModalFunctionality();
+
     // Handle interactive matrix button
     const openMatrixButton = document.getElementById('open-interactive-matrix');
     
@@ -21,6 +24,69 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Modal functionality
+function initModalFunctionality() {
+    const modal = document.getElementById('rubricModal');
+    const rubricSlides = document.querySelectorAll('.rubric-slide');
+    const closeButtons = document.querySelectorAll('.close-modal');
+    
+    if (!modal) {
+        console.error('Modal element not found');
+        return;
+    }
+    
+    // Show a specific slide
+    window.showSlide = function(slideId) {
+        console.log('Showing slide:', slideId);
+        // Hide all slides first
+        document.querySelectorAll('.rubric-slide').forEach(slide => {
+            slide.style.display = 'none';
+        });
+        
+        // Show the requested slide
+        const slideToShow = document.getElementById(slideId);
+        if (slideToShow) {
+            slideToShow.style.display = 'block';
+        } else {
+            console.error('Slide not found:', slideId);
+        }
+        
+        // Show the modal
+        modal.classList.add('show');
+    };
+    
+    // Close the modal
+    window.closeModal = function() {
+        modal.classList.remove('show');
+        
+        // After animation completes, hide all slides
+        setTimeout(() => {
+            document.querySelectorAll('.rubric-slide').forEach(slide => {
+                slide.style.display = 'none';
+            });
+        }, 300);
+    };
+    
+    // Close modal when clicking the X button
+    closeButtons.forEach(button => {
+        button.addEventListener('click', closeModal);
+    });
+    
+    // Close modal when clicking outside the slide content
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Close modal when pressing Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+}
 
 // Mobile navigation functionality
 function initMobileNavigation() {

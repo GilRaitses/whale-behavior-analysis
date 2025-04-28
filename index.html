@@ -2154,7 +2154,12 @@
                 
                 // Wait for scrolling to complete then show modal
                 setTimeout(() => {
-                    showSlide(modalSlideId);
+                    // Use the showSlide function defined in main.js
+                    if (typeof window.showSlide === 'function') {
+                        window.showSlide(modalSlideId);
+                    } else {
+                        console.error('showSlide function is not available');
+                    }
                 }, 600);
             }
         }
