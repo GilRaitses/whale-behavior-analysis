@@ -1141,12 +1141,17 @@
             
             <div class="slide-section">
                 <h3>Classification Performance</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px;">
-                    <div class="metric-point">Validation Accuracy: 57.2%</div>
-                    <div class="metric-point">Hierarchical Accuracy: 63.1%</div>
-                    <div class="metric-point">Training Accuracy: 72.3%</div>
+                <div style="background-color: #fdedec; border-left: 4px solid #e74c3c; padding: 15px; margin-top: 10px;">
+                    <h4 style="margin-top: 0; color: #c0392b;">Critical Data Limitation</h4>
+                    <p>Our analysis revealed that <strong>100% of the available data (99,925 samples) is unlabeled</strong>, making true classification impossible at this stage.</p>
+                    <p>The technical infrastructure for classification has been implemented, including:</p>
+                    <ul>
+                        <li>MinGRU architecture with optimized parallel forward pass</li>
+                        <li>Feature extraction pipeline (20 most informative features identified)</li>
+                        <li>Data processing with window segmentation and normalization</li>
+                    </ul>
+                    <p>However, meaningful classification metrics are not available without labeled data.</p>
                 </div>
-                <p style="margin-top: 15px; color: #e74c3c;"><strong>Note:</strong> These metrics must be considered preliminary due to extreme data limitations.</p>
             </div>
         </div>
         
@@ -1614,16 +1619,51 @@
                 <div class="card">
                     <h3>Performance Considerations</h3>
                     <div class="metrics-note">
-                        <h4>Important Note on Metrics</h4>
-                        <p>All performance metrics should be considered preliminary due to the extremely limited dataset size. In particular:</p>
+                        <h4>Critical Findings on Data Availability</h4>
+                        <p>Our analysis has revealed a fundamental limitation in the current dataset:</p>
                         <ul>
-                            <li>The validation set contains only 10 samples across all classes</li>
-                            <li>Some behavior classes have only a single example for validation</li>
-                            <li>Current metrics primarily demonstrate the pipeline functionality rather than reliable performance</li>
+                            <li><strong>No Labeled Data:</strong> 100% of the available data (99,925 samples) is classified as "Unlabeled" (class 0)</li>
+                            <li><strong>No Ground Truth:</strong> Without labeled examples of the target behaviors, meaningful classification is impossible</li>
+                            <li><strong>Technical Infrastructure Ready:</strong> While we've implemented the complete training pipeline including the MinGRU architecture with parallel forward processing, it cannot be meaningfully trained without labeled data</li>
                         </ul>
                     </div>
                     
-                    <p>Meaningful performance evaluation will only be possible once additional expert-validated behavior data is acquired from the Parks Lab.</p>
+                    <div class="visualization-container">
+                        <div class="visualization-card">
+                            <h3>MinGRU Architecture</h3>
+                            <img src="assets/mingru_architecture.png" alt="MinGRU Architecture">
+                            <div class="content">
+                                <p>Implemented MinGRU architecture with optimized parallel forward pass for efficient sequential data processing.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="visualization-card">
+                            <h3>Data Label Distribution</h3>
+                            <div class="content" style="text-align: center; padding: 20px;">
+                                <div style="width: 100%; height: 40px; background: #3498db; margin-bottom: 10px; position: relative;">
+                                    <span style="position: absolute; left: 50%; transform: translateX(-50%); color: white; font-weight: bold; line-height: 40px;">Unlabeled Data: 99,925 samples (100%)</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                                    <div style="text-align: left; color: #777;">
+                                        <p>No labeled examples available for the target behaviors:</p>
+                                        <ul style="text-align: left; padding-left: 20px;">
+                                            <li>Feeding_loop</li>
+                                            <li>Kick_feeding</li>
+                                            <li>Noodle_feeding</li>
+                                            <li>Side_rolls</li>
+                                            <li>Side_rolls_and_loop</li>
+                                            <li>Surface_Active</li>
+                                            <li>Traveling</li>
+                                            <li>Vertical_loop</li>
+                                            <li>Exploratory_dives</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p>Meaningful classification performance evaluation will only be possible once expert-validated behavior data is acquired from the Parks Lab.</p>
                 </div>
             </div>
         </section>
@@ -1701,23 +1741,10 @@
                 
                 <div class="card">
                     <h3>Cross-Validation Performance</h3>
-                    <div class="metrics-grid">
-                        <div class="metric-card">
-                            <h4>Overall Accuracy</h4>
-                            <div class="metric-value">66.8%</div>
-                        </div>
-                        <div class="metric-card">
-                            <h4>Precision</h4>
-                            <div class="metric-value">71.2%</div>
-                        </div>
-                        <div class="metric-card">
-                            <h4>Recall</h4>
-                            <div class="metric-value">64.5%</div>
-                        </div>
-                        <div class="metric-card">
-                            <h4>F1 Score</h4>
-                            <div class="metric-value">67.7%</div>
-                        </div>
+                    <div class="metrics-note" style="background-color: #fdedec; border-left: 4px solid #e74c3c; padding: 15px;">
+                        <h4 style="margin-top: 0; color: #c0392b;">Validation Not Possible</h4>
+                        <p>Our analysis revealed that 100% of the available data (99,925 samples) is unlabeled. Without labeled examples of the target behaviors, cross-validation cannot be performed.</p>
+                        <p>The previously reported metrics are not applicable and have been removed, as they would be misleading without labeled data.</p>
                     </div>
                 </div>
                 
@@ -1762,6 +1789,30 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Validation Status</h3>
+                    <div class="metrics-note" style="background-color: #fdedec; border-left: 4px solid #e74c3c; padding: 15px;">
+                        <h4 style="margin-top: 0; color: #c0392b;">Critical Limitation: Validation Not Possible</h4>
+                        <p>Validation of the classification model is <strong>not currently possible</strong> due to:</p>
+                        <ul>
+                            <li>Complete absence of labeled data (100% of 99,925 samples are unlabeled)</li>
+                            <li>No ground truth behaviors to validate against</li>
+                            <li>Inability to assess true classification performance without examples of target behaviors</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Path Forward</h3>
+                    <p>To enable meaningful validation:</p>
+                    <ul>
+                        <li><strong>Expert Annotations Required:</strong> Acquire labeled examples of each behavior class from marine biology experts</li>
+                        <li><strong>Minimum Data Needs:</strong> At least 10-20 examples per behavior class for minimal validation</li>
+                        <li><strong>Ideal Scenario:</strong> 50+ examples per class for robust validation with cross-validation</li>
+                    </ul>
+                    <p>Once labeled data is available, the existing validation infrastructure can be immediately applied to generate meaningful performance metrics.</p>
                 </div>
             </div>
         </section>

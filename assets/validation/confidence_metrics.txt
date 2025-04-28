@@ -1,0 +1,10 @@
+{
+    "mean_confidence": 0.11534036695957184,
+    "median_confidence": 0.11534036695957184,
+    "min_confidence": 0.11534036695957184,
+    "max_confidence": 0.11534036695957184,
+    "std_confidence": 0.0,
+    "class_mean_confidences": {
+        "8": 0.11534036695957184
+    }
+}

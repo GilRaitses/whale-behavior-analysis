@@ -1,0 +1,9 @@
+{
+    "mean_segment_length": 6244.0,
+    "median_segment_length": 6244.0,
+    "max_segment_length": 6244.0,
+    "total_segments": 1,
+    "total_transitions": 6243,
+    "self_transitions": 6243,
+    "cross_transitions": 0
+}

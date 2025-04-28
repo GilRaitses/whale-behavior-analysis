@@ -1,0 +1,11 @@
+{
+    "pca_explained_variance": [
+        NaN,
+        NaN
+    ],
+    "silhouette_score": null,
+    "classes_found": 1,
+    "class_counts": {
+        "8": 6244
+    }
+}
