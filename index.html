@@ -1508,38 +1508,59 @@
         <!-- Validation Slide -->
         <div id="validation-slide" class="rubric-slide" style="max-height: 100vh; overflow-y: auto;">
             <span class="close-modal">&times;</span>
-            <h2>Validation Results: Trivial Model Scenario</h2>
-        
+            <h2>Validation Results: Why The Current Scenario Fails</h2>
             <div class="slide-section">
-                <h3>Training Analogy</h3>
+                <h3>The Analogy</h3>
                 <div class="highlight-box">
-                    <p>Training only on apples labeled "apple" results in a model that always predicts "apple"—even when shown oranges or bananas. Without label diversity, no meaningful learning occurs.</p>
+                    <p>Imagine you want to train a model to tell apples from oranges. But your entire training set only contains apples, all labeled as "apple."<br>
+                    The model quickly learns to always say "apple" and if you test it on more apples, it gets 100% accuracy. But if you ask it to classify the whole produce section (apples, oranges, bananas, etc.), it will still say "apple" every time, and be wrong most of the time.</p>
                 </div>
             </div>
-        
             <div class="slide-section">
-                <h3>What Happened</h3>
-                <p style="font-size: 14px;">3,121 windows labeled only as class 0. After 70/15/15 train-val-test split, the model always predicts class 0. Validation accuracy is trivial; loss drops to zero with no real pattern recognition.</p>
+                <h3>What Actually Happened Here</h3>
+                <ul>
+                    <li>The dataset: 3,121 windows, all labeled as class 0 ("Unlabeled").</li>
+                    <li>This is split into train/val/test sets (70/15/15).</li>
+                    <li>The model instantly learns to always predict class 0.</li>
+                    <li>Validation and test accuracy are always a completely trivial value.</li>
+                    <li>Loss drops to zero, but the model isn't learning anything about real behaviors.</li>
+                </ul>
             </div>
-        
             <div class="slide-section">
-                <h3>Why It Fails</h3>
-                <p style="font-size: 14px;">Validation confirms trivial learning. Without labels for multiple behavior classes, the model cannot be evaluated or improved.</p>
+                <h3>Why This Matters</h3>
+                <div class="data-point">
+                    <ul>
+                        <li>There's no way to validate behavior classification without labeled data for multiple classes.</li>
+                        <li>The current validation just confirms the model learned the trivial solution: "always predict class 0."</li>
+                        <li>To proceed further, more expert-annotated data with real behavior classes are required.</li>
+                    </ul>
+                </div>
             </div>
-        
             <div class="slide-section">
-                <h3>Efforts So Far</h3>
-                <p style="font-size: 14px;">minGRU classifier deployed with MPS acceleration, early stopping, and learning rate scheduling. Feature extraction and normalization completed. No meaningful predictions possible due to class imbalance.</p>
+                <h3>Summary of Classification Efforts</h3>
+                <ul>
+                    <li><strong>Model:</strong> Implemented MinGRU classifier (sequential & parallel).</li>
+                    <li><strong>Data:</strong> Feature extraction, windowing, normalization.</li>
+                    <li><strong>Training:</strong> Used MPS acceleration, early stopping, learning rate scheduling.</li>
+                    <li><strong>Findings:</strong> Model always predicts class 0; parallel implementation works but can't be meaningfully tested.</li>
+                </ul>
             </div>
-        
             <div class="slide-section">
-                <h3>Next Steps</h3>
-                <p style="font-size: 14px;">Expert-labeled data for multiple behavior classes is required to continue. Class imbalance must be addressed for model improvement.</p>
+                <h3>What's Needed Next</h3>
+                <ul>
+                    <li>Labeled data with multiple behavior classes.</li>
+                    <li>Ground truth annotations from experts.</li>
+                    <li>Addressing class imbalance once labels are available.</li>
+                </ul>
             </div>
-        
             <div class="slide-section">
-                <h3>Optional Visuals</h3>
-                <p style="font-size: 14px;">MinGRU architecture, feature importance plot, and data distribution plot—only if they provide added value.</p>
+                <h3>Visualizations</h3>
+                <ul>
+                    <li>MinGRU architecture diagram (if available)</li>
+                    <li>Feature importance plot (if available)</li>
+                    <li>Data distribution plot (if available)</li>
+                </ul>
+                <p style="color:#aaa;">(Only include these if they are meaningful and available.)</p>
             </div>
         </div>
         
