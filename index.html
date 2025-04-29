@@ -997,6 +997,7 @@
             height: 22px;
             padding: 14px 15px;
             cursor: pointer;
+            z-index: 960; /* Ensure hamburger stays above the menu */
         }
         
         .hamburger-line {
@@ -1025,6 +1026,7 @@
                 transition: right 0.3s ease;
                 overflow-y: auto;
                 box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+                z-index: 955; /* Ensure menu is above content but below hamburger */
             }
             
             .navbar-links.active {
@@ -2344,7 +2346,7 @@
     <script src="presentation/presentation_helper.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize navigation elements
+            // Initialize navigation elements - MOVED TO IMMEDIATE EXECUTION
             initNavigation();
             
             // Initialize the frame viewer
@@ -2677,13 +2679,16 @@
 
         // Navigation functionality
         function initNavigation() {
+            console.log("Initializing navigation..."); // Debug log
+            
             // Presentation sidebar toggle
             const sidebar = document.getElementById('presentationSidebar');
             const sidebarTab = document.getElementById('sidebarTab');
             
             if (sidebarTab && sidebar) {
-                sidebarTab.addEventListener('click', function() {
+                sidebarTab.addEventListener('click', function(e) {
                     sidebar.classList.toggle('expanded');
+                    e.stopPropagation(); // Prevent click from bubbling
                 });
                 
                 // Also allow hovering to reveal on desktop
@@ -2703,31 +2708,40 @@
             const navbarLinks = document.getElementById('navbarLinks');
             
             if (hamburgerMenu && navbarLinks) {
-                hamburgerMenu.addEventListener('click', function() {
+                console.log("Hamburger menu found!"); // Debug log
+                
+                // Direct setup of hamburger click event
+                hamburgerMenu.onclick = function(e) {
+                    console.log("Hamburger clicked!"); // Debug log
                     hamburgerMenu.classList.toggle('active');
                     navbarLinks.classList.toggle('active');
-                });
+                    e.stopPropagation(); // Prevent click from bubbling
+                    e.preventDefault(); // Prevent default behavior
+                    return false; // Ensure no propagation
+                };
                 
                 // Close mobile menu when clicking a link
                 const navLinks = navbarLinks.querySelectorAll('a');
                 navLinks.forEach(function(link) {
-                    link.addEventListener('click', function() {
+                    link.addEventListener('click', function(e) {
                         hamburgerMenu.classList.remove('active');
                         navbarLinks.classList.remove('active');
                     });
                 });
+                
+                // Add directly to the document body
+                document.body.addEventListener('click', function(e) {
+                    // Only close the menu if it's open and the click wasn't on the menu or hamburger
+                    if (navbarLinks.classList.contains('active') && 
+                        !navbarLinks.contains(e.target) && 
+                        !hamburgerMenu.contains(e.target)) {
+                        hamburgerMenu.classList.remove('active');
+                        navbarLinks.classList.remove('active');
+                    }
+                });
+            } else {
+                console.log("Hamburger menu NOT found!"); // Debug log
             }
-            
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (hamburgerMenu && navbarLinks &&
-                    !hamburgerMenu.contains(event.target) && 
-                    !navbarLinks.contains(event.target) &&
-                    hamburgerMenu.classList.contains('active')) {
-                    hamburgerMenu.classList.remove('active');
-                    navbarLinks.classList.remove('active');
-                }
-            });
             
             // Handle window resize events
             window.addEventListener('resize', function() {
@@ -2737,6 +2751,24 @@
                     navbarLinks.classList.remove('active');
                 }
             });
+        }
+
+        // Execute navigation init immediately after definition
+        document.addEventListener('DOMContentLoaded', initNavigation);
+        // Also try to init immediately in case DOMContentLoaded already fired
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            initNavigation();
+        }
+        
+        // Function to toggle mobile menu from outside - can be called from console for debugging
+        function toggleMobileMenu() {
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            const navbarLinks = document.getElementById('navbarLinks');
+            if (hamburgerMenu && navbarLinks) {
+                hamburgerMenu.classList.toggle('active');
+                navbarLinks.classList.toggle('active');
+                console.log("Menu toggled via manual function");
+            }
         }
     </script>
 </body>
