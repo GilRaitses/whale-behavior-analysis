@@ -1779,7 +1779,7 @@
                 
                 <div class="card">
                     <h3>Sequential Processing with Window-Level Normalization</h3>
-                    <p>Our enhanced sequential feature extraction system implements window-level normalization to improve pattern recognition in time-series whale behavior data:</p>
+                    <p>The enhanced sequential feature extraction system implements window-level normalization to improve pattern recognition in time-series whale behavior data:</p>
                     <ul>
                         <li><strong>Adaptive Window Segmentation:</strong> Sequences are dynamically segmented based on signal complexity, using smaller windows for rapidly changing signals and larger windows for stable regions.</li>
                         <li><strong>Per-Window Normalization:</strong> Each window is individually normalized, preserving local patterns that would be lost in global normalization, especially for behaviors with varying amplitude ranges.</li>
@@ -1835,7 +1835,7 @@
                 
                 <div class="card">
                     <h3>Integration with Parallel MinGRU Architecture</h3>
-                    <p>Our window-normalized features are specifically designed to work with the parallel forward pass training of the MinGRU architecture:</p>
+                    <p>The window-normalized features are specifically designed to work with the parallel forward pass training of the MinGRU architecture:</p>
                     <ul>
                         <li><strong>Parallel Batch Processing:</strong> Normalized windows produce feature vectors that can be processed in parallel batches, maximizing GPU utilization during training.</li>
                         <li><strong>Reduced Sequence Variance:</strong> Window normalization reduces the variance in input sequences, making parallel training more stable and convergence more reliable.</li>
