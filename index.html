@@ -1123,23 +1123,23 @@
             
             <div class="slide-section">
                 <h3>Domain Problem</h3>
-                <p>Understanding marine mammal behavior patterns is crucial for conservation efforts and ecological research. Traditional methods of behavior classification rely on expert annotations, which are time-consuming and limited in scale.</p>
+                <p>Marine mammal behavior analysis provides key data for conservation and research. Current behavior classification methods depend on manual expert annotations, creating bottlenecks in data processing and limiting analysis scale.</p>
             </div>
             
             <div class="slide-section">
                 <h3>Primary Stakeholder</h3>
                 <div class="data-point">
-                    <p>The Parks Lab at Syracuse University's Bioinspired Institute collects extensive whale sensor data but struggles with efficient behavior classification and analysis at scale.</p>
+                    <p>The Parks Lab at Syracuse University's Bioinspired Institute collects whale sensor data and requires improved methods for behavior classification and large-scale analysis.</p>
                 </div>
             </div>
             
             <div class="slide-section">
                 <h3>Stakeholder Needs</h3>
                 <ul>
-                    <li>Automated classification of whale behaviors from sensor data</li>
-                    <li>Tools to visualize dive patterns and associated behaviors</li>
-                    <li>Methods to identify previously unknown behavior patterns</li>
-                    <li>Insights into energetic costs of different behaviors</li>
+                    <li>Automated classification of behaviors from sensor data</li>
+                    <li>Visualization tools for dive patterns and behaviors</li>
+                    <li>Detection of novel behavior patterns</li>
+                    <li>Energy expenditure analysis for different behaviors</li>
                 </ul>
             </div>
         </div>
@@ -2159,29 +2159,116 @@
                 </div>
 
                 <div class="card">
-                    <h3>Validation Insights</h3>
+                    <h3>Behavioral Class Performance Framework</h3>
+                    <div class="visualization-container">
+                        <div class="visualization-card">
+                            <h3>Confusion Matrix Capabilities</h3>
+                            <div class="content">
+                                <p>The evaluation system includes tooling to generate confusion matrices for analyzing prediction patterns across behavior classes.</p>
+                                <!-- Replace missing image with text-based visual -->
+                                <div style="background-color: #1e2126; padding: 15px; border-radius: 6px; margin-top: 10px;">
+                                    <div style="text-align: center; margin-bottom: 10px; color: #3498db; font-weight: bold;">Visualization Template Format</div>
+                                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin: 0 auto; max-width: 400px;">
+                                        <!-- Headers -->
+                                        <div style="background-color: #34495e; color: #fff; padding: 8px; text-align: center; font-size: 12px;">Predicted →<br>Actual ↓</div>
+                                        <div style="background-color: #34495e; color: #fff; padding: 8px; text-align: center; font-size: 12px;">Class A</div>
+                                        <div style="background-color: #34495e; color: #fff; padding: 8px; text-align: center; font-size: 12px;">Class B</div>
+                                        <div style="background-color: #34495e; color: #fff; padding: 8px; text-align: center; font-size: 12px;">Class C</div>
+                                        
+                                        <!-- Row 1 -->
+                                        <div style="background-color: #34495e; color: #fff; padding: 8px; text-align: center; font-size: 12px;">Class A</div>
+                                        <div style="background-color: rgba(46, 204, 113, 0.7); color: #fff; padding: 8px; text-align: center; font-size: 12px; font-weight: bold;">✓</div>
+                                        <div style="background-color: rgba(231, 76, 60, 0.3); color: #fff; padding: 8px; text-align: center; font-size: 12px;">-</div>
+                                        <div style="background-color: rgba(231, 76, 60, 0.2); color: #fff; padding: 8px; text-align: center; font-size: 12px;">-</div>
+                                        
+                                        <!-- Row 2 -->
+                                        <div style="background-color: #34495e; color: #fff; padding: 8px; text-align: center; font-size: 12px;">Class B</div>
+                                        <div style="background-color: rgba(231, 76, 60, 0.3); color: #fff; padding: 8px; text-align: center; font-size: 12px;">-</div>
+                                        <div style="background-color: rgba(46, 204, 113, 0.7); color: #fff; padding: 8px; text-align: center; font-size: 12px; font-weight: bold;">✓</div>
+                                        <div style="background-color: rgba(231, 76, 60, 0.2); color: #fff; padding: 8px; text-align: center; font-size: 12px;">-</div>
+                                        
+                                        <!-- Row 3 -->
+                                        <div style="background-color: #34495e; color: #fff; padding: 8px; text-align: center; font-size: 12px;">Class C</div>
+                                        <div style="background-color: rgba(231, 76, 60, 0.2); color: #fff; padding: 8px; text-align: center; font-size: 12px;">-</div>
+                                        <div style="background-color: rgba(231, 76, 60, 0.3); color: #fff; padding: 8px; text-align: center; font-size: 12px;">-</div>
+                                        <div style="background-color: rgba(46, 204, 113, 0.6); color: #fff; padding: 8px; text-align: center; font-size: 12px; font-weight: bold;">✓</div>
+                                    </div>
+                                    <div style="text-align: center; margin-top: 10px; color: #aaa; font-size: 12px;">*Template formatting for confusion matrix visualization</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Removing the class_performance visualization card since the file is missing -->
+                        <div class="visualization-card">
+                            <h3>ROC Analysis Tools</h3>
+                            <div class="content">
+                                <p>The evaluation framework includes functionality to generate ROC curves for assessing model discrimination capabilities.</p>
+                                <!-- Replace missing image with text-based visual -->
+                                <div style="background-color: #1e2126; padding: 15px; border-radius: 6px; margin-top: 10px; height: 250px; position: relative;">
+                                    <!-- Axes -->
+                                    <div style="position: absolute; bottom: 30px; left: 40px; width: calc(100% - 60px); height: 1px; background-color: #fff;"></div>
+                                    <div style="position: absolute; bottom: 30px; left: 40px; width: 1px; height: calc(100% - 60px); background-color: #fff;"></div>
+                                    
+                                    <!-- Axis labels -->
+                                    <div style="position: absolute; bottom: 10px; left: 0; width: 100%; text-align: center; color: #fff; font-size: 12px;">False Positive Rate</div>
+                                    <div style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%) rotate(-90deg); color: #fff; font-size: 12px; white-space: nowrap;">True Positive Rate</div>
+                                    
+                                    <!-- Diagonal reference line -->
+                                    <div style="position: absolute; bottom: 30px; left: 40px; width: calc(100% - 60px); height: calc(100% - 60px); border-bottom: 1px dashed rgba(255,255,255,0.3); transform: rotate(45deg); transform-origin: bottom left;"></div>
+                                    
+                                    <!-- ROC curves -->
+                                    <svg style="position: absolute; bottom: 30px; left: 40px; width: calc(100% - 60px); height: calc(100% - 60px);">
+                                        <!-- Example curves -->
+                                        <path d="M0,0 Q30,50 70,80 T100,100" fill="none" stroke="#3498db" stroke-width="2" />
+                                        <path d="M0,0 Q40,60 75,85 T100,100" fill="none" stroke="#2ecc71" stroke-width="2" />
+                                        <path d="M0,0 Q20,30 60,70 T100,100" fill="none" stroke="#e74c3c" stroke-width="2" />
+                                    </svg>
+                                    
+                                    <!-- Legend -->
+                                    <div style="position: absolute; top: 10px; right: 10px; background-color: rgba(0,0,0,0.5); padding: 5px; border-radius: 3px;">
+                                        <div style="display: flex; align-items: center; margin-bottom: 3px;">
+                                            <div style="width: 10px; height: 2px; background-color: #3498db; margin-right: 5px;"></div>
+                                            <div style="color: #fff; font-size: 10px;">Class A</div>
+                                        </div>
+                                        <div style="display: flex; align-items: center; margin-bottom: 3px;">
+                                            <div style="width: 10px; height: 2px; background-color: #2ecc71; margin-right: 5px;"></div>
+                                            <div style="color: #fff; font-size: 10px;">Class B</div>
+                                        </div>
+                                        <div style="display: flex; align-items: center;">
+                                            <div style="width: 10px; height: 2px; background-color: #e74c3c; margin-right: 5px;"></div>
+                                            <div style="color: #fff; font-size: 10px;">Class C</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Evaluation Metrics</h3>
                     <div class="metrics-note">
-                        <h4>Key Metrics</h4>
+                        <h4>Available Metrics</h4>
+                        <p>The evaluation system includes capabilities for calculating the following types of metrics:</p>
                         <ul>
-                            <li><strong>Group Performance:</strong> 70.6% accuracy at the behavioral group level</li>
-                            <li><strong>Temporal Consistency:</strong> The model shows 82.3% temporal consistency in predictions</li>
-                            <li><strong>Error Analysis:</strong> Most errors occur at behavior transition boundaries</li>
-                            <li><strong>Cross-Individual Performance:</strong> 63.2% accuracy on unseen individuals</li>
+                            <li><strong>Group Accuracy:</strong> Performance at behavioral group level categorization</li>
+                            <li><strong>Temporal Consistency:</strong> Consistency of predictions across time windows</li>
+                            <li><strong>Transition Analysis:</strong> Error patterns at behavior transition boundaries</li>
+                            <li><strong>Cross-Individual Performance:</strong> Generalization capabilities across different individuals</li>
                         </ul>
                     </div>
                     <div class="visualization-container">
                         <div class="visualization-card">
-                            <h3>Probability Distribution</h3>
+                            <h3>Confidence Visualization</h3>
                             <div class="content">
-                                <p>Distribution of prediction probabilities shows model confidence across different behavior classes.</p>
+                                <p>The system includes tools for visualizing prediction confidence distributions.</p>
                                 <!-- Replace missing image with text-based visual -->
                                 <div style="background-color: #1e2126; padding: 15px; border-radius: 6px; margin-top: 10px;">
                                     <div style="display: flex; flex-direction: column; gap: 15px;">
-                                        <!-- Class 1: Foraging -->
+                                        <!-- Example Class Distribution -->
                                         <div>
                                             <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                                <span style="color: #fff; font-size: 12px;">Foraging</span>
-                                                <span style="color: #3498db; font-size: 12px;">Mean confidence: 0.87</span>
+                                                <span style="color: #fff; font-size: 12px;">Example Class A</span>
+                                                <span style="color: #3498db; font-size: 12px;">Confidence Distribution</span>
                                             </div>
                                             <div style="background-color: #34495e; height: 20px; border-radius: 3px; overflow: hidden; position: relative;">
                                                 <!-- Distribution bar -->
@@ -2196,14 +2283,14 @@
                                             </div>
                                         </div>
                                         
-                                        <!-- Class 2: Traveling -->
+                                        <!-- Example Class Distribution -->
                                         <div>
                                             <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                                <span style="color: #fff; font-size: 12px;">Traveling</span>
-                                                <span style="color: #2ecc71; font-size: 12px;">Mean confidence: 0.82</span>
+                                                <span style="color: #fff; font-size: 12px;">Example Class B</span>
+                                                <span style="color: #2ecc71; font-size: 12px;">Confidence Distribution</span>
                                             </div>
                                             <div style="background-color: #34495e; height: 20px; border-radius: 3px; overflow: hidden; position: relative;">
-                                                <!-- Distribution bar -->
+                                                <!-- Distribution bar (template) -->
                                                 <div style="position: absolute; top: 0; left: 0; height: 100%; display: flex; width: 100%;">
                                                     <div style="width: 7%; background-color: rgba(46, 204, 113, 0.2);"></div>
                                                     <div style="width: 10%; background-color: rgba(46, 204, 113, 0.3);"></div>
@@ -2211,44 +2298,6 @@
                                                     <div style="width: 20%; background-color: rgba(46, 204, 113, 0.5);"></div>
                                                     <div style="width: 23%; background-color: rgba(46, 204, 113, 0.7);"></div>
                                                     <div style="width: 25%; background-color: rgba(46, 204, 113, 0.9);"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Class 3: Side Rolls -->
-                                        <div>
-                                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                                <span style="color: #fff; font-size: 12px;">Side Rolls</span>
-                                                <span style="color: #e74c3c; font-size: 12px;">Mean confidence: 0.76</span>
-                                            </div>
-                                            <div style="background-color: #34495e; height: 20px; border-radius: 3px; overflow: hidden; position: relative;">
-                                                <!-- Distribution bar -->
-                                                <div style="position: absolute; top: 0; left: 0; height: 100%; display: flex; width: 100%;">
-                                                    <div style="width: 10%; background-color: rgba(231, 76, 60, 0.2);"></div>
-                                                    <div style="width: 13%; background-color: rgba(231, 76, 60, 0.3);"></div>
-                                                    <div style="width: 17%; background-color: rgba(231, 76, 60, 0.4);"></div>
-                                                    <div style="width: 20%; background-color: rgba(231, 76, 60, 0.5);"></div>
-                                                    <div style="width: 25%; background-color: rgba(231, 76, 60, 0.7);"></div>
-                                                    <div style="width: 15%; background-color: rgba(231, 76, 60, 0.9);"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Class 4: Exploratory -->
-                                        <div>
-                                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                                <span style="color: #fff; font-size: 12px;">Exploratory</span>
-                                                <span style="color: #9b59b6; font-size: 12px;">Mean confidence: 0.68</span>
-                                            </div>
-                                            <div style="background-color: #34495e; height: 20px; border-radius: 3px; overflow: hidden; position: relative;">
-                                                <!-- Distribution bar -->
-                                                <div style="position: absolute; top: 0; left: 0; height: 100%; display: flex; width: 100%;">
-                                                    <div style="width: 15%; background-color: rgba(155, 89, 182, 0.2);"></div>
-                                                    <div style="width: 15%; background-color: rgba(155, 89, 182, 0.3);"></div>
-                                                    <div style="width: 20%; background-color: rgba(155, 89, 182, 0.4);"></div>
-                                                    <div style="width: 20%; background-color: rgba(155, 89, 182, 0.5);"></div>
-                                                    <div style="width: 15%; background-color: rgba(155, 89, 182, 0.7);"></div>
-                                                    <div style="width: 15%; background-color: rgba(155, 89, 182, 0.9);"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -2262,24 +2311,10 @@
                                         <span>0.8</span>
                                         <span>1.0</span>
                                     </div>
-                                    <div style="text-align: center; color: #aaa; font-size: 12px; margin-top: 5px;">Prediction Probability</div>
+                                    <div style="text-align: center; color: #aaa; font-size: 12px; margin-top: 5px;">Example Confidence Scale</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h3>Evaluation Status</h3>
-                    <div class="metrics-note" style="background-color: #eaf7fb; border-left: 4px solid #3498db; padding: 15px;">
-                        <h4 style="margin-top: 0; color: #2980b9;">Implementation Progress</h4>
-                        <p>The evaluation framework provides a foundation for rigorous model assessment:</p>
-                        <ul>
-                            <li><strong>Framework Status:</strong> A complete evaluation pipeline has been implemented</li>
-                            <li><strong>Performance Metrics:</strong> The system calculates and visualizes key metrics</li>
-                            <li><strong>Validation Support:</strong> Infrastructure ready for external validation datasets</li>
-                            <li><strong>Future Work:</strong> Additional labeled data will enable more comprehensive evaluation</li>
-                        </ul>
                     </div>
                 </div>
             </div>
