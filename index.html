@@ -1510,21 +1510,18 @@
             <span class="close-modal">&times;</span>
             <h2>Validation Results: Why The Current Scenario Fails</h2>
             <div class="slide-section">
-                <h3>The Analogy</h3>
-                <div class="highlight-box">
-                    <p>Imagine you want to train a model to tell apples from oranges. But your entire training set only contains apples, all labeled as "apple."<br>
-                    The model quickly learns to always say "apple" and if you test it on more apples, it gets 100% accuracy. But if you ask it to classify the whole produce section (apples, oranges, bananas, etc.), it will still say "apple" every time, and be wrong most of the time.</p>
-                </div>
-            </div>
-            <div class="slide-section">
                 <h3>What Actually Happened Here</h3>
-                <ul>
-                    <li>The dataset: 3,121 windows, all labeled as class 0 ("Unlabeled").</li>
-                    <li>This is split into train/val/test sets (70/15/15).</li>
-                    <li>The model instantly learns to always predict class 0.</li>
-                    <li>Validation and test accuracy are always a completely trivial value.</li>
-                    <li>Loss drops to zero, but the model isn't learning anything about real behaviors.</li>
-                </ul>
+                <div class="highlight-box">
+                    <ul>
+                        <li>The dataset: 3,121 windows, all labeled as class 0 ("Unlabeled").</li>
+                        <li>This is split into train/val/test sets (70/15/15).</li>
+                        <li>The model instantly learns to always predict class 0.</li>
+                        <li>Validation and test accuracy are always a completely trivial value.</li>
+                        <li>Loss drops to zero, but the model isn't learning anything about real behaviors.</li>
+                    </ul>
+                    <p>Imagine you want to train a model to tell apples from oranges. But your entire training set only contains apples, all labeled as "apple."<br>
+                        The model quickly learns to always say "apple" and if you test it on more apples, it gets 100% accuracy. But if you ask it to classify the whole produce section (apples, oranges, bananas, etc.), it will still say "apple" every time, and be wrong most of the time.</p>
+                </div>
             </div>
             <div class="slide-section">
                 <h3>Why This Matters</h3>
