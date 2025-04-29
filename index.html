@@ -6,6 +6,143 @@
     <title>Whale Behavior Analysis</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
+        /* Base styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #f0f0f0;
+            background-color: #121212;
+            line-height: 1.6;
+        }
+        
+        /* Navbar styles */
+        .navbar {
+            background-color: #1e2126;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .navbar-logo {
+            width: 30px;
+            height: 30px;
+            background-color: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .navbar-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .navbar-links a {
+            color: #f0f0f0;
+            text-decoration: none;
+            padding: 0 15px;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .navbar-links a:hover {
+            color: #3498db;
+        }
+        
+        /* Hamburger menu */
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+        }
+        
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .hamburger-menu {
+                display: flex;
+                z-index: 1001; /* Ensure it's above the navbar-links when active */
+            }
+            
+            .navbar-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: #1e2126;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                pointer-events: none;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+            }
+            
+            .navbar-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+            
+            .navbar-links a {
+                padding: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            /* Hamburger animation */
+            .hamburger-menu.active .hamburger-line:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            
+            .hamburger-menu.active .hamburger-line:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger-menu.active .hamburger-line:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+            
+            /* Adjustments for main content on mobile */
+            #content-container {
+                padding-top: 70px;
+            }
+        }
+        
+        /* ... existing code ... */
+        
         .visualization-container {
             display: flex;
             flex-direction: column;
@@ -1268,56 +1405,84 @@
             
         </div>
         
-        <!-- Results Slide -->
-        <div id="results-slide" class="rubric-slide">
+         <!-- Results Slide -->
+         <div id="results-slide" class="rubric-slide">
             <span class="close-modal">&times;</span>
             <h2>Initial Results</h2>
             
             <div class="slide-section">
                 <h3>Dimensionality Reduction Insights</h3>
-                <div class="data-point">
-                    <p><strong>Trustworthiness Score:</strong> 99.3% - The PCA embeddings successfully preserve local neighborhood structure from high-dimensional space.</p>
-                </div>
-                <div class="data-point">
-                    <p><strong>Feature Matrix Optimization:</strong> From 167 original features (111 static + 56 sequential), a subset of 40-80 most informative features was identified, reducing noise while maintaining discriminative power.</p>
-                </div>
-                <div class="data-point">
-                    <p><strong>Sequence Length Analysis:</strong> Optimal sequence length determined to be 384 timesteps, balancing information preservation and standardization requirements.</p>
-                </div>
-                
-                <div class="highlight-box">
-                    <p><strong>Most Informative Features:</strong></p>
-                    <div>
-                        <span class="feature-tag">Depth variance</span>
-                        <span class="feature-tag">Roll angle std</span>
-                        <span class="feature-tag">Y-acceleration peaks</span>
-                        <span class="feature-tag">Pitch stability</span>
-                        <span class="feature-tag">Depth profile</span>
-                        <span class="feature-tag">Heading changes</span>
-                        <span class="feature-tag">Z-acceleration FFT</span>
-                        <span class="feature-tag">Twist coefficient</span>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                    <div style="flex: 2; padding-right: 20px;">
+                        <!-- Key Metrics -->
+                        <div style="background-color: #2c3e50; border-radius: 6px; padding: 15px; margin-bottom: 15px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <div style="background-color: #3498db; width: 5px; height: 40px; margin-right: 15px; border-radius: 2px;"></div>
+                                <div>
+                                    <div style="color: #3498db; font-weight: bold; margin-bottom: 2px;">Trustworthiness Score</div>
+                                    <div style="color: #f8f9fa;">99.3% - PCA embeddings preserve neighborhood structure</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <div style="background-color: #2ecc71; width: 5px; height: 40px; margin-right: 15px; border-radius: 2px;"></div>
+                                <div>
+                                    <div style="color: #2ecc71; font-weight: bold; margin-bottom: 2px;">Feature Matrix Optimization</div>
+                                    <div style="color: #f8f9fa;">Reduced from 167 to 40-80 most informative features</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <div style="background-color: #e74c3c; width: 5px; height: 40px; margin-right: 15px; border-radius: 2px;"></div>
+                                <div>
+                                    <div style="color: #e74c3c; font-weight: bold; margin-bottom: 2px;">Sequence Length Analysis</div>
+                                    <div style="color: #f8f9fa;">Optimal length: 384 timesteps for standardization</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="flex: 1;">
+                        <!-- Feature Importance Visualization -->
+                        <div style="background-color: #2c3e50; border-radius: 6px; padding: 15px;">
+                            <h4 style="color: #3498db; margin-top: 0; margin-bottom: 10px;">Most Informative Features</h4>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                <div style="background-color: #1e2126; color: #3498db; font-size: 12px; padding: 5px 10px; border-radius: 15px; border: 1px solid #3498db;">Depth variance</div>
+                                <div style="background-color: #1e2126; color: #2ecc71; font-size: 12px; padding: 5px 10px; border-radius: 15px; border: 1px solid #2ecc71;">Roll angle std</div>
+                                <div style="background-color: #1e2126; color: #e74c3c; font-size: 12px; padding: 5px 10px; border-radius: 15px; border: 1px solid #e74c3c;">Y-accel peaks</div>
+                                <div style="background-color: #1e2126; color: #f39c12; font-size: 12px; padding: 5px 10px; border-radius: 15px; border: 1px solid #f39c12;">Pitch stability</div>
+                                <div style="background-color: #1e2126; color: #9b59b6; font-size: 12px; padding: 5px 10px; border-radius: 15px; border: 1px solid #9b59b6;">Depth profile</div>
+                                <div style="background-color: #1e2126; color: #1abc9c; font-size: 12px; padding: 5px 10px; border-radius: 15px; border: 1px solid #1abc9c;">Heading changes</div>
+                                <div style="background-color: #1e2126; color: #3498db; font-size: 12px; padding: 5px 10px; border-radius: 15px; border: 1px solid #3498db;">Z-accel FFT</div>
+                                <div style="background-color: #1e2126; color: #e74c3c; font-size: 12px; padding: 5px 10px; border-radius: 15px; border: 1px solid #e74c3c;">Twist coefficient</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div class="slide-section">
                 <h3>Classification Performance</h3>
-                <div style="background-color: #fdedec; border-left: 4px solid #e74c3c; padding: 15px; margin-top: 10px;">
-                    <h4 style="margin-top: 0; color: #c0392b;">Current Dataset Statistics</h4>
-                    <p>Analysis of the dataset reveals the following composition:</p>
-                    <ul>
-                        <li><strong>Total Samples:</strong> 50 labeled samples (after excluding 'End' label)</li>
-                        <li><strong>Feature Matrix:</strong> 167 total features (111 static + 56 sequential)</li>
-                        <li><strong>Behavior Types:</strong> 10 unique behavior classes</li>
-                    </ul>
-                    <p>The technical infrastructure for classification has been implemented, including:</p>
-                    <ul>
-                        <li>MinGRU architecture with optimized parallel forward pass</li>
-                        <li>Feature extraction pipeline with comprehensive feature set</li>
-                        <li>Data processing with window segmentation and normalization</li>
-                    </ul>
+                <div style="background-color: #2c3e50; border-radius: 6px; padding: 15px;">
+                    <div style="display: flex; justify-content: space-between; gap: 20px;">
+                        <div style="flex: 1;">
+                            <h4 style="color: #3498db; margin-top: 0; margin-bottom: 10px;">Current Dataset Statistics</h4>
+                            <ul style="color: #f8f9fa; padding-left: 20px; margin-bottom: 0;">
+                                <li>50 labeled samples (excluding 'End' label)</li>
+                                <li>167 features (111 static + 56 sequential)</li>
+                                <li>10 unique behavior classes</li>
+                            </ul>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="color: #3498db; margin-top: 0; margin-bottom: 10px;">Technical Implementation</h4>
+                            <ul style="color: #f8f9fa; padding-left: 20px; margin-bottom: 0;">
+                                <li>MinGRU with optimized parallel forward pass</li>
+                                <li>Comprehensive feature extraction pipeline</li>
+                                <li>Window segmentation and normalization</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
         </div>
         
         <!-- Challenges Slide -->
@@ -2992,28 +3157,25 @@
             if (hamburgerMenu && navbarLinks) {
                 console.log("Hamburger menu found!"); // Debug log
                 
-                // Direct setup of hamburger click event
-                hamburgerMenu.onclick = function(e) {
+                hamburgerMenu.addEventListener('click', function(e) {
                     console.log("Hamburger clicked!"); // Debug log
-                    hamburgerMenu.classList.toggle('active');
+                    this.classList.toggle('active');
                     navbarLinks.classList.toggle('active');
                     e.stopPropagation(); // Prevent click from bubbling
                     e.preventDefault(); // Prevent default behavior
-                    return false; // Ensure no propagation
-                };
+                });
                 
                 // Close mobile menu when clicking a link
                 const navLinks = navbarLinks.querySelectorAll('a');
                 navLinks.forEach(function(link) {
-                    link.addEventListener('click', function(e) {
+                    link.addEventListener('click', function() {
                         hamburgerMenu.classList.remove('active');
                         navbarLinks.classList.remove('active');
                     });
                 });
                 
-                // Add directly to the document body
-                document.body.addEventListener('click', function(e) {
-                    // Only close the menu if it's open and the click wasn't on the menu or hamburger
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
                     if (navbarLinks.classList.contains('active') && 
                         !navbarLinks.contains(e.target) && 
                         !hamburgerMenu.contains(e.target)) {
@@ -3035,15 +3197,15 @@
             });
         }
 
-        // Execute navigation init immediately after definition
-        document.addEventListener('DOMContentLoaded', initNavigation);
-        // Also try to init immediately in case DOMContentLoaded already fired
+        // Try to init immediately
         if (document.readyState === 'interactive' || document.readyState === 'complete') {
             initNavigation();
+        } else {
+            document.addEventListener('DOMContentLoaded', initNavigation);
         }
         
         // Function to toggle mobile menu from outside - can be called from console for debugging
-        function toggleMobileMenu() {
+        window.toggleMobileMenu = function() {
             const hamburgerMenu = document.getElementById('hamburgerMenu');
             const navbarLinks = document.getElementById('navbarLinks');
             if (hamburgerMenu && navbarLinks) {
