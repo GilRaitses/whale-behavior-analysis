@@ -1221,34 +1221,20 @@
     <!-- Rubric Slides Modal -->
     <div id="rubricModal" class="rubric-modal">
         <!-- Title Slide -->
-        <div id="title-slide" class="rubric-slide">
+        <div id="title-slide" class="rubric-slide" style="max-height: 100vh; overflow-y: auto;">
             <span class="close-modal">&times;</span>
-            <h2>Whale Behavior Classification</h2>
+            <h2 style="margin-bottom:10px;">Whale Behavior Classification</h2>
             <div class="slide-section">
-                <h3>Project Overview</h3>
-                <p>An end-to-end pipeline for automated classification and visualization of whale behaviors from sensor data.</p>
-                
+                <h3 style="margin-bottom:8px;">Project Overview</h3>
+                <p style="margin-bottom:10px;">A complete pipeline for classifying and visualizing whale behaviors using sensor data.</p>
                 <div class="highlight-box">
-                    <p><strong>Key Contributions:</strong></p>
-                    <ul>
-                        <li>Hierarchical visualization system for exploring dive patterns</li>
-                        <li>Custom minGRU architecture optimized for limited datasets</li>
-                        <li>Feature extraction methodology from high-dimensional sensor data</li>
-                        <li>Dashboard for marine biologists to explore behaviors and metrics</li>
-                    </ul>
+                    <p style="font-size: 14px;">Key contributions include a hierarchical visualization system, a minGRU model tailored to limited data, a feature extraction strategy for high-dimensional sensor inputs, and a dashboard interface for behavior exploration.</p>
                 </div>
             </div>
-            
             <div class="slide-section">
-                <h3>Project Goals</h3>
+                <h3 style="margin-bottom:8px;">Project Goals</h3>
                 <div class="highlight-box">
-                    <ul>
-                        <li><strong>Annotation Acquisition:</strong> Additional expert annotations required from the Parks Lab</li>
-                        <li><strong>Parallelization of RNN:</strong> Implementation of parallel processing in the minGRU architecture</li>
-                        <li><strong>Architecture Optimization:</strong> Exploration of Optisim/complexity-aware model architecture search</li>
-                        <li><strong>Model Refinement:</strong> Fine-tuning as more data becomes available</li>
-                        <li><strong>Transfer Learning:</strong> Maximizing utility of limited data</li>
-                    </ul>
+                    <p style="font-size: 14px;"><strong>Goals:</strong> Acquire more annotations from the Parks Lab; implement parallel RNN processing; explore architecture search via Optisim; refine the model with additional data; apply transfer learning to extend generalization.</p>
                 </div>
             </div>
         </div>
@@ -1522,21 +1508,21 @@
         <!-- Validation Slide -->
         <div id="validation-slide" class="rubric-slide">
             <span class="close-modal">&times;</span>
-            <h2>Validation Results: Why Our Current Scenario Fails</h2>
+            <h2>Validation Results: Why The Current Scenario Fails</h2>
             <div class="slide-section">
                 <h3>The Analogy</h3>
                 <div class="highlight-box">
                     <p>Imagine you want to train a model to tell apples from oranges. But your entire training set only contains apples, all labeled as "apple."<br>
-                    The model quickly learns to always say "apple" — and if you test it on more apples, it gets 100% accuracy. But if you ask it to classify the whole produce section (apples, oranges, bananas, etc.), it will still say "apple" every time, and be wrong most of the time.</p>
+                    The model quickly learns to always say "apple" and if you test it on more apples, it gets 100% accuracy. But if you ask it to classify the whole produce section (apples, oranges, bananas, etc.), it will still say "apple" every time, and be wrong most of the time.</p>
                 </div>
             </div>
             <div class="slide-section">
                 <h3>What Actually Happened Here</h3>
                 <ul>
                     <li>The dataset: 3,121 windows, all labeled as class 0 ("Unlabeled").</li>
-                    <li>We split this into train/val/test sets (70/15/15).</li>
+                    <li>This is split into train/val/test sets (70/15/15).</li>
                     <li>The model instantly learns to always predict class 0.</li>
-                    <li>Validation and test accuracy are always 100% — but this is trivial, not meaningful.</li>
+                    <li>Validation and test accuracy are always a completely trivial value.</li>
                     <li>Loss drops to zero, but the model isn't learning anything about real behaviors.</li>
                 </ul>
             </div>
@@ -1546,7 +1532,7 @@
                     <ul>
                         <li>There's no way to validate behavior classification without labeled data for multiple classes.</li>
                         <li>The current validation just confirms the model learned the trivial solution: "always predict class 0."</li>
-                        <li>To make progress, we need expert-annotated data with real behavior classes.</li>
+                        <li>To proceed further, more expert-annotated data with real behavior classes are required.</li>
                     </ul>
                 </div>
             </div>
